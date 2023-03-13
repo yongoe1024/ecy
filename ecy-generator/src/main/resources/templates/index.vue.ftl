@@ -16,13 +16,13 @@
                             value-format="yyyy-MM-dd"
                             type="date"
                             size="small"
-                            placeholder="选择日期"></el-date-picker>
+                            placeholder="${field.comment}"></el-date-picker>
             <#elseif field.propertyType=="LocalDateTime">
             <el-date-picker v-model="queryParam.${field.propertyName}"
                             value-format="yyyy-MM-dd HH:mm:ss"
                             type="datetime"
                             size="small"
-                            placeholder="选择日期时间"></el-date-picker>
+                            placeholder="${field.comment}"></el-date-picker>
             <#else>
             <el-input size="small"
                       prefix-icon="el-icon-search"
