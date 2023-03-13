@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yongoe.ecy.basic.mapper.PositionMapper">
+
+    <!--    获取分页数据-->
+    <select id="getPositionByPage" resultType="com.yongoe.ecy.basic.entity.Position">
+        select
+        id, name, enabled, create_time, update_time, create_by, update_by
+        from basic_position
+        <where>
+            <if test="null != position.name and ''!=position.name">
+                and name LIKE CONCAT('%',#{position.name  },'%')
+            </if>
+            <if test="null != position.enabled">
+                and enabled = #{position.enabled}
+            </if>
+        </where>
+    </select>
+
+</mapper>

@@ -1,0 +1,15 @@
+.idea
+.vscode
+
+.DS_Store
+node_modules
+dist
+dist.zip
+package-lock.json
+
+target
+ecy-file
+*.iml
+pom.xml.versionsBackup
+
+

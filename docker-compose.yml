@@ -1,0 +1,43 @@
+version: '3'
+services:
+  ecy-server:
+    container_name: ecy-server
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: ecy-server
+    restart: always
+    environment:
+      - SPRING_ACTIVE_PROFILE=prod
+      - DATABASE_URL=jdbc:mysql://host.docker.internal:3306/ecy?characterEncoding=utf8&useUnicode=true&serverTimezone=GMT%2B8&useSSL=false&allowPublicKeyRetrieval=true
+      - DATABASE_USERNAME=root
+      - DATABASE_PASSWORD=123456
+      - REDIS_PORT=6379
+      - REDIS_HOSTS=host.docker.internal
+      - REDIS_PASSWORD=
+      - REDIS_DATABASE=0
+      - MAIL_USERNAME=你的邮箱
+      - MAIL_PASSWORD=你的密钥
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    networks:
+      - default
+      - ecy-network
+  ecy-ui:
+    container_name: ecy-ui
+    build:
+      context: ./ecy-ui
+      dockerfile: Dockerfile
+    image: ecy-ui
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - default
+      - ecy-network
+networks:
+  ecy-network:
+
+# 宿主机需要jdk，maven环境，编译vue在容器内，不需要任何环境
+# nginx容器对外暴露80端口，设置转发/api 到 后端容器的8081端口，转发为容器内网络，不需要暴露后端的端口

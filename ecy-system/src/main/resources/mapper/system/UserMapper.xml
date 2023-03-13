@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yongoe.ecy.system.mapper.UserMapper">
+
+    <!--通用查询映射结果-->
+    <resultMap id="UserWithRole" type="com.yongoe.ecy.system.entity.User">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="avatar" property="avatar"/>
+        <result column="email" property="email"/>
+        <result column="phone" property="phone"/>
+        <result column="remark" property="remark"/>
+        <result column="last_time" property="lastTime"/>
+        <result column="enabled" property="enabled"/>
+        <result column="identifier" property="identifier"/>
+        <collection property="roleList" ofType="com.yongoe.ecy.system.entity.Role">
+            <result column="id" property="id"/>
+            <result column="name" property="name"/>
+            <result column="name_zh" property="nameZh"/>
+        </collection>
+    </resultMap>
+    <!--    获取分页数据-->
+    <select id="getUserByPage" resultMap="UserWithRole">
+        select *
+        from sys_user a
+        LEFT JOIN sys_user_role b ON a.id = b.user_id
+        LEFT JOIN sys_role c ON c.id = b.role_id
+        LEFT JOIN sys_user_auths d ON a.id = d.user_id
+        <where>
+            d.identity_type="username"
+            <if test="null != user.id">
+                and a.id = #{user.id}
+            </if>
+            <if test="null != user.name and ''!=user.name">
+                and a.name LIKE CONCAT('%',#{user.name  },'%')
+            </if>
+            <if test="null != user.email and ''!=user.email">
+                and a.email LIKE CONCAT('%',#{user.phone  },'%')
+            </if>
+            <if test="null != user.phone and ''!=user.phone">
+                and a.phone LIKE CONCAT('%',#{user.phone  },'%')
+            </if>
+            <if test="null != user.enabled">
+                and a.enabled = #{user.enabled}
+            </if>
+        </where>
+    </select>
+
+
+    <select id="getUserById" resultMap="UserWithRole">
+        SELECT *
+        FROM sys_user a
+                 LEFT JOIN sys_user_role b ON a.id = b.user_id
+                 LEFT JOIN sys_role c ON c.id = b.role_id
+                 LEFT JOIN sys_user_auths d ON a.id = d.user_id
+        where d.identity_type = "username"
+          and a.id = #{id}
+    </select>
+
+</mapper>
