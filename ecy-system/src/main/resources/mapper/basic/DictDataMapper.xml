@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yongoe.ecy.basic.mapper.DictDataMapper">
+
+    <!--    获取分页数据-->
+    <select id="getDictDataByPage" resultType="com.yongoe.ecy.basic.entity.DictData">
+        select
+        id, dict_id, dict_key, dict_value, sort, create_time, update_time, create_by, update_by
+        from basic_dict_data
+        <where>
+            <if test="null != dictData.dictId">
+                and dict_id =#{dictData.dictId}
+            </if>
+            <if test="null != dictData.dictKey and ''!=dictData.dictKey">
+                and dict_key LIKE CONCAT('%',#{dictData.dictKey  },'%')
+            </if>
+            <if test="null != dictData.dictValue and ''!=dictData.dictValue">
+                and dict_value LIKE CONCAT('%',#{dictData.dictValue  },'%')
+            </if>
+        </where>
+    </select>
+
+</mapper>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yongoe.ecy.system.mapper.RoleMapper">
+    <!--通用查询映射结果-->
+    <resultMap id="BaseResultMap" type="com.yongoe.ecy.system.entity.Role">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <collection property="menuIds" ofType="long">
+            <result column="rmenu_id"/>
+        </collection>
+    </resultMap>
+
+    <select id="getList" resultMap="BaseResultMap">
+        select a.*,
+               b.menu_id as rmenu_id
+        from sys_role a
+                 left join sys_role_menu b on a.id = b.role_id
+        where a.id != 1
+    </select>
+
+</mapper>

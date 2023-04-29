@@ -1,0 +1,3 @@
+knife4j:
+  production: true  #开启生产环境屏蔽
+

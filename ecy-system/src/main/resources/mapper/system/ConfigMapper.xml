@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yongoe.ecy.system.mapper.ConfigMapper">
+
+    <!--    获取分页数据-->
+    <select id="getConfigByPage" resultType="com.yongoe.ecy.system.entity.Config">
+        select
+        id, config_key, config_value,remark, create_time, update_time, create_by, update_by
+        from sys_config
+        <where>
+            <if test="null != config.id">
+                and id = #{config.id}
+            </if>
+            <if test="null != config.configKey and ''!=config.configKey">
+                and config_key LIKE CONCAT('%',#{config.configKey},'%')
+            </if>
+            <if test="null != config.configValue and ''!=config.configValue">
+                and config_value LIKE CONCAT('%',#{config.configValue},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="getConfig" resultType="com.yongoe.ecy.system.entity.Config">
+        select config_key, config_value
+        from sys_config
+    </select>
+
+
+</mapper>

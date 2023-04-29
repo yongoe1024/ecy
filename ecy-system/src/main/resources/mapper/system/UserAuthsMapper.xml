@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yongoe.ecy.system.mapper.UserAuthsMapper">
+
+    <!--    获取分页数据-->
+    <select id="getUserAuthsByPage" resultType="com.yongoe.ecy.system.entity.UserAuths">
+        select
+        id, user_id, login_type, openid, access_token, create_time, update_time, create_by, update_by
+        from sys_user_auths
+        <where>
+            <if test="null != userAuths.id">
+                and id = #{userAuths.id}
+            </if>
+            <if test="null != userAuths.userId">
+                and user_id = #{userAuths.userId}
+            </if>
+            <if test="null != userAuths.loginType and ''!=userAuths.loginType">
+                and login_type LIKE CONCAT('%',#{userAuths.loginType  },'%')
+            </if>
+            <if test="null != userAuths.openid and ''!=userAuths.openid">
+                and openid LIKE CONCAT('%',#{userAuths.openid  },'%')
+            </if>
+            <if test="null != userAuths.accessToken and ''!=userAuths.accessToken">
+                and access_token LIKE CONCAT('%',#{userAuths.accessToken  },'%')
+            </if>
+            <if test="null != userAuths.createTime">
+                and create_time = #{userAuths.createTime}
+            </if>
+            <if test="null != userAuths.updateTime">
+                and update_time = #{userAuths.updateTime}
+            </if>
+            <if test="null != userAuths.createBy and ''!=userAuths.createBy">
+                and create_by LIKE CONCAT('%',#{userAuths.createBy  },'%')
+            </if>
+            <if test="null != userAuths.updateBy and ''!=userAuths.updateBy">
+                and update_by LIKE CONCAT('%',#{userAuths.updateBy  },'%')
+            </if>
+        </where>
+    </select>
+
+</mapper>

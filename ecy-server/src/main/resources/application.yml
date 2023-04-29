@@ -1,0 +1,33 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /    #项目访问路径
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+
+spring:
+  profiles:
+    active: ${SPRING_ACTIVE_PROFILE:dev}
+  banner:
+    location: /banner.txt
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${DATABASE_URL:jdbc:mysql://localhost:3306/ecy?characterEncoding=utf8&useUnicode=true&serverTimezone=GMT%2B8&useSSL=false&allowPublicKeyRetrieval=true}
+    username: ${DATABASE_USERNAME:root}
+    password: ${DATABASE_PASSWORD:123456}
+  data:
+    redis:
+      port: ${REDIS_PORT:6379}
+      host: ${REDIS_HOSTS:localhost}
+      database: ${REDIS_DATABASE:0}
+      password: ${REDIS_PASSWORD:}
+      lettuce:
+        pool:
+          max-active: 20
+          max-wait: -1
+          max-idle: 5
+          min-idle: 0

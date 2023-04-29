@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yongoe.ecy.system.mapper.UserMapper">
+    <!--通用查询映射结果-->
+    <resultMap id="UserWithRole" type="com.yongoe.ecy.system.entity.User">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="department_id" property="departmentId"/>
+        <result column="position_id" property="positionId"/>
+        <result column="department_name" property="departmentName"/>
+        <result column="position_name" property="positionName"/>
+        <result column="username" property="username"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="name" property="name"/>
+        <result column="avatar" property="avatar"/>
+        <result column="email" property="email"/>
+        <result column="phone" property="phone"/>
+        <result column="remark" property="remark"/>
+        <result column="last_ip" property="lastIp"/>
+        <result column="last_time" property="lastTime"/>
+        <result column="enabled" property="enabled"/>
+        <collection property="roleList" ofType="com.yongoe.ecy.system.entity.Role">
+            <result column="role_id" property="id"/>
+            <result column="role_name" property="name"/>
+            <result column="role_code" property="code"/>
+        </collection>
+    </resultMap>
+
+    <!--    获取分页数据-->
+    <select id="getUserByPage" resultMap="UserWithRole">
+        select a.*,
+        c.id as role_id,
+        c.name as role_name,
+        c.code as role_code,
+        d.name as department_name,
+        e.name as position_name
+        from sys_user a
+        LEFT JOIN sys_user_role b ON a.id = b.user_id
+        LEFT JOIN sys_role c ON c.id = b.role_id
+        LEFT JOIN basic_department d ON a.department_id =d.id
+        LEFT JOIN basic_position e ON a.position_id = e.id
+        <where>
+            <if test="null != user.name and ''!=user.name">
+                and a.name LIKE CONCAT('%',#{user.name  },'%')
+            </if>
+            <if test="null != user.email and ''!=user.email">
+                and a.email LIKE CONCAT('%',#{user.phone  },'%')
+            </if>
+            <if test="null != user.phone and ''!=user.phone">
+                and a.phone LIKE CONCAT('%',#{user.phone  },'%')
+            </if>
+            <if test="null != user.enabled">
+                and a.enabled = #{user.enabled}
+            </if>
+            <if test="null != user.departmentId">
+                and a.department_id = #{user.departmentId}
+            </if>
+            <if test="null != user.positionId">
+                and a.position_id = #{user.positionId}
+            </if>
+        </where>
+    </select>
+
+    <select id="getUserById" resultMap="UserWithRole">
+        select a.*,
+        c.id as role_id,
+        c.name as role_name,
+        c.code as role_code,
+        d.name as department_name,
+        e.name as position_name
+        FROM sys_user a
+        LEFT JOIN sys_user_role b ON a.id = b.user_id
+        LEFT JOIN sys_role c ON c.id = b.role_id
+        LEFT JOIN basic_department d ON a.department_id =d.id
+        LEFT JOIN basic_position e ON a.position_id = e.id
+        <where>
+            and a.id = #{id}
+        </where>
+    </select>
+
+</mapper>
