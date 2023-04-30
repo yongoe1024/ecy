@@ -9,7 +9,7 @@
     </select>
 
     <select id="getMenuByUser" resultType="com.yongoe.ecy.system.entity.Menu">
-        SELECT c.*
+        SELECT distinct c.*
         FROM sys_user_role a
                  LEFT JOIN sys_role_menu b ON a.role_id = b.role_id
                  LEFT JOIN sys_menu c ON b.menu_id = c.id
