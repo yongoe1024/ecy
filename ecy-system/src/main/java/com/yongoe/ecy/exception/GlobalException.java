@@ -2,6 +2,7 @@ package com.yongoe.ecy.exception;
 
 import com.yongoe.ecy.utils.R;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -22,13 +23,19 @@ public class GlobalException {
     @ExceptionHandler(value = SQLIntegrityConstraintViolationException.class)
     public R sql(Throwable throwable) {
         log.error("错误:", throwable);
-        return R.error("SQL完整性约束违反异常");
+        return R.error("主键重复");
     }
 
     @ExceptionHandler(value = HttpMessageNotReadableException.class)
     public R valueException(Throwable throwable) {
         log.error("错误:", throwable);
         return R.error("数据格式有误");
+    }
+
+    @ExceptionHandler(value = DataIntegrityViolationException.class)
+    public R vdataLongException(Throwable throwable) {
+        log.error("错误:", throwable);
+        return R.error("数据长度超出范围");
     }
 
     @ExceptionHandler(value = {BadSqlGrammarException.class})
@@ -40,6 +47,6 @@ public class GlobalException {
     @ExceptionHandler(value = Throwable.class)
     public R handleException(Throwable throwable) {
         log.error("错误:", throwable);
-        return R.error();
+        return R.error("未知错误");
     }
 }
