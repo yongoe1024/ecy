@@ -230,8 +230,8 @@ DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user`
 (
     `id`            bigint unsigned                                               NOT NULL AUTO_INCREMENT,
-    `department_id` bigint                                                        NOT NULL COMMENT '部门id',
-    `position_id`   bigint                                                        NOT NULL COMMENT '职位id',
+    `department_id` bigint                                                        DEFAULT NULL COMMENT '部门id',
+    `position_id`   bigint                                                        DEFAULT NULL COMMENT '职位id',
     `username`      varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci  NOT NULL COMMENT '账号',
     `password`      varchar(50) COLLATE utf8mb4_unicode_ci                        NOT NULL COMMENT '密码',
     `name`          varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci  NOT NULL COMMENT '姓名',
@@ -300,6 +300,8 @@ CREATE TABLE `sys_user_role`
 
 insert into `sys_user_role`(`id`, `user_id`, `role_id`, `create_time`, `update_time`, `create_by`, `update_by`)
 values (1, 1, 1, '2023-01-01 00:00:00', '2023-01-01 00:00:00', 'yongoe', 'yongoe');
+
+DROP TABLE IF EXISTS `basic_letter`;
 
 CREATE TABLE `basic_letter`
 (
