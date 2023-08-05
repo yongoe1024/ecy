@@ -10,7 +10,7 @@ then
   exit
 fi
 docker rmi $(docker images -f "dangling=true" -q)
-docker-compose down && docker-compose build --no-cache && docker-compose up
+docker-compose down && docker-compose build --no-cache && docker-compose up -d
 if [ $? -ne 0 ]
 then
   echo "============================";

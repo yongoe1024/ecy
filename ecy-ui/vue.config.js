@@ -11,17 +11,11 @@ module.exports = defineConfig({
     ],
     // 打包后就用nginx转发啦
     proxy: {
-      '/api': {
+      '/ecy': {
         target: 'http://localhost:8081',
-        pathRewrite: { '^/api': '/' },
         ws: true,
         changeOrigin: true
       },
-      '/file': {
-        target: 'http://localhost:8081',
-        ws: true,
-        changeOrigin: true
-      }
     }
   }
 })

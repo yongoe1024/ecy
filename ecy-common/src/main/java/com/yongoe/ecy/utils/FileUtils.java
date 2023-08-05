@@ -46,7 +46,7 @@ public class FileUtils {
         } catch (IOException e) {
             throw new RuntimeException("无法创建文件");
         }
-        return "/file/" + directory + fileName;
+        return "/ecy/file/" + directory + fileName;
     }
 
 }
