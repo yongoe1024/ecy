@@ -1,6 +1,7 @@
 package com.yongoe.ecy.config.security;
 
 import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
@@ -25,6 +26,8 @@ public class MyWebConfig implements WebMvcConfigurer {
     private LoginInterceptor loginInterceptor;
     @Resource
     private AuthInterceptor authInterceptor;
+    @Value("${file-save-path}")
+    private String fileSavePath;
 
     /**
      * 跨域
@@ -50,9 +53,8 @@ public class MyWebConfig implements WebMvcConfigurer {
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        String fileSavePath = System.getProperty("user.dir");
         registry.addResourceHandler("/file/**")
-                .addResourceLocations("file://" + fileSavePath + "/ecy-file/");
+                .addResourceLocations("file://" + fileSavePath + "/");
     }
 
     @Override

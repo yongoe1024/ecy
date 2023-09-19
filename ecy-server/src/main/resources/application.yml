@@ -23,11 +23,12 @@ spring:
     redis:
       port: ${REDIS_PORT:6379}
       host: ${REDIS_HOSTS:localhost}
-      database: ${REDIS_DATABASE:0}
-      password: ${REDIS_PASSWORD:}
+      password: ${REDIS_PASSWORD:123456}
       lettuce:
         pool:
           max-active: 20
           max-wait: -1
           max-idle: 5
           min-idle: 0
+
+file-save-path: ${ECY_FILE:${user.dir}/ecy-file}

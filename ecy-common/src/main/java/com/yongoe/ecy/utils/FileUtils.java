@@ -1,5 +1,6 @@
 package com.yongoe.ecy.utils;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,6 +19,12 @@ import java.util.UUID;
  */
 @Component
 public class FileUtils {
+    private static String fileSavePath;
+
+    @Value ("${file-save-path}")
+    public void setSender(String s) {
+        fileSavePath = s;
+    }
     /**
      * 上传文件，返回文件url路径
      *
@@ -25,10 +32,9 @@ public class FileUtils {
      * @return 文件url路径
      */
     public static String saveFile(MultipartFile file) {
-        String fileSavePath = System.getProperty("user.dir") + "/ecy-file/";
         String suffix = Objects.requireNonNull(file.getOriginalFilename()).substring(file.getOriginalFilename().lastIndexOf("."));
         String fileName = UUID.randomUUID().toString().replaceAll("-", "") + suffix;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd/");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("/yyyy/MM/dd/");
         String directory = simpleDateFormat.format(new Date());
         // 如果目录不存在，则创建
         File dir = new File(fileSavePath + directory);
