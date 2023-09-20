@@ -305,7 +305,7 @@ DROP TABLE IF EXISTS `basic_letter`;
 
 CREATE TABLE `basic_letter`
 (
-    `id`           bigint unsigned                                                NOT NULL AUTO_INCREMENT COMMENT 'id',
+    `id`           bigint unsigned                                                NOT NULL AUTO_INCREMENT,
     `addresser_id` bigint                                                         NOT NULL COMMENT '发件人id',
     `addresser`    varchar(50) COLLATE utf8mb4_unicode_ci                         NOT NULL COMMENT '发件人',
     `addressee_id` bigint                                                         NOT NULL COMMENT '收件人id',
@@ -317,6 +317,22 @@ CREATE TABLE `basic_letter`
     `update_time`  datetime                                                       NOT NULL COMMENT '修改时间',
     `create_by`    varchar(50) COLLATE utf8mb4_unicode_ci                         NOT NULL COMMENT '创建人',
     `update_by`    varchar(50) COLLATE utf8mb4_unicode_ci                         NOT NULL COMMENT '修改人',
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_unicode_ci;
+
+CREATE TABLE `sys_log`
+(
+    `id`          bigint unsigned                        NOT NULL AUTO_INCREMENT,
+    `name`        varchar(50) COLLATE utf8mb4_unicode_ci                         DEFAULT NULL COMMENT '用户',
+    `type`        varchar(50) COLLATE utf8mb4_unicode_ci                         DEFAULT NULL COMMENT '类型',
+    `title`       varchar(100) COLLATE utf8mb4_unicode_ci                        DEFAULT NULL COMMENT '标题',
+    `details`     varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '详情',
+    `create_time` datetime                               NOT NULL COMMENT '创建时间',
+    `update_time` datetime                               NOT NULL COMMENT '修改时间',
+    `create_by`   varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '创建人',
+    `update_by`   varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '修改人',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4
