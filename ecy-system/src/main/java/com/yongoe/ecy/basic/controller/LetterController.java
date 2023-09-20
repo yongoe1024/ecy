@@ -98,8 +98,8 @@ public class LetterController {
     @PostMapping("/add")
     public R add(@RequestBody LetterReqVo reqVo) {
         Letter letter = letterConvert.req2Entity(reqVo);
-        letter.setAddresser(UserUtils.getUser().getName());
-        letter.setAddresserId(UserUtils.getUser().getId());
+        letter.setAddresser(UserUtils.getName());
+        letter.setAddresserId(UserUtils.getUserId());
         letter.setState(false);
         String base64Encode = Base64Utils.getBase64Encode(letter.getContent().trim());
         letter.setContent(base64Encode);

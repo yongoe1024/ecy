@@ -1,6 +1,5 @@
 package com.yongoe.ecy.config.aop;
 
-import com.yongoe.ecy.system.entity.Log;
 import com.yongoe.ecy.system.service.LogService;
 import jakarta.annotation.Resource;
 import org.aspectj.lang.JoinPoint;
@@ -56,8 +55,7 @@ public class Logger {
         String classname = joinPoint.getTarget().getClass().getName();
         String methodname = joinPoint.getSignature().getName();
         String s = Arrays.toString(joinPoint.getArgs());
-        // 保存日志
-        logService.saveLog(Log.SUCCESS, "执行了 " + classname + " 的 " + methodname + " 方法",
+        logService.saveLog("操作", "执行了 " + classname + " 的 " + methodname + " 方法",
                 "参数：" + s + "\n");
     }
 
@@ -69,8 +67,7 @@ public class Logger {
         String classname = joinPoint.getTarget().getClass().getName();
         String methodname = joinPoint.getSignature().getName();
         String s = Arrays.toString(joinPoint.getArgs());
-        // 保存日志
-        logService.saveLog(Log.ERROR, "在 " + classname + " 的 " + methodname + " 方法中发生了异常",
+        logService.saveLog("异常", "在 " + classname + " 的 " + methodname + " 方法中发生了异常",
                 "参数：" + s + "\n" + throwable);
     }
 

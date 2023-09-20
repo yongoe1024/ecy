@@ -15,8 +15,12 @@ public class UserUtils {
         return UserThreadLocal.get();
     }
 
+    public static String getName() {
+        return getUser() == null ? "系统" : getUser().getName();
+    }
+
     public static Long getUserId() {
-        return UserThreadLocal.get().getId();
+        return getUser() == null ? null : getUser().getId();
     }
 
     public static void logout() {

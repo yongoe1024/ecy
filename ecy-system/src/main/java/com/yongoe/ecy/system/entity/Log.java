@@ -21,9 +21,6 @@ import java.time.LocalDateTime;
 @Schema(name = "系统日志")
 public class Log {
 
-    public static final String SUCCESS = "操作成功";
-    public static final String ERROR = "系统异常";
-
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 

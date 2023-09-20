@@ -22,9 +22,9 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
         User user = UserUtils.getUser();
         if (user == null) {
             this.setFieldValByName("createTime", LocalDateTime.now(), metaObject);
-            this.setFieldValByName("createBy", "auto", metaObject);
+            this.setFieldValByName("createBy", "系统", metaObject);
             this.setFieldValByName("updateTime", LocalDateTime.now(), metaObject);
-            this.setFieldValByName("updateBy", "auto", metaObject);
+            this.setFieldValByName("updateBy", "系统", metaObject);
             return;
         }
         String name = user.getName();
@@ -39,7 +39,7 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
         User user = UserUtils.getUser();
         if (user == null) {
             this.setFieldValByName("updateTime", LocalDateTime.now(), metaObject);
-            this.setFieldValByName("updateBy", "auto", metaObject);
+            this.setFieldValByName("updateBy", "系统", metaObject);
             return;
         }
         String name = user.getName();
