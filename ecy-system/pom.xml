@@ -17,6 +17,11 @@
             <artifactId>ecy-common</artifactId>
             <version>${revision}</version>
         </dependency>
+        <!--aop切面-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
         <!--         注释处理器  -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

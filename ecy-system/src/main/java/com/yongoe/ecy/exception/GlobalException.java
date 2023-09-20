@@ -23,7 +23,7 @@ public class GlobalException {
     @ExceptionHandler(value = SQLIntegrityConstraintViolationException.class)
     public R sql(Throwable throwable) {
         log.error("错误:", throwable);
-        return R.error("主键重复");
+        return R.error("主键错误");
     }
 
     @ExceptionHandler(value = HttpMessageNotReadableException.class)
@@ -35,7 +35,7 @@ public class GlobalException {
     @ExceptionHandler(value = DataIntegrityViolationException.class)
     public R vdataLongException(Throwable throwable) {
         log.error("错误:", throwable);
-        return R.error("数据长度超出范围");
+        return R.error("数据完整性违规");
     }
 
     @ExceptionHandler(value = {BadSqlGrammarException.class})
