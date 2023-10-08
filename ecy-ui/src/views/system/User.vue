@@ -111,6 +111,16 @@
           </el-tag>
         </template>
       </el-table-column>
+       <el-table-column prop="roleList"
+                         label="角色"
+                         width="110"
+                         align="center">
+          <template slot-scope="scope">
+            <el-tag v-for="item in scope.row.roleList"
+                    :key="item.id"
+                    type="success">{{item.name}}</el-tag>
+          </template>
+        </el-table-column>
       <el-table-column label="操作"
                        align="center"
                        width="140"
@@ -317,7 +327,7 @@ export default {
         this.axios.post('/system/user/update/password', { id: row.id, password: value }).then(() => {
           this.getList()
         })
-      })
+      }).catch(e => { })
     },
     handleAddOrUpdate () {
       this.$refs.form.validate((valid) => {
