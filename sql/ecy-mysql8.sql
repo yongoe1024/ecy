@@ -158,6 +158,7 @@ CREATE TABLE `sys_menu`
     `update_by`   varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '修改人',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
+  AUTO_INCREMENT = 100
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_unicode_ci;
 
@@ -183,7 +184,10 @@ values (1, 0, '系统管理', 1, '', '', 'fa fa-cog', 0, 1, 1, '2023-01-01 00:00
        (9, 2, '数据字典', 2, '/basic/dict/**', 'basic/Dict', '', 0, 1, 1, '2023-01-01 00:00:00', '2023-01-01 00:00:00',
         'yongoe', 'yongoe'),
        (10, 2, '数据字典-数据', 2, '/basic/dict/data/**', 'basic/DictData', '', 0, 0, 1, '2023-01-01 00:00:00',
-        '2023-01-01 00:00:00', 'yongoe', 'yongoe');
+        '2023-01-01 00:00:00', 'yongoe', 'yongoe'),
+       (11, 1, '系统日志', 2, '', 'system/Log', '', 0, 1, 1, '2023-09-19 05:51:08', '2023-09-19 05:51:08', 'yongoe',
+        'yongoe');
+
 
 
 DROP TABLE IF EXISTS `sys_role`;
@@ -192,7 +196,7 @@ CREATE TABLE `sys_role`
 (
     `id`          bigint unsigned                                              NOT NULL AUTO_INCREMENT,
     `code`        varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '角色代码',
-    `name`      varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '中文名',
+    `name`        varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '中文名',
     `create_time` datetime                                                     NOT NULL COMMENT '创建时间',
     `update_time` datetime                                                     NOT NULL COMMENT '修改时间',
     `create_by`   varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '创建人',
@@ -230,8 +234,8 @@ DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user`
 (
     `id`            bigint unsigned                                               NOT NULL AUTO_INCREMENT,
-    `department_id` bigint                                                        DEFAULT NULL COMMENT '部门id',
-    `position_id`   bigint                                                        DEFAULT NULL COMMENT '职位id',
+    `department_id` bigint                                                       DEFAULT NULL COMMENT '部门id',
+    `position_id`   bigint                                                       DEFAULT NULL COMMENT '职位id',
     `username`      varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci  NOT NULL COMMENT '账号',
     `password`      varchar(50) COLLATE utf8mb4_unicode_ci                        NOT NULL COMMENT '密码',
     `name`          varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci  NOT NULL COMMENT '姓名',
@@ -321,6 +325,8 @@ CREATE TABLE `basic_letter`
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `sys_log`;
 
 CREATE TABLE `sys_log`
 (
