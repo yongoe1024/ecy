@@ -8,7 +8,7 @@ const ax = axios.create()
 
 // 解决请求不包含cookie  ：session
 ax.defaults.withCredentials = true
-ax.defaults.baseURL =  Vue.prototype.$BASE_URL
+ax.defaults.baseURL = Vue.prototype.$BASE_URL
 
 //请求拦截器
 ax.interceptors.request.use(config => {

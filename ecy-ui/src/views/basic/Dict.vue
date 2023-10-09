@@ -194,12 +194,12 @@ export default {
             this.axios.post('/basic/dict/update', this.form).then(() => {
               this.getList()
               this.dialogVisible = false
-            })
+            }).catch(e => { })
           } else {
             this.axios.post('/basic/dict/add', this.form).then(() => {
               this.getList()
               this.dialogVisible = false
-            })
+            }).catch(e => { })
           }
         }
       })
@@ -207,12 +207,12 @@ export default {
     handleDelete (row) {
       this.$confirm('此操作将永久删除这条数据, 是否继续?', '提示', { type: 'warning' }).then(() => {
         this.axios.post('/basic/dict/delete/' + row.id).then(() => this.getList())
-      })
+      }).catch(e => { })
     },
     handleDeleteMany () {
       this.$confirm('此操作将永久删除 [' + this.multipleSelection.length + '] 条数据, 是否继续?', '提示', { type: 'warning' }).then(() => {
         this.axios.post('/basic/dict/delete/' + this.multipleSelection).then(() => this.getList())
-      })
+      }).catch(e => { })
     },
     // 初始化数据
     getList () {
@@ -221,7 +221,7 @@ export default {
         this.loading = false
         this.dataList = data.list
         this.total = data.total - 0
-      })
+      }).catch(e => this.loading = false)
     },
   },
 }

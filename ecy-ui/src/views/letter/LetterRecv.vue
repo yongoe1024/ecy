@@ -143,7 +143,7 @@ export default {
         this.loading = false
         this.dataList = data.list
         this.total = data.total - 0
-      })
+      }).catch(e => this.loading = false)
     },
   },
 }

@@ -262,12 +262,12 @@ export default {
                         this.axios.post('/${packageName}/${entity?lower_case}/update', this.form).then(() => {
                             this.getList()
                             this.dialogVisible = false
-                        })
+                        }).catch(e => { })
                     } else {
                         this.axios.post('/${packageName}/${entity?lower_case}/add', this.form).then(() => {
                             this.getList()
                             this.dialogVisible = false
-                        })
+                        }).catch(e => { })
                     }
                     </#if>
                     </#list >
@@ -281,12 +281,12 @@ export default {
                 this.axios.post('/${packageName}/${entity?lower_case}/delete/' + row.${field.propertyName}).then(() => this.getList())
                 </#if>
                 </#list >
-            })
+            }).catch(e => { })
         },
         handleDeleteMany() {
             this.$confirm('此操作将永久删除 [' + this.multipleSelection.length + '] 条数据, 是否继续?', '提示', {type: 'warning'}).then(() => {
                 this.axios.post('/${packageName}/${entity?lower_case}/delete/' + this.multipleSelection).then(() => this.getList())
-            })
+            }).catch(e => { })
         },
         // 初始化数据
         getList() {
@@ -295,7 +295,7 @@ export default {
                 this.loading = false
                 this.dataList = data.list
                 this.total = data.total - 0
-            })
+            }).catch(e => this.loading = true )
         },
     },
 }

@@ -244,12 +244,12 @@ export default {
             this.axios.post('/system/menu/update', this.form).then(() => {
               this.getList()
               this.dialogVisible = false
-            })
+            }).catch(e => { })
           } else {
             this.axios.post('/system/menu/add', this.form).then(() => {
               this.getList()
               this.dialogVisible = false
-            })
+            }).catch(e => { })
           }
         }
       })
@@ -257,7 +257,7 @@ export default {
     handleDelete (row) {
       this.$confirm('此操作将永久删除这条数据, 是否继续?', '提示', { type: 'warning' }).then(() => {
         this.axios.post('/system/menu/delete/' + row.id).then(() => this.getList())
-      })
+      }).catch(e => { })
     },
     // 初始化数据
     getList () {
@@ -265,7 +265,7 @@ export default {
       this.axios.post('/system/menu/tree').then(data => {
         this.loading = false
         this.dataList = data
-      })
+      }).catch(e => this.loading = false)
     },
   },
 }

@@ -134,7 +134,7 @@ export default {
     clear () {
       this.$confirm('此操作将永久删除数据, 是否继续?', '提示', { type: 'warning' }).then(() => {
         this.axios.post('/system/log/delete').then(() => this.getList())
-      })
+      }).catch(e => { })
     },
     // 初始化数据
     getList () {
@@ -143,7 +143,7 @@ export default {
         this.loading = false
         this.dataList = data.list
         this.total = data.total - 0
-      })
+      }).catch(e => this.loading = false)
     },
   },
 }

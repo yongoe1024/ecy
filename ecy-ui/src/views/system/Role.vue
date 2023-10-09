@@ -90,7 +90,7 @@ export default {
     handleDeleteRole (role) {
       this.$confirm('此操作将永久删除[' + role.name + ']角色, 是否继续?', '提示', { type: 'warning' }).then(() => {
         this.axios.post('/system/role/delete/' + role.id).then(() => this.initAllRoles())
-      })
+      }).catch(e => { })
     },
     //添加角色
     handleAddRole () {
@@ -99,7 +99,7 @@ export default {
           this.initAllRoles()
           this.form.name = ''
           this.form.code = ''
-        })
+        }).catch(e => { })
       } else {
         this.$message.error('字段不能为空')
       }
@@ -115,7 +115,7 @@ export default {
     },
     // 查询全部菜单
     initAllMenus () {
-      this.axios.post('/system/menu/tree').then(data => this.menuList = data)
+      this.axios.post('/system/menu/tree').then(data => this.menuList = data).catch(e => { })
     },
     // 查询 全部角色
     initAllRoles () {
@@ -123,7 +123,7 @@ export default {
       this.axios.post('/system/role/list').then(data => {
         this.roleList = data
         this.$nextTick(() => this.checkStrictly = false)
-      })
+      }).catch(e => { })
     },
   },
 }

@@ -111,16 +111,16 @@
           </el-tag>
         </template>
       </el-table-column>
-       <el-table-column prop="roleList"
-                         label="角色"
-                         width="110"
-                         align="center">
-          <template slot-scope="scope">
-            <el-tag v-for="item in scope.row.roleList"
-                    :key="item.id"
-                    type="success">{{item.name}}</el-tag>
-          </template>
-        </el-table-column>
+      <el-table-column prop="roleList"
+                       label="角色"
+                       width="110"
+                       align="center">
+        <template slot-scope="scope">
+          <el-tag v-for="item in scope.row.roleList"
+                  :key="item.id"
+                  type="success">{{item.name}}</el-tag>
+        </template>
+      </el-table-column>
       <el-table-column label="操作"
                        align="center"
                        width="140"
@@ -283,10 +283,13 @@ export default {
   mounted () {
     this.axios.post('/basic/department/list').then(data => {
       this.departmentList = data
-    })
+    }).catch(e => { })
     this.axios.post('/basic/position/list').then(data => {
       this.positionList = data
-    })
+    }).catch(e => { })
+    this.axios.post('/system/role/list').then(data => {
+      this.roleList = data
+    }).catch(e => { })
     this.getList()
   },
   methods: {
@@ -337,12 +340,12 @@ export default {
             this.axios.post('/system/user/update', this.form).then(() => {
               this.getList()
               this.dialogVisible = false
-            })
+            }).catch(e => { })
           } else {
             this.axios.post('/system/user/add', this.form).then(() => {
               this.getList()
               this.dialogVisible = false
-            })
+            }).catch(e => { })
           }
         }
       })
@@ -350,7 +353,7 @@ export default {
     handleDelete (row) {
       this.$confirm('此操作将永久删除这条数据, 是否继续?', '提示', { type: 'warning' }).then(() => {
         this.axios.post('/system/user/delete/' + row.id).then(() => this.getList())
-      })
+      }).catch(e => { })
     },
 
     // 初始化数据
@@ -360,10 +363,7 @@ export default {
         this.loading = false
         this.dataList = data.list
         this.total = data.total - 0
-      })
-      this.axios.post('/system/role/list').then(data => {
-        this.roleList = data
-      })
+      }).catch(e => this.loading = false)
     },
   },
 }

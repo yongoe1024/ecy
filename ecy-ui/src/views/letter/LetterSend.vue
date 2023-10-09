@@ -201,7 +201,7 @@ export default {
     this.getList()
     this.axios.post('/basic/letter/user').then(data => {
       this.userList = data
-    })
+    }).catch(e => { })
   },
   methods: {
     getInfo (row) {
@@ -233,7 +233,7 @@ export default {
           this.axios.post('/basic/letter/add', this.form).then(() => {
             this.getList()
             this.dialogVisible = false
-          })
+          }).catch(e => { })
         }
       })
     },
@@ -245,7 +245,7 @@ export default {
         this.loading = false
         this.dataList = data.list
         this.total = data.total - 0
-      })
+      }).catch(e => this.loading = false)
     },
   },
 }

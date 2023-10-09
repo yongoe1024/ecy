@@ -70,7 +70,7 @@ export default {
         if (valid) {
           this.axios.post('/forget', this.form).then((result) => {
             this.$router.replace('/login')
-          })
+          }).catch(e => { })
         }
       })
     },

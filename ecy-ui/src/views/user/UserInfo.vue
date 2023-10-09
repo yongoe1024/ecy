@@ -107,13 +107,13 @@ export default {
     handleUpdate () {
       this.axios.post('/user/update', this.form).then((data) => {
         setTimeout(() => { this.initUser() }, 1000)
-      })
+      }).catch(e => { })
     },
     initUser () {
       this.axios.post('/user/info').then(data => {
         this.$store.commit('initUser', data)
         this.form = data
-      })
+      }).catch(e => { })
     }
   },
 }

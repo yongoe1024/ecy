@@ -68,7 +68,7 @@ export default {
     this.axios.post('/user/getdict?name=' + this.name).then(data => {
       this.dataList = data.list
       this.type = data.type
-    })
+    }).catch(e => { })
   }
 }
 </script>

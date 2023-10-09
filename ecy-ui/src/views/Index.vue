@@ -134,12 +134,12 @@ export default {
         this.$store.commit('initUser', {})
         window.localStorage.removeItem('token')
         this.$router.replace('/login')
-      })
+      }).catch(e => { })
     },
   },
   mounted () {
     //获取用户信息
-    this.axios.post('/user/info').then(data => this.$store.commit('initUser', data))
+    this.axios.post('/user/info').then(data => this.$store.commit('initUser', data)).catch(e => { })
   },
 };
 </script>
