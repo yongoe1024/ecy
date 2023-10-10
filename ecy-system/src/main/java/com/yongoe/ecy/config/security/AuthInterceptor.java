@@ -10,6 +10,7 @@ import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -28,6 +29,8 @@ import java.util.List;
 public class AuthInterceptor implements HandlerInterceptor {
     @Resource
     private MenuService menuService;
+    @Value("${server.servlet.context-path}")
+    private String contextPath;
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
         User user = UserThreadLocal.get();
@@ -40,7 +43,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         String requestURI = request.getRequestURI();
         for (Menu menu : menuService.list()) {
             // 查找 与请求路径匹配的菜单数据
-            if (!StringUtils.isEmpty(menu.getUrl()) && antPathMatcher.match(menu.getUrl(), requestURI)) {
+            if (!StringUtils.isEmpty(menu.getUrl()) && antPathMatcher.match(contextPath + menu.getUrl(), requestURI)) {
                 // 返回 该菜单的 所需的权限
                 List<Long> roleIds = menuService.getRoleIdsByMenuId(menu.getId());
                 for (Long id : roleIds) {

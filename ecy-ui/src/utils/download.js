@@ -25,8 +25,9 @@ service.interceptors.response.use(
     const headers = resp.headers
     let reg = RegExp(/application\/json/)
     if (headers['content-type'].match(reg)) {
-      resp.data = unitToString(resp.data)
-      Message.error({ message: resp.data.message })
+      let enc = new TextDecoder('utf-8')
+      let data = JSON.parse(enc.decode(new Uint8Array(resp.data)))
+      Message.error({ message: data.message })
     }
     else {
       let fileDownload = require('js-file-download')

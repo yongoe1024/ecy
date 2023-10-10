@@ -4,9 +4,16 @@
 
     <!--    获取分页数据-->
     <select id="getLogByPage" resultType="com.yongoe.ecy.system.entity.Log">
-        select
-                id, name, type, title, details, create_time, update_time, create_by, update_by
-        from  sys_log
+        select id,
+               name,
+               type,
+               title,
+               details,
+               create_time,
+               update_time,
+               create_by,
+               update_by
+        from sys_log
         order by create_time desc
     </select>
 

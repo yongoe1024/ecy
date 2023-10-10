@@ -23,24 +23,24 @@ public class LogServiceImpl extends ServiceImpl<LogMapper, Log> implements LogSe
     }
 
     @Override
-    public void saveLog(String type,String title, String details) {
-       try {
-           Log log = new Log();
-           if (title.length() >= 100)
-               log.setTitle(title.substring(0, 99));
-           else
-               log.setTitle(title);
-           if (details.length() >= 2000)
-               log.setDetails(details.substring(0, 1999));
-           else
-               log.setDetails(details);
-           String name = UserUtils.getName();
-           log.setName(name);
-           log.setType(type);
-           baseMapper.insert(log);
-       }catch (Exception e){
-           e.printStackTrace();
-       }
+    public void saveLog(String type, String title, String details) {
+        try {
+            Log log = new Log();
+            if (title.length() >= 100)
+                log.setTitle(title.substring(0, 99));
+            else
+                log.setTitle(title);
+            if (details.length() >= 2000)
+                log.setDetails(details.substring(0, 1999));
+            else
+                log.setDetails(details);
+            String name = UserUtils.getName();
+            log.setName(name);
+            log.setType(type);
+            baseMapper.insert(log);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

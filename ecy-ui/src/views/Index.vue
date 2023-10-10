@@ -134,6 +134,7 @@ export default {
         this.$store.commit('initUser', {})
         window.localStorage.removeItem('token')
         this.$router.replace('/login')
+        location.reload()
       }).catch(e => { })
     },
   },

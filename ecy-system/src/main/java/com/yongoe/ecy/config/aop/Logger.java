@@ -52,11 +52,11 @@ public class Logger {
      */
     @AfterReturning("all()")
     public void afterReturningPrint(JoinPoint joinPoint) {
-        String classname = joinPoint.getTarget().getClass().getName();
-        String methodname = joinPoint.getSignature().getName();
-        String s = Arrays.toString(joinPoint.getArgs());
-        logService.saveLog("操作", "执行了 " + classname + " 的 " + methodname + " 方法",
-                "参数：" + s + "\n");
+//        String classname = joinPoint.getTarget().getClass().getName();
+//        String methodname = joinPoint.getSignature().getName();
+//        String s = Arrays.toString(joinPoint.getArgs());
+//        logService.saveLog("操作", "执行了 " + classname + " 的 " + methodname + " 方法",
+//                "参数：" + s + "\n");
     }
 
     /**

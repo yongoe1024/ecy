@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 public class LogResVo {
 
     /**
-     * 
+     *
      */
     private Long id;
     /**
