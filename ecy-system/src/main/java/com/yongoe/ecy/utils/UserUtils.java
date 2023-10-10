@@ -1,6 +1,7 @@
 package com.yongoe.ecy.utils;
 
 import com.yongoe.ecy.config.security.UserThreadLocal;
+import com.yongoe.ecy.system.entity.Role;
 import com.yongoe.ecy.system.entity.User;
 
 /**
@@ -17,6 +18,19 @@ public class UserUtils {
 
     public static String getName() {
         return getUser() == null ? "系统" : getUser().getName();
+    }
+
+    public static String getUserName() {
+        return getUser() == null ? null : getUser().getUsername();
+    }
+
+    public static Boolean isAdmin() {
+        for (Role role : getUser().getRoleList()) {
+            if ("admin".equals(role.getCode())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static Long getUserId() {

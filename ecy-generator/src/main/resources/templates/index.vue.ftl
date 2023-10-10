@@ -188,7 +188,7 @@ export default {
             dataList: [],
             form: {
                 <#list table.fields as field >
-                <#if field.keyFlag || myParam?seq_contains(field.name)>
+                <#if myParam?seq_contains(field.name)>
                 <#elseif field.propertyType=="Boolean">
                 ${field.propertyName}: true,
                 <#else>
@@ -198,7 +198,7 @@ export default {
             },
             queryParam: {
                 <#list table.fields as field >
-                <#if field.keyFlag || myParam?seq_contains(field.name)>
+                <#if myParam?seq_contains(field.name)>
                 <#else >
                 ${field.propertyName}: null,
                 </#if>
