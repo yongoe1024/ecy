@@ -352,7 +352,7 @@ export default {
     },
     handleDelete (row) {
       this.$confirm('此操作将永久删除这条数据, 是否继续?', '提示', { type: 'warning' }).then(() => {
-        this.axios.post('/system/user/delete/' + row.id).then(() => this.getList())
+        this.axios.post('/system/user/delete/' + row.id).then(() => this.getList()).catch(e => { })
       }).catch(e => { })
     },
 

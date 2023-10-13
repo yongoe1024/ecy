@@ -21,10 +21,11 @@ import java.util.UUID;
 public class FileUtils {
     private static String fileSavePath;
 
-    @Value ("${file-save-path}")
+    @Value("${file-save-path}")
     public void setSender(String s) {
         fileSavePath = s;
     }
+
     /**
      * 上传文件，返回文件url路径
      *

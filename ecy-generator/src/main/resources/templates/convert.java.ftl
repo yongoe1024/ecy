@@ -43,9 +43,13 @@ public interface ${entity}Convert {
     Page<${entity}ExcelVo> entity2ExcelPage(Page<${entity}> page);
 
     /**
-     * req 转 entity
+     * vo 转 entity
      */
-    ${entity}  req2Entity(${entity}ReqVo reqVo);
+    ${entity} req2Entity(${entity}ReqVo reqVo);
+
+    ${entity} excel2Entity(${entity}ExcelVo excelVo);
+
+    List<${entity}> excel2EntityList(List<${entity}ExcelVo> list);
 
 
 }

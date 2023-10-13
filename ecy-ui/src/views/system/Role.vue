@@ -89,7 +89,7 @@ export default {
     //删除角色
     handleDeleteRole (role) {
       this.$confirm('此操作将永久删除[' + role.name + ']角色, 是否继续?', '提示', { type: 'warning' }).then(() => {
-        this.axios.post('/system/role/delete/' + role.id).then(() => this.initAllRoles())
+        this.axios.post('/system/role/delete/' + role.id).then(() => this.initAllRoles()).catch(e => { })
       }).catch(e => { })
     },
     //添加角色

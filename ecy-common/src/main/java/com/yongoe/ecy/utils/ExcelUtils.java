@@ -36,6 +36,7 @@ public class ExcelUtils {
         } catch (Exception e) {
             throw new RuntimeException("解析excel失败");
         }
+        list = list.stream().filter(t -> !ObjectUitls.isAllFieldNull(t)).toList();
         return list;
     }
 

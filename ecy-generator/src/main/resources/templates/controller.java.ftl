@@ -69,7 +69,8 @@ public class ${table.controllerName} {
     @Operation(summary = "导入数据")
     @PostMapping("/upload")
     public R upload(MultipartFile file) {
-        List<${entity}> list = ExcelUtils.upload(file, ${entity}.class);
+        List<${entity}ExcelVo> excelList = ExcelUtils.upload(file, ${entity}ExcelVo.class);
+        List<${entity}> list = ${entity?uncap_first}Convert.excel2EntityList(excelList);
         ${table.serviceName?uncap_first}.saveBatch(list);
         return R.success("导入成功");
     }
