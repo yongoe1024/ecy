@@ -80,7 +80,7 @@ public class ${table.controllerName} {
     public void export(@RequestBody ${entity}ReqVo reqVo, HttpServletResponse response) {
         ${entity} entity = ${entity?uncap_first}Convert.req2Entity(reqVo);
         Page<${entity}> page = ${table.serviceName?uncap_first}.get${entity}ByPage(Page.of(-1, -1), entity);
-        List<${entity}ExcelVo> list = ${entity?uncap_first}Convert.entity2ExcelPage(page).getRecords();
+        List<${entity}ExcelVo> list = ${entity?uncap_first}Convert.entity2ExcelList(page.getRecords());
         ExcelUtils.export(response, list, ${entity}ExcelVo.class);
     }
 }

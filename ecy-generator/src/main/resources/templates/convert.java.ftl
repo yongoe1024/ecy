@@ -18,7 +18,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ${entity}Convert {
     /**
-     * entity转vo
+     * entity to vo
      */
     ${entity}ReqVo entity2Req(${entity} entity);
 
@@ -27,7 +27,7 @@ public interface ${entity}Convert {
     ${entity}ExcelVo entity2Excel(${entity} entity);
 
     /**
-     * entity List 转vo
+     * entity to vo List
      */
     List<${entity}ReqVo> entity2ReqList(List<${entity}> list);
 
@@ -36,11 +36,9 @@ public interface ${entity}Convert {
     List<${entity}ExcelVo> entity2ExcelList(List<${entity}> list);
 
     /**
-     * entity Page 转vo
+     * entity to vo Page
      */
     Page<${entity}ResVo> entity2ResPage(Page<${entity}> page);
-
-    Page<${entity}ExcelVo> entity2ExcelPage(Page<${entity}> page);
 
     /**
      * vo 转 entity
@@ -49,6 +47,9 @@ public interface ${entity}Convert {
 
     ${entity} excel2Entity(${entity}ExcelVo excelVo);
 
+    /**
+     * vo to entity List
+     */
     List<${entity}> excel2EntityList(List<${entity}ExcelVo> list);
 
 

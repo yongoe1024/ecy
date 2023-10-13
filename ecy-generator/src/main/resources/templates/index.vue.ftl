@@ -46,7 +46,7 @@
                        size="small"
                        @click="handleShowAddEdit"
                        icon="el-icon-plus">添加</el-button></#if>
-            <#if upload><upload size="small" :url="$BASE_URL+'/${packageName}/${entity?lower_case}/upload'" v-auth="'导入'"
+            <#if upload><upload size="small" url="/${packageName}/${entity?lower_case}/upload" v-auth="'导入'"
                     @success="getList"></upload></#if>
             <#if export><el-button type="success" v-auth="'导出'"
                        icon="el-icon-download"
