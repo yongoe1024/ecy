@@ -17,26 +17,26 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface LogConvert {
     /**
-     * entity转vo
+     * entity to vo
      */
     LogReqVo entity2Req(Log entity);
 
     LogResVo entity2Res(Log entity);
 
     /**
-     * entity List 转vo
+     * entity to vo List
      */
     List<LogReqVo> entity2ReqList(List<Log> list);
 
     List<LogResVo> entity2ResList(List<Log> list);
 
     /**
-     * entity Page 转vo
+     * entity to vo Page
      */
     Page<LogResVo> entity2ResPage(Page<Log> page);
 
-    /**
-     * req 转 entity
+   /**
+     * vo 转 entity
      */
     Log req2Entity(LogReqVo reqVo);
 

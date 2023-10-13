@@ -17,14 +17,14 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface LetterConvert {
     /**
-     * entity转vo
+     * entity to vo
      */
     LetterReqVo entity2Req(Letter entity);
 
     LetterResVo entity2Res(Letter entity);
 
     /**
-     * entity List 转vo
+     * entity to vo List
      */
     List<LetterReqVo> entity2ReqList(List<Letter> list);
 
@@ -32,13 +32,13 @@ public interface LetterConvert {
 
 
     /**
-     * entity Page 转vo
+     * entity to vo Page
      */
     Page<LetterResVo> entity2ResPage(Page<Letter> page);
 
 
-    /**
-     * req 转 entity
+   /**
+     * vo 转 entity
      */
     Letter req2Entity(LetterReqVo reqVo);
 

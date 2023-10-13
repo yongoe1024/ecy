@@ -17,7 +17,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface PositionConvert {
     /**
-     * entity转vo
+     * entity to vo
      */
     PositionReqVo entity2Req(Position entity);
 
@@ -25,7 +25,7 @@ public interface PositionConvert {
 
 
     /**
-     * entity List 转vo
+     * entity to vo List
      */
     List<PositionReqVo> entity2ReqList(List<Position> list);
 
@@ -33,13 +33,13 @@ public interface PositionConvert {
 
 
     /**
-     * entity Page 转vo
+     * entity to vo Page
      */
     Page<PositionResVo> entity2ResPage(Page<Position> page);
 
 
-    /**
-     * req 转 entity
+   /**
+     * vo 转 entity
      */
     Position req2Entity(PositionReqVo reqVo);
 

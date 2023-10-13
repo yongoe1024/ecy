@@ -17,7 +17,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface DictConvert {
     /**
-     * entity转vo
+     * entity to vo
      */
     DictReqVo entity2Req(Dict entity);
 
@@ -25,7 +25,7 @@ public interface DictConvert {
 
 
     /**
-     * entity List 转vo
+     * entity to vo List
      */
     List<DictReqVo> entity2ReqList(List<Dict> list);
 
@@ -33,13 +33,13 @@ public interface DictConvert {
 
 
     /**
-     * entity Page 转vo
+     * entity to vo Page
      */
     Page<DictResVo> entity2ResPage(Page<Dict> page);
 
 
-    /**
-     * req 转 entity
+   /**
+     * vo 转 entity
      */
     Dict req2Entity(DictReqVo reqVo);
 

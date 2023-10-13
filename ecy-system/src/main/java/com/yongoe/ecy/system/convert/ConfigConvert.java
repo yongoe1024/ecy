@@ -17,7 +17,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ConfigConvert {
     /**
-     * entity转vo
+     * entity to vo
      */
     ConfigReqVo entity2Req(Config entity);
 
@@ -25,7 +25,7 @@ public interface ConfigConvert {
 
 
     /**
-     * entity List 转vo
+     * entity to vo List
      */
     List<ConfigReqVo> entity2ReqList(List<Config> list);
 
@@ -33,13 +33,13 @@ public interface ConfigConvert {
 
 
     /**
-     * entity Page 转vo
+     * entity to vo Page
      */
     Page<ConfigResVo> entity2ResPage(Page<Config> page);
 
 
-    /**
-     * req 转 entity
+   /**
+     * vo 转 entity
      */
     Config req2Entity(ConfigReqVo reqVo);
 

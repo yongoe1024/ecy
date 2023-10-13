@@ -17,7 +17,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface DepartmentConvert {
     /**
-     * entity转vo
+     * entity to vo
      */
     DepartmentReqVo entity2Req(Department entity);
 
@@ -25,7 +25,7 @@ public interface DepartmentConvert {
 
 
     /**
-     * entity List 转vo
+     * entity to vo List
      */
     List<DepartmentReqVo> entity2ReqList(List<Department> list);
 
@@ -33,13 +33,13 @@ public interface DepartmentConvert {
 
 
     /**
-     * entity Page 转vo
+     * entity to vo Page
      */
     Page<DepartmentResVo> entity2ResPage(Page<Department> page);
 
 
-    /**
-     * req 转 entity
+   /**
+     * vo 转 entity
      */
     Department req2Entity(DepartmentReqVo reqVo);
 
