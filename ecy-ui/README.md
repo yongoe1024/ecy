@@ -14,9 +14,9 @@ size： 下拉框尺寸 default: 'small'
 ## 上传按钮组件  
 url  接口
 size 尺寸，medium/small/mini
-on-success  成功的回调，传入后端返回的信息
+success  成功的回调，传入后端返回的信息
 ```
-<upload url="/api/upload"  @on-success="handleSuccess"></upload>
+<upload url="/api/upload"  @success="handleSuccess"></upload>
 ```
 
 ## Tree 选择器组件  

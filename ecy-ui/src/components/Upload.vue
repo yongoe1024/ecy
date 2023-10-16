@@ -48,7 +48,7 @@ export default {
       this.uploadButtonText = '导入数据'
       this.uploadButtonIcon = 'el-icon-upload2'
       this.uploadButtonDisabled = false
-      this.$emit('on-success', data.data)
+      this.$emit('success', data.data)
     },
     onError () {
       this.$message({ message: '导入失败', type: 'error' })
