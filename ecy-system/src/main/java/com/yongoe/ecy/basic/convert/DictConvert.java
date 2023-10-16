@@ -38,7 +38,7 @@ public interface DictConvert {
     Page<DictResVo> entity2ResPage(Page<Dict> page);
 
 
-   /**
+    /**
      * vo 转 entity
      */
     Dict req2Entity(DictReqVo reqVo);

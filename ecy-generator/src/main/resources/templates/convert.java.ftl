@@ -41,7 +41,7 @@ public interface ${entity}Convert {
     Page<${entity}ResVo> entity2ResPage(Page<${entity}> page);
 
     /**
-     * vo 转 entity
+     * vo to entity
      */
     ${entity} req2Entity(${entity}ReqVo reqVo);
 

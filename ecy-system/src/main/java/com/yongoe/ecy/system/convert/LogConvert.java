@@ -35,7 +35,7 @@ public interface LogConvert {
      */
     Page<LogResVo> entity2ResPage(Page<Log> page);
 
-   /**
+    /**
      * vo 转 entity
      */
     Log req2Entity(LogReqVo reqVo);

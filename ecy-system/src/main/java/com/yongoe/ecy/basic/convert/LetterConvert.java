@@ -37,7 +37,7 @@ public interface LetterConvert {
     Page<LetterResVo> entity2ResPage(Page<Letter> page);
 
 
-   /**
+    /**
      * vo 转 entity
      */
     Letter req2Entity(LetterReqVo reqVo);

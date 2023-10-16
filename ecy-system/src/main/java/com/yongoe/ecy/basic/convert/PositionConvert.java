@@ -38,7 +38,7 @@ public interface PositionConvert {
     Page<PositionResVo> entity2ResPage(Page<Position> page);
 
 
-   /**
+    /**
      * vo 转 entity
      */
     Position req2Entity(PositionReqVo reqVo);

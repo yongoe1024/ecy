@@ -38,7 +38,7 @@ public interface DepartmentConvert {
     Page<DepartmentResVo> entity2ResPage(Page<Department> page);
 
 
-   /**
+    /**
      * vo 转 entity
      */
     Department req2Entity(DepartmentReqVo reqVo);

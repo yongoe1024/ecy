@@ -9,7 +9,6 @@ import com.yongoe.ecy.basic.entity.Letter;
 import com.yongoe.ecy.basic.service.LetterService;
 import com.yongoe.ecy.system.entity.User;
 import com.yongoe.ecy.system.service.UserService;
-import com.yongoe.ecy.utils.Base64Utils;
 import com.yongoe.ecy.utils.PageUtils;
 import com.yongoe.ecy.utils.R;
 import com.yongoe.ecy.utils.UserUtils;
@@ -58,10 +57,10 @@ public class LetterController {
         // 最新6个
         List<Letter> records = letterService.getLetterByPage(Page.of(1, 6), letter).getRecords();
         for (Letter record : records) {
-            String base64Decode = Base64Utils.getBase64Decode(record.getContent());
-            if (base64Decode.length() >= 15)
-                base64Decode = base64Decode.substring(0, 15);
-            record.setContent(base64Decode);
+            String str = record.getContent();
+            if (str.length() >= 15)
+                str = str.substring(0, 15);
+            record.setContent(str);
         }
         List<LetterReqVo> letterReqVos = letterConvert.entity2ReqList(records);
         Map<String, Object> map = new HashMap<>();
@@ -73,15 +72,14 @@ public class LetterController {
     @Operation(summary = "查询信件详情")
     @PostMapping("/info")
     public R info(Long id) {
-        Letter byId = letterService.getById(id);
+        Letter letter = letterService.getById(id);
         Long userId = UserUtils.getUserId();
         //如果收件人是自己，就已读
-        if (byId.getAddresseeId().equals(userId)) {
-            byId.setState(true);
-            letterService.updateById(byId);
+        if (letter.getAddresseeId().equals(userId)) {
+            letter.setState(true);
+            letterService.updateById(letter);
         }
-        byId.setContent(Base64Utils.getBase64Decode(byId.getContent()));
-        LetterReqVo letterReqVo = letterConvert.entity2Req(byId);
+        LetterReqVo letterReqVo = letterConvert.entity2Req(letter);
         return R.success().put(letterReqVo);
     }
 
@@ -101,8 +99,7 @@ public class LetterController {
         letter.setAddresser(UserUtils.getName());
         letter.setAddresserId(UserUtils.getUserId());
         letter.setState(false);
-        String base64Encode = Base64Utils.getBase64Encode(letter.getContent().trim());
-        letter.setContent(base64Encode);
+        letter.setContent(letter.getContent().trim());
         letterService.save(letter);
         return R.success("添加成功");
     }

@@ -38,7 +38,7 @@ public interface ConfigConvert {
     Page<ConfigResVo> entity2ResPage(Page<Config> page);
 
 
-   /**
+    /**
      * vo 转 entity
      */
     Config req2Entity(ConfigReqVo reqVo);
