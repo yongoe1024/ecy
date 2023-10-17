@@ -112,4 +112,21 @@ router.beforeEach((to, from, next) => {
   }
 })
 
+// 防止跳转当前路径报错
+let originPush = VueRouter.prototype.push  //备份原push方法
+VueRouter.prototype.push = function (location, resolve, reject) {
+  if (resolve && reject) {    //如果传了回调函数，直接使用
+    originPush.call(this, location, resolve, reject)
+  } else {                     //如果没有传回调函数，手动添加
+    originPush.call(this, location, () => { }, () => { })
+  }
+}
+VueRouter.prototype.push = function (location, resolve, reject) {
+  if (resolve && reject) {    //如果传了回调函数，直接使用
+    originPush.call(this, location, resolve, reject)
+  } else {                     //如果没有传回调函数，手动添加
+    originPush.call(this, location, () => { }, () => { })
+  }
+}
+
 export default router
