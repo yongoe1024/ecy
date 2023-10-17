@@ -27,7 +27,7 @@ ecy-server 中的`Application.java`为main启动类
 ## docker启动
 执行 sudo ./run.sh，内部流程为：打包jar，制作jar镜像，制作nginx与vue镜像，启动compose
 *  主机需要jdk17，maven环境（不强制，mvnw可以下载），编译vue是在docker容器内，不需要任何环境
-*  nginx容器对外暴露80，443端口，转发`/api与/file`开头的请求 到 后端容器的8081端口，转发为容器内网络，不需要暴露后端的端口
+*  nginx容器对外暴露80，443端口，转发`/ecy`开头的请求 到 后端容器的8081端口，转发为容器内网络，不需要暴露后端的端口
 *  docker-compose中，host.docker.internal 为主机ip，相当于本地localhost ，mysql，redis我是放到主机运行，并非容器
 *  若在服务器启动docker-compose，可修改nginx监听的域名，在`/ecy-ui/nginx/default.conf`文件中
 
