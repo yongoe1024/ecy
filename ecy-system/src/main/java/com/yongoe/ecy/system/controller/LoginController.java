@@ -1,5 +1,6 @@
 package com.yongoe.ecy.system.controller;
 
+import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import com.yongoe.ecy.system.controller.vo.req.ForgetVO;
 import com.yongoe.ecy.system.controller.vo.req.LoginVo;
 import com.yongoe.ecy.system.controller.vo.req.RegisterVo;
@@ -20,7 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @author yongoe
  * @since 2023/1/1
  */
-@Tag(name = "登录")
+@Tag(name = "登录", description = "登录")
+@ApiSupport(order = 1)
 @RestController
 public class LoginController {
     @Resource

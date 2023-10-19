@@ -10,7 +10,7 @@ public class Application {
 
         SpringApplication.run(Application.class, args);
         System.out.println(("================================================启动完毕================================================"));
-        System.out.println(("===============================  接口文档: http://localhost:8081/doc.html  ============================="));
+        System.out.println(("===============================  接口文档: http://localhost:8081/ecy/doc.html  ============================="));
     }
 
 }

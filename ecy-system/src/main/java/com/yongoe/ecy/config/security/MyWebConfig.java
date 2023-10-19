@@ -61,8 +61,7 @@ public class MyWebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         String[] p = new String[]{
                 "/login", "/logout", "/oauth/**", "/forget", "/register", "/captcha/**", "/file/**",
-                "/swagger**/**", "/webjars/**", "/v3/**", "/doc.html",
-                "/oauth/**"
+                "/webjars/**", "/v3/**", "/doc.html",
         };
         registry.addInterceptor(loginInterceptor).addPathPatterns("/**").excludePathPatterns(p);
         registry.addInterceptor(authInterceptor).addPathPatterns("/**").excludePathPatterns(p);
