@@ -20,9 +20,15 @@ import java.util.UUID;
 @Component
 public class FileUtils {
     private static String fileSavePath;
+    private static String contextPath;
+
+    @Value("${server.servlet.context-path}")
+    public void setContextPath(String s) {
+        contextPath = s;
+    }
 
     @Value("${file-save-path}")
-    public void setSender(String s) {
+    public void setFileSavePath(String s) {
         fileSavePath = s;
     }
 
@@ -53,7 +59,7 @@ public class FileUtils {
         } catch (IOException e) {
             throw new RuntimeException("无法创建文件");
         }
-        return "/ecy/file/" + directory + fileName;
+        return contextPath+"/file/" + directory + fileName;
     }
 
 }

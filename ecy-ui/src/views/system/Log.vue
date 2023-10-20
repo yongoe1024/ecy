@@ -60,14 +60,12 @@
 
     <el-dialog :visible.sync="dialogVisible"
                :title="dialogTitle"
-               @close="reset"
                :close-on-click-modal="false"
                width="70%">
       <el-form ref="form"
                :model="form"
                label-width="auto"
-               style="margin:20px"
-               :rules="rules">
+               style="margin:20px">
         <el-form-item label="标题"
                       prop="title">
           <el-input v-model="form.title"
