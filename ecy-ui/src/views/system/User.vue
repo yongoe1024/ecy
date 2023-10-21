@@ -324,8 +324,8 @@ export default {
       this.$prompt('请输入密码', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
-        inputPattern: /^\d{6,}$/,
-        inputErrorMessage: '密码最低6位'
+        inputPattern: /^.{1,}$/,
+        inputErrorMessage: '密码不能为空'
       }).then(({ value }) => {
         this.axios.post('/system/user/update/password', { id: row.id, password: value }).then(() => {
           this.getList()
