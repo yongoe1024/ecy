@@ -24,12 +24,18 @@ public class FileUtils {
 
     @Value("${server.servlet.context-path}")
     public void setContextPath(String s) {
-        contextPath = s;
+        if (s.endsWith("/"))
+            contextPath = s.substring(0, s.length() - 1);
+        else
+            contextPath = s;
     }
 
-    @Value("${file-save-path}")
+    @Value("${ecy.file-save-path}")
     public void setFileSavePath(String s) {
-        fileSavePath = s;
+        if (s.endsWith("/"))
+            fileSavePath = s.substring(0, s.length() - 1);
+        else
+            fileSavePath = s;
     }
 
     /**
@@ -59,7 +65,7 @@ public class FileUtils {
         } catch (IOException e) {
             throw new RuntimeException("无法创建文件");
         }
-        return contextPath+"/file/" + directory + fileName;
+        return contextPath + "/file/" + directory + fileName;
     }
 
 }

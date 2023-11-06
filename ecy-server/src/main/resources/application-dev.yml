@@ -5,3 +5,28 @@ knife4j:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ecy?characterEncoding=utf8&useUnicode=true&serverTimezone=GMT%2B8&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+  data:
+    redis:
+      port: 6379
+      host: localhost
+      password: 123456
+      lettuce:
+        pool:
+          max-active: 20
+          max-wait: -1
+          max-idle: 5
+          min-idle: 0
+
+ecy:
+  file-save-path: ${ECY_FILE:${user.dir}/ecy-file}  #文件

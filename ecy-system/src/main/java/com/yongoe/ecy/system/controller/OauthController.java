@@ -85,7 +85,7 @@ public class OauthController {
         }
     }
 
-    public Long createUser(String name, String avatar, String openid, String accessToken) {
+    private Long createUser(String name, String avatar, String openid, String accessToken) {
         User build = User.builder().phone("")
                 .email("")
                 .name(name)
@@ -107,7 +107,7 @@ public class OauthController {
     }
 
 
-    public AuthRequest getAuthRequest() {
+    private AuthRequest getAuthRequest() {
         AuthCacheConfig.timeout = 10 * 60 * 1000;
         String clientId = configUtils.get("qq-clientId");
         String clientSecret = configUtils.get("qq-clientSecret");

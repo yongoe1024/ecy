@@ -115,7 +115,8 @@ CREATE TABLE `sys_config`
     `update_time`  datetime                                                     NOT NULL COMMENT '修改时间',
     `create_by`    varchar(50) COLLATE utf8mb4_unicode_ci                       NOT NULL COMMENT '创建人',
     `update_by`    varchar(50) COLLATE utf8mb4_unicode_ci                       NOT NULL COMMENT '修改人',
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `key` (`config_key`) COMMENT 'key'
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_unicode_ci;

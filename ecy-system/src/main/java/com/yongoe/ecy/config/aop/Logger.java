@@ -16,17 +16,13 @@ public class Logger {
 
     /**
      * 在  包下的类 的 方法，都能注入代码
-     * before -》 afterReturning -》 after
+     * before -> afterReturning -> after
      */
     @Pointcut("execution(* com.yongoe.ecy..controller.*.*(..))")
     public void pt() {
     }
 
-    @Pointcut("execution(*  com.yongoe.ecy.system.controller.LogController.*(..))")
-    public void excludePointcutWeb() {
-    }
-
-    @Pointcut("pt() && !excludePointcutWeb()")
+    @Pointcut("pt()")
     public void all() {
     }
 
@@ -35,7 +31,6 @@ public class Logger {
      */
     @Before("all()")
     public void beforePrint() {
-        //System.out.println("=======before");
     }
 
     /**
@@ -43,7 +38,6 @@ public class Logger {
      */
     @After("all()")
     public void afterPrint() {
-        //System.out.println("======after");
     }
 
 

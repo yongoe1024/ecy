@@ -11,8 +11,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * 统一datatime格式
- * 序列化时将Long转为String
+ * 序列化配置
+ * 1. 序列号与反序列化，统一datatime格式
+ * 2. 序列化时将Long转为String
  *
  * @author yongoe
  * @since 2023/1/1

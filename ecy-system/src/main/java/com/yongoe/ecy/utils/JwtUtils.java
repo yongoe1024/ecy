@@ -15,7 +15,7 @@ import java.util.Map;
  * @since 2023/1/1
  */
 public class JwtUtils {
-    public static final String tokenHeader = "Authorization";  // JWT存储的请求头
+    public static final String requestHeader = "Authorization";  // JWT存储的请求头
     public static final String tokenHead = "Bearer";           // JWT 负载中拿到开头
 
     private static final String secret = "ecy-secret";          // JWT 加解密使用的密钥;

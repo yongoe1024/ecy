@@ -4,6 +4,9 @@ import com.yongoe.ecy.config.security.UserThreadLocal;
 import com.yongoe.ecy.system.entity.Role;
 import com.yongoe.ecy.system.entity.User;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 用户工具类
  *
@@ -24,9 +27,10 @@ public class UserUtils {
         return getUser() == null ? null : getUser().getUsername();
     }
 
-    public static Boolean isAdmin() {
-        for (Role role : getUser().getRoleList()) {
-            if ("admin".equals(role.getCode())) {
+    public static Boolean isRole(String code) {
+        List<Role> roles = getUser() == null ? new ArrayList<>() : getUser().getRoleList();
+        for (Role role : roles) {
+            if ("code".equals(role.getCode())) {
                 return true;
             }
         }

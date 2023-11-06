@@ -2,6 +2,9 @@ package com.yongoe.ecy.utils;
 
 import java.lang.reflect.Field;
 
+/**
+ * Object对象工具类
+ */
 public class ObjectUitls {
 
     /**
@@ -9,7 +12,7 @@ public class ObjectUitls {
      */
     public static boolean isAllFieldNull(Object obj) {
         // 得到类对象
-        Class stuCla = (Class) obj.getClass();
+        Class<?> stuCla = obj.getClass();
         //得到属性集合
         Field[] fs = stuCla.getDeclaredFields();
         boolean flag = true;

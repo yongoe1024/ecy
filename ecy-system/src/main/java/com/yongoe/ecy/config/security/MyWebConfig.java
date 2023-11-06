@@ -26,7 +26,7 @@ public class MyWebConfig implements WebMvcConfigurer {
     private LoginInterceptor loginInterceptor;
     @Resource
     private AuthInterceptor authInterceptor;
-    @Value("${file-save-path}")
+    @Value("${ecy.file-save-path}")
     private String fileSavePath;
 
     /**
@@ -53,14 +53,21 @@ public class MyWebConfig implements WebMvcConfigurer {
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        String fileurl = "";
+        if (fileSavePath.endsWith("/"))
+            fileurl = fileSavePath.substring(0, fileSavePath.length() - 1);
+        else
+            fileurl = fileSavePath;
         registry.addResourceHandler("/file/**")
-                .addResourceLocations("file://" + fileSavePath + "/");
+                .addResourceLocations("file://" + fileurl + "/");
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         String[] p = new String[]{
-                "/login", "/logout", "/oauth/**", "/forget", "/register", "/captcha/**", "/file/**",
+                "/login", "/logout", "/oauth/**",
+                "/forget", "/register",
+                "/captcha/**", "/file/**",
                 "/webjars/**", "/v3/**", "/doc.html",
         };
         registry.addInterceptor(loginInterceptor).addPathPatterns("/**").excludePathPatterns(p);
