@@ -124,19 +124,21 @@ CREATE TABLE `sys_config`
 
 insert into `sys_config`(`id`, `config_key`, `config_value`, `remark`, `create_time`, `update_time`, `create_by`,
                          `update_by`)
-values (1, 'qq-clientId', '无', 'client Id', '2023-01-01 00:00:00', '2023-01-01 00:00:00', 'yongoe', 'yongoe'),
-       (2, 'qq-clientSecret', '无', 'client Secret', '2023-01-01 00:00:00', '2023-01-01 00:00:00', 'yongoe', 'yongoe'),
-       (3, 'qq-redirectUri', '无', '重定向链接', '2023-01-01 00:00:00', '2023-01-01 00:00:00', 'yongoe',
+values (1, 'qq-clientId', '无', 'QQ登陆clientId', '2023-01-01 00:00:00', '2023-01-01 00:00:00', 'yongoe', 'yongoe'),
+       (2, 'qq-clientSecret', '无', 'QQ登陆Secret', '2023-01-01 00:00:00', '2023-01-01 00:00:00', 'yongoe', 'yongoe'),
+       (3, 'qq-redirectUri', '无', 'QQ登陆重定向链接', '2023-01-01 00:00:00', '2023-01-01 00:00:00', 'yongoe',
         'yongoe'),
-       (4, 'sms-secretId', '无', '腾讯云账号id', '2023-01-01 00:00:00',
-        '2023-01-01 00:00:00', 'yongoe', 'yongoe'),
-       (5, 'sms-secretKey', '无', '腾讯云账号key', '2023-01-01 00:00:00',
-        '2023-01-01 00:00:00', 'yongoe', 'yongoe'),
-       (6, 'sms-sdkAppId', '无', '创建应用的id', '2023-01-01 00:00:00', '2023-01-01 00:00:00', 'yongoe',
+       (4, 'sms-secretId', '无', '腾讯云账号id', '2023-01-01 00:00:00', '2023-01-01 00:00:00', 'yongoe', 'yongoe'),
+       (5, 'sms-secretKey', '无', '腾讯云账号key', '2023-01-01 00:00:00', '2023-01-01 00:00:00', 'yongoe', 'yongoe'),
+       (6, 'sms-sdkAppId', '无', '创建应用的id', '2023-01-01 00:00:00', '2023-01-01 00:00:00', 'yongoe', 'yongoe'),
+       (7, 'sms-signName', '无', '签名内容', '2023-01-01 00:00:00', '2023-01-01 00:00:00', 'yongoe', 'yongoe'),
+       (8, 'sms-templateId', '无', '短信模板id', '2023-01-01 00:00:00', '2023-01-01 00:00:00', 'yongoe', 'yongoe'),
+       (9, 'wxh5-clientId', '无', '微信H5登陆clientId', '2023-11-06 05:33:19', '2023-11-06 05:33:21', 'yongoe',
         'yongoe'),
-       (7, 'sms-signName', '无', '签名内容', '2023-01-01 00:00:00', '2023-01-01 00:00:00', 'yongoe',
+       (10, 'wxh5-clientSecret', '无', '微信H5登陆Secret', '2023-11-06 05:33:59', '2023-11-06 05:34:01', 'yongoe',
         'yongoe'),
-       (8, 'sms-templateId', '无', '短信模板id', '2023-01-01 00:00:00', '2023-01-01 00:00:00', 'yongoe', 'yongoe');
+       (11, 'wxh5-redirectUri', '无', '微信H5登陆redirectUri', '2023-11-06 05:34:24', '2023-11-06 05:34:26', 'yongoe',
+        'yongoe');
 
 
 DROP TABLE IF EXISTS `sys_menu`;
