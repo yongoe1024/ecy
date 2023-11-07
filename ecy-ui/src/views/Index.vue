@@ -59,7 +59,7 @@
             </div>
           </div>
           <div>
-            <letter-icon style=" margin-right:20px;display:inline;"></letter-icon>
+            <letter-icon style="margin-right:20px;display:inline;"></letter-icon>
             <el-dropdown class="userinfo"
                          @command="handleCommand">
               <img :src="user.avatar"
