@@ -9,14 +9,13 @@ export default (router, store) => {
     //防止无限请求，一秒一次
     setTimeout(() => { flag = true }, 1000)
     axios.post('/user/menu').then(data => {
+      flag = true
       //格式化
       let fmtRoutes = formatRoutes(data)
       fmtRoutes.forEach(x => router.addRoute(x))
       //存入vuex
       store.commit('initRoutes', fmtRoutes)
     }).catch(() => {
-      //防止无限请求
-      // flag = false
     })
   }
 }

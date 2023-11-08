@@ -93,10 +93,6 @@ router.beforeEach((to, from, next) => {
     }
   }
   else {
-    // 退出登陆刷新页面的，先不用
-    // if (to.path == '/login' && from.path != '/') {
-    //   window.localStorage.removeItem("first")
-    // }
     let arr = ['/login', '/forget', '/register', '/oauth/qq']
     console.log(to.path)
     if (arr.indexOf(to.path) > -1) {

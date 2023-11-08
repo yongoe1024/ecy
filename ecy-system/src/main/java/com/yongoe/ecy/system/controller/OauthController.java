@@ -51,6 +51,7 @@ public class OauthController {
             Map<String, String> returnMap = wxh5SignatureUtil.getWechatSignature(decodedURL);
             return R.success().put(returnMap);
         } catch (Exception e) {
+            e.printStackTrace();
             return R.error("获取微信配置失败");
         }
     }
