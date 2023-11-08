@@ -138,7 +138,15 @@ values (1, 'qq-clientId', '无', 'QQ登陆clientId', '2023-01-01 00:00:00', '202
        (10, 'wxh5-clientSecret', '无', '微信H5登陆Secret', '2023-11-06 05:33:59', '2023-11-06 05:34:01', 'yongoe',
         'yongoe'),
        (11, 'wxh5-redirectUri', '无', '微信H5登陆redirectUri', '2023-11-06 05:34:24', '2023-11-06 05:34:26', 'yongoe',
-        'yongoe');
+        'yongoe'),
+       (12, 'mail-host', 'smtp.qq.com', '邮箱host', '2023-11-08 13:58:06', '2023-11-08 13:58:06', 'yongoe', 'yongoe'),
+       (13, 'mail-port', '25', '邮箱端口', '2023-11-08 13:58:21', '2023-11-08 13:58:21', 'yongoe', 'yongoe'),
+       (14, 'mail-username', '1355805965@qq.com', '邮箱账号', '2023-11-08 13:58:42', '2023-11-08 13:58:42', 'yongoe',
+        'yongoe'),
+       (15, 'mail-password', 'swifthqrladqjaaj', '邮箱密钥', '2023-11-08 13:59:01', '2023-11-08 13:59:01', 'yongoe',
+        'yongoe'),
+       (16, 'mail-protocol', 'smtp', '邮箱协议', '2023-11-08 13:59:17', '2023-11-08 13:59:32', 'yongoe', 'yongoe');
+
 
 
 DROP TABLE IF EXISTS `sys_menu`;
