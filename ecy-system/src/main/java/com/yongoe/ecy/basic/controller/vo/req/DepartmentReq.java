@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 职位
+ * 部门
  *
  * @author yongoe
  * @since 2023/1/1
@@ -14,14 +14,26 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "职位ReqVo")
-public class PositionReqVo {
+@Schema(name = "部门Req")
+public class DepartmentReq {
 
     private Long id;
     /**
-     * 职位
+     * 父id
+     */
+    private Long parentId;
+    /**
+     * 部门名称
      */
     private String name;
+    /**
+     * 负责人
+     */
+    private String leader;
+    /**
+     * 联系电话
+     */
+    private String phone;
     /**
      * 是否启用
      */

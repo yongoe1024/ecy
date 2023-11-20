@@ -13,6 +13,12 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * 微信H5获取配置工具
+ *
+ * @author yongoe
+ * @since 2023/1/1
+ */
 @Component
 public class WXH5SignatureUtil {
     @Resource
@@ -47,7 +53,7 @@ public class WXH5SignatureUtil {
     /**
      * 获取 token
      */
-    public String getToken() {
+    private String getToken() {
         String clientId = configUtils.get("qq-clientId");
         String clientSecret = configUtils.get("qq-clientSecret");
         String cache = (String) redisUtils.get("access_token");
@@ -65,7 +71,7 @@ public class WXH5SignatureUtil {
     /**
      * 获取 ticket
      */
-    public String getTicket(String token) {
+    private String getTicket(String token) {
         String cache = (String) redisUtils.get("ticket");
         if (!StringUtils.isEmpty(cache)) {
             return cache;
@@ -81,7 +87,7 @@ public class WXH5SignatureUtil {
     /**
      * SHA1加密
      */
-    public String SHA1(final String value) {
+    private String SHA1(final String value) {
         MessageDigest digest;
         try {
             digest = MessageDigest.getInstance("SHA-1");
@@ -105,7 +111,7 @@ public class WXH5SignatureUtil {
     /**
      * 发送请求
      */
-    public JSONObject httpGetForJson(String url) {
+    private JSONObject httpGetForJson(String url) {
         RestTemplate restTemplate = new RestTemplate();
         String result = restTemplate.getForObject(url, String.class);
         return JSONObject.parseObject(result);

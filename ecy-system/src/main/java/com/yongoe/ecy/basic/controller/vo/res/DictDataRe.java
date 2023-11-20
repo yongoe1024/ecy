@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "数据字典-数据ResVo")
-public class DictDataResVo {
+@Schema(name = "数据字典-数据Res")
+public class DictDataRe {
 
     private Long id;
     /**

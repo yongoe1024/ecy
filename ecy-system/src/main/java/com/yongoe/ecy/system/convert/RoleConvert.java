@@ -1,7 +1,7 @@
 package com.yongoe.ecy.system.convert;
 
-import com.yongoe.ecy.system.controller.vo.req.RoleReqVo;
-import com.yongoe.ecy.system.controller.vo.res.RoleResVo;
+import com.yongoe.ecy.system.controller.vo.req.RoleReq;
+import com.yongoe.ecy.system.controller.vo.res.RoleRes;
 import com.yongoe.ecy.system.entity.Role;
 import org.mapstruct.Mapper;
 
@@ -16,8 +16,8 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface RoleConvert {
 
-    Role req2Entity(RoleReqVo reqVo);
+    Role req2Entity(RoleReq reqVo);
 
 
-    List<RoleResVo> entity2Res(List<Role> list);
+    List<RoleRes> entity2Res(List<Role> list);
 }

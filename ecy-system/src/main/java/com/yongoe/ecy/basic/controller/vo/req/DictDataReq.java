@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 数据字典
+ * 数据字典-数据
  *
  * @author yongoe
  * @since 2023/1/1
@@ -14,21 +14,25 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "数据字典ReqVo")
-public class DictReqVo {
+@Schema(name = "数据字典-数据Req")
+public class DictDataReq {
 
     private Long id;
     /**
-     * 字典名称
+     * 字典id
      */
-    private String name;
+    private Long dictId;
     /**
-     * 字典类型(select,radio)
+     * 字典键
      */
-    private String type;
+    private String dictKey;
     /**
-     * 备注
+     * 字典值
      */
-    private String remark;
+    private String dictValue;
+    /**
+     * 字典顺序
+     */
+    private Integer sort;
 
 }

@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 部门
+ * 数据字典
  *
  * @author yongoe
  * @since 2023/1/1
@@ -14,29 +14,21 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "部门ReqVo")
-public class DepartmentReqVo {
+@Schema(name = "数据字典Req")
+public class DictReq {
 
     private Long id;
     /**
-     * 父id
-     */
-    private Long parentId;
-    /**
-     * 部门名称
+     * 字典名称
      */
     private String name;
     /**
-     * 负责人
+     * 字典类型(select,radio)
      */
-    private String leader;
+    private String type;
     /**
-     * 联系电话
+     * 备注
      */
-    private String phone;
-    /**
-     * 是否启用
-     */
-    private Boolean enabled;
+    private String remark;
 
 }

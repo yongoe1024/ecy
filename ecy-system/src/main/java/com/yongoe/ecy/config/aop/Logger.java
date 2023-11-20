@@ -8,6 +8,12 @@ import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
+/**
+ * 日志切面
+ *
+ * @author yongoe
+ * @since 2023/1/1
+ */
 @Component
 @Aspect
 public class Logger {

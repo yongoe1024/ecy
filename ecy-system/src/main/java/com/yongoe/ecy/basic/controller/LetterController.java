@@ -2,8 +2,8 @@ package com.yongoe.ecy.basic.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.yongoe.ecy.basic.controller.vo.req.LetterReqVo;
-import com.yongoe.ecy.basic.controller.vo.res.LetterResVo;
+import com.yongoe.ecy.basic.controller.vo.req.LetterReq;
+import com.yongoe.ecy.basic.controller.vo.res.LetterRes;
 import com.yongoe.ecy.basic.convert.LetterConvert;
 import com.yongoe.ecy.basic.entity.Letter;
 import com.yongoe.ecy.basic.service.LetterService;
@@ -62,9 +62,9 @@ public class LetterController {
                 str = str.substring(0, 15);
             record.setContent(str);
         }
-        List<LetterReqVo> letterReqVos = letterConvert.entity2ReqList(records);
+        List<LetterReq> letterReqs = letterConvert.entity2ReqList(records);
         Map<String, Object> map = new HashMap<>();
-        map.put("list", letterReqVos);
+        map.put("list", letterReqs);
         map.put("num", list.size());
         return R.success().put(map);
     }
@@ -79,23 +79,23 @@ public class LetterController {
             letter.setState(true);
             letterService.updateById(letter);
         }
-        LetterReqVo letterReqVo = letterConvert.entity2Req(letter);
-        return R.success().put(letterReqVo);
+        LetterReq letterReq = letterConvert.entity2Req(letter);
+        return R.success().put(letterReq);
     }
 
     @Operation(summary = "查询分页数据")
     @PostMapping("/page")
-    public R page(Long current, Long size, @RequestBody LetterReqVo reqVo) {
-        Letter entity = letterConvert.req2Entity(reqVo);
+    public R page(Long current, Long size, @RequestBody LetterReq req) {
+        Letter entity = letterConvert.req2Entity(req);
         Page<Letter> page = letterService.getLetterByPage(Page.of(current, size), entity);
-        Page<LetterResVo> voPage = letterConvert.entity2ResPage(page);
-        return R.success().put(new PageUtils(voPage));
+        Page<LetterRes> resPage = letterConvert.entity2ResPage(page);
+        return R.success().put(new PageUtils(resPage));
     }
 
     @Operation(summary = "添加数据")
     @PostMapping("/add")
-    public R add(@RequestBody LetterReqVo reqVo) {
-        Letter letter = letterConvert.req2Entity(reqVo);
+    public R add(@RequestBody LetterReq req) {
+        Letter letter = letterConvert.req2Entity(req);
         letter.setAddresser(UserUtils.getName());
         letter.setAddresserId(UserUtils.getUserId());
         letter.setState(false);
@@ -106,8 +106,8 @@ public class LetterController {
 
     @Operation(summary = "修改数据")
     @PostMapping("/update")
-    public R update(@RequestBody LetterReqVo reqVo) {
-        Letter letter = letterConvert.req2Entity(reqVo);
+    public R update(@RequestBody LetterReq req) {
+        Letter letter = letterConvert.req2Entity(req);
         letterService.updateById(letter);
         return R.success("修改成功");
     }

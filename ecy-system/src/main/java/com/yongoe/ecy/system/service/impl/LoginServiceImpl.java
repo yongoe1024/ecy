@@ -1,9 +1,9 @@
 package com.yongoe.ecy.system.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.yongoe.ecy.system.controller.vo.req.ForgetVO;
-import com.yongoe.ecy.system.controller.vo.req.LoginVo;
-import com.yongoe.ecy.system.controller.vo.req.RegisterVo;
+import com.yongoe.ecy.system.controller.vo.req.ForgetReq;
+import com.yongoe.ecy.system.controller.vo.req.LoginReq;
+import com.yongoe.ecy.system.controller.vo.req.RegisterReq;
 import com.yongoe.ecy.system.entity.User;
 import com.yongoe.ecy.system.service.LoginService;
 import com.yongoe.ecy.system.service.UserService;
@@ -29,17 +29,17 @@ public class LoginServiceImpl implements LoginService {
     private UserService userService;
 
     @Override
-    public R login(LoginVo loginVo, HttpServletRequest request) {
+    public R login(LoginReq loginReq, HttpServletRequest request) {
 //        HttpSession session = request.getSession();
 //        String captcha = (String) session.getAttribute("captcha");
 //        request.getSession().removeAttribute("captcha");
 //        if (StringUtils.isEmpty(captcha) || !captcha.equalsIgnoreCase(code)) {
 //            return R.error(402, "验证码错误");
 //        }
-        User user = userService.getOne(new LambdaQueryWrapper<User>().eq(User::getUsername, loginVo.getUsername()));
+        User user = userService.getOne(new LambdaQueryWrapper<User>().eq(User::getUsername, loginReq.getUsername()));
         if (user == null)
             return R.error("账号或密码错误");
-        if (!loginVo.getPassword().equals(user.getPassword()))
+        if (!loginReq.getPassword().equals(user.getPassword()))
             return R.error("账号或密码错误");
         if (!user.getEnabled()) {
             return R.error("账号被禁用");
@@ -51,7 +51,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Transactional(rollbackFor = RuntimeException.class)
     @Override
-    public R register(RegisterVo register) {
+    public R register(RegisterReq register) {
         try {
             User user = User.builder().avatar("/")
                     .enabled(true)
@@ -73,7 +73,7 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public R forget(ForgetVO forget) {
+    public R forget(ForgetReq forget) {
         User one = userService.getOne(new LambdaQueryWrapper<User>()
                 .eq(User::getUsername, forget.getUsername())
                 .eq(User::getEmail, forget.getEmail()));

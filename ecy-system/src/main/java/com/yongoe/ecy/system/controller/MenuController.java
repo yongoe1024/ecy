@@ -1,8 +1,8 @@
 package com.yongoe.ecy.system.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.yongoe.ecy.system.controller.vo.req.MenuReqVo;
-import com.yongoe.ecy.system.controller.vo.res.MenuResVo;
+import com.yongoe.ecy.system.controller.vo.req.MenuReq;
+import com.yongoe.ecy.system.controller.vo.res.MenuRes;
 import com.yongoe.ecy.system.convert.MenuConvert;
 import com.yongoe.ecy.system.entity.Menu;
 import com.yongoe.ecy.system.entity.RoleMenu;
@@ -38,22 +38,22 @@ public class MenuController {
     @PostMapping("/tree")
     public R tree() {
         List<Menu> list = menuService.getMenuByTree();
-        List<MenuResVo> voList = convert.entity2Res(list);
-        return R.success().put(voList);
+        List<MenuRes> resList = convert.entity2Res(list);
+        return R.success().put(resList);
     }
 
     @Operation(summary = "添加数据")
     @PostMapping("/add")
-    public R add(@RequestBody MenuReqVo reqVo) {
-        Menu menu = convert.req2Entity(reqVo);
+    public R add(@RequestBody MenuReq req) {
+        Menu menu = convert.req2Entity(req);
         menuService.save(menu);
         return R.success("添加成功");
     }
 
     @Operation(summary = "修改数据")
     @PostMapping("/update")
-    public R update(@RequestBody MenuReqVo reqVo) {
-        Menu menu = convert.req2Entity(reqVo);
+    public R update(@RequestBody MenuReq req) {
+        Menu menu = convert.req2Entity(req);
         menuService.updateById(menu);
         return R.success("修改成功");
     }

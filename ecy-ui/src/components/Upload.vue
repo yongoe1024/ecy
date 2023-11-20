@@ -6,7 +6,7 @@
                :on-error="onError"
                :headers="headers"
                :disabled="uploadButtonDisabled"
-               :action="uploadURL">
+               :action="$BASE_URL + url">
       <el-button :icon="uploadButtonIcon"
                  :size="size"
                  type="primary">{{uploadButtonText}}</el-button>
@@ -19,7 +19,7 @@ export default {
   props: {
     url: {
       type: String,
-      default: ''
+      default: '/upload/single'
     },
     size: {
       type: String,
@@ -28,7 +28,6 @@ export default {
   },
   data () {
     return {
-      uploadURL: this.$BASE_URL + this.url,
       uploadButtonText: '导入数据',
       uploadButtonIcon: 'el-icon-upload2',
       uploadButtonDisabled: false,

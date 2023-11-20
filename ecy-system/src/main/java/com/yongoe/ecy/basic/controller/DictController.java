@@ -2,9 +2,9 @@ package com.yongoe.ecy.basic.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.yongoe.ecy.basic.controller.vo.req.DictReqVo;
-import com.yongoe.ecy.basic.controller.vo.res.DictDataResVo;
-import com.yongoe.ecy.basic.controller.vo.res.DictResVo;
+import com.yongoe.ecy.basic.controller.vo.req.DictReq;
+import com.yongoe.ecy.basic.controller.vo.res.DictDataRe;
+import com.yongoe.ecy.basic.controller.vo.res.DictRes;
 import com.yongoe.ecy.basic.convert.DictConvert;
 import com.yongoe.ecy.basic.convert.DictDataConvert;
 import com.yongoe.ecy.basic.entity.Dict;
@@ -50,34 +50,34 @@ public class DictController {
         List<DictData> dictData = dictDataService.list(new LambdaQueryWrapper<DictData>()
                 .eq(DictData::getDictId, dict.getId())
                 .orderByDesc(DictData::getSort));
-        List<DictDataResVo> voList = dictDataConvert.entity2ResList(dictData);
+        List<DictDataRe> resList = dictDataConvert.entity2ResList(dictData);
         Map<String, Object> map = new HashMap<>();
-        map.put("list", voList);
+        map.put("list", resList);
         map.put("type", dict.getType());
         return R.success().put(map);
     }
 
     @Operation(summary = "查询分页数据")
     @PostMapping("/basic/dict/page")
-    public R page(Long current, Long size, @RequestBody DictReqVo reqVo) {
-        Dict entity = dictConvert.req2Entity(reqVo);
+    public R page(Long current, Long size, @RequestBody DictReq req) {
+        Dict entity = dictConvert.req2Entity(req);
         Page<Dict> page = dictService.getDictByPage(Page.of(current, size), entity);
-        Page<DictResVo> voPage = dictConvert.entity2ResPage(page);
-        return R.success().put(new PageUtils(voPage));
+        Page<DictRes> resPage = dictConvert.entity2ResPage(page);
+        return R.success().put(new PageUtils(resPage));
     }
 
     @Operation(summary = "添加数据")
     @PostMapping("/basic/dict/add")
-    public R add(@RequestBody DictReqVo reqVo) {
-        Dict dict = dictConvert.req2Entity(reqVo);
+    public R add(@RequestBody DictReq req) {
+        Dict dict = dictConvert.req2Entity(req);
         dictService.save(dict);
         return R.success("添加成功");
     }
 
     @Operation(summary = "修改数据")
     @PostMapping("/basic/dict/update")
-    public R update(@RequestBody DictReqVo reqVo) {
-        Dict dict = dictConvert.req2Entity(reqVo);
+    public R update(@RequestBody DictReq req) {
+        Dict dict = dictConvert.req2Entity(req);
         dictService.updateById(dict);
         return R.success("修改成功");
     }

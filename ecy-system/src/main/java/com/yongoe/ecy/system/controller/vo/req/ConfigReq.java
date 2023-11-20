@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 找回密码
+ * 系统配置
  *
  * @author yongoe
  * @since 2023/1/1
@@ -14,13 +14,20 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "找回密码")
-public class ForgetVO {
+@Schema(name = "系统配置Req")
+public class ConfigReq {
 
-    String username;
-
-    String password;
-
-    String email;
-
+    private Long id;
+    /**
+     * 键
+     */
+    private String configKey;
+    /**
+     * 值
+     */
+    private String configValue;
+    /**
+     * 备注
+     */
+    private String remark;
 }

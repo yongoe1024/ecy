@@ -1,8 +1,8 @@
 package com.yongoe.ecy.system.convert;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.yongoe.ecy.system.controller.vo.req.ConfigReqVo;
-import com.yongoe.ecy.system.controller.vo.res.ConfigResVo;
+import com.yongoe.ecy.system.controller.vo.req.ConfigReq;
+import com.yongoe.ecy.system.controller.vo.res.ConfigRes;
 import com.yongoe.ecy.system.entity.Config;
 import org.mapstruct.Mapper;
 
@@ -19,29 +19,29 @@ public interface ConfigConvert {
     /**
      * entity to vo
      */
-    ConfigReqVo entity2Req(Config entity);
+    ConfigReq entity2Req(Config entity);
 
-    ConfigResVo entity2Res(Config entity);
+    ConfigRes entity2Res(Config entity);
 
 
     /**
      * entity to vo List
      */
-    List<ConfigReqVo> entity2ReqList(List<Config> list);
+    List<ConfigReq> entity2ReqList(List<Config> list);
 
-    List<ConfigResVo> entity2ResList(List<Config> list);
+    List<ConfigRes> entity2ResList(List<Config> list);
 
 
     /**
      * entity to vo Page
      */
-    Page<ConfigResVo> entity2ResPage(Page<Config> page);
+    Page<ConfigRes> entity2ResPage(Page<Config> page);
 
 
     /**
      * vo 转 entity
      */
-    Config req2Entity(ConfigReqVo reqVo);
+    Config req2Entity(ConfigReq reqVo);
 
 
 }

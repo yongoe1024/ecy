@@ -6,10 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * 用户个人信息
+ * 用户
  *
  * @author yongoe
  * @since 2023/1/1
@@ -17,10 +18,18 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "用户信息")
-public class UserInfoResVo {
+@Schema(name = "用户Res")
+public class UserRes {
 
     private Long id;
+    /**
+     * 部门id
+     */
+    private Long departmentId;
+    /**
+     * 职位id
+     */
+    private Long positionId;
     /**
      * 部门名
      */
@@ -53,6 +62,18 @@ public class UserInfoResVo {
      * 备注
      */
     private String remark;
+    /**
+     * 上次登录ip
+     */
+    private String lastIp;
+    /**
+     * 上次登录时间
+     */
+    private LocalDateTime lastTime;
+    /**
+     * 是否启用
+     */
+    private Boolean enabled;
 
     private List<Role> roleList;
 }

@@ -11,7 +11,6 @@
                  size="small"
                  @click="handleShowAddEdit"
                  icon="el-icon-plus">添加</el-button>
-
     </div>
 
     <!-- 表格 -->
@@ -111,8 +110,9 @@
 </template>
 
 <script>
+import UploadPlus from '@/components/UploadPlus.vue'
 export default {
-  components: {},
+  components: { UploadPlus },
   props: {},
   data () {
     return {

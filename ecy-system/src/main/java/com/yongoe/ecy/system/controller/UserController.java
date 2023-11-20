@@ -3,8 +3,8 @@ package com.yongoe.ecy.system.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.yongoe.ecy.system.controller.vo.req.UserReqVo;
-import com.yongoe.ecy.system.controller.vo.res.UserResVo;
+import com.yongoe.ecy.system.controller.vo.req.UserReq;
+import com.yongoe.ecy.system.controller.vo.res.UserRes;
 import com.yongoe.ecy.system.convert.UserConvert;
 import com.yongoe.ecy.system.entity.User;
 import com.yongoe.ecy.system.entity.UserAuths;
@@ -42,22 +42,22 @@ public class UserController {
 
     @Operation(summary = "查询分页数据")
     @PostMapping("/page")
-    public R page(Long current, Long size, @RequestBody UserReqVo reqVo) {
-        User entity = convert.req2Entity(reqVo);
+    public R page(Long current, Long size, @RequestBody UserReq req) {
+        User entity = convert.req2Entity(req);
         Page<User> page = userService.getUserByPage(Page.of(current, size), entity);
-        Page<UserResVo> voPage = convert.entity2ResPage(page);
-        return R.success().put(new PageUtils(voPage));
+        Page<UserRes> resPage = convert.entity2ResPage(page);
+        return R.success().put(new PageUtils(resPage));
     }
 
     @Operation(summary = "添加数据")
     @Transactional(rollbackFor = RuntimeException.class)
     @PostMapping("/add")
-    public R add(@RequestBody UserReqVo reqVo) {
-        User user = convert.req2Entity(reqVo);
+    public R add(@RequestBody UserReq req) {
+        User user = convert.req2Entity(req);
         user.setAvatar("/");
         try {
             userService.save(user);
-            userService.updateUserRole(user.getId(), reqVo.getRoleIds());
+            userService.updateUserRole(user.getId(), req.getRoleIds());
             return R.success("添加成功");
         } catch (Exception e) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -67,9 +67,9 @@ public class UserController {
 
     @Operation(summary = "重置密码")
     @PostMapping("/update/password")
-    public R updatePassword(@RequestBody UserReqVo reqVo) {
-        Long id = reqVo.getId();
-        String password = reqVo.getPassword();
+    public R updatePassword(@RequestBody UserReq req) {
+        Long id = req.getId();
+        String password = req.getPassword();
         userService.update(new LambdaUpdateWrapper<User>().eq(User::getId, id).set(User::getPassword, password));
         return R.success("修改成功");
     }
@@ -77,11 +77,11 @@ public class UserController {
     @Operation(summary = "修改数据")
     @Transactional(rollbackFor = RuntimeException.class)
     @PostMapping("/update")
-    public R update(@RequestBody UserReqVo reqVo) {
-        User user = convert.req2Entity(reqVo);
+    public R update(@RequestBody UserReq req) {
+        User user = convert.req2Entity(req);
         try {
             userService.updateById(user);
-            userService.updateUserRole(user.getId(), reqVo.getRoleIds());
+            userService.updateUserRole(user.getId(), req.getRoleIds());
             return R.success("修改成功");
         } catch (Exception e) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();

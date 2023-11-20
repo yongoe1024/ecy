@@ -6,6 +6,7 @@ import com.yongoe.ecy.system.entity.Role;
 import com.yongoe.ecy.system.entity.User;
 import com.yongoe.ecy.system.service.MenuService;
 import com.yongoe.ecy.utils.R;
+import com.yongoe.ecy.utils.UserThreadLocal;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

@@ -1,9 +1,9 @@
 package com.yongoe.ecy.system.controller;
 
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
-import com.yongoe.ecy.system.controller.vo.req.UserReqVo;
-import com.yongoe.ecy.system.controller.vo.res.MenuResVo;
-import com.yongoe.ecy.system.controller.vo.res.UserInfoResVo;
+import com.yongoe.ecy.system.controller.vo.req.UserReq;
+import com.yongoe.ecy.system.controller.vo.res.MenuRes;
+import com.yongoe.ecy.system.controller.vo.res.UserInfoRes;
 import com.yongoe.ecy.system.convert.MenuConvert;
 import com.yongoe.ecy.system.convert.UserConvert;
 import com.yongoe.ecy.system.entity.Menu;
@@ -53,7 +53,7 @@ public class UserInfoController {
         user.setLastTime(LocalDateTime.now());
         user.setLastIp(IpUtils.getIp(request));
         userService.updateById(user);
-        UserInfoResVo userInfo = userConvert.entity2UserInfo(user);
+        UserInfoRes userInfo = userConvert.entity2UserInfo(user);
         return R.success().put(userInfo);
     }
 
@@ -61,18 +61,18 @@ public class UserInfoController {
     @PostMapping("/user/menu")
     public R getMenuById() {
         List<Menu> list = menuService.getMenuByUser();
-        List<MenuResVo> voList = menuConvert.entity2Res(list);
-        return R.success().put(voList);
+        List<MenuRes> resList = menuConvert.entity2Res(list);
+        return R.success().put(resList);
     }
 
     @Operation(summary = "修改个人信息")
     @PostMapping("/user/update")
-    public R updateUserinfo(@RequestBody UserReqVo reqVo) {
+    public R updateUserinfo(@RequestBody UserReq req) {
         Long userId = UserUtils.getUserId();
         User user = userService.getUserById(userId);
-        user.setPhone(reqVo.getPhone());
-        user.setEmail(reqVo.getEmail());
-        user.setRemark(reqVo.getRemark());
+        user.setPhone(req.getPhone());
+        user.setEmail(req.getEmail());
+        user.setRemark(req.getRemark());
         userService.updateById(user);
         return R.success("修改成功");
     }
@@ -90,9 +90,9 @@ public class UserInfoController {
 
     @Operation(summary = "修改密码")
     @PostMapping("/user/password")
-    public R password(@RequestBody UserReqVo reqVo) {
+    public R password(@RequestBody UserReq req) {
         User user = UserUtils.getUser();
-        String password = reqVo.getPassword();
+        String password = req.getPassword();
         userService.update(new LambdaUpdateWrapper<User>()
                 .eq(User::getId, user.getId())
                 .set(User::getPassword, password));

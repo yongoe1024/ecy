@@ -20,8 +20,8 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "${moduleName}ExcelVo")
-public class ${entity}ExcelVo {
+@Schema(name = "${moduleName}Excel")
+public class ${entity}Excel {
 
 <#-- ----------  BEGIN 字段循环遍历  ---------->
 <#list table.fields as field>

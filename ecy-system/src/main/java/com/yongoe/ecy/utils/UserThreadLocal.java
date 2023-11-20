@@ -1,9 +1,9 @@
-package com.yongoe.ecy.config.security;
+package com.yongoe.ecy.utils;
 
 import com.yongoe.ecy.system.entity.User;
 
 /**
- * ThreadLocal
+ * ThreadLocal线程工具
  *
  * @author yongoe
  * @since 2023/1/1

@@ -1,4 +1,4 @@
-package com.yongoe.ecy.system.controller.vo.res;
+package com.yongoe.ecy.basic.controller.vo.res;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 系统配置
+ * 职位
  *
  * @author yongoe
  * @since 2023/1/1
@@ -14,20 +14,17 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "系统配置ResVo")
-public class ConfigResVo {
+@Schema(name = "职位Res")
+public class PositionRes {
 
     private Long id;
     /**
-     * 键
+     * 职位
      */
-    private String configKey;
+    private String name;
     /**
-     * 值
+     * 是否启用
      */
-    private String configValue;
-    /**
-     * 备注
-     */
-    private String remark;
+    private Boolean enabled;
+
 }

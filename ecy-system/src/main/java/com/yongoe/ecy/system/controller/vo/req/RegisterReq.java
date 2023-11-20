@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 角色
+ * 注册信息
  *
  * @author yongoe
  * @since 2023/1/1
@@ -14,16 +14,18 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "角色ReqVo")
-public class RoleReqVo {
+@Schema(name = "注册")
+public class RegisterReq {
 
-    private Long id;
-    /**
-     * 名称
-     */
-    private String name;
-    /**
-     * 代码
-     */
-    private String code;
+    String username;
+
+    String password;
+
+    String name;
+
+    String email;
+
+    String phone;
+
+
 }

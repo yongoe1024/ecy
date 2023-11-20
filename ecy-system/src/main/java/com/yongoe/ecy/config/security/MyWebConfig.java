@@ -11,23 +11,39 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.nio.file.Path;
 import java.util.Collections;
 
 /**
- * 静态资源映射
- * 解决跨域
+ * 拦截器、添加自定义视图解析器、配置资源处理器等
  *
  * @author yongoe
  * @since 2023/1/1
  */
 @Configuration
 public class MyWebConfig implements WebMvcConfigurer {
+    @Value("${ecy.file-save-path}")
+    private String fileSavePath;
     @Resource
     private LoginInterceptor loginInterceptor;
     @Resource
     private AuthInterceptor authInterceptor;
-    @Value("${ecy.file-save-path}")
-    private String fileSavePath;
+
+    /**
+     * 拦截器
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        String[] p = new String[]{
+                "/login", "/logout", "/oauth/**", "/captcha/**",
+                "/forget", "/register",
+                "/file/**",
+                "/webjars/**", "/v3/**", "/doc.html",
+                "/index.html**", "/js/**", "/fonts/**", "/img/**", "/favicon.ico"
+        };
+        registry.addInterceptor(loginInterceptor).addPathPatterns("/**").excludePathPatterns(p);
+        registry.addInterceptor(authInterceptor).addPathPatterns("/**").excludePathPatterns(p);
+    }
 
     /**
      * 跨域
@@ -53,25 +69,10 @@ public class MyWebConfig implements WebMvcConfigurer {
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        String fileurl = "";
-        if (fileSavePath.endsWith("/"))
-            fileurl = fileSavePath.substring(0, fileSavePath.length() - 1);
-        else
-            fileurl = fileSavePath;
+        String path = Path.of("file://", fileSavePath).toString();
         registry.addResourceHandler("/file/**")
-                .addResourceLocations("file://" + fileurl + "/");
+                .addResourceLocations(path + "/");
     }
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        String[] p = new String[]{
-                "/login", "/logout", "/oauth/**",
-                "/forget", "/register",
-                "/captcha/**", "/file/**",
-                "/webjars/**", "/v3/**", "/doc.html",
-        };
-        registry.addInterceptor(loginInterceptor).addPathPatterns("/**").excludePathPatterns(p);
-        registry.addInterceptor(authInterceptor).addPathPatterns("/**").excludePathPatterns(p);
-    }
 
 }

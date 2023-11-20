@@ -69,18 +69,18 @@ public class GeneratorService {
                                     .templatePath("/templates/convert.java.ftl")
                                     .filePath(path + "/convert")
                                     .build())
-                            // reqVo
-                            .customFile(new CustomFile.Builder().fileName("ReqVo.java")
+                            // req
+                            .customFile(new CustomFile.Builder().fileName("Req.java")
                                     .templatePath("/templates/req.java.ftl")
                                     .filePath(path + "/controller/vo/req")
                                     .build())
-                            // resVo
-                            .customFile(new CustomFile.Builder().fileName("ResVo.java")
+                            // res
+                            .customFile(new CustomFile.Builder().fileName("Res.java")
                                     .templatePath("/templates/res.java.ftl")
                                     .filePath(path + "/controller/vo/res")
                                     .build())
-                            // excelVo
-                            .customFile(new CustomFile.Builder().fileName("ExcelVo.java")
+                            // excel
+                            .customFile(new CustomFile.Builder().fileName("Excel.java")
                                     .templatePath("/templates/excel.java.ftl")
                                     .filePath(path + "/controller/vo/excel")
                                     .build())

@@ -102,7 +102,7 @@ public class RedisUtils {
     /**
      * 缓存Map
      */
-    public void setMap(final String key, final Map<String, Object> dataMap) {
+    public void setMap(final String key, final Map<Object, Object> dataMap) {
         if (dataMap != null) {
             redisTemplate.opsForHash().putAll(key, dataMap);
         }

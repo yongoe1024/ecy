@@ -1,11 +1,9 @@
-package com.yongoe.ecy.system.controller.vo.res;
+package com.yongoe.ecy.system.controller.vo.req;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 
 /**
  * 系统日志
@@ -16,12 +14,9 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "系统日志ResVo")
-public class LogResVo {
+@Schema(name = "系统日志Req")
+public class LogReq {
 
-    /**
-     *
-     */
     private Long id;
     /**
      * 用户
@@ -39,20 +34,5 @@ public class LogResVo {
      * 详情
      */
     private String details;
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createTime;
-    /**
-     * 修改时间
-     */
-    private LocalDateTime updateTime;
-    /**
-     * 创建人
-     */
-    private String createBy;
-    /**
-     * 修改人
-     */
-    private String updateBy;
+
 }

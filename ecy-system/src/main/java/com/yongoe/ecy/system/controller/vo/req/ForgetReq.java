@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 登录
+ * 找回密码
  *
  * @author yongoe
  * @since 2023/1/1
@@ -14,14 +14,13 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "登录")
-public class LoginVo {
+@Schema(name = "找回密码")
+public class ForgetReq {
 
     String username;
 
     String password;
 
-    String code;
-
+    String email;
 
 }

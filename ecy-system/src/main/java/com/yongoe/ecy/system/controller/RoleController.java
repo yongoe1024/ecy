@@ -1,8 +1,8 @@
 package com.yongoe.ecy.system.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.yongoe.ecy.system.controller.vo.req.RoleReqVo;
-import com.yongoe.ecy.system.controller.vo.res.RoleResVo;
+import com.yongoe.ecy.system.controller.vo.req.RoleReq;
+import com.yongoe.ecy.system.controller.vo.res.RoleRes;
 import com.yongoe.ecy.system.convert.RoleConvert;
 import com.yongoe.ecy.system.entity.Role;
 import com.yongoe.ecy.system.entity.RoleMenu;
@@ -41,8 +41,8 @@ public class RoleController {
     @PostMapping("/list")
     public R list() {
         List<Role> list = roleService.getList();
-        List<RoleResVo> voList = convert.entity2Res(list);
-        return R.success().put(voList);
+        List<RoleRes> resList = convert.entity2Res(list);
+        return R.success().put(resList);
     }
 
     @Operation(summary = "根据角色id 修改菜单id")
@@ -54,16 +54,16 @@ public class RoleController {
 
     @Operation(summary = "添加数据")
     @PostMapping("/add")
-    public R add(@RequestBody RoleReqVo reqVo) {
-        Role role = convert.req2Entity(reqVo);
+    public R add(@RequestBody RoleReq req) {
+        Role role = convert.req2Entity(req);
         roleService.save(role);
         return R.success("添加成功");
     }
 
     @Operation(summary = "修改数据")
     @PostMapping("/update")
-    public R update(@RequestBody RoleReqVo reqVo) {
-        Role role = convert.req2Entity(reqVo);
+    public R update(@RequestBody RoleReq req) {
+        Role role = convert.req2Entity(req);
         roleService.updateById(role);
         return R.success("修改成功");
     }

@@ -7,7 +7,7 @@ module.exports = defineConfig({
   },
   transpileDependencies: true,
   lintOnSave: false,
-  publicPath: '/',
+  publicPath: '/',   //如果放到jar中,需要修改为/ecy
   devServer: {
     port: 8080,
     allowedHosts: [

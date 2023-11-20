@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "菜单ReqVo")
-public class MenuReqVo {
+@Schema(name = "菜单Req")
+public class MenuReq {
 
     private Long id;
     /**

@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 系统配置
+ * 登录
  *
  * @author yongoe
  * @since 2023/1/1
@@ -14,20 +14,14 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "系统配置ReqVo")
-public class ConfigReqVo {
+@Schema(name = "登录")
+public class LoginReq {
 
-    private Long id;
-    /**
-     * 键
-     */
-    private String configKey;
-    /**
-     * 值
-     */
-    private String configValue;
-    /**
-     * 备注
-     */
-    private String remark;
+    String username;
+
+    String password;
+
+    String code;
+
+
 }

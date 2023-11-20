@@ -1,8 +1,8 @@
 package com.yongoe.ecy.basic.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.yongoe.ecy.basic.controller.vo.req.DepartmentReqVo;
-import com.yongoe.ecy.basic.controller.vo.res.DepartmentResVo;
+import com.yongoe.ecy.basic.controller.vo.req.DepartmentReq;
+import com.yongoe.ecy.basic.controller.vo.res.DepartmentRes;
 import com.yongoe.ecy.basic.convert.DepartmentConvert;
 import com.yongoe.ecy.basic.entity.Department;
 import com.yongoe.ecy.basic.service.DepartmentService;
@@ -38,8 +38,8 @@ public class DepartmentController {
     @PostMapping("/tree")
     public R tree() {
         List<Department> list = departmentService.getMenuByTree(null);
-        List<DepartmentResVo> voList = departmentConvert.entity2ResList(list);
-        return R.success().put(voList);
+        List<DepartmentRes> resList = departmentConvert.entity2ResList(list);
+        return R.success().put(resList);
     }
 
     @Operation(summary = "查询list")
@@ -47,22 +47,22 @@ public class DepartmentController {
     public R list() {
         List<Department> list = departmentService.getMenuByTree(new LambdaQueryWrapper<Department>()
                 .eq(Department::getEnabled, true));
-        List<DepartmentResVo> voList = departmentConvert.entity2ResList(list);
-        return R.success().put(voList);
+        List<DepartmentRes> resList = departmentConvert.entity2ResList(list);
+        return R.success().put(resList);
     }
 
     @Operation(summary = "添加数据")
     @PostMapping("/add")
-    public R add(@RequestBody DepartmentReqVo reqVo) {
-        Department department = departmentConvert.req2Entity(reqVo);
+    public R add(@RequestBody DepartmentReq req) {
+        Department department = departmentConvert.req2Entity(req);
         departmentService.save(department);
         return R.success("添加成功");
     }
 
     @Operation(summary = "修改数据")
     @PostMapping("/update")
-    public R update(@RequestBody DepartmentReqVo reqVo) {
-        Department department = departmentConvert.req2Entity(reqVo);
+    public R update(@RequestBody DepartmentReq req) {
+        Department department = departmentConvert.req2Entity(req);
         departmentService.updateById(department);
         return R.success("修改成功");
     }

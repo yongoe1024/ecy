@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.yongoe.ecy.system.controller.vo.req.QqReqVo;
+import com.yongoe.ecy.system.controller.vo.req.QQReq;
 import com.yongoe.ecy.system.entity.User;
 import com.yongoe.ecy.system.entity.UserAuths;
 import com.yongoe.ecy.system.mapper.UserAuthsMapper;
@@ -120,7 +120,7 @@ public class OauthServiceImpl implements OauthService {
         //反序列化的时候如果多了其他属性,不抛出异常
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-        QqReqVo qq = objectMapper.readValue(res, QqReqVo.class);
+        QQReq qq = objectMapper.readValue(res, QQReq.class);
         // 获取信息
         String accessToken = qq.getToken().getAccessToken();
         String openId = qq.getToken().getOpenId();

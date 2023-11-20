@@ -19,8 +19,8 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "${moduleName}ResVo")
-public class ${entity}ResVo {
+@Schema(name = "${moduleName}Res")
+public class ${entity}Res {
 
 <#-- ----------  BEGIN 字段循环遍历  ---------->
 <#list table.fields as field>

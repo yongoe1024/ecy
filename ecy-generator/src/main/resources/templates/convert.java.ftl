@@ -1,9 +1,9 @@
 package com.yongoe.ecy.${packageName}.convert;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.yongoe.ecy.${packageName}.controller.vo.excel.${entity}ExcelVo;
-import com.yongoe.ecy.${packageName}.controller.vo.req.${entity}ReqVo;
-import com.yongoe.ecy.${packageName}.controller.vo.res.${entity}ResVo;
+import com.yongoe.ecy.${packageName}.controller.vo.excel.${entity}Excel;
+import com.yongoe.ecy.${packageName}.controller.vo.req.${entity}Req;
+import com.yongoe.ecy.${packageName}.controller.vo.res.${entity}Res;
 import com.yongoe.ecy.${packageName}.entity.${entity};
 import org.mapstruct.Mapper;
 
@@ -20,37 +20,37 @@ public interface ${entity}Convert {
     /**
      * entity to vo
      */
-    ${entity}ReqVo entity2Req(${entity} entity);
+    ${entity}Req entity2Req(${entity} entity);
 
-    ${entity}ResVo entity2Res(${entity} entity);
+    ${entity}Res entity2Res(${entity} entity);
 
-    ${entity}ExcelVo entity2Excel(${entity} entity);
+    ${entity}Excel entity2Excel(${entity} entity);
 
     /**
      * entity to vo List
      */
-    List<${entity}ReqVo> entity2ReqList(List<${entity}> list);
+    List<${entity}Req> entity2ReqList(List<${entity}> list);
 
-    List<${entity}ResVo> entity2ResList(List<${entity}> list);
+    List<${entity}Res> entity2ResList(List<${entity}> list);
 
-    List<${entity}ExcelVo> entity2ExcelList(List<${entity}> list);
+    List<${entity}Excel> entity2ExcelList(List<${entity}> list);
 
     /**
      * entity to vo Page
      */
-    Page<${entity}ResVo> entity2ResPage(Page<${entity}> page);
+    Page<${entity}Res> entity2ResPage(Page<${entity}> page);
 
     /**
      * vo to entity
      */
-    ${entity} req2Entity(${entity}ReqVo reqVo);
+    ${entity} req2Entity(${entity}Req req);
 
-    ${entity} excel2Entity(${entity}ExcelVo excelVo);
+    ${entity} excel2Entity(${entity}Excel excel);
 
     /**
      * vo to entity List
      */
-    List<${entity}> excel2EntityList(List<${entity}ExcelVo> list);
+    List<${entity}> excel2EntityList(List<${entity}Excel> list);
 
 
 }

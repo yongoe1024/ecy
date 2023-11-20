@@ -1,4 +1,4 @@
-package com.yongoe.ecy.basic.controller.vo.res;
+package com.yongoe.ecy.system.controller.vo.res;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -8,46 +8,37 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 /**
- * 信件
+ * 系统日志
  *
  * @author yongoe
- * @since 2023/1/1
+ * @since 2023/09/19
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "信件管理ResVo")
-public class LetterResVo {
+@Schema(name = "系统日志Res")
+public class LogRes {
 
+    /**
+     *
+     */
     private Long id;
     /**
-     * 发件人id
+     * 用户
      */
-    private Long addresserId;
+    private String name;
     /**
-     * 发件人
+     * 类型
      */
-    private String addresser;
-    /**
-     * 收件人id
-     */
-    private Long addresseeId;
-    /**
-     * 收件人
-     */
-    private String addressee;
+    private String type;
     /**
      * 标题
      */
     private String title;
     /**
-     * 内容
+     * 详情
      */
-    private String content;
-    /**
-     * 状态
-     */
-    private Boolean state;
+    private String details;
     /**
      * 创建时间
      */

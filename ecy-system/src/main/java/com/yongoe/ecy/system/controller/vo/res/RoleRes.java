@@ -1,38 +1,35 @@
-package com.yongoe.ecy.system.controller.vo.req;
+package com.yongoe.ecy.system.controller.vo.res;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 /**
- * 系统日志
+ * 角色
  *
  * @author yongoe
- * @since 2023/09/19
+ * @since 2023/1/1
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "系统日志ReqVo")
-public class LogReqVo {
+@Schema(name = "角色Res")
+public class RoleRes {
 
     private Long id;
     /**
-     * 用户
+     * 名称
      */
     private String name;
     /**
-     * 类型
+     * 代码
      */
-    private String type;
+    private String code;
     /**
-     * 标题
+     * 角色管理
      */
-    private String title;
-    /**
-     * 详情
-     */
-    private String details;
-
+    private List<Long> menuIds;
 }

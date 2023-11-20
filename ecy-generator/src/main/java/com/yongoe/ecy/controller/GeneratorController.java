@@ -29,9 +29,9 @@ public class GeneratorController {
                 .username("root")
                 .password("123456")
                 .author("yongoe")
-                .tablePrefix("basic_")
-                .tableName("basic_lettet")
-                .packageName("basic")
+                .tablePrefix("sys_")
+                .tableName("sys_log")
+                .packageName("new") //  包名必填--新项目名
                 .moduleName("信件管理")
                 .parentId("1")
                 .add(true)

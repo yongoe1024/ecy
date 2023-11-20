@@ -18,6 +18,7 @@ public class PrefixRedisSerializer extends StringRedisSerializer {
      */
     @Override
     public byte[] serialize(String s) {
+
         if (s == null) {
             return new byte[0];
         }

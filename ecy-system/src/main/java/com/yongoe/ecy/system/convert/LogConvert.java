@@ -1,8 +1,8 @@
 package com.yongoe.ecy.system.convert;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.yongoe.ecy.system.controller.vo.req.LogReqVo;
-import com.yongoe.ecy.system.controller.vo.res.LogResVo;
+import com.yongoe.ecy.system.controller.vo.req.LogReq;
+import com.yongoe.ecy.system.controller.vo.res.LogRes;
 import com.yongoe.ecy.system.entity.Log;
 import org.mapstruct.Mapper;
 
@@ -19,26 +19,26 @@ public interface LogConvert {
     /**
      * entity to vo
      */
-    LogReqVo entity2Req(Log entity);
+    LogReq entity2Req(Log entity);
 
-    LogResVo entity2Res(Log entity);
+    LogRes entity2Res(Log entity);
 
     /**
      * entity to vo List
      */
-    List<LogReqVo> entity2ReqList(List<Log> list);
+    List<LogReq> entity2ReqList(List<Log> list);
 
-    List<LogResVo> entity2ResList(List<Log> list);
+    List<LogRes> entity2ResList(List<Log> list);
 
     /**
      * entity to vo Page
      */
-    Page<LogResVo> entity2ResPage(Page<Log> page);
+    Page<LogRes> entity2ResPage(Page<Log> page);
 
     /**
      * vo 转 entity
      */
-    Log req2Entity(LogReqVo reqVo);
+    Log req2Entity(LogReq reqVo);
 
 
 }

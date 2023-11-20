@@ -16,8 +16,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "用户ReqVo")
-public class UserReqVo {
+@Schema(name = "用户Req")
+public class UserReq {
 
     private Long id;
     /**

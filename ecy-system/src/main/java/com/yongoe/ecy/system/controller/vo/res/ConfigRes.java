@@ -5,10 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 /**
- * 角色
+ * 系统配置
  *
  * @author yongoe
  * @since 2023/1/1
@@ -16,20 +14,20 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "角色ResVo")
-public class RoleResVo {
+@Schema(name = "系统配置Res")
+public class ConfigRes {
 
     private Long id;
     /**
-     * 名称
+     * 键
      */
-    private String name;
+    private String configKey;
     /**
-     * 代码
+     * 值
      */
-    private String code;
+    private String configValue;
     /**
-     * 角色管理
+     * 备注
      */
-    private List<Long> menuIds;
+    private String remark;
 }

@@ -1,9 +1,9 @@
 package com.yongoe.ecy.system.controller;
 
 import com.github.xiaoymin.knife4j.annotations.ApiSupport;
-import com.yongoe.ecy.system.controller.vo.req.ForgetVO;
-import com.yongoe.ecy.system.controller.vo.req.LoginVo;
-import com.yongoe.ecy.system.controller.vo.req.RegisterVo;
+import com.yongoe.ecy.system.controller.vo.req.ForgetReq;
+import com.yongoe.ecy.system.controller.vo.req.LoginReq;
+import com.yongoe.ecy.system.controller.vo.req.RegisterReq;
 import com.yongoe.ecy.system.service.LoginService;
 import com.yongoe.ecy.utils.R;
 import com.yongoe.ecy.utils.UserUtils;
@@ -30,8 +30,8 @@ public class LoginController {
 
     @Operation(summary = "登录")
     @PostMapping("/login")
-    public R login(@RequestBody LoginVo loginVo, HttpServletRequest request) {
-        return loginService.login(loginVo, request);
+    public R login(@RequestBody LoginReq loginReq, HttpServletRequest request) {
+        return loginService.login(loginReq, request);
     }
 
     @Operation(summary = "退出登录")
@@ -43,13 +43,13 @@ public class LoginController {
 
     @Operation(summary = "注册")
     @PostMapping("/register")
-    public R register(@RequestBody RegisterVo register) {
+    public R register(@RequestBody RegisterReq register) {
         return loginService.register(register);
     }
 
     @Operation(summary = "找回密码")
     @PostMapping("/forget")
-    public R forget(@RequestBody ForgetVO forget) {
+    public R forget(@RequestBody ForgetReq forget) {
         return loginService.forget(forget);
     }
 

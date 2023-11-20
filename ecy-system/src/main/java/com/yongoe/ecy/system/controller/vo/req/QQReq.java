@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(name = "qq")
-public class QqReqVo {
+public class QQReq {
 
     private String uuid;
     private String username;

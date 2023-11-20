@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 职位
+ * 数据字典
  *
  * @author yongoe
  * @since 2023/1/1
@@ -14,17 +14,21 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "职位ResVo")
-public class PositionResVo {
+@Schema(name = "数据字典Res")
+public class DictRes {
 
     private Long id;
     /**
-     * 职位
+     * 字典名称
      */
     private String name;
     /**
-     * 是否启用
+     * 字典类型(select,radio)
      */
-    private Boolean enabled;
+    private String type;
+    /**
+     * 备注
+     */
+    private String remark;
 
 }

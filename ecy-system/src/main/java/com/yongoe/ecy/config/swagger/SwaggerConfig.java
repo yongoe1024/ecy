@@ -15,9 +15,9 @@ import org.springframework.context.annotation.Configuration;
 public class SwaggerConfig {
 
 
-    /**
-     * 配置分组
-     */
+//    /**
+//     * 配置分组
+//     */
 //    @Bean
 //    public GroupedOpenApi publicApi() {
 //        return GroupedOpenApi.builder()

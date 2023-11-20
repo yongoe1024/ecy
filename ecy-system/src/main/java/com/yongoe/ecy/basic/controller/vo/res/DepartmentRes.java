@@ -17,8 +17,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "部门ResVo")
-public class DepartmentResVo {
+@Schema(name = "部门Res")
+public class DepartmentRes {
 
     private Long id;
     /**

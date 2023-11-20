@@ -2,8 +2,8 @@ package com.yongoe.ecy.basic.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.yongoe.ecy.basic.controller.vo.req.PositionReqVo;
-import com.yongoe.ecy.basic.controller.vo.res.PositionResVo;
+import com.yongoe.ecy.basic.controller.vo.req.PositionReq;
+import com.yongoe.ecy.basic.controller.vo.res.PositionRes;
 import com.yongoe.ecy.basic.convert.PositionConvert;
 import com.yongoe.ecy.basic.entity.Position;
 import com.yongoe.ecy.basic.service.PositionService;
@@ -38,11 +38,11 @@ public class PositionController {
 
     @Operation(summary = "查询分页数据")
     @PostMapping("/page")
-    public R page(Long current, Long size, @RequestBody PositionReqVo reqVo) {
-        Position entity = positionConvert.req2Entity(reqVo);
+    public R page(Long current, Long size, @RequestBody PositionReq req) {
+        Position entity = positionConvert.req2Entity(req);
         Page<Position> page = positionService.getPositionByPage(Page.of(current, size), entity);
-        Page<PositionResVo> voPage = positionConvert.entity2ResPage(page);
-        return R.success().put(new PageUtils(voPage));
+        Page<PositionRes> resPage = positionConvert.entity2ResPage(page);
+        return R.success().put(new PageUtils(resPage));
     }
 
     @Operation(summary = "查询list")
@@ -50,22 +50,22 @@ public class PositionController {
     public R list() {
         List<Position> list = positionService.list(new LambdaQueryWrapper<Position>()
                 .eq(Position::getEnabled, true));
-        List<PositionResVo> voList = positionConvert.entity2ResList(list);
-        return R.success().put(voList);
+        List<PositionRes> resList = positionConvert.entity2ResList(list);
+        return R.success().put(resList);
     }
 
     @Operation(summary = "添加数据")
     @PostMapping("/add")
-    public R add(@RequestBody PositionReqVo reqVo) {
-        Position position = positionConvert.req2Entity(reqVo);
+    public R add(@RequestBody PositionReq req) {
+        Position position = positionConvert.req2Entity(req);
         positionService.save(position);
         return R.success("添加成功");
     }
 
     @Operation(summary = "修改数据")
     @PostMapping("/update")
-    public R update(@RequestBody PositionReqVo reqVo) {
-        Position position = positionConvert.req2Entity(reqVo);
+    public R update(@RequestBody PositionReq req) {
+        Position position = positionConvert.req2Entity(req);
         positionService.updateById(position);
         return R.success("修改成功");
     }

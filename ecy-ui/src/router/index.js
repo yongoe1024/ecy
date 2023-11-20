@@ -4,9 +4,6 @@ import store from '@/store'
 
 import initMenu from '@/utils/menus'
 
-import NotFound from '@/views/404'
-import Index from '@/views/Index'
-
 Vue.use(VueRouter)
 
 const routes = [
@@ -33,7 +30,7 @@ const routes = [
   {
     path: '/index',
     name: '页面框架',
-    component: Index,
+    component: () => import('@/views/Index'),
     children: [
       {
         path: '/index',
@@ -41,14 +38,14 @@ const routes = [
         component: () => import('@/views/Home'),
       },
       {
+        path: '/test',
+        name: '测试',
+        component: () => import('@/views/Test'),
+      },
+      {
         path: '/userinfo',
         name: '用户信息',
         component: () => import('@/views/user/UserInfo'),
-      },
-      {
-        path: '/password',
-        name: '修改密码',
-        component: () => import('@/views/user/Password'),
       },
       {
         path: '/password',
@@ -74,12 +71,13 @@ const routes = [
   },
   {
     path: '*',
-    component: NotFound
+    component: () => import('@/views/404'),
   }
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  // mode: 'history',
+  mode: 'hash',
   routes
 })
 // 路由前置守卫

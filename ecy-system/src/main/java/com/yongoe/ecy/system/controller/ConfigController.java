@@ -1,8 +1,8 @@
 package com.yongoe.ecy.system.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.yongoe.ecy.system.controller.vo.req.ConfigReqVo;
-import com.yongoe.ecy.system.controller.vo.res.ConfigResVo;
+import com.yongoe.ecy.system.controller.vo.req.ConfigReq;
+import com.yongoe.ecy.system.controller.vo.res.ConfigRes;
 import com.yongoe.ecy.system.convert.ConfigConvert;
 import com.yongoe.ecy.system.entity.Config;
 import com.yongoe.ecy.system.service.ConfigService;
@@ -35,17 +35,17 @@ public class ConfigController {
 
     @Operation(summary = "查询分页数据")
     @PostMapping("/page")
-    public R page(Long current, Long size, @RequestBody ConfigReqVo reqVo) {
-        Config entity = convert.req2Entity(reqVo);
+    public R page(Long current, Long size, @RequestBody ConfigReq req) {
+        Config entity = convert.req2Entity(req);
         Page<Config> page = configService.getConfigByPage(Page.of(current, size), entity);
-        Page<ConfigResVo> voPage = convert.entity2ResPage(page);
-        return R.success().put(new PageUtils(voPage));
+        Page<ConfigRes> resPage = convert.entity2ResPage(page);
+        return R.success().put(new PageUtils(resPage));
     }
 
     @Operation(summary = "添加数据")
     @PostMapping("/add")
-    public R add(@RequestBody ConfigReqVo reqVo) {
-        Config config = convert.req2Entity(reqVo);
+    public R add(@RequestBody ConfigReq req) {
+        Config config = convert.req2Entity(req);
         configService.save(config);
         configUtils.init();
         return R.success("添加成功");
@@ -53,8 +53,8 @@ public class ConfigController {
 
     @Operation(summary = "修改数据")
     @PostMapping("/update")
-    public R update(@RequestBody ConfigReqVo reqVo) {
-        Config config = convert.req2Entity(reqVo);
+    public R update(@RequestBody ConfigReq req) {
+        Config config = convert.req2Entity(req);
         configService.updateById(config);
         configUtils.init();
         return R.success("修改成功");

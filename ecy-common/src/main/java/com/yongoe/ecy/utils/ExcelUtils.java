@@ -8,6 +8,7 @@ import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -53,9 +54,9 @@ public class ExcelUtils {
         Workbook workbook = ExcelExportUtil.exportExcel(params, classname, list);
         String fileName = UUID.randomUUID().toString().replaceAll("-", "") + ".xlsx";
         //下载文件无法获取Content-Disposition 解决办法
-        response.setHeader("Access-Control-Expose-Headers", "Content-disposition");
-        response.setHeader("content-type", "application/octet-stream");
-        response.setHeader("content-disposition", "attachment;filename=" + URLEncoder.encode(fileName, StandardCharsets.UTF_8));
+        response.setHeader(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "Content-disposition");
+        response.setHeader(HttpHeaders.CONTENT_TYPE, "application/octet-stream");
+        response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + URLEncoder.encode(fileName, StandardCharsets.UTF_8));
         try (ServletOutputStream outputStream = response.getOutputStream()) {
             workbook.write(outputStream);
         } catch (IOException e) {

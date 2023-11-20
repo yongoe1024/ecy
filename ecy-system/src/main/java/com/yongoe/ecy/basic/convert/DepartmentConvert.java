@@ -1,8 +1,8 @@
 package com.yongoe.ecy.basic.convert;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.yongoe.ecy.basic.controller.vo.req.DepartmentReqVo;
-import com.yongoe.ecy.basic.controller.vo.res.DepartmentResVo;
+import com.yongoe.ecy.basic.controller.vo.req.DepartmentReq;
+import com.yongoe.ecy.basic.controller.vo.res.DepartmentRes;
 import com.yongoe.ecy.basic.entity.Department;
 import org.mapstruct.Mapper;
 
@@ -19,29 +19,29 @@ public interface DepartmentConvert {
     /**
      * entity to vo
      */
-    DepartmentReqVo entity2Req(Department entity);
+    DepartmentReq entity2Req(Department entity);
 
-    DepartmentResVo entity2Res(Department entity);
+    DepartmentRes entity2Res(Department entity);
 
 
     /**
      * entity to vo List
      */
-    List<DepartmentReqVo> entity2ReqList(List<Department> list);
+    List<DepartmentReq> entity2ReqList(List<Department> list);
 
-    List<DepartmentResVo> entity2ResList(List<Department> list);
+    List<DepartmentRes> entity2ResList(List<Department> list);
 
 
     /**
      * entity to vo Page
      */
-    Page<DepartmentResVo> entity2ResPage(Page<Department> page);
+    Page<DepartmentRes> entity2ResPage(Page<Department> page);
 
 
     /**
      * vo 转 entity
      */
-    Department req2Entity(DepartmentReqVo reqVo);
+    Department req2Entity(DepartmentReq reqVo);
 
 
 }

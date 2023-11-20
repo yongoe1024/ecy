@@ -1,8 +1,8 @@
 package com.yongoe.ecy.system.service;
 
-import com.yongoe.ecy.system.controller.vo.req.ForgetVO;
-import com.yongoe.ecy.system.controller.vo.req.LoginVo;
-import com.yongoe.ecy.system.controller.vo.req.RegisterVo;
+import com.yongoe.ecy.system.controller.vo.req.ForgetReq;
+import com.yongoe.ecy.system.controller.vo.req.LoginReq;
+import com.yongoe.ecy.system.controller.vo.req.RegisterReq;
 import com.yongoe.ecy.utils.R;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -17,15 +17,15 @@ public interface LoginService {
     /**
      * 登陆之后返回token
      */
-    R login(LoginVo loginVo, HttpServletRequest request);
+    R login(LoginReq loginReq, HttpServletRequest request);
 
     /**
      * 注册之后返回token
      */
-    R register(RegisterVo register);
+    R register(RegisterReq register);
 
     /**
      * 找回密码
      */
-    R forget(ForgetVO forget);
+    R forget(ForgetReq forget);
 }
