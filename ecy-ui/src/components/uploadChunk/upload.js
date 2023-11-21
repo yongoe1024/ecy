@@ -81,7 +81,7 @@ export async function uploadChunk (fileObject) {
       onUploadProgress: progressEvent => {
         try {
           progressList[chunkNumber] = Math.floor((progressEvent.loaded * 100) / progressEvent.total)
-          //progress的平均值
+          //progress的平均值为进度
           let sum = progressList.reduce((accumulator, currentValue) => accumulator + currentValue, 0)
           fileObject.onProgress({ percent: sum / totalChunks })
         } catch (e) {
@@ -93,10 +93,11 @@ export async function uploadChunk (fileObject) {
     axiosList.push(axios.post(uploadUrl, formData, config))
   }
   let result = await Promise.all(axiosList)
+  //所有分块上传成功
   if (result.every(item => item.data.code == 200)) {
     //合并分块
     let re = await mergeChunks(new FileRequest(file, md5, totalChunks, null))
-    return Promise.resolve(re)
+    return Promise.resolve("合并成功")
   } else {
     return Promise.reject("合并失败")
   }

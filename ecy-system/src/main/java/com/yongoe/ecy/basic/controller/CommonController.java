@@ -2,6 +2,8 @@ package com.yongoe.ecy.basic.controller;
 
 import com.yongoe.ecy.utils.FileUtils;
 import com.yongoe.ecy.utils.R;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -28,6 +30,7 @@ import java.util.List;
  * @author yongoe
  * @since 2023/1/1
  */
+@Tag(name = "通用接口")
 @Controller
 public class CommonController {
     @Value("${ecy.file-save-path}")
@@ -38,6 +41,7 @@ public class CommonController {
      *
      * @param filePath 文件路径
      */
+    @Operation(summary = "普通下载文件,流式传输")
     @GetMapping("/download")
     public ResponseEntity<InputStreamResource> downloadFile(String filePath) throws IOException {
         Path path = Path.of(fileSavePath, filePath);
@@ -64,6 +68,7 @@ public class CommonController {
      * @param file 文件
      * @return 文件url路径
      */
+    @Operation(summary = "普通上传文件-单个")
     @PostMapping("/upload/single")
     @ResponseBody
     public R uploadFile(MultipartFile file,String ss) {
@@ -77,6 +82,7 @@ public class CommonController {
      * @param file 文件数组
      * @return 文件url路径数组
      */
+    @Operation(summary = "普通上传文件-批量")
     @PostMapping("/upload/batch")
     @ResponseBody
     public R uploadFile(List<MultipartFile> file) {

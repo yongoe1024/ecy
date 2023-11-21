@@ -4,6 +4,8 @@ import com.yongoe.ecy.basic.controller.vo.req.FileChunkReq;
 import com.yongoe.ecy.basic.controller.vo.res.FileChunkRes;
 import com.yongoe.ecy.basic.service.UploadService;
 import com.yongoe.ecy.utils.R;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author yongoe
  * @since 2023/1/1
  */
+@Tag(name = "断点续传")
 @RestController
 @RequestMapping("/upload")
 public class UploaderController {
@@ -24,9 +27,7 @@ public class UploaderController {
     @Resource
     private UploadService uploadService;
 
-    /**
-     * 检查分片是否存在
-     */
+    @Operation(summary = "检查分片是否存在")
     @PostMapping("checkChunkExist")
     public R checkChunkExist(@RequestBody FileChunkReq chunkReq) {
         try {
@@ -38,9 +39,7 @@ public class UploaderController {
         }
     }
 
-    /**
-     * 上传文件分片
-     */
+    @Operation(summary = "上传文件分片")
     @PostMapping("uploadChunk")
     public R uploadChunk(FileChunkReq chunkReq) {
         try {
@@ -52,9 +51,7 @@ public class UploaderController {
         }
     }
 
-    /**
-     * 请求合并文件分片
-     */
+    @Operation(summary = "请求合并文件分片")
     @PostMapping("merge")
     public R mergeChunks(@RequestBody FileChunkReq chunkReq) {
         boolean success = uploadService.mergeChunk(chunkReq);

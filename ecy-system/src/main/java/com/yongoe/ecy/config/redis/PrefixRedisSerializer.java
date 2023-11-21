@@ -1,11 +1,7 @@
 package com.yongoe.ecy.config.redis;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
-@Order
-@Configuration
 public class PrefixRedisSerializer extends StringRedisSerializer {
 
     public static final String PREFIX_KEY = "ecy:";

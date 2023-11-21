@@ -110,9 +110,7 @@
 </template>
 
 <script>
-import UploadPlus from '@/components/UploadPlus.vue'
 export default {
-  components: { UploadPlus },
   props: {},
   data () {
     return {

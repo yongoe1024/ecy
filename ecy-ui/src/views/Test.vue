@@ -1,14 +1,15 @@
 <template>
   <div>
-
+    <upload-chunk></upload-chunk>
   </div>
 </template>
 
 
 <script>
+import UploadChunk from '@/components/uploadChunk/UploadChunk.vue'
 export default {
   name: 'Test',
-  components: {},
+  components: { UploadChunk },
   props: {},
   computed: {},
   watch: {},

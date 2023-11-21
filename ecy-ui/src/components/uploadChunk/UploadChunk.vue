@@ -120,8 +120,9 @@ export default {
 
 <style scoped>
 .upload {
+  width: 400px;
   padding: 20px;
-  box-shadow: 2px 2px 2px 2px rgba(0, 21, 41, 1);
+  box-shadow: 0 5px 10px rgba(0, 21, 41, 0.7);
   z-index: 10;
 }
 </style>
