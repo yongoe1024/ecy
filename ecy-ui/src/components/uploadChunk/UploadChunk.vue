@@ -100,12 +100,12 @@ export default {
       // 上传前的钩子，参数为上传的文件，若返回 false 或者 Promise 则停止上传。
       console.log('类型：' + file.type)
       let type = !!file.type
-      let size = file.size <= 1024 * 1024 * 200
+      let size = file.size <= 1024 * 1024 * 5 * 10
       if (!type) {
-        this.$message.error('上传头只能是 JPG 格式!')
+        this.$message.error('上传头只能是 XXX 格式!')
       }
       if (!size) {
-        this.$message.error('上传大小不能超过 2MB!')
+        this.$message.error('上传大小不能超过 50 MB!')
       }
       return type && size
     },

@@ -6,6 +6,7 @@ import com.yongoe.ecy.basic.service.UploadService;
 import com.yongoe.ecy.utils.RedisUtils;
 import com.yongoe.ecy.utils.UserUtils;
 import jakarta.annotation.Resource;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -77,33 +78,36 @@ public class UploadServiceImpl implements UploadService {
         String chunkFilePath = getChunkFilePath(chunkReq.getMd5());
         String filePath = getFilePath(chunkReq.getFileName(), chunkReq.getMd5());
         // 检查分片是否都存在
-        if (checkChunks(chunkReq.getMd5(), chunkReq.getTotalChunks())) {
-            File chunkFileFolder = new File(chunkFilePath);
-            File mergeFile = new File(filePath);
-            File[] chunks = chunkFileFolder.listFiles();
-            // 切片排序1、2、3...
-            List<File> fileList = Arrays.asList(chunks);
-            fileList.sort(Comparator.comparingInt((File file) -> Integer.parseInt(file.getName())));
-            // 开始合并
-            try {
-                RandomAccessFile randomAccessFileWriter = new RandomAccessFile(mergeFile, "rw");
-                byte[] bytes = new byte[2048];
-                for (File chunk : chunks) {
-                    RandomAccessFile randomAccessFileReader = new RandomAccessFile(chunk, "r");
-                    int len;
-                    while ((len = randomAccessFileReader.read(bytes)) != -1) {
-                        randomAccessFileWriter.write(bytes, 0, len);
-                    }
-                    randomAccessFileReader.close();
-                }
-                randomAccessFileWriter.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-                return false;
-            }
-            return true;
+        if (!checkChunks(chunkReq.getMd5(), chunkReq.getTotalChunks())) {
+            return false;
         }
-        return false;
+        File chunkFileFolder = new File(chunkFilePath);
+        File mergeFile = new File(filePath);
+        File[] chunks = chunkFileFolder.listFiles();
+        // 切片排序1、2、3...
+        List<File> fileList = Arrays.asList(chunks);
+        fileList.sort(Comparator.comparingInt((File file) -> Integer.parseInt(file.getName())));
+        // 开始合并
+        try {
+            RandomAccessFile randomAccessFileWriter = new RandomAccessFile(mergeFile, "rw");
+            byte[] bytes = new byte[2048];
+            for (File chunk : chunks) {
+                RandomAccessFile randomAccessFileReader = new RandomAccessFile(chunk, "r");
+                int len;
+                while ((len = randomAccessFileReader.read(bytes)) != -1) {
+                    randomAccessFileWriter.write(bytes, 0, len);
+                }
+                randomAccessFileReader.close();
+            }
+            randomAccessFileWriter.close();
+            //删除分片
+            chunkFileFolder = new File(chunkFilePath);
+            FileUtils.deleteDirectory(chunkFileFolder);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     /**

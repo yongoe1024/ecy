@@ -6,7 +6,7 @@ var CancelToken = axios.CancelToken //在请求的任何阶段关闭请求。
 var source = CancelToken.source() //取消请求的令牌
 
 const baseURL = Vue.prototype.$BASE_URL
-const chunkSize = 1024 * 1024 * 10 // 文件分片大小 20M
+const chunkSize = 1024 * 1024 * 5 // 文件分片大小 20M
 const uploadUrl = baseURL + '/upload/uploadChunk' // 上传地址
 const checkChunkExistUrl = baseURL + '/upload/checkChunkExist' // 检查分片是否存在
 const mergeChunksUrl = baseURL + '/upload/merge' // 合并分片
@@ -73,6 +73,7 @@ export async function uploadChunk (fileObject) {
     }
     //axios配置
     let config = {
+      timeout: 0,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: window.localStorage.getItem("token")
