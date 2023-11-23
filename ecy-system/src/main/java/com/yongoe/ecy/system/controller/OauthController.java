@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletResponse;
 import me.zhyd.oauth.model.AuthCallback;
+import me.zhyd.oauth.request.AuthRequest;
 import me.zhyd.oauth.utils.AuthStateUtils;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,7 +37,13 @@ public class OauthController {
 
     @GetMapping("/oauth/qq/redirect")
     public void redirectQQ(HttpServletResponse response) throws IOException {
-        response.sendRedirect(oauthService.getQQAuthRequest().authorize(AuthStateUtils.createState()));
+        AuthRequest qqAuthRequest = oauthService.getQQAuthRequest();
+        if (qqAuthRequest != null)
+            response.sendRedirect(qqAuthRequest.authorize(AuthStateUtils.createState()));
+        else {
+            response.setHeader("Content-Type", "text/html;charset=UTF-8");
+            response.getWriter().println("QQ登录配置错误");
+        }
     }
 
     @GetMapping("/oauth/wxh5/redirect")

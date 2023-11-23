@@ -37,6 +37,15 @@ public class UploadServiceImpl implements UploadService {
         if (exist) {
             return new FileChunkRes(true);
         }
+        //提前创建文件夹
+        String chunkFileFolderPath = getChunkFilePath(chunkReq.getMd5());
+        File chunkFileFolder = new File(chunkFileFolderPath);
+        if (!chunkFileFolder.exists()) {
+            if (!chunkFileFolder.mkdirs()) {
+                throw new RuntimeException("无法创建文件夹" + chunkFileFolderPath);
+            }
+        }
+        //检查分片是否已上传过
         Map<Object, Object> map = redisUtils.getMap(chunkReq.getMd5());
         if (map == null || map.size() == 0) {
             return new FileChunkRes(false, Set.of());
@@ -53,12 +62,6 @@ public class UploadServiceImpl implements UploadService {
     public void uploadChunk(FileChunkReq chunkReq) throws IOException {
         //分块的目录
         String chunkFileFolderPath = getChunkFilePath(chunkReq.getMd5());
-        File chunkFileFolder = new File(chunkFileFolderPath);
-        if (!chunkFileFolder.exists()) {
-            if (!chunkFileFolder.mkdirs()) {
-                throw new RuntimeException("无法创建文件夹" + chunkFileFolderPath);
-            }
-        }
         //写入分片
         InputStream inputStream = chunkReq.getFile().getInputStream();
         OutputStream outputStream = new FileOutputStream(
@@ -129,14 +132,24 @@ public class UploadServiceImpl implements UploadService {
      * 检查分片是否都存在
      */
     private boolean checkChunks(String md5, int totalChunks) {
+        Set<Integer> notExist = new HashSet<>();
         try {
             for (int i = 0; i < totalChunks; i++) {
                 File file = new File(Path.of(getChunkFilePath(md5), String.valueOf(i)).toString());
-                if (!file.exists()) {
-                    throw new Exception("分片不存在");
-                }
+                if (!file.exists())
+                    notExist.add(i);
             }
+            if (notExist.size() > 0)
+                throw new Exception("分片不存在" + notExist);
         } catch (Exception e) {
+            //检测redis中的分片信息并修复
+            Map<Object, Object> map = redisUtils.getMap(md5);
+            if (map != null && map.size() > 0) {
+                Set<Integer> uploaded = (Set<Integer>) map.get("uploaded");
+                //从redis中删除不存在的分片
+                uploaded.removeAll(notExist);
+                redisUtils.setMap(md5, map);
+            }
             e.printStackTrace();
             return false;
         }

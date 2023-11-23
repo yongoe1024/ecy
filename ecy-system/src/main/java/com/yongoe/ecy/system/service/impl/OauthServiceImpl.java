@@ -56,15 +56,20 @@ public class OauthServiceImpl implements OauthService {
     }
 
     public AuthRequest getQQAuthRequest() {
-        AuthCacheConfig.timeout = 10 * 60 * 1000;
-        String clientId = configUtils.get("qq-clientId");
-        String clientSecret = configUtils.get("qq-clientSecret");
-        String redirectUri = configUtils.get("qq-redirectUri");
-        return new AuthQqRequest(AuthConfig.builder()
-                .clientId(clientId)
-                .clientSecret(clientSecret)
-                .redirectUri(redirectUri)
-                .build());
+        try {
+            AuthCacheConfig.timeout = 10 * 60 * 1000;
+            String clientId = configUtils.get("qq-clientId");
+            String clientSecret = configUtils.get("qq-clientSecret");
+            String redirectUri = configUtils.get("qq-redirectUri");
+            return new AuthQqRequest(AuthConfig.builder()
+                    .clientId(clientId)
+                    .clientSecret(clientSecret)
+                    .redirectUri(redirectUri)
+                    .build());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Transactional(rollbackFor = RuntimeException.class)
@@ -110,7 +115,7 @@ public class OauthServiceImpl implements OauthService {
     @Transactional(rollbackFor = RuntimeException.class)
     public R callbackQQ(AuthCallback callback) throws JsonProcessingException {
         AuthResponse login = getQQAuthRequest().login(callback);
-        if (login.getCode() != 2000)
+        if (login!=null && login.getCode() != 2000)
             return R.error("qq登录失败");
         Object data = login.getData();
         ObjectMapper objectMapper = new ObjectMapper();

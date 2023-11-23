@@ -34,8 +34,12 @@ public class LogServiceImpl extends ServiceImpl<LogMapper, Log> implements LogSe
                 log.setDetails(details.substring(0, 1999));
             else
                 log.setDetails(details);
-            String name = UserUtils.getName();
-            log.setName(name);
+            try {
+                String name = UserUtils.getName();
+                log.setName(name);
+            }catch (Exception e) {
+               e.printStackTrace();
+            }
             log.setType(type);
             baseMapper.insert(log);
         } catch (Exception e) {

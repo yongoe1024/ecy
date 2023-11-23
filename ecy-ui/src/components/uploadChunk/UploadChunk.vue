@@ -61,7 +61,7 @@ export default {
       }).catch((err) => {
         console.log(err)
         fileObject.onError()
-        this.$message({ message: `${fileObject.file.name} 失败, ${err}`, type: 'error' })
+        this.$message({ message: `${fileObject.file.name} 失败 ---失败原因：${err},请重试`, type: 'error' })
       })
     },
     submitUpload () {
