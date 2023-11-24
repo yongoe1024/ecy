@@ -7,10 +7,6 @@
                      :title="letter.title"
                      :column="2"
                      border>
-      <template slot="extra">
-        <el-button type="primary"
-                   size="small">无</el-button>
-      </template>
       <el-descriptions-item>
         <template slot="label">
           发件人id
@@ -54,9 +50,11 @@
       </el-descriptions-item>
     </el-descriptions>
     <el-card>
-      <p> {{letter.content}}</p>
+      <span class="ql-editor"
+            v-html="letter.content"> </span>
     </el-card>
   </div>
+
 </template>
 
 <script>
@@ -85,6 +83,6 @@ export default {
 
   },
 }
-</script>
+</script> 
 <style scoped>
 </style>

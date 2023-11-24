@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { uploadChunk, stop } from '@/components/uploadChunk/upload.js'
+import { uploadChunk, stop } from '@/components/chunk-upload/upload.js'
 export default {
   data () {
     return {

@@ -73,7 +73,7 @@ public class CommonController {
     @ResponseBody
     public R uploadFile(MultipartFile file,String ss) {
         String url = FileUtils.saveFile(file);
-        return R.success().put(url);
+        return R.success("上传成功").put(url);
     }
 
     /**
@@ -91,6 +91,6 @@ public class CommonController {
             String url = FileUtils.saveFile(multipartFile);
             urlList.add(url);
         }
-        return R.success().put(urlList);
+        return R.success("上传成功").put(urlList);
     }
 }

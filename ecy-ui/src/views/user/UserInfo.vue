@@ -77,7 +77,7 @@ export default {
       headers: {
         Authorization: window.localStorage.getItem('token')
       },
-      imgUrl: require('../../assets/no-img.png'),
+      imgUrl: require('../../assets/no-img.jpg'),
       form: {
         name: null,
         email: null,

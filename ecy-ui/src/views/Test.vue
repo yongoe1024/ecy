@@ -1,28 +1,31 @@
 <template>
   <div>
-    <upload-chunk></upload-chunk>
+    <e-dict name="性别"
+            v-model="v"></e-dict>
+    <e-upload>
+    </e-upload>
+    <e-chunk-upload></e-chunk-upload>
+    <e-editor v-model="v"></e-editor>
   </div>
 </template>
 
 
 <script>
-import UploadChunk from '@/components/uploadChunk/UploadChunk.vue'
+import eEditor from '@/components/e-editor.vue'
 export default {
-  name: 'Test',
-  components: { UploadChunk },
+  components: { eEditor },
   props: {},
   computed: {},
   watch: {},
   data () {
     return {
+      v: '',
     }
   },
-  create () { },
   mounted () { },
-  update () { },
   methods: {},
 }
-
 </script>
-<style scoped>
+
+<style  >
 </style>

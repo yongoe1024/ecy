@@ -102,7 +102,7 @@ export default {
   },
   data () {
     return {
-      imgUrl: require('../assets/no-img.png'),
+      imgUrl: require('../assets/no-img.jpg'),
       isCollapse: false,
       asideWidth: '200px',
     }

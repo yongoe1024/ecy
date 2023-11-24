@@ -119,10 +119,10 @@
         </el-form-item>
         <el-form-item label="父菜单"
                       prop="parentId">
-          <Tree :data="dataList"
-                v-model="form.parentId"
-                :tree_props="{ children: 'children', label: 'name', keyname: 'id' }"
-                placeholder="请选择父菜单"></Tree>
+          <e-input-tree :data="dataList"
+                        v-model="form.parentId"
+                        :tree_props="{ children: 'children', label: 'name', keyname: 'id' }"
+                        placeholder="请选择父菜单"></e-input-tree>
         </el-form-item>
         <el-form-item label="组件位置"
                       prop="component">

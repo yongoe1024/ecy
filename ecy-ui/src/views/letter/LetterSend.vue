@@ -46,19 +46,17 @@
               element-loading-background="rgba(0, 0, 0, 0.8)"
               :data="dataList"
               style="width: 100%">
-      <el-table-column align="center"
-                       type="index"></el-table-column>
-      <el-table-column prop="addresseeId"
+      <!-- <el-table-column prop="addresseeId"
                        label="收件人id"
                        width="100"
-                       align="center"></el-table-column>
+                       align="center"></el-table-column> -->
       <el-table-column prop="addressee"
                        label="收件人"
-                       width="140"
+                       width="200"
                        align="center"></el-table-column>
       <el-table-column prop="title"
                        label="标题"
-                       align="center"></el-table-column>
+                       align="left"></el-table-column>
       <el-table-column prop="state"
                        label="状态"
                        width="100"
@@ -132,10 +130,7 @@
         </el-form-item>
         <el-form-item label="内容"
                       prop="content">
-          <el-input v-model="form.content"
-                    type="textarea"
-                    :rows="10"
-                    placeholder="请输入内容" />
+          <e-editor v-model="form.content"></e-editor>
         </el-form-item>
       </el-form>
       <span slot="footer">
@@ -148,8 +143,9 @@
 </template>
 
 <script>
+import EEditor from '@/components/e-editor.vue'
 export default {
-  components: {},
+  components: { EEditor },
   props: {},
   data () {
     return {

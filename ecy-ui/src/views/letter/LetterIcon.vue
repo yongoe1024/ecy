@@ -20,7 +20,8 @@
             <div style="font-size:10px;color:#a09999">{{item.createBy}}</div>
           </div>
           <div class="content">
-            <div>{{item.content.substring(0, 15)}}...</div>
+            <span> </span>
+            <!-- <div>{{item.content.substring(0, 15)}}...</div> -->
             <div style="font-size:10px;color:#a09999">{{item.createTime}}</div>
           </div>
         </div>

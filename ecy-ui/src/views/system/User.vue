@@ -171,10 +171,10 @@
         </el-form-item>
         <el-form-item label="部门"
                       prop="departmentId">
-          <Tree :data="departmentList"
-                v-model="form.departmentId"
-                :tree_props="{ children: 'children', label: 'name', keyname: 'id'}"
-                placeholder="请选择部门"></Tree>
+          <e-input-tree :data="departmentList"
+                        v-model="form.departmentId"
+                        :tree_props="{ children: 'children', label: 'name', keyname: 'id'}"
+                        placeholder="请选择部门"></e-input-tree>
         </el-form-item>
         <el-form-item label="职位"
                       prop="positionId">
