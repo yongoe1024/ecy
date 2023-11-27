@@ -33,8 +33,11 @@ public class MailUtils {
     private JavaMailSenderImpl mailSender;
     private Configuration configuration;
 
+    /**
+     * 初始化
+     */
     @PostConstruct
-    public void doConstruct() {
+    private void doConstruct() {
         mailSender = new JavaMailSenderImpl();
         mailSender.setDefaultEncoding("UTF-8");
         configuration = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);

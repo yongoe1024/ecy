@@ -12,7 +12,7 @@ services:
     volumes:
       - ./ecy-file:/ecy/ecy-file
     environment:
-      - SPRING_ACTIVE_PROFILE=prod
+      - SPRING_ACTIVE_PROFILE=docker
       - DATABASE_URL=jdbc:mysql://host.docker.internal:3306/ecy?characterEncoding=utf8&useUnicode=true&serverTimezone=GMT%2B8&useSSL=false&allowPublicKeyRetrieval=true
       - DATABASE_USERNAME=root
       - DATABASE_PASSWORD=123456

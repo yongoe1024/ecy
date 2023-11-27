@@ -29,7 +29,7 @@ vue.config设置过转发
       },
     }
 ```
-但打包html，解决方法是nginx
+但打包html，解决方法是nginx配置转发，在`ecy-ui/nginx/nginx.conf`中,已配置好结合docker所用的nginx，例如docker网络
 ```
 server {
     listen       80 default;

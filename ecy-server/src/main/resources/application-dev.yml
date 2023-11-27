@@ -29,4 +29,4 @@ spring:
           min-idle: 0
 
 ecy:
-  file-save-path: ${user.dir}/ecy-file  #文件
+  file-save-path: ${user.dir}/ecy-file
