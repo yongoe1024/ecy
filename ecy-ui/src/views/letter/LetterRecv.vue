@@ -10,10 +10,10 @@
                 prefix-icon="el-icon-search"
                 placeholder="请输入标题"
                 v-model="queryParam.title"></el-input>
-      <el-input size="small"
+      <!-- <el-input size="small"
                 prefix-icon="el-icon-search"
                 placeholder="请输入内容"
-                v-model="queryParam.content"></el-input>
+                v-model="queryParam.content"></el-input> -->
       <el-select v-model="queryParam.state"
                  size="small"
                  placeholder="请选择状态">
@@ -25,11 +25,11 @@
     </div>
     <!-- 按钮 -->
     <div class="button">
-      <el-button type="primary"
+      <el-button type="text"
                  size="small"
                  icon="el-icon-search"
                  @click="getList">搜索</el-button>
-      <el-button type="primary"
+      <el-button type="text"
                  size="small"
                  icon="el-icon-refresh"
                  @click="resetQuery">重置</el-button>

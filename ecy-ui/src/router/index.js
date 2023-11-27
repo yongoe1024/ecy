@@ -53,19 +53,14 @@ const routes = [
         component: () => import('@/views/user/Password'),
       },
       {
+        path: '/letter',
+        name: '信件',
+        component: () => import('@/views/letter/Letter'),
+      },
+      {
         path: '/letter-info',
         name: '信件详情',
         component: () => import('@/views/letter/LetterInfo'),
-      },
-      {
-        path: '/letter-send',
-        name: '写信',
-        component: () => import('@/views/letter/LetterSend'),
-      },
-      {
-        path: '/letter-recv',
-        name: '收件箱',
-        component: () => import('@/views/letter/LetterRecv'),
       },
     ]
   },

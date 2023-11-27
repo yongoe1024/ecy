@@ -66,8 +66,6 @@
                    @error="setDefaultImage" />
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item command="userinfo">个人中心</el-dropdown-item>
-                <el-dropdown-item command="letter-send">写信</el-dropdown-item>
-                <el-dropdown-item command="letter-recv">收信箱</el-dropdown-item>
                 <el-dropdown-item command="logout">退出登录</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
@@ -121,10 +119,6 @@ export default {
         this.$router.push('/userinfo')
       } else if (command == 'logout') {
         this.logout()
-      } else if (command == 'letter-send') {
-        this.$router.push('/letter-send')
-      } else if (command == 'letter-recv') {
-        this.$router.push('/letter-recv')
       }
     },
     logout () {

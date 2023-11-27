@@ -1,11 +1,11 @@
 <template>
   <div>
     <el-popover placement="bottom"
-                width="400"
+                width="300"
                 trigger="click">
-      <div style="height:410px">
+      <div style="height:310px">
         <el-button circle
-                   size="mini"
+                   type="text"
                    @click="getletter"
                    icon="el-icon-refresh"> </el-button>
         <div class="letter"
@@ -27,7 +27,7 @@
         </div>
         <el-link type="primary"
                  @click="getAll"
-                 style="font-size:13px;margin:10px 0px 0px 25px">查看全部</el-link>
+                 style="font-size:13px;margin:10px 0px 0px 10px">查看全部</el-link>
       </div>
 
       <el-badge :value="num"
@@ -63,7 +63,7 @@ export default {
       this.$router.push('/letter-info?id=' + id)
     },
     getAll () {
-      this.$router.push('/letter-recv')
+      this.$router.push('/letter')
     }
   },
 }
@@ -71,7 +71,7 @@ export default {
 </script>
 <style scoped>
 .letter {
-  padding: 10px 20px 10px 30px;
+  padding: 4px;
   border-bottom: 1px solid #ddd;
   cursor: pointer;
 }
