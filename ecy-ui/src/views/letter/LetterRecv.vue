@@ -22,22 +22,21 @@
         <el-option label="已读"
                    :value="true"></el-option>
       </el-select>
-    </div>
-    <!-- 按钮 -->
-    <div class="button">
-      <el-button type="text"
-                 icon="el-icon-search"
+      <el-button icon="el-icon-search"
+                 size="mini"
+                 plain
+                 type="primary"
                  @click="getList">搜索</el-button>
-      <el-button type="text"
-                 icon="el-icon-refresh"
+      <el-button icon="el-icon-refresh"
+                 size="mini"
+                 plain
+                 type="info"
                  @click="resetQuery">重置</el-button>
     </div>
 
     <!-- 表格 -->
     <el-table v-loading="loading"
-              element-loading-text="拼命加载中"
-              element-loading-spinner="el-icon-loading"
-              element-loading-background="rgba(0, 0, 0, 0.8)"
+              :header-cell-style="{background:'#eef1f6'}"
               :data="dataList"
               style="width: 100%">
       <!-- <el-table-column prop="addresserId"
@@ -50,7 +49,7 @@
                        align="center"></el-table-column>
       <el-table-column prop="title"
                        label="标题"
-                       align="left"></el-table-column>
+                       align="center"></el-table-column>
       <el-table-column prop="state"
                        label="状态"
                        width="100"
@@ -73,7 +72,7 @@
                        width="140"
                        fixed="right">
         <template slot-scope="scope">
-          <el-button style="padding: 3px"
+          <el-button type="text"
                      @click="getInfo(scope.row)">详情</el-button>
         </template>
       </el-table-column>
@@ -135,7 +134,7 @@ export default {
     getList () {
       this.queryParam.addresseeId = this.$store.state.user.user.id
       this.loading = true
-      this.axios.post('/basic/letter/page?current=' + this.current + '&size=' + this.size, this.queryParam).then(data => {
+      this.axios.post(`/basic/letter/page?current=${this.current}&size=${this.size}`, this.queryParam).then(data => {
         this.loading = false
         this.dataList = data.list
         this.total = data.total - 0

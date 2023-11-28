@@ -46,13 +46,13 @@
           <router-link :to="{path: 'forget'}">忘记密码？</router-link>
         </div>
 
-        <div class="qq">
+        <!-- <div class="qq">
           社交账号登录<br>
           <a :href="$BASE_URL+'/oauth/qq/redirect'">
             <img style="width:25px;margin:10px"
                  src="../assets/icon_QQ.png">
           </a>
-        </div>
+        </div> -->
       </el-form>
     </div>
 
@@ -76,14 +76,6 @@ export default {
         code: [{ required: true, message: '请输入验证码', trigger: 'change' }],
       },
     }
-  },
-  mounted () {
-    // 退出登陆刷新页面的，先不用
-    // if (window.localStorage.getItem("first") != 1) {
-    //   this.$message('成功刷新')
-    //   window.localStorage.setItem('first', 1)
-    //   this.$router.go(0)
-    // }
   },
   methods: {
     updateCaptcha () {

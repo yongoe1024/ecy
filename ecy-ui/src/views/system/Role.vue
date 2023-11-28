@@ -46,7 +46,6 @@
                        align="center"
                        fixed="right">
         <template slot-scope="scope">
-
           <el-button type="text"
                      size="mini"
                      icon="el-icon-edit"
@@ -230,7 +229,7 @@ export default {
     },
     handleDelete (row) {
       this.$confirm('此操作将永久删除[' + row.name + ']角色, 是否继续?', '提示', { type: 'warning' }).then(() => {
-        this.axios.post('/system/role/delete/' + row.id).then(() => this.initAllRoles()).catch(e => { })
+        this.axios.post('/system/role/delete/' + row.id).then(() => this.getList()).catch(e => { })
       }).catch(e => { })
     },
     // 初始化菜单数据

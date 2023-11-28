@@ -14,15 +14,17 @@
     <!-- 按钮 -->
     <div class="button">
       <el-button type="primary"
-                 size="small"
+                 size="mini"
+                 plain
                  icon="el-icon-search"
                  @click="getList">搜索</el-button>
-      <el-button type="primary"
-                 size="small"
+      <el-button size="mini"
+                 plain
                  icon="el-icon-refresh"
                  @click="resetQuery">重置</el-button>
-      <el-button type="primary"
-                 size="small"
+      <el-button type="success"
+                 plain
+                 size="mini"
                  @click="handleShowAddEdit"
                  icon="el-icon-plus">添加</el-button>
 
@@ -30,13 +32,9 @@
 
     <!-- 表格 -->
     <el-table v-loading="loading"
-              element-loading-text="拼命加载中"
-              element-loading-spinner="el-icon-loading"
-              element-loading-background="rgba(0, 0, 0, 0.8)"
               :data="dataList"
-              stripe
-              border
               style="width: 100%"
+              :header-cell-style="{background:'#eef1f6'}"
               @selection-change="handleSelectionChange">
       <el-table-column type="selection"
                        width="55"></el-table-column>
@@ -56,11 +54,13 @@
                        width="140"
                        fixed="right">
         <template slot-scope="scope">
-          <el-button style="padding: 3px"
-                     type="primary"
+          <el-button type="text"
+                     size="mini"
+                     icon="el-icon-edit"
                      @click="handleShowUpdateEdit(scope.row)">编辑</el-button>
-          <el-button style="padding: 3px"
-                     type="danger"
+          <el-button type="text"
+                     size="mini"
+                     icon="el-icon-delete"
                      @click="handleDelete(scope.row)">删除</el-button>
         </template>
       </el-table-column>
@@ -213,7 +213,7 @@ export default {
     // 初始化数据
     getList () {
       this.loading = true
-      this.axios.post('/system/config/page?current=' + this.current + '&size=' + this.size, this.queryParam).then(data => {
+      this.axios.post(`/system/config/page?current=${this.current}&size=${this.size}`, this.queryParam).then(data => {
         this.loading = false
         this.dataList = data.list
         this.total = data.total - 0

@@ -17,7 +17,7 @@
           <el-menu-item index="/index"
                         class="el-menu-item2">
             <i class="fa fa-home"
-               style="color: #FFFFFF;  font-size:23px"></i>
+               style="margin-left:3px;color:#FFFFFF;font-size:23px"></i>
             <span style="margin-left:20px;font-size:15px">首页</span>
           </el-menu-item>
           <el-submenu v-for="(item, index) in routes"
@@ -26,7 +26,7 @@
                       v-show="item.isShow">
             <template slot="title">
               <i :class="item.icon"
-                 style="color: #FFFFFF;  font-size:18px"></i>
+                 style="color:#FFFFFF;font-size:18px"></i>
               <span style="margin-left:5px;font-size:15px">{{ item.name }}</span>
             </template>
             <!-- 子选项 -->
@@ -44,12 +44,13 @@
       </el-aside>
 
       <el-container>
+        <!-- 页头 -->
         <el-header class="homeHeader"
                    height="50px">
           <div class="mianbaoxie">
-            <div> <i class="el-icon-s-fold"
-                 style="font-size:25px"
-                 @click="collapse"></i></div>
+            <i class="el-icon-s-fold"
+               style="font-size:25px;cursor:pointer;"
+               @click="collapse"></i>
             <!-- 面包屑 -->
             <div style="margin-left:10px">
               <el-breadcrumb>
@@ -59,7 +60,7 @@
             </div>
           </div>
           <div>
-            <letter-icon style="margin-right:20px;display:inline;"></letter-icon>
+            <letter-icon style="margin-right:20px;display:inline; "></letter-icon>
             <el-dropdown class="userinfo"
                          @command="handleCommand">
               <img :src="user.avatar"
@@ -72,10 +73,11 @@
           </div>
 
         </el-header>
+        <!-- 主体内容 -->
         <el-main>
-
-          <router-view style="padding:20px; box-shadow: 0 1px 4px rgba(0, 21, 41, 0.2);" />
-
+          <keep-alive>
+            <router-view />
+          </keep-alive>
         </el-main>
       </el-container>
     </el-container>
@@ -105,6 +107,10 @@ export default {
       asideWidth: '200px',
     }
   },
+  mounted () {
+    //获取用户信息
+    this.axios.post('/user/info').then(data => this.$store.commit('initUser', data)).catch(e => { })
+  },
   methods: {
     setDefaultImage (e) {
       e.target.src = this.imgUrl
@@ -131,10 +137,6 @@ export default {
         location.reload()
       }).catch(e => { })
     },
-  },
-  mounted () {
-    //获取用户信息
-    this.axios.post('/user/info').then(data => this.$store.commit('initUser', data)).catch(e => { })
   },
 };
 </script>

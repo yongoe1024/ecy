@@ -315,7 +315,6 @@ export default {
 .head * {
   margin: 0 8px 8px 0;
 }
-
 .button {
     margin: 0 0 15px 0;
     display: flex;

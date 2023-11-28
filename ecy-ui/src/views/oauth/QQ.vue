@@ -16,7 +16,7 @@ export default {
   mounted () {
     this.code = this.$route.query.code
     this.state = this.$route.query.state
-    this.axios.get('/oauth/qq/callback?code=' + this.code + '&state=' + this.state).then((result) => {
+    this.axios.get(`/oauth/qq/callback?code=${this.code}&state=${this.state}`).then((result) => {
       window.localStorage.setItem('token', result)
       this.$router.replace('/index')
     }).catch((err) => {

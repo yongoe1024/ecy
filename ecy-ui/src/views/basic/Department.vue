@@ -1,30 +1,27 @@
 <template>
   <div>
-
     <!-- 按钮 -->
     <div class="button">
-      <el-button type="primary"
-                 size="small"
+      <el-button size="mini"
+                 plain
                  icon="el-icon-search"
                  @click="getList">刷新</el-button>
-      <el-button type="primary"
-                 size="small"
+      <el-button type="success"
+                 size="mini"
+                 plain
                  @click="handleShowAddEdit"
                  icon="el-icon-plus">添加</el-button>
     </div>
 
     <!-- 表格 -->
     <el-table v-loading="loading"
-              element-loading-text="拼命加载中"
-              element-loading-spinner="el-icon-loading"
-              element-loading-background="rgba(0, 0, 0, 0.8)"
               :data="dataList"
               row-key="id"
               :tree-props="{children: 'children'}"
-              stripe
-              border
+              :header-cell-style="{background:'#eef1f6'}"
               style="width: 100%">
       <el-table-column prop="name"
+                       align="center"
                        label="部门名称"></el-table-column>
       <el-table-column prop="leader"
                        label="负责人"
@@ -46,14 +43,15 @@
       </el-table-column>
       <el-table-column label="操作"
                        align="center"
-                       width="140"
                        fixed="right">
         <template slot-scope="scope">
-          <el-button style="padding: 3px"
-                     type="primary"
+          <el-button type="text"
+                     size="mini"
+                     icon="el-icon-edit"
                      @click="handleShowUpdateEdit(scope.row)">编辑</el-button>
-          <el-button style="padding: 3px"
-                     type="danger"
+          <el-button type="text"
+                     size="mini"
+                     icon="el-icon-delete"
                      @click="handleDelete(scope.row)">删除</el-button>
         </template>
       </el-table-column>

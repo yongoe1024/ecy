@@ -137,7 +137,7 @@ export default {
     // 初始化数据
     getList () {
       this.loading = true
-      this.axios.post('/system/log/page?current=' + this.current + '&size=' + this.size).then(data => {
+      this.axios.post(`/system/log/page?current=${this.current}&size=${this.size}`).then(data => {
         this.loading = false
         this.dataList = data.list
         this.total = data.total - 0
@@ -157,7 +157,6 @@ export default {
 .head * {
   margin: 0 8px 8px 0;
 }
-
 .button {
   margin: 0 0 15px 0;
   display: flex;

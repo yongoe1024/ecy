@@ -6,11 +6,11 @@
                 prefix-icon="el-icon-search"
                 placeholder="请输入姓名"
                 v-model="queryParam.name"></el-input>
-      <Tree :data="departmentList"
-            size="small"
-            v-model="queryParam.departmentId"
-            :tree_props="{ children: 'children', label: 'name', keyname: 'id' }"
-            placeholder="请选择部门"></Tree>
+      <e-input-tree :data="departmentList"
+                    size="small"
+                    v-model="queryParam.departmentId"
+                    :tree_props="{ children: 'children', label: 'name', keyname: 'id' }"
+                    placeholder="请选择部门"></e-input-tree>
       <el-select v-model="queryParam.positionId"
                  placeholder="请选择职位"
                  size="small">
@@ -40,41 +40,39 @@
     <!-- 按钮 -->
     <div class="button">
       <el-button type="primary"
-                 size="small"
+                 size="mini"
+                 plain
                  icon="el-icon-search"
                  @click="getList">搜索</el-button>
-      <el-button type="primary"
-                 size="small"
+      <el-button size="mini"
+                 plain
                  icon="el-icon-refresh"
                  @click="resetQuery">重置</el-button>
-      <el-button type="primary"
-                 size="small"
+      <el-button type="success"
+                 size="mini"
+                 plain
                  @click="handleShowAddEdit"
                  icon="el-icon-plus">添加</el-button>
     </div>
 
     <!-- 表格 -->
     <el-table v-loading="loading"
-              element-loading-text="拼命加载中"
-              element-loading-spinner="el-icon-loading"
-              element-loading-background="rgba(0, 0, 0, 0.8)"
               :data="dataList"
-              stripe
-              border
+              :header-cell-style="{background:'#eef1f6'}"
               style="width: 100%">
       <el-table-column align="center"
                        type="index"></el-table-column>
-      <el-table-column prop="departmentName"
-                       label="部门"
-                       align="center"></el-table-column>
-      <el-table-column prop="positionName"
-                       label="职位"
-                       align="center"></el-table-column>
       <el-table-column prop="username"
                        label="账号"
                        align="center"></el-table-column>
       <el-table-column prop="name"
                        label="姓名"
+                       align="center"></el-table-column>
+      <el-table-column prop="departmentName"
+                       label="部门"
+                       align="center"></el-table-column>
+      <el-table-column prop="positionName"
+                       label="职位"
                        align="center"></el-table-column>
       <el-table-column prop="avatar"
                        label="头像"
@@ -84,21 +82,6 @@
                style="width:40px">
         </template>
       </el-table-column>
-      <el-table-column prop="email"
-                       label="邮箱"
-                       align="center"></el-table-column>
-      <el-table-column prop="phone"
-                       label="联系电话"
-                       align="center"></el-table-column>
-      <el-table-column prop="remark"
-                       label="备注"
-                       align="center"></el-table-column>
-      <el-table-column prop="lastIp"
-                       label="上次登录ip"
-                       align="center"></el-table-column>
-      <el-table-column prop="lastTime"
-                       label="上次登录时间"
-                       align="center"></el-table-column>
       <el-table-column prop="enabled"
                        label="是否启用"
                        align="center">
@@ -113,28 +96,48 @@
       </el-table-column>
       <el-table-column prop="roleList"
                        label="角色"
-                       width="110"
                        align="center">
         <template slot-scope="scope">
           <el-tag v-for="item in scope.row.roleList"
-                  :key="item.id"
-                  type="success">{{item.name}}</el-tag>
+                  style="margin:2px"
+                  :key="item.id">{{item.name}}</el-tag>
         </template>
       </el-table-column>
+      <!--  <el-table-column prop="email"
+                       label="邮箱"
+                       width="200"
+                       align="center"></el-table-column>
+                       <el-table-column prop="lastIp"
+                       label="上次登录ip"
+                       width="100"
+                       align="center"></el-table-column>
+      <el-table-column prop="lastTime"
+                       label="上次登录时间"
+                       width="120"
+                       align="center"></el-table-column>
+      <el-table-column prop="phone"
+                       label="联系电话"
+                       align="center"></el-table-column>
+      <el-table-column prop="remark"
+                       label="备注"
+                       align="center"></el-table-column> -->
       <el-table-column label="操作"
                        align="center"
                        width="140"
                        fixed="right">
         <template slot-scope="scope">
-          <el-button style="padding: 3px"
-                     type="danger"
-                     @click="handleUpdatePassword(scope.row)">修改密码</el-button>
-          <el-button style="padding: 3px"
-                     type="primary"
+          <el-button type="text"
+                     size="mini"
+                     icon="el-icon-edit"
                      @click="handleShowUpdateEdit(scope.row)">编辑</el-button>
-          <el-button style="padding: 3px"
-                     type="danger"
+          <el-button type="text"
+                     size="mini"
+                     icon="el-icon-delete"
                      @click="handleDelete(scope.row)">删除</el-button>
+          <el-button type="text"
+                     size="mini"
+                     @click="handleUpdatePassword(scope.row)">修改密码</el-button>
+
         </template>
       </el-table-column>
     </el-table>
@@ -359,7 +362,7 @@ export default {
     // 初始化数据
     getList () {
       this.loading = true
-      this.axios.post('/system/user/page?current=' + this.current + '&size=' + this.size, this.queryParam).then(data => {
+      this.axios.post(`/system/user/page?current=${this.current}&size=${this.size}`, this.queryParam).then(data => {
         this.loading = false
         this.dataList = data.list
         this.total = data.total - 0
@@ -379,7 +382,6 @@ export default {
 .head * {
   margin: 0 8px 8px 0;
 }
-
 .button {
   margin: 0 0 15px 0;
   display: flex;

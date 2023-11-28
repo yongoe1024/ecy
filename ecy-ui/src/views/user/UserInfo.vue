@@ -2,24 +2,24 @@
   <div class="box">
     <el-page-header @back="$router.back()"
                     style="margin-bottom:30px"
-                    content="用户信息"></el-page-header>
+                    content="个人信息"></el-page-header>
     <el-form ref="form"
              style="margin:20px"
              label="right"
              label-width="auto"
              :rules="rules"
              :model="form">
-      <el-form-item label="头像:">
-        <el-upload :action="uploadURL"
-                   :headers="headers"
-                   :show-file-list="false"
-                   :on-success="onSuccess">
-          <img style="width:150px;"
+      <el-upload :action="uploadURL"
+                 :headers="headers"
+                 :show-file-list="false"
+                 :on-success="onSuccess">
+        <div class="user-info-img">
+          <img style="width:100px;height:100px;"
                @error="setDefaultImage"
                :src="form.avatar" />
-        </el-upload>
-        <div style="color:white;position:relative;bottom:48px;background-color: rgb(255,255,255,0.5);">&emsp;&emsp;点击修改头像&emsp;&emsp;&emsp;</div>
-      </el-form-item>
+        </div>
+      </el-upload>
+      <el-divider></el-divider>
       <el-form-item label="角色:">
         <el-tag v-for="(role, index) in form.roleList"
                 :key="index">{{ role.name }} </el-tag>
@@ -124,12 +124,28 @@ export default {
   margin: 20px auto;
   width: 50%;
   min-height: 70%;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.2);
+  padding: 20px;
 }
-.box-card {
-  width: 500px;
+.user-info-img {
+  position: relative;
+  display: inline-block;
+  border: 2px solid #e9e4e4;
 }
-.login-box {
-  margin: 0 auto;
-  width: 320px;
+.user-info-img:hover:after {
+  content: "+";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  color: #eee;
+  background: rgba(0, 0, 0, 0.5);
+  font-size: 24px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  cursor: pointer;
+  line-height: 100px;
 }
 </style>
