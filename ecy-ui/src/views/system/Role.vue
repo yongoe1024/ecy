@@ -1,140 +1,271 @@
 <template>
   <div>
-    <div style="display: flex;">
-      <el-input class="addInput"
-                placeholder="请输入角色代码"
-                v-model="form.code"> </el-input>
-      <el-input class="addInput"
-                v-model="form.name"
-                placeholder="请输入中文名"
-                @keydown.enter.native="handleAddRole"></el-input>
-      <el-button size="small"
-                 type="primary"
-                 icon="el-icon-plus"
-                 @click="handleAddRole">添加角色</el-button>
+    <!-- 搜索 -->
+    <div class="head">
+      <el-input v-model="queryParam.code"
+                size="small"
+                prefix-icon="el-icon-search"
+                placeholder="请输入角色代码"></el-input>
+      <el-input v-model="queryParam.name"
+                size="small"
+                prefix-icon="el-icon-search"
+                placeholder="请输入中文名"></el-input>
+    </div>
+    <!-- 按钮 -->
+    <div class="button">
+      <el-button type="primary"
+                 size="mini"
+                 plain
+                 icon="el-icon-search"
+                 @click="getList">搜索</el-button>
+      <el-button size="mini"
+                 plain
+                 icon="el-icon-refresh"
+                 @click="resetQuery">重置</el-button>
+      <el-button type="success"
+                 size="mini"
+                 plain
+                 @click="handleShowAddEdit"
+                 icon="el-icon-plus">添加</el-button>
     </div>
 
-    <!-- 手风琴折叠面板 -->
-    <el-collapse accordion
-                 style="width:500px;margin:8px"
-                 @change="handleCollapseChange"
-                 v-model="activeName">
-      <el-collapse-item :title="r.name"
-                        :name="r.id"
-                        v-for="(r, index) in roleList"
-                        :key="index">
-        <el-card>
-          <!-- 卡片头 -->
-          <div slot="header"
-               class="clearfix">
-            <span>可访问资源</span>
-            <el-button style="float: right; padding: 3px 0; color: #ff0000"
-                       type="text"
-                       icon="el-icon-delete"
-                       @click="handleDeleteRole(r)"></el-button>
-          </div>
+    <!-- 表格 -->
+    <el-table v-loading="loading"
+              :data="roleList"
+              style="width: 100%"
+              :header-cell-style="{background:'#eef1f6'}">
+      <el-table-column align="center"
+                       type="index"></el-table-column>
+      <el-table-column prop="code"
+                       label="角色代码"
+                       align="center"></el-table-column>
+      <el-table-column prop="name"
+                       label="中文名"
+                       align="center"></el-table-column>
+      <el-table-column label="操作"
+                       align="center"
+                       fixed="right">
+        <template slot-scope="scope">
 
-          <!-- 树形 -->
-          <!-- :check-strictly="checkStrictly" -->
-          <div>
-            <el-tree ref="tree"
-                     :default-expand-all="true"
-                     :key="index"
-                     show-checkbox
-                     :default-checked-keys="r.menuIds"
-                     :data="menuList"
-                     :check-strictly="true"
-                     :props="{children:'children',label:'name'}"
-                     node-key="id"></el-tree>
-            <div style="display:flex;justify-content:flex-end">
-              <el-button size="mini"
-                         @click="activeName = ''">取消</el-button>
-              <el-button size="mini"
-                         type="primary"
-                         @click="handleUpdate(r.id, index)">确认修改</el-button>
-            </div>
-          </div>
-        </el-card>
-      </el-collapse-item>
-    </el-collapse>
+          <el-button type="text"
+                     size="mini"
+                     icon="el-icon-edit"
+                     @click="handleShowUpdateEdit(scope.row)">编辑</el-button>
+          <el-button type="text"
+                     size="mini"
+                     icon="el-icon-delete"
+                     @click="handleDelete(scope.row)">删除</el-button>
+          <el-button type="text"
+                     size="mini"
+                     @click="handleRoleMenuEdit(scope.row)">菜单权限</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+
+    <!-- 分页 -->
+    <el-pagination background
+                   style="display:flex;justify-content:center;"
+                   @size-change="handleSizeChange"
+                   @current-change="handleCurrentChange"
+                   :page-size="size"
+                   layout="total, sizes, prev, pager, next, jumper"
+                   :total="total"></el-pagination>
+
+    <el-dialog :visible.sync="dialogVisible"
+               :title="dialogTitle"
+               @close="reset"
+               :close-on-click-modal="false"
+               width="600px">
+      <el-form ref="form"
+               :model="form"
+               label-width="auto"
+               style="margin:20px"
+               :rules="rules">
+        <el-form-item label="角色代码"
+                      prop="code">
+          <el-input v-model="form.code"
+                    :disabled="form.id"
+                    placeholder="请输入角色代码" />
+        </el-form-item>
+        <el-form-item label="中文名"
+                      prop="name">
+          <el-input v-model="form.name"
+                    placeholder="请输入中文名" />
+        </el-form-item>
+      </el-form>
+      <span slot="footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary"
+                   @click="handleAddOrUpdate">确 定</el-button>
+      </span>
+    </el-dialog>
+
+    <!-- 编辑菜单权限 -->
+    <el-dialog v-if="dialogVisibleMenu"
+               :visible.sync="dialogVisibleMenu"
+               title="菜单权限"
+               :close-on-click-modal="false"
+               width="60%">
+      <el-form label-width="auto"
+               style="margin:20px">
+        <el-form-item label="菜单">
+          <!-- 树 -->
+          <el-tree ref="tree"
+                   :check-strictly="treeCheckStrictly"
+                   :default-expand-all="true"
+                   show-checkbox
+                   :default-checked-keys="form.menuIds"
+                   :data="menuList"
+                   :props="{children:'children',label:'name'}"
+                   node-key="id"></el-tree>
+        </el-form-item>
+        <el-form-item>
+          <el-button size="mini"
+                     type="primary"
+                     @click="handlMenuUpdate()">确认修改</el-button></el-form-item>
+      </el-form>
+      <span slot="footer">
+        <el-button @click="dialogVisibleMenu = false">关闭</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 export default {
+  components: {},
+  props: {},
   data () {
     return {
-      // 手风琴默认打开位置
-      activeName: '',
-      checkStrictly: true,
+      total: 0,
+      current: 1,
+      size: 10,
+      loading: false,
+
+      dialogVisible: false,
+      dialogVisibleMenu: false,
+      dialogTitle: '',
+
+      treeCheckStrictly: true,
+
       menuList: [],
       roleList: [],
       form: {
-        name: '',
-        code: '',
+        id: null,
+        code: null,
+        name: null,
+        menuIds: [],
+      },
+      queryParam: {
+        id: null,
+        code: null,
+        name: null,
+      },
+      rules: {
+        code: [{ required: true, message: '请输入角色代码', trigger: 'change' }],
+        name: [{ required: true, message: '请输入中文名', trigger: 'change' }],
       },
     }
   },
   mounted () {
-    this.initAllRoles()
-    this.initAllMenus()
+    this.getList()
+    this.getMenus()
   },
   methods: {
-    handleConnect () {
-      this.checkStrictly = !this.checkStrictly
-    },
-    handleCollapseChange () {
-      this.initAllRoles()
-    },
-    //删除角色
-    handleDeleteRole (role) {
-      this.$confirm('此操作将永久删除[' + role.name + ']角色, 是否继续?', '提示', { type: 'warning' }).then(() => {
-        this.axios.post('/system/role/delete/' + role.id).then(() => this.initAllRoles()).catch(e => { })
-      }).catch(e => { })
-    },
-    //添加角色
-    handleAddRole () {
-      if (this.form.name && this.form.code) {
-        this.axios.post('/system/role/add', this.form).then(() => {
-          this.initAllRoles()
-          this.form.name = ''
-          this.form.code = ''
-        }).catch(e => { })
-      } else {
-        this.$message.error('字段不能为空')
-      }
-    },
-    //更新 角色-菜单 index为折叠面板的id
-    handleUpdate (rid, index) {
-      let tree = this.$refs.tree[index]
-      //  父节点与子节点 ，传入的时候无关联
+    handlMenuUpdate () {
+      let tree = this.$refs.tree
+      //  父节点与子节点 ，传入的时候无关联，1. 是否只是叶子节点，默认值为 false 2. 是否包含半选节点，默认值为 false
       let selectedKeys = tree.getCheckedNodes(false, true)
       let menuIds = selectedKeys.map(item => item.id)
-      let url = '/system/role/menu/update?roleId=' + rid + '&menuIds=' + menuIds
-      this.axios.post(url)
+      let url = `/system/role/menu/update?roleId=${this.form.id}&menuIds=${menuIds}`
+      this.axios.post(url).then(() => {
+        // this.getList()
+      }).catch(e => { })
     },
-    // 查询全部菜单
-    initAllMenus () {
+    handleRoleMenuEdit (row) {
+      this.dialogVisibleMenu = true
+      Object.assign(this.form, row)
+    },
+    reset () {
+      this.form = this.$options.data().form
+    },
+    resetQuery () {
+      this.queryParam = this.$options.data().queryParam
+    },
+    // 改变页码
+    handleSizeChange (val) {
+      this.size = val
+      this.getList()
+    },
+    // 点击页数
+    handleCurrentChange (val) {
+      this.current = val
+      this.getList()
+    },
+    handleShowAddEdit () {
+      this.dialogTitle = '添加'
+      this.dialogVisible = true
+    },
+    handleShowUpdateEdit (row) {
+      this.dialogTitle = '修改'
+      Object.assign(this.form, row)
+      this.dialogVisible = true
+    },
+    handleAddOrUpdate () {
+      this.$refs.form.validate((valid) => {
+        if (valid) {
+          if (this.form.id) {
+            this.axios.post('/system/role/update', this.form).then(() => {
+              this.getList()
+              this.dialogVisible = false
+            }).catch(e => { })
+          } else {
+            this.axios.post('/system/role/add', this.form).then(() => {
+              this.getList()
+              this.dialogVisible = false
+            }).catch(e => { })
+          }
+        }
+      })
+    },
+    handleDelete (row) {
+      this.$confirm('此操作将永久删除[' + row.name + ']角色, 是否继续?', '提示', { type: 'warning' }).then(() => {
+        this.axios.post('/system/role/delete/' + row.id).then(() => this.initAllRoles()).catch(e => { })
+      }).catch(e => { })
+    },
+    // 初始化菜单数据
+    getMenus () {
       this.axios.post('/system/menu/tree').then(data => this.menuList = data).catch(e => { })
     },
-    // 查询 全部角色
-    initAllRoles () {
-      this.checkStrictly = true
-      this.axios.post('/system/role/list').then(data => {
-        this.roleList = data
-        this.$nextTick(() => this.checkStrictly = false)
-      }).catch(e => { })
+    // 初始化数据
+    getList () {
+      this.loading = true
+      this.axios.post(`/system/role/page?current=${this.current}&size=${this.size}`, this.queryParam).then(data => {
+        this.loading = false
+        this.roleList = data.list
+        this.total = data.total - 0
+      }).catch(e => this.loading = false)
     },
   },
 }
-
 </script>
 <style scoped>
-.addInput {
-  width: 250px;
-  margin-right: 6px;
+.head {
+  display: flex;
+  flex-wrap: wrap;
 }
-.card {
-  width: 500px;
+.head .el-input {
+  width: 200px !important;
+}
+.head * {
+  margin: 0 8px 8px 0;
+}
+
+.button {
+  margin: 0 0 15px 0;
+  display: flex;
+}
+.button * {
+  margin: 0 8px 0 0;
 }
 </style>

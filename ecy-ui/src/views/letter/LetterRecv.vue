@@ -26,11 +26,9 @@
     <!-- 按钮 -->
     <div class="button">
       <el-button type="text"
-                 size="small"
                  icon="el-icon-search"
                  @click="getList">搜索</el-button>
       <el-button type="text"
-                 size="small"
                  icon="el-icon-refresh"
                  @click="resetQuery">重置</el-button>
     </div>

@@ -1,17 +1,22 @@
 import axios from '@/utils/request'
 
+var flag = true
 export default (router, store) => {
-
-  if (store.getters.getRoutes.length == 0) {
-    //防止无限请求，一秒一次
-    axios.post('/user/menu').then(data => {
-      //格式化
-      let fmtRoutes = formatRoutes(data)
-      fmtRoutes.forEach(x => router.addRoute(x))
-      //存入vuex
-      store.commit('initRoutes', fmtRoutes)
-    }).catch(() => {
-    })
+  if (flag) {
+    flag = false
+    if (store.getters.getRoutes.length == 0) {
+      //防止无限请求，一秒一次
+      axios.post('/user/menu').then(data => {
+        //格式化
+        let fmtRoutes = formatRoutes(data)
+        fmtRoutes.forEach(x => router.addRoute(x))
+        //存入vuex
+        store.commit('initRoutes', fmtRoutes)
+        flag = true
+      }).catch(() => {
+        flag = true
+      })
+    }
   }
 }
 

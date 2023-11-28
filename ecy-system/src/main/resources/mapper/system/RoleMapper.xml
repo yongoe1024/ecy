@@ -11,12 +11,21 @@
         </collection>
     </resultMap>
 
-    <select id="getList" resultMap="BaseResultMap">
+    <select id="getRoleByPage" resultMap="BaseResultMap">
         select a.*,
-               b.menu_id as rmenu_id
+        b.menu_id as rmenu_id
         from sys_role a
-                 left join sys_role_menu b on a.id = b.role_id
-        where a.id != 1
+        left join sys_role_menu b on a.id = b.role_id
+        <where>
+            a.id != 1
+            <if test="null != role.name and ''!=role.name">
+                and name LIKE CONCAT('%',#{role.name},'%')
+            </if>
+            <if test="null != role.code and ''!=role.code">
+                and code LIKE CONCAT('%',#{role.code},'%')
+            </if>
+        </where>
+
     </select>
 
 </mapper>

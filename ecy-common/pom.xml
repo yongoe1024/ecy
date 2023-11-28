@@ -12,11 +12,11 @@
     <artifactId>ecy-common</artifactId>
 
     <dependencies>
-        <!--    easy poi    -->
+
         <dependency>
             <groupId>cn.afterturn</groupId>
-            <artifactId>easypoi-spring-boot-starter</artifactId>
-            <version>4.4.0</version>
+            <artifactId>easypoi-base</artifactId>
+            <version>4.1.0</version>
         </dependency>
     </dependencies>
 

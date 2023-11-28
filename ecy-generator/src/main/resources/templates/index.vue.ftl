@@ -3,7 +3,7 @@
     <div>
         <!-- 搜索 -->
         <#if get>
-        <div class="head" v-auth="'查'">
+        <div v-auth="'查'" class="head">
             <#list table.fields as field>
             <#if field.keyFlag || myParam?seq_contains(field.name)>
             <#elseif  field.propertyType == "Boolean">
@@ -24,10 +24,10 @@
                             size="small"
                             placeholder="${field.comment}"></el-date-picker>
             <#else>
-            <el-input size="small"
+            <el-input v-model="queryParam.${field.propertyName}"
+                      size="small"
                       prefix-icon="el-icon-search"
-                      placeholder="请输入${field.comment}"
-                      v-model="queryParam.${field.propertyName}"></el-input>
+                      placeholder="请输入${field.comment}"></el-input>
             </#if>
             </#list>
         </div>
@@ -35,36 +35,36 @@
         <!-- 按钮 -->
         <div class="button">
             <#if get><el-button type="primary" v-auth="'查'"
-                       size="small"
+                       size="mini" plain
                        icon="el-icon-search"
                        @click="getList">搜索</el-button></#if>
-            <#if get><el-button type="primary" v-auth="'查'"
-                       size="small"
+            <#if get><el-button v-auth="'查'"
+                       size="mini" plain
                        icon="el-icon-refresh"
                        @click="resetQuery">重置</el-button></#if>
-            <#if add><el-button type="primary" v-auth="'增'"
-                       size="small"
+            <#if add><el-button type="success" v-auth="'增'"
+                       size="mini" plain
                        @click="handleShowAddEdit"
                        icon="el-icon-plus">添加</el-button></#if>
-            <#if upload><upload size="small" url="/${packageName}/${entity?lower_case}/upload" v-auth="'导入'"
-                    @success="getList"></upload></#if>
-            <#if export><el-button type="success" v-auth="'导出'"
-                       icon="el-icon-download"
-                       size="small"
-                       @click="handleExport">导出数据</el-button></#if>
+            <#if upload><e-upload size="mini"
+                                v-auth="'导入'"
+                                url="/${packageName}/${entity?lower_case}/upload"
+                                @success="getList"></e-upload></#if>
+            <#if export><el-button type="warning"
+                                   v-auth="'导出'"
+                                   icon="el-icon-download" plain
+                                   size="mini"
+                                   @click="handleExport">导出数据</el-button></#if>
         </div>
 
         <!-- 表格 -->
         <el-table v-loading="loading"
-                  element-loading-text="拼命加载中"
-                  element-loading-spinner="el-icon-loading"
-                  element-loading-background="rgba(0, 0, 0, 0.8)"
                   :data="dataList"
-                  stripe
-                  border
                   style="width: 100%"
+                  :header-cell-style="{background:'#eef1f6'}"
                   @selection-change="handleSelectionChange">
-            <el-table-column type="selection"
+            <el-table-column align="center"
+                             type="selection"
                              width="55"></el-table-column>
             <el-table-column align="center"
                              type="index"></el-table-column>
@@ -95,11 +95,15 @@
                              width="140"
                              fixed="right">
                 <template slot-scope="scope">
-                    <#if update><el-button style="padding: 3px" v-auth="'改'"
-                               type="primary"
+                    <#if update><el-button v-auth="'改'"
+                                type="text"
+                                size="mini"
+                                icon="el-icon-edit"
                                @click="handleShowUpdateEdit(scope.row)">编辑</el-button></#if>
-                    <#if delete><el-button style="padding: 3px" v-auth="'删'"
-                               type="danger"
+                    <#if delete><el-button v-auth="'删'"
+                                type="text"
+                                size="mini"
+                                icon="el-icon-delete"
                                @click="handleDelete(scope.row)">删除</el-button></#if>
                 </template>
             </el-table-column>
@@ -291,11 +295,11 @@ export default {
         // 初始化数据
         getList() {
             this.loading = true
-            this.axios.post('/${packageName}/${entity?lower_case}/page?current=' + this.current + '&size=' + this.size, this.queryParam).then(data => {
+            this.axios.post(`/${packageName}/${entity?lower_case}/page?current=${this.current}&size=${this.size}`, this.queryParam).then(data => {
                 this.loading = false
                 this.dataList = data.list
                 this.total = data.total - 0
-            }).catch(e => this.loading = true )
+            }).catch(e => this.loading = false )
         },
     },
 }

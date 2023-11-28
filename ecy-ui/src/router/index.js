@@ -28,7 +28,7 @@ const routes = [
     component: () => import('@/views/oauth/QQ'),
   },
   {
-    path: '/index',
+    path: '/frame',
     name: '页面框架',
     component: () => import('@/views/Index'),
     children: [
@@ -36,11 +36,6 @@ const routes = [
         path: '/index',
         name: '首页',
         component: () => import('@/views/Home'),
-      },
-      {
-        path: '/test',
-        name: '测试',
-        component: () => import('@/views/Test'),
       },
       {
         path: '/userinfo',
@@ -62,12 +57,13 @@ const routes = [
         name: '信件详情',
         component: () => import('@/views/letter/LetterInfo'),
       },
+      {
+        path: '/test',
+        name: '测试',
+        component: () => import('@/views/Test'),
+      },
     ]
   },
-  {
-    path: '*',
-    component: () => import('@/views/404'),
-  }
 ]
 
 const router = new VueRouter({

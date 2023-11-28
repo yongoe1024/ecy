@@ -9,7 +9,8 @@
                :action="$BASE_URL + url">
       <el-button :icon="uploadButtonIcon"
                  :size="size"
-                 type="primary">{{uploadButtonText}}</el-button>
+                 type="info"
+                 plain>{{uploadButtonText}}</el-button>
     </el-upload>
   </div>
 </template>

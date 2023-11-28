@@ -1,6 +1,7 @@
 package com.yongoe.ecy.system.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yongoe.ecy.system.controller.vo.req.RoleReq;
 import com.yongoe.ecy.system.controller.vo.res.RoleRes;
 import com.yongoe.ecy.system.convert.RoleConvert;
@@ -10,6 +11,7 @@ import com.yongoe.ecy.system.entity.UserRole;
 import com.yongoe.ecy.system.mapper.RoleMenuMapper;
 import com.yongoe.ecy.system.mapper.UserRoleMapper;
 import com.yongoe.ecy.system.service.RoleService;
+import com.yongoe.ecy.utils.PageUtils;
 import com.yongoe.ecy.utils.R;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -40,9 +42,18 @@ public class RoleController {
     @Operation(summary = "查询数据")
     @PostMapping("/list")
     public R list() {
-        List<Role> list = roleService.getList();
-        List<RoleRes> resList = convert.entity2Res(list);
+        Page<Role> list = roleService.getRoleByPage(Page.of(-1, -1), new Role());
+        List<RoleRes> resList = convert.entity2Res(list.getRecords());
         return R.success().put(resList);
+    }
+
+    @Operation(summary = "查询分页数据")
+    @PostMapping("/page")
+    public R list(Long current, Long size, @RequestBody RoleReq roleReq) {
+        Role role = convert.req2Entity(roleReq);
+        Page<Role> list = roleService.getRoleByPage(Page.of(current, size), role);
+        Page<RoleRes> roleResPage = convert.entity2ResPage(list);
+        return R.success().put(new PageUtils(roleResPage));
     }
 
     @Operation(summary = "根据角色id 修改菜单id")
