@@ -1,12 +1,12 @@
 <template>
   <div class="root">
 
-    <div class="login">
+    <div class="right-box">
       <el-form v-loading="loading"
                :rules="rules"
                ref="form"
                :model="form"
-               class="login-box">
+               style="width: 320px;">
         <h1 class="titleText">{{$TITLE}}</h1>
 
         <el-form-item prop="username">
@@ -109,18 +109,16 @@ export default {
 <style scoped>
 .root {
   height: 100%;
-  position: absolute;
   width: 100%;
+  position: absolute;
   background-image: url("../assets/back.jpg");
   background-size: 100% 100%;
 }
 .titleText {
-  text-align: left;
-  color: rgb(0, 0, 0);
   font-size: 20px;
   font-family: 楷体;
 }
-.login {
+.right-box {
   float: right;
   height: 100%;
   width: 450px;
@@ -128,9 +126,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-.login-box {
-  width: 320px;
 }
 .end {
   display: flex;

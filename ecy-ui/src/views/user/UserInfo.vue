@@ -22,14 +22,16 @@
         <el-form ref="form"
                  label="right"
                  label-width="auto">
-          <el-row :gutter="20"> <el-col :span="12">
+          <el-row>
+            <el-col :span="12">
               <el-form-item label="角色:">
                 <el-tag v-for="(role, index) in form.roleList"
+                        style="margin-right:5px"
                         :key="index">{{ role.name }} </el-tag>
-              </el-form-item></el-col>
+              </el-form-item>
+            </el-col>
           </el-row>
-
-          <el-row :gutter="20">
+          <el-row>
             <el-col :span="12">
               <el-form-item label="账号:"
                             prop="username">
@@ -43,7 +45,6 @@
               </el-form-item>
             </el-col>
           </el-row>
-
         </el-form>
       </el-col>
     </el-row>
@@ -144,9 +145,8 @@ export default {
 </script>
 <style scoped>
 .box {
-  margin: 20px auto;
+  margin: 0 auto;
   width: 50%;
-  min-height: 70%;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.2);
   padding: 20px;
 }

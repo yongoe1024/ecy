@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-    <el-card class="box-card">
+    <el-card style="width: 500px;">
       <el-form :rules="rules"
                ref="form"
                :model="form"
@@ -80,17 +80,18 @@ export default {
 </script>
 <style scoped>
 .box {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-image: url("../../assets/back.jpg");
+  background-size: 100% 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-}
-.box-card {
-  width: 500px;
 }
 .login-box {
   margin: 0 auto;
-  width: 320px;
+  padding: 20px;
 }
 </style>
 

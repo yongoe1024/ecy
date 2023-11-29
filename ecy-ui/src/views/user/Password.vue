@@ -1,24 +1,24 @@
 <template>
   <div class="box">
-    <el-page-header @back="$router.back()"
-                    style="margin-bottom:30px"
-                    content="修改密码"></el-page-header>
-    <el-form :rules="rules"
-             ref="form"
-             :model="form"
-             class="login-box">
+    <div class="form-box">
+      <el-page-header @back="$router.back()"
+                      style="margin-bottom:30px"
+                      content="修改密码"></el-page-header>
+      <el-form :rules="rules"
+               ref="form"
+               :model="form">
+        <el-form-item prop="password"
+                      label="新密码">
+          <el-input v-model="form.password"> </el-input>
+        </el-form-item>
 
-      <el-form-item prop="password"
-                    label="新密码">
-        <el-input v-model="form.password"> </el-input>
-      </el-form-item>
-
-      <el-form-item>
-        <el-button style="width: 100%"
-                   type="primary"
-                   @click="update">修改密码</el-button>
-      </el-form-item>
-    </el-form>
+        <el-form-item>
+          <el-button style="width: 100%"
+                     type="primary"
+                     @click="update">修改密码</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
   </div>
 </template>
 
@@ -52,11 +52,12 @@ export default {
 </script>
 <style scoped>
 .box {
-  margin: 8% auto;
-  width: 40%;
-  height: 300px;
+  display: flex;
+  justify-content: center;
 }
-.login-box {
-  margin: 0 10%;
+.form-box {
+  margin-top: 10%;
+  width: 400px;
+  height: 300px;
 }
 </style>

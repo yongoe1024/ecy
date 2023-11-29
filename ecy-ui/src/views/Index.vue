@@ -1,7 +1,7 @@
 <template>
   <!-- 页面主体 -->
   <div>
-    <el-container style=" height:100vh">
+    <el-container style="height:100vh">
       <el-aside :width="isCollapse?'64px':'200px'">
         <!-- 启动路由模式 只打开一个菜单 -->
         <el-menu router
@@ -11,11 +11,9 @@
                  class="el-menu-vertical"
                  background-color="#3e506b"
                  text-color="#FFFFFF"
-                 active-text-color="#0080ff"
                  :default-active="path"
                  unique-opened>
-          <el-menu-item index="/index"
-                        class="el-menu-item2">
+          <el-menu-item index="/index">
             <i class="fa fa-home"
                style="margin-left:3px;color:#FFFFFF;font-size:23px"></i>
             <span style="margin-left:20px;font-size:15px">首页</span>
@@ -36,7 +34,7 @@
                           :key="indexj"
                           v-show="children.isShow">
               <i :class="children.icon"
-                 style="color: #FFFFFF;font-size:15px"></i>
+                 style="color:#FFFFFF;font-size:15px"></i>
               <span style="font-size:15px">{{ children.name }}</span>
             </el-menu-item>
           </el-submenu>
@@ -45,26 +43,24 @@
 
       <el-container>
         <!-- 页头 -->
-        <el-header class="homeHeader "
+        <el-header class="homeHeader"
                    height="50px">
-          <div class="homeHeaderLeft">
+          <div>
             <i class="el-icon-s-fold"
                style="font-size:25px;cursor:pointer;"
-               @click="collapse"></i>
+               @click="isCollapse=!isCollapse"></i>
             <!-- 面包屑 -->
-            <div style="margin-left:10px">
-              <el-breadcrumb>
-                <el-breadcrumb-item>首页</el-breadcrumb-item>
-                <el-breadcrumb-item v-if="$router.currentRoute.path != '/index'">{{$router.currentRoute.name }}</el-breadcrumb-item>
-              </el-breadcrumb>
-            </div>
+            <el-breadcrumb>
+              <el-breadcrumb-item>首页</el-breadcrumb-item>
+              <el-breadcrumb-item v-if="$router.currentRoute.path != '/index'">{{$router.currentRoute.name }}</el-breadcrumb-item>
+            </el-breadcrumb>
           </div>
 
-          <div class="homeHeaderLeft">
-            <letter-icon style="margin:0 20px"></letter-icon>
-            <el-dropdown class="userinfo"
-                         @command="handleCommand">
+          <div>
+            <letter-icon></letter-icon>
+            <el-dropdown @command="handleCommand">
               <img :src="user.avatar"
+                   class="userimg"
                    @error="setDefaultImage" />
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item command="userinfo">个人中心</el-dropdown-item>
@@ -76,10 +72,12 @@
         </el-header>
         <!-- 主体内容 -->
         <el-main>
+
           <keep-alive>
             <router-view />
           </keep-alive>
         </el-main>
+
       </el-container>
     </el-container>
   </div>
@@ -117,9 +115,6 @@ export default {
       e.target.src = this.imgUrl
       e.target.onerror = null
     },
-    collapse () {
-      this.isCollapse = !this.isCollapse
-    },
     // 头像个人信息
     handleCommand (command) {
       if (command == 'userinfo') {
@@ -142,6 +137,37 @@ export default {
 };
 </script>
 <style >
+.homeHeader {
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.3);
+  background: #fbfbfb;
+}
+.homeHeader * {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5px;
+}
+.userimg {
+  width: 42px;
+  height: 42px;
+  border-radius: 45%;
+  border: 1px solid #c0bbbb;
+  cursor: pointer;
+}
+.el-menu-vertical:not(.el-menu--collapse) {
+  width: 200px;
+}
+.el-aside {
+  transition: width 0.3s;
+  -webkit-transition: width 0.3s;
+  -moz-transition: width 0.3s;
+  -webkit-transition: width 0.3s;
+  -o-transition: width 0.3s;
+  color: #76bdda;
+}
+/* 
 .el-submenu__title {
   display: flex;
   align-items: center;
@@ -160,46 +186,7 @@ export default {
   white-space: normal;
   line-height: 20px;
 }
-.homeHeader {
-  display: flex;
-  justify-content: space-between;
-  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.3);
-  background: #f3f3f6;
-}
-.homeHeaderLeft {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.userinfo {
-  cursor: pointer;
-  margin-top: 3px;
-  margin-right: 50px;
-  color: #3e506b;
-}
-.userinfo img {
-  width: 42px;
-  height: 42px;
-  border-radius: 45%;
-  border: 1px solid #c0bbbb;
-}
-/*.el-menu-item { 子选项背景
-  background-color: #3f4761 !important;
-}*/
-.el-menu-item2 {
-  background-color: #3e506b !important;
-}
 .el-menu {
   border-right-width: 0 !important;
-}
-.el-menu-vertical:not(.el-menu--collapse) {
-  width: 200px;
-}
-.el-aside {
-  transition: width 0.5s;
-  -webkit-transition: width 0.5s;
-  -moz-transition: width 0.5s;
-  -webkit-transition: width 0.5s;
-  -o-transition: width 0.5s;
-}
+} */
 </style>
