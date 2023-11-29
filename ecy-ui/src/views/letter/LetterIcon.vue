@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="display:inline;">
     <el-popover placement="bottom"
                 width="300"
                 trigger="click">
@@ -33,9 +33,8 @@
       <el-badge :value="num"
                 slot="reference">
         <i class="el-icon-message"
-           style="font-size:25px;margin-bottom:20px;cursor: pointer;"></i>
+           style="font-size:25px;cursor: pointer;"></i>
       </el-badge>
-
     </el-popover>
   </div>
 </template>
@@ -73,7 +72,6 @@ export default {
 .letter {
   padding: 4px;
   border-bottom: 1px solid #ddd;
-  cursor: pointer;
 }
 .letter .content {
   display: flex;

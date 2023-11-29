@@ -55,7 +55,6 @@ public class MailUtils {
      * @throws Exception 失败异常
      */
     public void sendMail(String to, String subject, String content, Boolean isHtml) throws Exception {
-        init();
         MimeMessage msg = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(msg);
         //发件人
@@ -84,7 +83,6 @@ public class MailUtils {
      * @throws Exception 失败异常
      */
     public void sendMail(String to, String subject, String template, Map<Objects, Object> map, Boolean isHtml) throws Exception {
-        init();
         MimeMessage msg = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(msg);
         //发件人

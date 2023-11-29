@@ -45,9 +45,9 @@
 
       <el-container>
         <!-- 页头 -->
-        <el-header class="homeHeader"
+        <el-header class="homeHeader "
                    height="50px">
-          <div class="mianbaoxie">
+          <div class="homeHeaderLeft">
             <i class="el-icon-s-fold"
                style="font-size:25px;cursor:pointer;"
                @click="collapse"></i>
@@ -59,8 +59,9 @@
               </el-breadcrumb>
             </div>
           </div>
-          <div>
-            <letter-icon style="margin-right:20px;display:inline; "></letter-icon>
+
+          <div class="homeHeaderLeft">
+            <letter-icon style="margin:0 20px"></letter-icon>
             <el-dropdown class="userinfo"
                          @command="handleCommand">
               <img :src="user.avatar"
@@ -163,8 +164,9 @@ export default {
   display: flex;
   justify-content: space-between;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.3);
+  background: #f3f3f6;
 }
-.mianbaoxie {
+.homeHeaderLeft {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -179,6 +181,7 @@ export default {
   width: 42px;
   height: 42px;
   border-radius: 45%;
+  border: 1px solid #c0bbbb;
 }
 /*.el-menu-item { 子选项背景
   background-color: #3f4761 !important;

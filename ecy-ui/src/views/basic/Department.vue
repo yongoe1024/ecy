@@ -67,12 +67,12 @@
                label-width="auto"
                style="margin:20px"
                :rules="rules">
-        <el-form-item label="父部门"
+        <el-form-item label="上级部门"
                       prop="parentId">
-          <Tree :data="dataList"
-                v-model="form.parentId"
-                :tree_props="{ children: 'children', label: 'name', keyname: 'id' }"
-                placeholder="请选择父部门"></Tree>
+          <e-input-tree :data="dataList"
+                        v-model="form.parentId"
+                        :tree_props="{ children: 'children', label: 'name', keyname: 'id' }"
+                        placeholder="请选择上级部门"></e-input-tree>
         </el-form-item>
         <el-form-item label="部门名称"
                       prop="name">
@@ -109,7 +109,6 @@
 
 <script>
 export default {
-  props: {},
   data () {
     return {
       loading: false,

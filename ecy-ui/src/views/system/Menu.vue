@@ -23,6 +23,7 @@
               :header-cell-style="{background:'#eef1f6'}">
       <el-table-column prop="name"
                        width="150"
+                       align="center"
                        label="菜单名"></el-table-column>
       <el-table-column prop="type"
                        label="类型"
@@ -100,6 +101,13 @@
                label-width="auto"
                style="margin:20px"
                :rules="rules">
+        <el-form-item label="上级菜单"
+                      prop="parentId">
+          <e-input-tree :data="dataList"
+                        v-model="form.parentId"
+                        :tree_props="{ children: 'children', label: 'name', keyname: 'id' }"
+                        placeholder="请选择上级菜单"></e-input-tree>
+        </el-form-item>
         <el-form-item label="菜单名"
                       prop="name">
           <el-input v-model="form.name"
@@ -115,13 +123,6 @@
                        :value="item.type">
             </el-option>
           </el-select>
-        </el-form-item>
-        <el-form-item label="父菜单"
-                      prop="parentId">
-          <e-input-tree :data="dataList"
-                        v-model="form.parentId"
-                        :tree_props="{ children: 'children', label: 'name', keyname: 'id' }"
-                        placeholder="请选择父菜单"></e-input-tree>
         </el-form-item>
         <el-form-item label="组件位置"
                       prop="component">

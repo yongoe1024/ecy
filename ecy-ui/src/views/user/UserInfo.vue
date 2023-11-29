@@ -3,54 +3,77 @@
     <el-page-header @back="$router.back()"
                     style="margin-bottom:30px"
                     content="个人信息"></el-page-header>
+    <el-row :gutter="20">
+      <el-col :offset="1"
+              :span="6">
+        <el-upload :action="uploadURL"
+                   :headers="headers"
+                   :show-file-list="false"
+                   :on-success="onSuccess">
+          <div class="user-info-img">
+            <img style="width:100px;height:100px;"
+                 @error="setDefaultImage"
+                 :src="form.avatar" />
+          </div>
+        </el-upload>
+      </el-col>
+
+      <el-col :span="16">
+        <el-form ref="form"
+                 label="right"
+                 label-width="auto">
+          <el-row :gutter="20"> <el-col :span="12">
+              <el-form-item label="角色:">
+                <el-tag v-for="(role, index) in form.roleList"
+                        :key="index">{{ role.name }} </el-tag>
+              </el-form-item></el-col>
+          </el-row>
+
+          <el-row :gutter="20">
+            <el-col :span="12">
+              <el-form-item label="账号:"
+                            prop="username">
+                {{form.username}}
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="姓名:"
+                            prop="name">
+                {{form.name}}
+              </el-form-item>
+            </el-col>
+          </el-row>
+
+        </el-form>
+      </el-col>
+    </el-row>
+    <el-divider></el-divider>
     <el-form ref="form"
              style="margin:20px"
              label="right"
              label-width="auto"
              :rules="rules"
              :model="form">
-      <el-upload :action="uploadURL"
-                 :headers="headers"
-                 :show-file-list="false"
-                 :on-success="onSuccess">
-        <div class="user-info-img">
-          <img style="width:100px;height:100px;"
-               @error="setDefaultImage"
-               :src="form.avatar" />
-        </div>
-      </el-upload>
-      <el-divider></el-divider>
-      <el-form-item label="角色:">
-        <el-tag v-for="(role, index) in form.roleList"
-                :key="index">{{ role.name }} </el-tag>
-      </el-form-item>
-      <el-form-item label="账号:"
-                    prop="username">
-        {{form.username}}
-      </el-form-item>
-      <el-form-item label="姓名:"
-                    prop="name">
-        {{form.name}}
-      </el-form-item>
-      <el-form-item label="部门:"
+
+      <el-form-item label="部门"
                     prop="departmentName">
         {{form.departmentName}}
       </el-form-item>
-      <el-form-item label="职位:"
+      <el-form-item label="职位"
                     prop="positionName">
         {{form.positionName}}
       </el-form-item>
-      <el-form-item label="邮箱:"
+      <el-form-item label="邮箱"
                     prop="email">
         <el-input v-model="form.email"
                   placeholder="请输入邮箱" />
       </el-form-item>
-      <el-form-item label="联系电话:"
+      <el-form-item label="联系电话"
                     prop="phone">
         <el-input v-model="form.phone"
                   placeholder="请输入联系电话" />
       </el-form-item>
-      <el-form-item label="备注:"
+      <el-form-item label="备注"
                     prop="remark">
         <el-input v-model="form.remark"
                   placeholder="请输入备注" />
