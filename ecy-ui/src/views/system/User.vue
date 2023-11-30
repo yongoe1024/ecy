@@ -100,6 +100,7 @@
         <template slot-scope="scope">
           <el-tag v-for="item in scope.row.roleList"
                   style="margin:2px"
+                  size="small"
                   :key="item.id">{{item.name}}</el-tag>
         </template>
       </el-table-column>

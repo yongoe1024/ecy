@@ -48,6 +48,10 @@
           <el-button type="text"
                      size="mini"
                      icon="el-icon-edit"
+                     @click="handleShowRowAddEdit(scope.row)">添加</el-button>
+          <el-button type="text"
+                     size="mini"
+                     icon="el-icon-edit"
                      @click="handleShowUpdateEdit(scope.row)">编辑</el-button>
           <el-button type="text"
                      size="mini"
@@ -144,6 +148,11 @@ export default {
     },
     handleShowAddEdit () {
       this.dialogTitle = '添加'
+      this.dialogVisible = true
+    },
+    handleShowRowAddEdit (row) {
+      this.dialogTitle = '添加'
+      this.form.parentId = row.id
       this.dialogVisible = true
     },
     handleShowUpdateEdit (row) {

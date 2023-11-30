@@ -82,6 +82,10 @@
           <el-button type="text"
                      size="mini"
                      icon="el-icon-edit"
+                     @click="handleShowRowAddEdit(scope.row)">添加</el-button>
+          <el-button type="text"
+                     size="mini"
+                     icon="el-icon-edit"
                      @click="handleShowUpdateEdit(scope.row)">编辑</el-button>
           <el-button type="text"
                      size="mini"
@@ -135,7 +139,6 @@
           <el-input v-model="form.url"
                     placeholder="请输入接口路径" />
         </el-form-item>
-
         <el-form-item label="图标"
                       prop="icon">
           <e-icon-picker v-model="form.icon" />
@@ -229,6 +232,11 @@ export default {
     },
     handleShowAddEdit () {
       this.dialogTitle = '添加'
+      this.dialogVisible = true
+    },
+    handleShowRowAddEdit (row) {
+      this.dialogTitle = '添加'
+      this.form.parentId = row.id
       this.dialogVisible = true
     },
     handleShowUpdateEdit (row) {

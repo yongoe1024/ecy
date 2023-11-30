@@ -167,6 +167,9 @@ export default {
   -o-transition: width 0.3s;
   color: #76bdda;
 }
+.el-menu {
+  border-right-width: 0 !important;
+}
 /* 
 .el-submenu__title {
   display: flex;
