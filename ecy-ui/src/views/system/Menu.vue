@@ -76,12 +76,12 @@
       </el-table-column>
       <el-table-column label="操作"
                        align="center"
-                       width="140"
+                       width="200"
                        fixed="right">
         <template slot-scope="scope">
           <el-button type="text"
                      size="mini"
-                     icon="el-icon-edit"
+                     icon="el-icon-plus"
                      @click="handleShowRowAddEdit(scope.row)">添加</el-button>
           <el-button type="text"
                      size="mini"
@@ -232,6 +232,7 @@ export default {
     },
     handleShowAddEdit () {
       this.dialogTitle = '添加'
+      this.form.parentId = 0
       this.dialogVisible = true
     },
     handleShowRowAddEdit (row) {

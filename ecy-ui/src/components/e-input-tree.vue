@@ -55,7 +55,7 @@ export default {
           return
         }
         if (newVal == '0') {
-          this.label = "根目录"
+          this.label = "根节点"
           return
         }
         this.getChild(this.data, newVal)
