@@ -295,7 +295,7 @@ export default {
         // 初始化数据
         getList() {
             this.loading = true
-            this.axios.post(`/${packageName}/${entity?lower_case}/page?current=${this.current}&size=${this.size}`, this.queryParam).then(data => {
+            this.axios.post(`/${packageName}/${entity?lower_case}/page?current=${r'${this.current}'}&size=${r'${this.size}'}`, this.queryParam).then(data => {
                 this.loading = false
                 this.dataList = data.list
                 this.total = data.total - 0

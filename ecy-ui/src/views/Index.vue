@@ -72,10 +72,7 @@
         </el-header>
         <!-- 主体内容 -->
         <el-main>
-
-          <keep-alive>
             <router-view />
-          </keep-alive>
         </el-main>
 
       </el-container>
