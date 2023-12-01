@@ -36,9 +36,11 @@
           状态
         </template>
         <el-tag v-if="letter.state"
+                effect="dark"
                 type="success">已读
         </el-tag>
         <el-tag v-else
+                effect="dark"
                 type="danger">未读
         </el-tag>
       </el-descriptions-item>

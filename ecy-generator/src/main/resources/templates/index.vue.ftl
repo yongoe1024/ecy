@@ -75,10 +75,10 @@
                              label="${field.comment}"
                              align="center">
                 <template slot-scope="scope">
-                    <el-tag v-if="scope.row.${field.propertyName}"
+                    <el-tag v-if="scope.row.${field.propertyName}"  effect="dark"
                             type="success">启用
                     </el-tag>
-                    <el-tag v-else
+                    <el-tag v-else  effect="dark"
                             type="danger">禁用
                     </el-tag>
                 </template>

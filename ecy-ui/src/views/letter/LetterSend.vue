@@ -60,9 +60,11 @@
                        align="center">
         <template slot-scope="scope">
           <el-tag v-if="scope.row.state"
+                  effect="dark"
                   type="success">已读
           </el-tag>
           <el-tag v-else
+                  effect="dark"
                   type="danger">未读
           </el-tag>
         </template>
