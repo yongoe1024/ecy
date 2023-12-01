@@ -2,7 +2,7 @@
   <div>
     <el-page-header @back="$router.back()"
                     style="margin-bottom:30px"
-                    content="数据"></el-page-header>
+                    content="数据字典-数据"></el-page-header>
     <!-- 搜索 -->
     <div class="head">
       <el-input size="small"
