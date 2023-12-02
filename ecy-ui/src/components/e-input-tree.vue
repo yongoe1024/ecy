@@ -21,7 +21,7 @@
 export default {
   props: {
     value: {
-      default: ''
+      default: () => null
     },
     //原为element的tree组件的props参数
     tree_props: {
@@ -30,20 +30,20 @@ export default {
     //树形 折叠状态
     open_all: {
       type: Boolean,
-      default: false
+      default: () => false
     },
     // tree数据
     data: {
       type: Array,
-      default: []
+      default: () => []
     },
     placeholder: {
       type: String,
-      default: ''
+      default: () => ''
     },
     size: {
       type: String,
-      default: 'medium' //medium , small , mini
+      default: () => 'medium' //medium , small , mini
     }
   },
   watch: {

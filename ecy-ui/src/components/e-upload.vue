@@ -20,11 +20,11 @@ export default {
   props: {
     url: {
       type: String,
-      default: '/upload/single'
+      default: () => '/upload/single'
     },
     size: {
       type: String,
-      default: 'small'  //	medium/small/mini
+      default: () => 'small' //medium/small/mini
     },
   },
   data () {

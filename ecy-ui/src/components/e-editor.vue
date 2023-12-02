@@ -19,7 +19,8 @@ export default {
   },
   props: {
     value: {
-      default: ''
+      type: String,
+      default: () => ''
     },
   },
   watch: {

@@ -24,23 +24,24 @@
 export default {
   props: {
     value: {
-      default: ''
+      type: String,
+      default: () => ''
     },
     name: {
       type: String,
-      default: ''
+      default: () => ''
     },
     placeholder: {
       type: String,
-      default: ''
+      default: () => ''
     },
     icon: {
       type: String,
-      default: ''
+      default: () => ''
     },
     size: {
       type: String,
-      default: 'medium' //medium , small , mini
+      default: () => 'medium' // medium , small , mini
     }
   },
   watch: {
