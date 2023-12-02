@@ -282,14 +282,14 @@ export default {
             this.$confirm('此操作将永久删除这条数据, 是否继续?', '提示', {type: 'warning'}).then(() => {
                 <#list table.fields as field >
                 <#if field.keyFlag>
-                this.axios.post('/${packageName}/${entity?lower_case}/delete/' + row.${field.propertyName}).then(() => this.getList())
+                this.axios.post('/${packageName}/${entity?lower_case}/delete/' + row.${field.propertyName}).then(() => this.getList()).catch(e => {})
                 </#if>
                 </#list >
             }).catch(e => { })
         },
         handleDeleteMany() {
             this.$confirm('此操作将永久删除 [' + this.multipleSelection.length + '] 条数据, 是否继续?', '提示', {type: 'warning'}).then(() => {
-                this.axios.post('/${packageName}/${entity?lower_case}/delete/' + this.multipleSelection).then(() => this.getList())
+                this.axios.post('/${packageName}/${entity?lower_case}/delete/' + this.multipleSelection).then(() => this.getList()).catch(e => {})
             }).catch(e => { })
         },
         // 初始化数据
