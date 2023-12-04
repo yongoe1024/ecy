@@ -47,6 +47,6 @@ public class GlobalException {
     @ExceptionHandler(value = Throwable.class)
     public R handleException(Throwable throwable) {
         log.error("错误:", throwable);
-        return R.error("未知错误");
+        return R.error("未知错误，" + throwable.getMessage());
     }
 }
