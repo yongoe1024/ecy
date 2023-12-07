@@ -4,7 +4,7 @@
 
     <!--    获取分页数据-->
     <select id="getLetterByPage" resultType="com.yongoe.ecy.basic.entity.Letter">
-        select *
+        select id,addresser_id,addresser,addressee_id,addressee,title,state,create_time,update_time,create_by,update_by
         from basic_letter
         <where>
             <if test="null != letter.id">

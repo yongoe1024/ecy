@@ -87,4 +87,7 @@ export default {
 }
 </script> 
 <style scoped>
+.ql-editor >>> img {
+  max-width: 90%;
+}
 </style>

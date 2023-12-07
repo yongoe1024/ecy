@@ -175,7 +175,7 @@ export default {
         title: [{ required: true, message: '请输入标题', trigger: 'change' },
         { max: 15, message: '最多15个字', trigger: 'change' }],
         content: [{ required: true, message: '请输入内容', trigger: 'change' },
-        { max: 1000, message: '最多1000个字', trigger: 'change' }],
+        ],
       },
     }
   },
