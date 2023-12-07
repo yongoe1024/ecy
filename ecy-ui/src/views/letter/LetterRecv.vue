@@ -134,9 +134,8 @@ export default {
     },
     // 初始化数据
     getList () {
-      this.queryParam.addresseeId = this.$store.state.user.user.id
       this.loading = true
-      this.axios.post(`/basic/letter/page?current=${this.current}&size=${this.size}`, this.queryParam).then(data => {
+      this.axios.post(`/basic/letter/recv?current=${this.current}&size=${this.size}`, this.queryParam).then(data => {
         this.loading = false
         this.dataList = data.list
         this.total = data.total - 0
