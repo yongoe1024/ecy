@@ -47,6 +47,8 @@ public class WXH5SignatureUtil {
         result.put("nonceStr", nonceStr);
         result.put("timestamp", timestamp);
         result.put("signature", signature);
+        String clientId = configUtils.get("qq-clientId");
+        result.put("appId", clientId);
         return result;
     }
 

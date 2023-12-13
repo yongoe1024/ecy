@@ -44,6 +44,13 @@
             <artifactId>tencentcloud-sdk-java-sms</artifactId>
             <version>3.1.600</version>
         </dependency>
+        <!-- 支付宝支付jar包 -->
+        <dependency>
+            <groupId>com.alipay.sdk</groupId>
+            <artifactId>alipay-sdk-java</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+
         <!--        第三方登录-->
         <dependency>
             <groupId>me.zhyd.oauth</groupId>
