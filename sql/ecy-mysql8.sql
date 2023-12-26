@@ -109,7 +109,7 @@ CREATE TABLE `sys_config`
 (
     `id`           bigint unsigned                                              NOT NULL AUTO_INCREMENT,
     `config_key`   varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '键',
-    `config_value` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '值',
+    `config_value` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci    NOT NULL COMMENT '值',
     `remark`       varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '备注',
     `create_time`  datetime                                                     NOT NULL COMMENT '创建时间',
     `update_time`  datetime                                                     NOT NULL COMMENT '修改时间',
@@ -157,7 +157,16 @@ values (1, 'qq-clientId', '无', 'QQ登陆clientId(动态生效)', '2023-01-01 0
        (15, 'mail-password', '无', '邮箱密钥(重启生效)', '2023-11-08 13:59:01', '2023-11-08 13:59:01', 'yongoe',
         'yongoe'),
        (16, 'mail-protocol', 'smtp', '邮箱协议(重启生效)', '2023-11-08 13:59:17', '2023-11-08 13:59:32', 'yongoe',
-        'yongoe');
+        'yongoe'),
+       (17,'alipay-appId','无','支付宝应用ID','2023-12-26 15:43:01','2023-12-26 15:43:01','yongoe','yongoe'),
+       (18,'alipay-privateKey','无','支付宝商户私钥，PKCS8格式RSA2私钥','2023-12-26 15:43:43','2023-12-26 15:50:49','yongoe','yongoe'),
+       (19,'alipay-publicKey','无','支付宝公钥','2023-12-26 15:43:58','2023-12-26 15:51:12','yongoe','yongoe'),
+       (20,'alipay-notifyUrl','http://localhost:8081/alipay/success','服务器异步通知路径','2023-12-26 15:44:20','2023-12-26 15:44:20','yongoe','yongoe'),
+       (21,'alipay-returnUrl','http://localhost:8080/alipay/success','页面跳转同步路径','2023-12-26 15:44:52','2023-12-26 15:44:52','yongoe','yongoe'),
+       (22,'alipay-signType','RSA2','签名方式','2023-12-26 15:45:16','2023-12-26 15:45:16','yongoe','yongoe'),
+       (23,'alipay-charset','utf-8','字符编码格式','2023-12-26 15:45:37','2023-12-26 15:45:37','yongoe','yongoe'),
+       (24,'alipay-gatewayUrl','https://openapi-sandbox.dl.alipaydev.com/gateway.do','支付宝网关','2023-12-26 15:48:43','2023-12-26 15:48:43','yongoe','yongoe'),
+       (25,'alipay-format','json','格式','2023-12-26 15:49:03','2023-12-26 15:49:03','yongoe','yongoe');
 
 
 

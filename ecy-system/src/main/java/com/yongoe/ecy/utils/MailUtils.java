@@ -42,7 +42,11 @@ public class MailUtils {
         mailSender.setDefaultEncoding("UTF-8");
         configuration = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
         configuration.setTemplateLoader(new SpringTemplateLoader(new DefaultResourceLoader(), "templates/"));
-        init();
+        mailSender.setHost(configUtils.get("mail-host"));
+        mailSender.setPort(Integer.parseInt(configUtils.get("mail-port")));
+        mailSender.setUsername(configUtils.get("mail-username"));
+        mailSender.setPassword(configUtils.get("mail-password"));
+        mailSender.setProtocol(configUtils.get("mail-protocol"));
     }
 
     /**
@@ -104,19 +108,6 @@ public class MailUtils {
     private String createTemplate(String templateName, Map<Objects, Object> data) throws IOException, TemplateException {
         Template template = configuration.getTemplate(templateName);
         return FreeMarkerTemplateUtils.processTemplateIntoString(template, data);
-    }
-
-    private void init() {
-        String host = configUtils.get("mail-host");
-        String port = configUtils.get("mail-port");
-        String username = configUtils.get("mail-username");
-        String password = configUtils.get("mail-password");
-        String protocol = configUtils.get("mail-protocol");
-        mailSender.setHost(host);
-        mailSender.setPort(Integer.parseInt(port));
-        mailSender.setUsername(username);
-        mailSender.setPassword(password);
-        mailSender.setProtocol(protocol);
     }
 
 }

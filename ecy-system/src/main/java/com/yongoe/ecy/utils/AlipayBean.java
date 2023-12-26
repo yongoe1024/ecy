@@ -6,6 +6,12 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
+/**
+ * 支付宝支付接口参数
+ *
+ * @author yongoe
+ * @since 2023/12/9
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

@@ -44,6 +44,7 @@
                        label="键"
                        align="center"></el-table-column>
       <el-table-column prop="configValue"
+                       :show-overflow-tooltip="true"
                        label="值"
                        align="center"></el-table-column>
       <el-table-column prop="remark"
