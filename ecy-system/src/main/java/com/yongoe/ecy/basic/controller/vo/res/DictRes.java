@@ -23,7 +23,7 @@ public class DictRes {
      */
     private String name;
     /**
-     * 字典类型(select,radio)
+     * 字典类型
      */
     private String type;
     /**

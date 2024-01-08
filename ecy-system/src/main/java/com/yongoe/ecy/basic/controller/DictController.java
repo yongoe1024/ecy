@@ -21,9 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 数据字典
@@ -51,10 +49,7 @@ public class DictController {
                 .eq(DictData::getDictId, dict.getId())
                 .orderByDesc(DictData::getSort));
         List<DictDataRe> resList = dictDataConvert.entity2ResList(dictData);
-        Map<String, Object> map = new HashMap<>();
-        map.put("list", resList);
-        map.put("type", dict.getType());
-        return R.success().put(map);
+        return R.success().put(resList);
     }
 
     @Operation(summary = "查询分页数据")

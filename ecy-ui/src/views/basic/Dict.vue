@@ -44,9 +44,6 @@
           </router-link>
         </template>
       </el-table-column>
-      <el-table-column prop="type"
-                       label="字典类型"
-                       align="center"></el-table-column>
       <el-table-column prop="remark"
                        label="备注"
                        align="center"></el-table-column>
@@ -96,16 +93,6 @@
           <el-input v-model="form.name"
                     placeholder="请输入字典名称" />
         </el-form-item>
-        <el-form-item label="字典类型"
-                      prop="type">
-          <el-select v-model="form.type">
-            <el-option v-for="item in [{name:'下拉框',type:'select'},{name:'单选',type:'radio'}]"
-                       :key="item.type"
-                       :label="item.name"
-                       :value="item.type">
-            </el-option>
-          </el-select>
-        </el-form-item>
         <el-form-item label="备注"
                       prop="remark">
           <el-input v-model="form.remark"
@@ -138,7 +125,6 @@ export default {
       dataList: [],
       form: {
         name: null,
-        type: null,
         remark: null,
       },
       queryParam: {
@@ -146,7 +132,6 @@ export default {
       },
       rules: {
         name: [{ required: true, message: '请输入字典名称', trigger: 'change' }],
-        type: [{ required: true, message: '请输入字典类型(select,radio)', trigger: 'change' }],
       },
     }
   },

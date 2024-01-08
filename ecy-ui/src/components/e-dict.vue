@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-select v-if="!tag && type==='select'"
+    <el-select v-if="type==='select'"
                v-model="myValue"
                :prefix-icon="icon"
                :size="size"
@@ -11,12 +11,12 @@
                  :value="item.dictValue">
       </el-option>
     </el-select>
-    <el-radio v-else-if="!tag && type==='radio'"
+    <el-radio v-else-if="type==='radio'"
               v-for="item in dataList"
               :key="item.id"
               v-model="myValue"
               :label="item.dictValue">{{item.dictKey}}</el-radio>
-    <span v-else-if="tag"
+    <span v-else-if="type==='tag'"
           v-for="item in dataList"
           :key="item.id">
       <el-tag :size="size"
@@ -35,7 +35,7 @@ export default {
       default: () => false
     },
     value: {
-      default: () => ''
+      default: () => null
     },
     name: {
       type: String,
@@ -52,13 +52,20 @@ export default {
     size: {
       type: String,
       default: () => '' // medium , small , mini
+    },
+    type: {
+      type: String,
+      default: () => 'select' // select , radio , tag
     }
   },
   watch: {
     value: {
       immediate: true,
       handler (nv) {
-        this.myValue = nv + ''
+        if (nv != null)
+          this.myValue = nv + ''
+        else
+          this.myValue = nv
       },
     },
     myValue: {
@@ -71,14 +78,12 @@ export default {
   data () {
     return {
       dataList: [],
-      type: 'select',
       myValue: null
     }
   },
   mounted () {
     this.axios.post('/dict?name=' + this.name).then(data => {
-      this.dataList = data.list
-      this.type = data.type
+      this.dataList = data
     }).catch(e => { })
   }
 }

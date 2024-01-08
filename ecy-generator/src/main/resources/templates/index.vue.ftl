@@ -58,8 +58,7 @@
         </div>
 
         <!-- 表格 -->
-        <el-table v-loading="loading"
-                  :data="dataList"
+        <el-table :data="dataList"
                   style="width: 100%"
                   :header-cell-style="{background:'#eef1f6'}"
                   @selection-change="handleSelectionChange">
@@ -185,7 +184,6 @@ export default {
             total: 0,
             current: 1,
             size: 10,
-            loading: false,
             dialogVisible: false,
             dialogTitle: '',
 
@@ -294,12 +292,10 @@ export default {
         },
         // 初始化数据
         getList() {
-            this.loading = true
             this.axios.post(`/${packageName}/${entity?lower_case}/page?current=${r'${this.current}'}&size=${r'${this.size}'}`, this.queryParam).then(data => {
-                this.loading = false
                 this.dataList = data.list
                 this.total = data.total - 0
-            }).catch(e => this.loading = false )
+            }).catch(e => { })
         },
     },
 }
