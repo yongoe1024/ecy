@@ -10,7 +10,10 @@
       <el-button :icon="uploadButtonIcon"
                  :size="size"
                  type="info"
-                 plain>{{uploadButtonText}}</el-button>
+                 plain>
+        <slot v-if="!uploadButtonDisabled"></slot>
+        <span v-else> {{uploadButtonText}}</span>
+      </el-button>
     </el-upload>
   </div>
 </template>
@@ -24,12 +27,12 @@ export default {
     },
     size: {
       type: String,
-      default: () => 'small' //medium/small/mini
+      default: () => '' //medium/small/mini
     },
   },
   data () {
     return {
-      uploadButtonText: '导入数据',
+      uploadButtonText: '正在导入',
       uploadButtonIcon: 'el-icon-upload2',
       uploadButtonDisabled: false,
       headers: {
@@ -39,20 +42,17 @@ export default {
   },
   methods: {
     beforeUpload () {
-      this.uploadButtonText = '正在导入'
       this.uploadButtonIcon = 'el-icon-loading'
       this.uploadButtonDisabled = true
     },
     onSuccess (data) {
       this.$message({ message: data.message, type: data.code === 200 ? 'success' : 'error' })
-      this.uploadButtonText = '导入数据'
       this.uploadButtonIcon = 'el-icon-upload2'
       this.uploadButtonDisabled = false
       this.$emit('success', data.data)
     },
     onError () {
       this.$message({ message: '导入失败', type: 'error' })
-      this.uploadButtonText = '导入数据'
       this.uploadButtonDisabled = false
       this.uploadButtonIcon = 'el-icon-upload2'
     },

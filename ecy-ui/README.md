@@ -61,16 +61,20 @@ docker-compose方法: 需结合/ecy/中的docker-compose.yml，无法单独启�
 |name|字典名
 |placeholder|提示文字
 |icon|输入框图标
-|size：|默认medium 【medium , small , mini】
+|tag|解析为标签
+|size：|【medium , small , mini】
 ```
-<e-dict name="性别" v-model="xxx" ></e-dict>
+<e-dict name="性别" v-model="xxx" size="mini" ></e-dict>
+<e-dict name="启用"
+        :tag="true"
+        :value="true"></e-dict>
 ```
 ## 上传按钮组件  
 | 参数 | 值 |
 |---|---|
 |url|上传接口，默认通用上传接口不需要改
-|size|默认medium 【medium , small , mini】
-|success|成功的回调，传入后端返回信息中的“data”
+|size|【medium , small , mini】
+|success|成功的回调，传入后端返回的数据
 ```
 <e-upload  @success="handleSuccess"></e-upload>
 handleSuccess(data){
@@ -85,7 +89,7 @@ handleSuccess(data){
 |v-model|选中数据的指定属性
 |open_all|树形选择器的折叠状态，默认flase
 |placeholder|输入框提示
-|size|默认medium 【medium , small , mini】
+|size| 【medium , small , mini】
 |tree_props|每条数据的子属性children，对外显示名称label，v-model中的字段keyname。默认为{ children: 'children', label: 'name', keyname: 'id' }  
 ```
 <e-input-tree
@@ -110,10 +114,6 @@ handleSuccess(data){
 ```
 ## 断点续传组件
 固定接口，不需要改变
-
-| 参数 | 值 |
-|---|---|
-|v-model|内容，html格式的字符串
 ```
 <e-chunk-upload></e-chunk-upload>
 ```

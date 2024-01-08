@@ -44,7 +44,7 @@ public class DictController {
     private DictDataConvert dictDataConvert;
 
     @Operation(summary = "查询字典,没权限")
-    @PostMapping("/user/getdict")
+    @PostMapping("/dict")
     public R getDict(String name) {
         Dict dict = dictService.getOne(new LambdaQueryWrapper<Dict>().eq(Dict::getName, name));
         List<DictData> dictData = dictDataService.list(new LambdaQueryWrapper<DictData>()

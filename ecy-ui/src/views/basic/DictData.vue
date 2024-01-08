@@ -48,6 +48,14 @@
       <el-table-column prop="dictValue"
                        label="字典值"
                        align="center"></el-table-column>
+      <el-table-column prop="color"
+                       label="颜色"
+                       align="center">
+        <template slot-scope="scope">
+          <el-tag effect="dark"
+                  :style="{'background-color': scope.row.color,'border-color': scope.row.color}">{{scope.row.color}}</el-tag>
+        </template>
+      </el-table-column>
       <el-table-column prop="sort"
                        label="字典顺序"
                        align="center"></el-table-column>
@@ -100,12 +108,20 @@
         <el-form-item label="字典值"
                       prop="dictValue">
           <el-input v-model="form.dictValue"
-                    placeholder="请输入字典值" />
+                    placeholder="数据库若为布尔类型,则字典值填写true或false" />
         </el-form-item>
+
         <el-form-item label="字典顺序"
                       prop="sort">
           <el-input-number v-model="form.sort"
                            :min="0"></el-input-number>
+        </el-form-item>
+        <el-form-item label="颜色"
+                      prop="color">
+          <el-color-picker v-model="form.color"
+                           show-alpha
+                           :predefine="predefineColors">
+          </el-color-picker>
         </el-form-item>
       </el-form>
       <span slot="footer">
@@ -137,12 +153,29 @@ export default {
         dictId: null,
         dictKey: null,
         dictValue: null,
+        color: null,
         sort: null,
       },
       queryParam: {
         dictKey: null,
         dictValue: null,
       },
+      predefineColors: [
+        '#ff4500',
+        '#ff8c00',
+        '#ffd700',
+        '#90ee90',
+        '#00ced1',
+        '#1e90ff',
+        '#c71585',
+        'rgba(255, 69, 0, 0.68)',
+        'rgb(255, 120, 0)',
+        'hsv(51, 100, 98)',
+        'hsva(120, 40, 94, 0.5)',
+        'hsl(181, 100%, 37%)',
+        'hsla(209, 100%, 56%, 0.73)',
+        '#c7158577'
+      ],
       rules: {
         dictKey: [{ required: true, message: '请输入字典键', trigger: 'change' }],
         dictValue: [{ required: true, message: '请输入字典值', trigger: 'change' }],

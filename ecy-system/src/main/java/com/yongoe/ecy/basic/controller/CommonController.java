@@ -71,7 +71,7 @@ public class CommonController {
     @Operation(summary = "普通上传文件-单个")
     @PostMapping("/upload/single")
     @ResponseBody
-    public R uploadFile(MultipartFile file,String ss) {
+    public R uploadFile(MultipartFile file) {
         String url = FileUtils.saveFile(file);
         return R.success("上传成功").put(url);
     }

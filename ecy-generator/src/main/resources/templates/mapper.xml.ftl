@@ -4,11 +4,7 @@
 
     <!--    获取分页数据-->
     <select id="get${entity}ByPage" resultType="${package.Entity}.${entity}">
-        select
-        <#list table.commonFields as field>
-                ${field.columnName},
-        </#list>
-                ${table.fieldNames}
+        select *
         from  ${table.name}
         <where>
             <#list table.fields as field>

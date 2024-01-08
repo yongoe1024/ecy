@@ -42,12 +42,18 @@ service.interceptors.response.use(
   }
 )
 
-Vue.prototype.$downloadRequest = (url, params) => {
+Vue.prototype.$downloadRequest = (url, params, progress) => {
   return service(
     {
-      method: 'post',
+      method: 'get',
       url: `${Vue.prototype.$BASE_URL}${url}`,
-      data: params
+      data: params,
+      onDownloadProgress: progressEvent => {
+        try {
+          progress(Math.floor((progressEvent.loaded * 100) / progressEvent.total))
+        } catch (e) {
+        }
+      }
     }
   )
 

@@ -31,6 +31,10 @@ public class DictDataRe {
      */
     private String dictValue;
     /**
+     * 颜色
+     */
+    private String color;
+    /**
      * 字典顺序
      */
     private Integer sort;

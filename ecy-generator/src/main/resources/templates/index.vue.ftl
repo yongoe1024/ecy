@@ -49,7 +49,7 @@
             <#if upload><e-upload size="mini"
                                 v-auth="'导入'"
                                 url="/${packageName}/${entity?lower_case}/upload"
-                                @success="getList"></e-upload></#if>
+                                @success="getList">导入数据</e-upload></#if>
             <#if export><el-button type="warning"
                                    v-auth="'导出'"
                                    icon="el-icon-download" plain

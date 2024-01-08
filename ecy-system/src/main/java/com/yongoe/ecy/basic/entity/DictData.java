@@ -28,6 +28,8 @@ public class DictData {
 
     private String dictKey;
 
+    private String color;
+
     private String dictValue;
 
     private Integer sort;

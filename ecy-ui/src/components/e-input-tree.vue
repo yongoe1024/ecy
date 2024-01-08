@@ -43,7 +43,7 @@ export default {
     },
     size: {
       type: String,
-      default: () => 'medium' //medium , small , mini
+      default: () => '' //medium , small , mini
     }
   },
   watch: {
