@@ -88,7 +88,7 @@ export default {
             // 取出重定向的网页
             let path = this.$route.query.redirect
             this.$router.replace(
-              path == '/login' || path == undefined ? '/index' : path
+              path == '/login' || path == undefined ? '/home' : path
             )
           }).catch(() => {
             this.updateCaptcha()

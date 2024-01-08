@@ -13,7 +13,7 @@
                  text-color="#FFFFFF"
                  :default-active="path"
                  unique-opened>
-          <el-menu-item index="/index">
+          <el-menu-item index="/home">
             <i class="fa fa-home"
                style="margin-left:3px;color:#FFFFFF;font-size:23px"></i>
             <span style="margin-left:20px;font-size:15px">首页</span>
@@ -72,9 +72,11 @@
         </el-header>
         <!-- 主体内容 -->
         <el-main>
-            <router-view />
+          <keep-alive>
+            <router-view v-if="$route.meta.keepAlive" />
+          </keep-alive>
+          <router-view v-if="!$route.meta.keepAlive" />
         </el-main>
-
       </el-container>
     </el-container>
   </div>

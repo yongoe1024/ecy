@@ -47,6 +47,10 @@ public class MenuReq {
      */
     private Integer sort;
     /**
+     * 是否缓存
+     */
+    private Boolean keepAlive;
+    /**
      * 是否显示
      */
     private Boolean isShow;

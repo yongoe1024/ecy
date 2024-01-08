@@ -24,6 +24,7 @@ function formatRoutes (routes) {
   let fmtRoutes = []
   routes.forEach(router => {
     let {
+      keepAlive,
       type,
       component,
       name,
@@ -41,11 +42,11 @@ function formatRoutes (routes) {
       icon: icon,
       children: children,
       isShow: isShow,
-      meta: { auth: [] }
+      meta: {
+        auth: [],
+        keepAlive: false
+      }
     }
-    let a = component == null ? '' : component.replaceAll('/', '-')
-    fmRouter.path = '/' + a
-
     children.forEach(v => {
       //按钮权限
       if (v.type === 3)
@@ -56,7 +57,9 @@ function formatRoutes (routes) {
       fmRouter.path = '//'    // 此处不这么做 会导致路由混乱 ，meta传不进去值，顺序错误
     }
     else {
-      fmRouter.component = () => import('/src/views/' + component)
+      fmRouter.path = component
+      fmRouter.component = () => import('/src/views' + component)
+      fmRouter.meta.keepAlive = keepAlive
     }
     fmtRoutes.push(fmRouter)
   })

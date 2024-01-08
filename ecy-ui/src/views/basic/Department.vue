@@ -20,7 +20,6 @@
               :header-cell-style="{background:'#eef1f6'}"
               style="width: 100%">
       <el-table-column prop="name"
-                       align="center"
                        label="部门名称"></el-table-column>
       <el-table-column prop="leader"
                        label="负责人"

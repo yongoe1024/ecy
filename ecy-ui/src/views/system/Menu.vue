@@ -22,7 +22,6 @@
               :header-cell-style="{background:'#eef1f6'}">
       <el-table-column prop="name"
                        width="150"
-                       align="center"
                        label="菜单名"></el-table-column>
       <el-table-column prop="type"
                        label="类型"
@@ -49,6 +48,20 @@
       <el-table-column prop="sort"
                        label="顺序"
                        align="center"></el-table-column>
+      <el-table-column prop="keepAlive"
+                       label="是否缓存"
+                       align="center">
+        <template slot-scope="scope">
+          <el-tag v-if="scope.row.keepAlive"
+                  effect="dark"
+                  type="success">是
+          </el-tag>
+          <el-tag v-else
+                  effect="dark"
+                  type="danger">否
+          </el-tag>
+        </template>
+      </el-table-column>
       <el-table-column prop="isShow"
                        label="是否显示"
                        align="center">
@@ -151,6 +164,14 @@
           <el-input-number v-model="form.sort"
                            :min="0"></el-input-number>
         </el-form-item>
+        <el-form-item label="是否缓存"
+                      prop="keepAlive">
+          <el-switch v-model="form.keepAlive"
+                     active-text="是"
+                     inactive-text="否"
+                     active-color="#13ce66"
+                     inactive-color="#ff4949"></el-switch>
+        </el-form-item>
         <el-form-item label="是否显示"
                       prop="isShow">
           <el-switch v-model="form.isShow"
@@ -214,6 +235,7 @@ export default {
         component: null,
         icon: null,
         sort: null,
+        keepAlive: false,
         isShow: true,
         enabled: true,
       },

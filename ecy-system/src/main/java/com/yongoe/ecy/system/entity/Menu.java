@@ -39,6 +39,8 @@ public class Menu {
 
     private Integer sort;
 
+    private Boolean keepAlive;
+
     private Boolean isShow;
 
     private Boolean enabled;

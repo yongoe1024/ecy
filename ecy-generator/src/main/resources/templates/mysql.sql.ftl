@@ -1,7 +1,7 @@
 
         insert  into `sys_menu`(`id`,`parent_id`,`type`,`url`,`component`,`name`,`icon`,`sort`,`is_show`,`enabled`,
         `create_time`,`update_time`,`create_by`,`update_by`) values
-    (null,${parentId},2,'','${packageName}/${entity}','${moduleName}','',0,1,1,NOW(),NOW(),'${author}','${author}');
+    (null,${parentId},2,'','/${packageName}/${entity}','${moduleName}','',0,1,1,NOW(),NOW(),'${author}','${author}');
     -- 按钮父菜单ID
     set @parentId = @@identity;
 

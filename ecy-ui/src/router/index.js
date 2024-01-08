@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 import store from '@/store'
 
 import initMenu from '@/utils/menus'
-import {endLoading, startLoading} from '@/utils/loading'
 
 Vue.use(VueRouter)
 
@@ -29,12 +28,12 @@ const routes = [
     component: () => import('@/views/oauth/QQ'),
   },
   {
-    path: '/frame',
+    path: '/index',
     name: '页面框架',
     component: () => import('@/views/Index'),
     children: [
       {
-        path: '/index',
+        path: '/home',
         name: '首页',
         component: () => import('@/views/Home'),
       },
@@ -74,10 +73,10 @@ const router = new VueRouter({
 })
 // 路由前置守卫
 router.beforeEach((to, from, next) => {
-  startLoading()
+  // startLoading()
   if (window.localStorage.getItem('token')) {
     if (to.path == '/login' || to.path == '/') {
-      next('/index')
+      next('/home')
     } else {
       initMenu(router, store)
       next()
@@ -99,7 +98,7 @@ router.beforeEach((to, from, next) => {
   }
 })
 router.afterEach((to, from) => {
-  endLoading()
+  // endLoading()
 })
 
 // 防止跳转当前路径报错

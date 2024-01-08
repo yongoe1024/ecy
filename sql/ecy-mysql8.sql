@@ -176,6 +176,7 @@ CREATE TABLE `sys_menu`
     `component`   varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '组件位置',
     `icon`        varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '图标',
     `sort`        int                                                          NOT NULL COMMENT '顺序',
+    `keep_alive`  tinyint(1)                                                   NOT NULL COMMENT '是否缓存',
     `is_show`     tinyint(1)                                                   NOT NULL COMMENT '是否显示',
     `enabled`     tinyint(1)                                                   NOT NULL COMMENT '是否启用',
     `create_time` datetime                                                     NOT NULL COMMENT '创建时间',
@@ -189,29 +190,32 @@ CREATE TABLE `sys_menu`
   COLLATE = utf8mb4_unicode_ci;
 
 
-insert into `sys_menu`(`id`, `parent_id`, `name`, `type`, `url`, `component`, `icon`, `sort`, `is_show`, `enabled`,
+insert into `sys_menu`(`id`, `parent_id`, `name`, `type`, `url`, `component`, `icon`, `sort`, `keep_alive`, `is_show`,
+                       `enabled`,
                        `create_time`, `update_time`, `create_by`, `update_by`)
-values (1, 0, '系统管理', 1, '', '', 'fa fa-cog', 0, 1, 1, '2023-01-01 00:00:00', '2023-01-01 00:00:00', 'yongoe',
+values (1, 0, '系统管理', 1, '', '', 'fa fa-cog', 0, 0, 1, 1, '2023-01-01 00:00:00', '2023-01-01 00:00:00', 'yongoe',
         'yongoe'),
-       (2, 0, '基础信息', 1, '', '', 'fa fa-table', 0, 1, 1, '2023-01-01 00:00:00', '2023-01-01 00:00:00', 'yongoe',
+       (2, 0, '基础信息', 1, '', '', 'fa fa-table', 0, 0, 1, 1, '2023-01-01 00:00:00', '2023-01-01 00:00:00', 'yongoe',
         'yongoe'),
-       (3, 1, '用户管理', 2, '/system/user/**', 'system/User', '', 0, 1, 1, '2023-01-01 00:00:00',
+       (3, 1, '用户管理', 2, '/system/user/**', '/system/User', '', 0, 0, 1, 1, '2023-01-01 00:00:00',
         '2023-01-01 00:00:00', 'yongoe', 'yongoe'),
-       (4, 1, '角色管理', 2, '/system/role/**', 'system/Role', '', 0, 1, 1, '2023-01-01 00:00:00',
+       (4, 1, '角色管理', 2, '/system/role/**', '/system/Role', '', 0, 0, 1, 1, '2023-01-01 00:00:00',
         '2023-01-01 00:00:00', 'yongoe', 'yongoe'),
-       (5, 1, '菜单管理', 2, '/system/menu/**', 'system/Menu', '', 0, 1, 1, '2023-01-01 00:00:00',
+       (5, 1, '菜单管理', 2, '/system/menu/**', '/system/Menu', '', 0, 0, 1, 1, '2023-01-01 00:00:00',
         '2023-01-01 00:00:00', 'yongoe', 'yongoe'),
-       (6, 1, '系统配置', 2, '/system/config/**', 'system/Config', '', 0, 1, 1, '2023-01-01 00:00:00',
+       (6, 1, '系统配置', 2, '/system/config/**', '/system/Config', '', 0, 0, 1, 1, '2023-01-01 00:00:00',
         '2023-01-01 00:00:00', 'yongoe', 'yongoe'),
-       (7, 2, '部门', 2, '/basic/department/**', 'basic/Department', '', 0, 1, 1, '2023-01-01 00:00:00',
+       (7, 2, '部门', 2, '/basic/department/**', '/basic/Department', '', 0, 0, 1, 1, '2023-01-01 00:00:00',
         '2023-01-01 00:00:00', 'yongoe', 'yongoe'),
-       (8, 2, '职位', 2, '/basic/position/**', 'basic/Position', '', 0, 1, 1, '2023-01-01 00:00:00',
+       (8, 2, '职位', 2, '/basic/position/**', '/basic/Position', '', 0, 0, 1, 1, '2023-01-01 00:00:00',
         '2023-01-01 00:00:00', 'yongoe', 'yongoe'),
-       (9, 2, '数据字典', 2, '/basic/dict/**', 'basic/Dict', '', 0, 1, 1, '2023-01-01 00:00:00', '2023-01-01 00:00:00',
+       (9, 2, '数据字典', 2, '/basic/dict/**', '/basic/Dict', '', 0, 0, 1, 1, '2023-01-01 00:00:00',
+        '2023-01-01 00:00:00',
         'yongoe', 'yongoe'),
-       (10, 2, '数据字典-数据', 2, '/basic/dict/data/**', 'basic/DictData', '', 0, 0, 1, '2023-01-01 00:00:00',
+       (10, 2, '数据字典-数据', 2, '/basic/dict/data/**', '/basic/DictData', '', 0, 0, 0, 1, '2023-01-01 00:00:00',
         '2023-01-01 00:00:00', 'yongoe', 'yongoe'),
-       (11, 1, '系统日志', 2, '/system/log/**', 'system/Log', '', 0, 1, 1, '2023-09-19 05:51:08', '2023-09-19 05:51:08',
+       (11, 1, '系统日志', 2, '/system/log/**', '/system/Log', '', 0, 0, 1, 1, '2023-09-19 05:51:08',
+        '2023-09-19 05:51:08',
         'yongoe', 'yongoe');
 
 
@@ -288,7 +292,7 @@ insert into `sys_user`(`id`, `department_id`, `position_id`, `username`, `passwo
                        `remark`, `last_ip`,
                        `last_time`, `enabled`, `create_time`, `update_time`, `create_by`, `update_by`)
 values (1, 1, 1, 'admin', '111111', 'yongoe',
-        'https://gulimall-mrguo.oss-cn-beijing.aliyuncs.com/retouch_2022082218101242.jpg', '121887765@qq.com', '10086',
+        'https://img.xjh.me/random_img.php', '121887765@qq.com', '10086',
         '无', '127.0.0.1', '2023-01-01 00:00:00', 1,
         '2023-01-01 00:00:00', '2023-01-01 00:00:00', 'yongoe', 'yongoe');
 
