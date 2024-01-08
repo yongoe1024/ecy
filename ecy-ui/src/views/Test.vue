@@ -10,9 +10,9 @@
 -->
     <e-upload>收拾 </e-upload>
     <e-download> 下载</e-download>
-    <!-- <e-dict name="启用"
+    <e-dict name="启用"
             :tag="true"
-            :value="true"></e-dict> -->
+            :value="true"></e-dict>
     <e-dict name="启用"
             v-model="a"></e-dict>
   </div>

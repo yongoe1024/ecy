@@ -2,8 +2,7 @@
   <div class="root">
 
     <div class="right-box">
-      <el-form v-loading="loading"
-               :rules="rules"
+      <el-form :rules="rules"
                ref="form"
                :model="form"
                style="width: 320px;">
@@ -63,7 +62,6 @@
 export default {
   data () {
     return {
-      loading: false,
       captchaUrl: this.$BASE_URL + '/captcha',
       form: {
         username: '',
@@ -84,7 +82,6 @@ export default {
     submitForm () {
       this.$refs.form.validate((valid) => {
         if (valid) {
-          this.loading = true
           this.axios.post('/login', this.form).then((token) => {
             // 存入 session
             window.localStorage.setItem('token', token)
@@ -93,11 +90,9 @@ export default {
             this.$router.replace(
               path == '/login' || path == undefined ? '/index' : path
             )
-            this.loading = false
           }).catch(() => {
             this.updateCaptcha()
             this.form.code = ''
-            this.loading = false
           })
         }
       })

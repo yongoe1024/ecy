@@ -30,8 +30,7 @@
     </div>
 
     <!-- 表格 -->
-    <el-table v-loading="loading"
-              :data="roleList"
+    <el-table :data="roleList"
               style="width: 100%"
               :header-cell-style="{background:'#eef1f6'}">
       <el-table-column align="center"
@@ -139,7 +138,6 @@ export default {
       total: 0,
       current: 1,
       size: 10,
-      loading: false,
 
       dialogVisible: false,
       dialogVisibleMenu: false,
@@ -238,12 +236,10 @@ export default {
     },
     // 初始化数据
     getList () {
-      this.loading = true
       this.axios.post(`/system/role/page?current=${this.current}&size=${this.size}`, this.queryParam).then(data => {
-        this.loading = false
         this.roleList = data.list
         this.total = data.total - 0
-      }).catch(e => this.loading = false)
+      }).catch(e => { })
     },
   },
 }

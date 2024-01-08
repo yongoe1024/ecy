@@ -14,8 +14,7 @@
     </div>
 
     <!-- 表格 -->
-    <el-table v-loading="loading"
-              :data="dataList"
+    <el-table :data="dataList"
               row-key="id"
               :tree-props="{children: 'children'}"
               :header-cell-style="{background:'#eef1f6'}"
@@ -118,7 +117,6 @@
 export default {
   data () {
     return {
-      loading: false,
       dialogVisible: false,
       dialogTitle: '',
 
@@ -188,11 +186,9 @@ export default {
     },
     // 初始化数据
     getList () {
-      this.loading = true
       this.axios.post('/basic/department/tree').then(data => {
-        this.loading = false
         this.dataList = data
-      }).catch(e => this.loading = false)
+      }).catch(e => { })
     },
   },
 }

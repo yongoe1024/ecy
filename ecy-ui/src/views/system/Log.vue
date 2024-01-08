@@ -14,11 +14,7 @@
     </div>
 
     <!-- 表格 -->
-    <el-table v-loading="loading"
-              element-loading-text="拼命加载中"
-              element-loading-spinner="el-icon-loading"
-              element-loading-background="rgba(0, 0, 0, 0.8)"
-              :data="dataList"
+    <el-table :data="dataList"
               style="width: 100%">
       <el-table-column prop="createTime"
                        label="时间"
@@ -97,7 +93,6 @@ export default {
       total: 0,
       current: 1,
       size: 20,
-      loading: false,
       dialogVisible: false,
       dialogTitle: '',
 
@@ -136,12 +131,10 @@ export default {
     },
     // 初始化数据
     getList () {
-      this.loading = true
       this.axios.post(`/system/log/page?current=${this.current}&size=${this.size}`).then(data => {
-        this.loading = false
         this.dataList = data.list
         this.total = data.total - 0
-      }).catch(e => this.loading = false)
+      }).catch(e => { })
     },
   },
 }

@@ -10,10 +10,6 @@
                 prefix-icon="el-icon-search"
                 placeholder="请输入标题"
                 v-model="queryParam.title"></el-input>
-      <!-- <el-input size="small"
-                prefix-icon="el-icon-search"
-                placeholder="请输入内容"
-                v-model="queryParam.content"></el-input> -->
       <el-select v-model="queryParam.state"
                  size="small"
                  placeholder="请选择状态">
@@ -35,14 +31,9 @@
     </div>
 
     <!-- 表格 -->
-    <el-table v-loading="loading"
-              :header-cell-style="{background:'#eef1f6'}"
+    <el-table :header-cell-style="{background:'#eef1f6'}"
               :data="dataList"
               style="width: 100%">
-      <!-- <el-table-column prop="addresserId"
-                       label="发件人id"
-                       width="100"
-                       align="center"></el-table-column> -->
       <el-table-column prop="addresser"
                        label="发件人"
                        width="200"
@@ -101,7 +92,6 @@ export default {
       total: 0,
       current: 1,
       size: 10,
-      loading: false,
       dataList: [],
       queryParam: {
         addresseeId: null,
@@ -134,12 +124,10 @@ export default {
     },
     // 初始化数据
     getList () {
-      this.loading = true
       this.axios.post(`/basic/letter/recv?current=${this.current}&size=${this.size}`, this.queryParam).then(data => {
-        this.loading = false
         this.dataList = data.list
         this.total = data.total - 0
-      }).catch(e => this.loading = false)
+      }).catch(e => { })
     },
   },
 }

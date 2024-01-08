@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import store from '@/store'
 
 import initMenu from '@/utils/menus'
+import {endLoading, startLoading} from '@/utils/loading'
 
 Vue.use(VueRouter)
 
@@ -73,6 +74,7 @@ const router = new VueRouter({
 })
 // 路由前置守卫
 router.beforeEach((to, from, next) => {
+  startLoading()
   if (window.localStorage.getItem('token')) {
     if (to.path == '/login' || to.path == '/') {
       next('/index')
@@ -95,6 +97,9 @@ router.beforeEach((to, from, next) => {
         next('/login?redirect=' + to.path)
     }
   }
+})
+router.afterEach((to, from) => {
+  endLoading()
 })
 
 // 防止跳转当前路径报错

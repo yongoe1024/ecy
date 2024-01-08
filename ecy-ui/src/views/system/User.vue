@@ -56,8 +56,7 @@
     </div>
 
     <!-- 表格 -->
-    <el-table v-loading="loading"
-              :data="dataList"
+    <el-table :data="dataList"
               :header-cell-style="{background:'#eef1f6'}"
               style="width: 100%">
       <el-table-column align="center"
@@ -247,7 +246,6 @@ export default {
       total: 0,
       current: 1,
       size: 10,
-      loading: false,
       dialogVisible: false,
       dialogTitle: '',
 
@@ -364,12 +362,10 @@ export default {
 
     // 初始化数据
     getList () {
-      this.loading = true
       this.axios.post(`/system/user/page?current=${this.current}&size=${this.size}`, this.queryParam).then(data => {
-        this.loading = false
         this.dataList = data.list
         this.total = data.total - 0
-      }).catch(e => this.loading = false)
+      }).catch(e => { })
     },
   },
 }

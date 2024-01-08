@@ -85,7 +85,7 @@ public class LetterController {
     }
 
     @Operation(summary = "查询分页数据-收件箱")
-    @PostMapping("/revc")
+    @PostMapping("/recv")
     public R revc(Long current, Long size, @RequestBody LetterReq req) {
         Letter entity = letterConvert.req2Entity(req);
         Long userId = UserUtils.getUserId();

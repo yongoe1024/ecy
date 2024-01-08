@@ -22,7 +22,7 @@
       <el-tag :size="size"
               effect="dark"
               :style="{'background-color': item.color,'border-color': item.color}"
-              v-if="value == item.dictValue">{{item.dictKey}}</el-tag>
+              v-if="myValue == item.dictValue">{{item.dictKey}}</el-tag>
     </span>
   </div>
 </template>
