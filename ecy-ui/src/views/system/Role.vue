@@ -60,6 +60,15 @@
       </el-table-column>
     </el-table>
 
+    <!-- 分页 -->
+    <el-pagination background
+                   style="display:flex;justify-content:center;"
+                   @size-change="handleSizeChange"
+                   @current-change="handleCurrentChange"
+                   :page-size="size"
+                   layout="total, sizes, prev, pager, next, jumper"
+                   :total="total"></el-pagination>
+
     <el-dialog :visible.sync="dialogVisible"
                :title="dialogTitle"
                @close="reset"
@@ -126,6 +135,10 @@ export default {
   props: {},
   data () {
     return {
+      total: 0,
+      current: 1,
+      size: 10,
+
       dialogVisible: false,
       dialogVisibleMenu: false,
       dialogTitle: '',
@@ -176,6 +189,16 @@ export default {
     resetQuery () {
       this.queryParam = this.$options.data().queryParam
     },
+    // 改变页码
+    handleSizeChange (val) {
+      this.size = val
+      this.getList()
+    },
+    // 点击页数
+    handleCurrentChange (val) {
+      this.current = val
+      this.getList()
+    },
     handleShowAddEdit () {
       this.dialogTitle = '添加'
       this.dialogVisible = true
@@ -213,8 +236,9 @@ export default {
     },
     // 初始化数据
     getList () {
-      this.axios.post(`/system/role/list`, this.queryParam).then(data => {
-        this.roleList = data
+      this.axios.post(`/system/role/page?current=${this.current}&size=${this.size}`, this.queryParam).then(data => {
+        this.roleList = data.list
+        this.total = data.total - 0
       }).catch(e => { })
     },
   },

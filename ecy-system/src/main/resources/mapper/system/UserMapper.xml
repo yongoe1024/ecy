@@ -20,24 +20,26 @@
         <result column="last_ip" property="lastIp"/>
         <result column="last_time" property="lastTime"/>
         <result column="enabled" property="enabled"/>
-        <collection property="roleList" ofType="com.yongoe.ecy.system.entity.Role">
-            <result column="role_id" property="id"/>
-            <result column="role_name" property="name"/>
-            <result column="role_code" property="code"/>
+        <collection property="roleList"
+                    select="selectRoleByUserId"
+                    column="id">
         </collection>
     </resultMap>
+
+    <!--    获取用户角色-->
+    <select id="selectRoleByUserId" resultType="com.yongoe.ecy.system.entity.Role">
+        select a.*
+        from sys_role a
+                 LEFT JOIN sys_user_role b ON a.id = b.role_id
+        where b.user_id = #{userId}
+    </select>
 
     <!--    获取分页数据-->
     <select id="getUserByPage" resultMap="UserWithRole">
         select a.*,
-        c.id as role_id,
-        c.name as role_name,
-        c.code as role_code,
         d.name as department_name,
         e.name as position_name
         from sys_user a
-        LEFT JOIN sys_user_role b ON a.id = b.user_id
-        LEFT JOIN sys_role c ON c.id = b.role_id
         LEFT JOIN basic_department d ON a.department_id =d.id
         LEFT JOIN basic_position e ON a.position_id = e.id
         <where>
@@ -64,14 +66,9 @@
 
     <select id="getUserById" resultMap="UserWithRole">
         select a.*,
-        c.id as role_id,
-        c.name as role_name,
-        c.code as role_code,
         d.name as department_name,
         e.name as position_name
         FROM sys_user a
-        LEFT JOIN sys_user_role b ON a.id = b.user_id
-        LEFT JOIN sys_role c ON c.id = b.role_id
         LEFT JOIN basic_department d ON a.department_id =d.id
         LEFT JOIN basic_position e ON a.position_id = e.id
         <where>
