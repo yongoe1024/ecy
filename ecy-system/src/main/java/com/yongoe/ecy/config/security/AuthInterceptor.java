@@ -56,7 +56,7 @@ public class AuthInterceptor implements HandlerInterceptor {
                 response.setCharacterEncoding("utf-8");
                 response.setContentType("application/json");
                 PrintWriter writer = response.getWriter();
-                R error = R.error(403, "["+menu.getName()+"]权限不足，请联系管理员！");
+                R error = R.error(403, "[" + menu.getName() + "]权限不足，请联系管理员！");
                 writer.write(new ObjectMapper().writeValueAsString(error));
                 writer.flush();
                 writer.close();

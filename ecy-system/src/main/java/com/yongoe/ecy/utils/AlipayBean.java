@@ -40,7 +40,7 @@ public class AlipayBean implements Serializable {
     /**
      * 产品编号，支付方式不同，传的数据不同
      */
-     //如果是PC网页支付，这个是必传参数
+    //如果是PC网页支付，这个是必传参数
     private String product_code = "FAST_INSTANT_TRADE_PAY";
     //如果是扫码支付，这个是选传参数
     //private String product_code = "FACE_TO_FACE_PAYMENT";

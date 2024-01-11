@@ -30,7 +30,7 @@ public class RedisConfig {
         redisTemplate.setHashValueSerializer(new GenericJackson2JsonRedisSerializer());
         redisTemplate.setConnectionFactory(connectionFactory);
         //统一前缀
-        PrefixRedisSerializer redisKeySerializer=new PrefixRedisSerializer();
+        PrefixRedisSerializer redisKeySerializer = new PrefixRedisSerializer();
         redisTemplate.setKeySerializer(redisKeySerializer);
         return redisTemplate;
     }

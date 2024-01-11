@@ -1,7 +1,6 @@
 package com.yongoe.ecy.system.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yongoe.ecy.system.entity.Role;
 import com.yongoe.ecy.system.entity.RoleMenu;
@@ -26,7 +25,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
 
     @Override
     public List<Role> getRole(Role role) {
-        return baseMapper.getRole( role);
+        return baseMapper.getRole(role);
     }
 
     @Override

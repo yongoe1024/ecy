@@ -1,6 +1,5 @@
 package com.yongoe.ecy.system.service;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.yongoe.ecy.system.entity.Role;
 

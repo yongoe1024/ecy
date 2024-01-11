@@ -18,7 +18,7 @@ public class UserUtils {
         return UserThreadLocal.get();
     }
 
-    public static String getName(){
+    public static String getName() {
         User user = getUser();
         Objects.requireNonNull(user, "用户未登录");
         return getUser().getName();

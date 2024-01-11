@@ -68,12 +68,12 @@ public class LetterController {
     @PostMapping("/info")
     public R info(Long id) {
         Letter letter = letterService.getById(id);
-        if(letter == null)
+        if (letter == null)
             return R.error("信件不存在");
         Long userId = UserUtils.getUserId();
         Long addresserId = letter.getAddresserId();
         Long addresseeId = letter.getAddresseeId();
-        if(!Objects.equals(userId, addresserId) && !Objects.equals(userId, addresseeId))
+        if (!Objects.equals(userId, addresserId) && !Objects.equals(userId, addresseeId))
             return R.error("信件不存在");
         //如果收件人是自己，就已读
         if (addresseeId.equals(userId)) {

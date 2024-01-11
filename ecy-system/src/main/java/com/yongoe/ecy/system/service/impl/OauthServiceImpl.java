@@ -112,7 +112,7 @@ public class OauthServiceImpl implements OauthService {
 
     public R callbackQQ(AuthCallback callback) throws JsonProcessingException {
         AuthResponse login = getQQAuthRequest().login(callback);
-        if (login!=null && login.getCode() != 2000)
+        if (login != null && login.getCode() != 2000)
             return R.error("qq登录失败");
         Object data = login.getData();
         ObjectMapper objectMapper = new ObjectMapper();
