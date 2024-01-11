@@ -92,9 +92,9 @@
         </el-form-item>
       </el-form>
       <span slot="footer">
-        <el-button @click="dialogVisible = false">取 消</el-button>
         <el-button type="primary"
                    @click="handleAddOrUpdate">确 定</el-button>
+        <el-button @click="dialogVisible = false">取 消</el-button>
       </span>
     </el-dialog>
 
@@ -117,12 +117,12 @@
                    :props="{children:'children',label:'name'}"
                    node-key="id"></el-tree>
         </el-form-item>
-        <el-form-item>
-          <el-button size="mini"
-                     type="primary"
-                     @click="handlMenuUpdate()">确认修改</el-button></el-form-item>
+
       </el-form>
       <span slot="footer">
+        <el-button size="mini"
+                   type="primary"
+                   @click="handlMenuUpdate()">确认修改</el-button>
         <el-button @click="dialogVisibleMenu = false">关闭</el-button>
       </span>
     </el-dialog>
@@ -176,7 +176,7 @@ export default {
       let menuIds = selectedKeys.map(item => item.id)
       let url = `/system/role/menu/update?roleId=${this.form.id}&menuIds=${menuIds}`
       this.axios.post(url).then(() => {
-        // this.getList()
+        this.getList()
       }).catch(e => { })
     },
     handleRoleMenuEdit (row) {
