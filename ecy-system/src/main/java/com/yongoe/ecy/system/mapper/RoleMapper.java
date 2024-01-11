@@ -6,6 +6,8 @@ import com.yongoe.ecy.system.entity.Role;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * 角色
  *
@@ -18,5 +20,5 @@ public interface RoleMapper extends BaseMapper<Role> {
     /**
      * 获取角色list 包含菜单id数组
      */
-    Page<Role> getRoleByPage(Page<Role> page,@Param("role") Role role);
+    List<Role> getRole(@Param("role") Role role);
 }

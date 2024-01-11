@@ -41,19 +41,11 @@ public class RoleController {
 
     @Operation(summary = "查询数据")
     @PostMapping("/list")
-    public R list() {
-        Page<Role> list = roleService.getRoleByPage(Page.of(-1, -1), new Role());
-        List<RoleRes> resList = convert.entity2Res(list.getRecords());
-        return R.success().put(resList);
-    }
-
-    @Operation(summary = "查询分页数据")
-    @PostMapping("/page")
-    public R list(Long current, Long size, @RequestBody RoleReq roleReq) {
+    public R list(@RequestBody RoleReq roleReq) {
         Role role = convert.req2Entity(roleReq);
-        Page<Role> list = roleService.getRoleByPage(Page.of(current, size), role);
-        Page<RoleRes> roleResPage = convert.entity2ResPage(list);
-        return R.success().put(new PageUtils(roleResPage));
+        List<Role> list = roleService.getRole(role);
+        List<RoleRes> resList = convert.entity2Res(list);
+        return R.success().put(resList);
     }
 
     @Operation(summary = "根据角色id 修改菜单id")

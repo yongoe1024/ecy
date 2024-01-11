@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.yongoe.ecy.system.entity.Role;
 
+import java.util.List;
+
 /**
  * 角色
  *
@@ -15,7 +17,7 @@ public interface RoleService extends IService<Role> {
     /**
      * 获取角色列表，包含菜单id
      */
-    Page<Role> getRoleByPage(Page<Role> page, Role role);
+    List<Role> getRole(Role role);
 
     /**
      * 更新用户-角色

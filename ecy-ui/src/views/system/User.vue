@@ -299,7 +299,7 @@ export default {
     this.axios.post('/basic/position/list').then(data => {
       this.positionList = data
     }).catch(e => { })
-    this.axios.post('/system/role/list').then(data => {
+    this.axios.post('/system/role/list', {}).then(data => {
       this.roleList = data
     }).catch(e => { })
     this.getList()

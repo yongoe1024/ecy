@@ -11,6 +11,8 @@ import com.yongoe.ecy.system.service.RoleService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * 角色
  *
@@ -23,8 +25,8 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
     private RoleMenuMapper roleMenuMapper;
 
     @Override
-    public Page<Role> getRoleByPage(Page<Role> page, Role role) {
-        return baseMapper.getRoleByPage(page, role);
+    public List<Role> getRole(Role role) {
+        return baseMapper.getRole( role);
     }
 
     @Override

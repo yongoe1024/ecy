@@ -11,7 +11,7 @@
         </collection>
     </resultMap>
 
-    <select id="getRoleByPage" resultMap="BaseResultMap">
+    <select id="getRole" resultMap="BaseResultMap">
         select a.*,
         b.menu_id as rmenu_id
         from sys_role a
@@ -25,7 +25,6 @@
                 and code LIKE CONCAT('%',#{role.code},'%')
             </if>
         </where>
-
     </select>
 
 </mapper>
