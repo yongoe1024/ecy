@@ -9,13 +9,13 @@
     </select>
 
     <select id="getMenuByUser" resultType="com.yongoe.ecy.system.entity.Menu">
-        SELECT distinct c.*
-        FROM sys_user_role a
-                 LEFT JOIN sys_role_menu b ON a.role_id = b.role_id
-                 LEFT JOIN sys_menu c ON b.menu_id = c.id
-        WHERE c.enabled = 1
-          and a.user_id = #{userId}
-        order by c.sort desc
+        SELECT sys_menu.*
+        from sys_menu
+                 LEFT JOIN sys_role_menu ON sys_role_menu.menu_id = sys_menu.id
+                 LEFT JOIN sys_user_role ON sys_user_role.role_id = sys_role_menu.role_id
+        WHERE sys_menu.enabled = 1
+          and sys_user_role.user_id = #{userId}
+        order by sys_menu.sort desc
     </select>
 
 
