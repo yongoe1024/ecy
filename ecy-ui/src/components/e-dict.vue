@@ -82,9 +82,15 @@ export default {
     }
   },
   mounted () {
-    this.axios.post('/dict?name=' + this.name).then(data => {
-      this.dataList = data
-    }).catch(e => { })
+    window.sessionStorage.getItem('dict_' + this.name) ? this.dataList = JSON.parse(window.sessionStorage.getItem('dict_' + this.name)) : this.getData()
+  },
+  methods: {
+    getData () {
+      this.axios.post('/dict?name=' + this.name).then(data => {
+        this.dataList = data
+        window.sessionStorage.setItem('dict_' + this.name, JSON.stringify(data))
+      }).catch(e => { })
+    }
   }
 }
 </script>

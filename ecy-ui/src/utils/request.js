@@ -1,9 +1,8 @@
 import axios from 'axios'
 import Vue from 'vue'
-import store from '@/store'
 import router from '@/router'
-import {Message} from 'element-ui'
-import {endLoading, startLoading} from '@/utils/loading'
+import { Message } from 'element-ui'
+import { endLoading, startLoading } from '@/utils/loading'
 
 const ax = axios.create({
   baseURL: Vue.prototype.$BASE_URL,
@@ -32,10 +31,10 @@ ax.interceptors.response.use(
       // 未登录
       if (response.data.code == 401) {
         Message.error({ message: response.data.message })
-        window.localStorage.removeItem('token')
-        store.commit('initRoutes', [])
+        window.localStorage.clear()
+        window.sessionStorage.clear()
         router.replace('/login')
-        return Promise.reject(response)
+        location.reload()
       }
       else if (response.data.code == 402) {
         //验证码错误

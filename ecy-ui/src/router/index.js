@@ -84,7 +84,6 @@ router.beforeEach((to, from, next) => {
   }
   else {
     let arr = ['/login', '/forget', '/register', '/oauth/qq']
-    console.log(to.path)
     if (arr.indexOf(to.path) > -1) {
       next()
     }
