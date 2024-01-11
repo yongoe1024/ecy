@@ -6,7 +6,7 @@ var CancelToken = axios.CancelToken //在请求的任何阶段关闭请求。
 var source = CancelToken.source() //取消请求的令牌
 
 const baseURL = Vue.prototype.$BASE_URL
-const chunkSize = 1024 * 1024 * 5 // 文件分片大小 20M
+const chunkSize = 1024 * 1024 * 5 // 文件分片大小 50M
 const uploadUrl = baseURL + '/upload/uploadChunk' // 上传地址
 const checkChunkExistUrl = baseURL + '/upload/checkChunkExist' // 检查分片是否存在
 const mergeChunksUrl = baseURL + '/upload/merge' // 合并分片
@@ -29,7 +29,7 @@ const mergeChunksUrl = baseURL + '/upload/merge' // 合并分片
 
 /**
  * 分片上传功能
- * @param {Element的fileObject对象} fileObject 
+ * @param {*Element的fileObject对象} fileObject 
  * @returns 
  */
 export async function uploadChunk (fileObject) {
@@ -114,7 +114,7 @@ export function stop () {
 
 /**
  * 获取第一个块的md5
- * @param {原生File} file 
+ * @param {*原生File} file 
  * @returns 异步Promise
  */
 function firstChunkMd5 (file) {
@@ -135,7 +135,7 @@ function firstChunkMd5 (file) {
 }
 /**
  * 检测文件是否存在
- * @param {FileRequest} fileRequest 
+ * @param {*FileRequest} fileRequest 
  * @returns 请求结果
  */
 function checkChunkExist (fileRequest) {
@@ -144,7 +144,7 @@ function checkChunkExist (fileRequest) {
 }
 /**
  * 合并文件
- * @param {FileRequest} fileRequest 
+ * @param {*FileRequest} fileRequest 
  * @returns 请求结果
  */
 function mergeChunks (fileRequest) {
@@ -153,10 +153,10 @@ function mergeChunks (fileRequest) {
 }
 /**
  * 文件请求对象构造函数
- * @param {原生File} file 
- * @param {文件md5} md5 
- * @param {分块总数} totalChunks 
- * @param {当前分块序号,从0开始} chunkNumber 
+ * @param {*原生File} file 
+ * @param {*文件md5} md5 
+ * @param {*分块总数} totalChunks 
+ * @param {*当前分块序号,从0开始} chunkNumber 
  */
 function FileRequest (file, md5, totalChunks, chunkNumber) {
   let chunkFile = file.slice(0 + chunkNumber * chunkSize, 0 + (chunkNumber + 1) * chunkSize)

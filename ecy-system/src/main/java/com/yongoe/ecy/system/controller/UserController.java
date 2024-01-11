@@ -148,7 +148,7 @@ public class UserController {
     }
 
     @Operation(summary = "导出模板")
-    @PostMapping("/export")
+    @GetMapping("/export")
     public void export(HttpServletResponse response) {
         ExcelUtils.export(response, new ArrayList<>(), UserExcel.class);
     }

@@ -226,7 +226,7 @@ export default {
             this.queryParam = this.$options.data().queryParam
         },
         handleExport() {
-            this.$downloadRequest('/${packageName}/${entity?lower_case}/export', this.queryParam)
+            this.download('/${packageName}/${entity?lower_case}/export', this.queryParam)
         },
         // 多选框回调
         handleSelectionChange(val) {

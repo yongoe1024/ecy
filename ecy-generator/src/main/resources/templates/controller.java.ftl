@@ -76,8 +76,8 @@ public class ${table.controllerName} {
     }
 
     @Operation(summary = "导出数据")
-    @PostMapping("/export")
-    public void export(@RequestBody ${entity}Req req, HttpServletResponse response) {
+    @GetMapping("/export")
+    public void export(${entity}Req req, HttpServletResponse response) {
         ${entity} entity = ${entity?uncap_first}Convert.req2Entity(req);
         Page<${entity}> page = ${table.serviceName?uncap_first}.get${entity}ByPage(Page.of(-1, -1), entity);
         List<${entity}Excel> list = ${entity?uncap_first}Convert.entity2ExcelList(page.getRecords());

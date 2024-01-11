@@ -58,8 +58,7 @@ ax.interceptors.response.use(
   error => {
     endLoading()
     console.log(error)
-    let response = error.response
-    Message.error({ message: response.status + ' ' + response.statusText })
+    Message.error({ message: error.response.status + ' ' + error.response.statusText })
     return Promise.reject(error)
   })
 

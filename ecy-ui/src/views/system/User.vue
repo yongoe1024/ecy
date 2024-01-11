@@ -307,7 +307,7 @@ export default {
   methods: {
     handleExport () {
       this.$confirm('部门存在子部门，若子部门同名，则无法区分，建议所有子部门区分名称, 是否继续?', '提示', { type: 'warning' }).then(() => {
-        this.$downloadRequest('/system/user/export').then(() => { this.getList() }).catch(e => { })
+        this.download('/system/user/export')
       }).catch(e => { })
     },
     reset () {

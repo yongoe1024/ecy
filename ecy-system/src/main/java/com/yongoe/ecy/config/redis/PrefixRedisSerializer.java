@@ -1,10 +1,12 @@
 package com.yongoe.ecy.config.redis;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 public class PrefixRedisSerializer extends StringRedisSerializer {
-
-    public static final String PREFIX_KEY = "ecy:";
+    @Value("${server.servlet.context-path}")
+    private String pathPrefix;
+    public String PREFIX_KEY = pathPrefix + ":";
 
     /**
      * 序列化

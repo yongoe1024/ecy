@@ -32,7 +32,7 @@
       <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
 
       <div class="el-upload__tip"
-           slot="tip">只能上传不超过10M</div>
+           slot="tip">只能上传不超过50M</div>
     </el-upload>
   </div>
 </template>

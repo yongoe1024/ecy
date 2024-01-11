@@ -2,17 +2,19 @@
   <div>
     <!-- <e-dict name="性别"
             v-model="v"></e-dict>
-    <e-chunk-upload></e-chunk-upload>
+  
     <e-editor v-model="v"></e-editor>  
      <el-button @click="pay">支付</el-button>
     <el-button @click="dd">aa{{p}}</el-button>
       <e-upload>收拾 </e-upload>
-    <e-download> 下载</e-download>
+  
     <e-dict name="启用"
             :tag="true"
             :value="true"></e-dict>
     <e-dict name="启用"
             v-model="a"></e-dict> -->
+    <e-chunk-upload></e-chunk-upload>
+    <e-download-file file-path="/1/2dd29b76af857983a2dc84ba33327330.mp4"> 下载</e-download-file>
   </div>
 </template>
 
@@ -30,14 +32,8 @@ export default {
     }
   },
   mounted () {
-    this.axios.post('/system/user/export').then(res => {
-    }).catch(err => {
-    })
   },
   methods: {
-    dd () {
-      this.$downloadRequest('/download?filePath=', {}, (progress) => { this.p = progress })
-    },
     pay () {
       this.axios.get('/pay').then(res => {
         let myWindow = window.open('', '_parent', 'width:90%,height:90%')

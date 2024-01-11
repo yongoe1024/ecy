@@ -30,7 +30,11 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json");
-        String token = request.getHeader(JwtUtils.requestHeader);
+        String token;
+        token = request.getParameter("Authorization");
+        if (StringUtils.isEmpty(token)) {
+            token = request.getHeader(JwtUtils.requestHeader);
+        }
         if (!StringUtils.isEmpty(token) && token.startsWith(JwtUtils.tokenHead)) {
             token = token.substring(JwtUtils.tokenHead.length());
             String id = JwtUtils.getKeyFromToken(token);

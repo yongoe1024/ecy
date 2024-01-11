@@ -35,6 +35,8 @@ import java.util.List;
 public class CommonController {
     @Value("${ecy.file-save-path}")
     private String fileSavePath;
+    @Value("${server.servlet.context-path}")
+    private String pathPrefix;
 
     /**
      * 普通下载文件,流式传输
@@ -44,6 +46,9 @@ public class CommonController {
     @Operation(summary = "普通下载文件,流式传输")
     @GetMapping("/download")
     public ResponseEntity<InputStreamResource> downloadFile(String filePath) throws IOException {
+        String prefix = Path.of(pathPrefix, "file").toString();
+        if (filePath.startsWith(prefix))
+            filePath = filePath.substring(prefix.length());
         Path path = Path.of(fileSavePath, filePath);
         // 从文件系统中获取文件输入流
         File file = new File(path.toString());
@@ -60,7 +65,6 @@ public class CommonController {
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .body(resource);
     }
-
 
     /**
      * 普通上传文件-单个
