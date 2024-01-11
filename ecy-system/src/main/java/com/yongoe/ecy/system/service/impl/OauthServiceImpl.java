@@ -24,7 +24,6 @@ import me.zhyd.oauth.request.AuthQqRequest;
 import me.zhyd.oauth.request.AuthRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URLDecoder;
@@ -72,7 +71,6 @@ public class OauthServiceImpl implements OauthService {
         }
     }
 
-    @Transactional(rollbackFor = RuntimeException.class)
     public R callbackWXH5(String code) {
         String clientId = configUtils.get("wxh5-clientId");
         String clientSecret = configUtils.get("wxh5-clientSecret");
@@ -112,7 +110,6 @@ public class OauthServiceImpl implements OauthService {
         return R.success().put(token);
     }
 
-    @Transactional(rollbackFor = RuntimeException.class)
     public R callbackQQ(AuthCallback callback) throws JsonProcessingException {
         AuthResponse login = getQQAuthRequest().login(callback);
         if (login!=null && login.getCode() != 2000)

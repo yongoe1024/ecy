@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import me.zhyd.oauth.model.AuthCallback;
 import me.zhyd.oauth.request.AuthRequest;
 import me.zhyd.oauth.utils.AuthStateUtils;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -64,7 +63,6 @@ public class OauthController {
     }
 
     @GetMapping("/oauth/wxh5/callback")
-    @Transactional(rollbackFor = RuntimeException.class)
     public R callbackWXH5(String code) throws JsonProcessingException {
         return oauthService.callbackWXH5(code);
     }

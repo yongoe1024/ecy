@@ -8,7 +8,7 @@ import {endLoading, startLoading} from '@/utils/loading'
 const ax = axios.create({
   baseURL: Vue.prototype.$BASE_URL,
   withCredentials: true,  //是否允许跨域, 解决请求不包含cookie  ：session
-  timeout: 6000
+  timeout: 0
 })
 
 //请求拦截器
@@ -58,38 +58,8 @@ ax.interceptors.response.use(
   error => {
     endLoading()
     console.log(error)
-    if (!error.response) {
-      Message.error({ message: '无法连接服务器' })
-      window.localStorage.removeItem('token')
-      store.commit('initRoutes', [])
-      router.replace('/login')
-    }
-    else if (error.response.data.status == 504 || error.response.data.status == 404) {
-      Message.error({ message: '404 服务器无法访问' })
-    }
-    else if (error.response.data.status == 500) {
-      Message.error({ message: '500 服务器错误' })
-      window.localStorage.removeItem('token')
-      store.commit('initRoutes', [])
-      router.replace('/login')
-    }
-    else if (error.response.data.status == 403) {
-      Message.error({ message: '403 权限不足,请联系管理员' })
-    }
-    else if (error.response.data.status == 401) {
-      Message.error({ message: '401 未登录' })
-      window.localStorage.removeItem('token')
-      store.commit('initRoutes', [])
-      router.replace('/login')
-    }
-    else {
-      if (error.response.data.error) {
-        Message.error({ message: error.response.data.message })
-      }
-      else {
-        Message.error({ message: '无法请求服务器，未知错误' })
-      }
-    }
+    let response = error.response
+    Message.error({ message: response.status + ' ' + response.statusText })
     return Promise.reject(error)
   })
 

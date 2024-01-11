@@ -11,7 +11,4 @@
 .ql-editor img {
   max-width: 90%;
 }
-.ql-editor {
-  min-height: 10px;
-}
 </style>

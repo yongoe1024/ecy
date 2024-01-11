@@ -12,7 +12,6 @@ import com.yongoe.ecy.utils.R;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.util.List;
@@ -49,7 +48,6 @@ public class LoginServiceImpl implements LoginService {
         return R.success("登录成功").put(token);
     }
 
-    @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public R register(RegisterReq register) {
         try {

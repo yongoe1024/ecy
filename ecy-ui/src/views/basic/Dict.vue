@@ -39,7 +39,7 @@
                        align="center">
         <template slot-scope="scope">
           <router-link :to="{
-                path: 'basic-DictData',  query :{ dictId:scope.row.id}
+                path: '/basic/DictData',  query :{ dictId:scope.row.id}
                 }">{{scope.row.name}}
           </router-link>
         </template>

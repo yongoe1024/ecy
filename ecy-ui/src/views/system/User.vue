@@ -53,6 +53,14 @@
                  plain
                  @click="handleShowAddEdit"
                  icon="el-icon-plus">添加</el-button>
+      <e-upload size="mini"
+                url="/system/user/upload"
+                @success="getList">导入用户</e-upload>
+      <el-button type="warning"
+                 icon="el-icon-download"
+                 plain
+                 size="mini"
+                 @click="handleExport">导出模板</el-button>
     </div>
 
     <!-- 表格 -->
@@ -297,6 +305,11 @@ export default {
     this.getList()
   },
   methods: {
+    handleExport () {
+      this.$confirm('部门存在子部门，若子部门同名，则无法区分，建议所有子部门区分名称, 是否继续?', '提示', { type: 'warning' }).then(() => {
+        this.$downloadRequest('/system/user/export').then(() => { this.getList() }).catch(e => { })
+      }).catch(e => { })
+    },
     reset () {
       this.form = this.$options.data().form
     },

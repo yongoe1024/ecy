@@ -39,13 +39,14 @@ service.interceptors.response.use(
   },
   error => {
     console.log(error)
+    Message.error({ message: '无法请求服务器，未知错误' })
   }
 )
 
 Vue.prototype.$downloadRequest = (url, params, progress) => {
   return service(
     {
-      method: 'get',
+      method: 'post',
       url: `${Vue.prototype.$BASE_URL}${url}`,
       data: params,
       onDownloadProgress: progressEvent => {
