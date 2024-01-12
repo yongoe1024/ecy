@@ -60,9 +60,9 @@ public class UserController {
 
     @Operation(summary = "查询分页数据")
     @PostMapping("/page")
-    public R page(Long current, Long size, @RequestBody UserReq req) {
+    public R page(@RequestBody UserReq req) {
         User entity = convert.req2Entity(req);
-        Page<User> page = userService.getUserByPage(Page.of(current, size), entity);
+        Page<User> page = userService.getUserByPage(Page.of(req.getCurrent(), req.getSize()), entity);
         Page<UserRes> resPage = convert.entity2ResPage(page);
         return R.success().put(new PageUtils(resPage));
     }

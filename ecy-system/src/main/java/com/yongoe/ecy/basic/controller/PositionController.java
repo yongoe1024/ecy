@@ -38,9 +38,9 @@ public class PositionController {
 
     @Operation(summary = "查询分页数据")
     @PostMapping("/page")
-    public R page(Long current, Long size, @RequestBody PositionReq req) {
+    public R page(@RequestBody PositionReq req) {
         Position entity = positionConvert.req2Entity(req);
-        Page<Position> page = positionService.getPositionByPage(Page.of(current, size), entity);
+        Page<Position> page = positionService.getPositionByPage(Page.of(req.getCurrent(), req.getSize()), entity);
         Page<PositionRes> resPage = positionConvert.entity2ResPage(page);
         return R.success().put(new PageUtils(resPage));
     }

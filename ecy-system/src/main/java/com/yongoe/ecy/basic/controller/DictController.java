@@ -54,9 +54,9 @@ public class DictController {
 
     @Operation(summary = "查询分页数据")
     @PostMapping("/basic/dict/page")
-    public R page(Long current, Long size, @RequestBody DictReq req) {
+    public R page(@RequestBody DictReq req) {
         Dict entity = dictConvert.req2Entity(req);
-        Page<Dict> page = dictService.getDictByPage(Page.of(current, size), entity);
+        Page<Dict> page = dictService.getDictByPage(Page.of(req.getCurrent(), req.getSize()), entity);
         Page<DictRes> resPage = dictConvert.entity2ResPage(page);
         return R.success().put(new PageUtils(resPage));
     }

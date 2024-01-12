@@ -1,6 +1,7 @@
 package com.yongoe.ecy.system.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.yongoe.ecy.system.controller.vo.req.LogReq;
 import com.yongoe.ecy.system.controller.vo.res.LogRes;
 import com.yongoe.ecy.system.convert.LogConvert;
 import com.yongoe.ecy.system.entity.Log;
@@ -11,6 +12,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,8 +33,8 @@ public class LogController {
 
     @Operation(summary = "查询分页数据")
     @PostMapping("/page")
-    public R page(Long current, Long size) {
-        Page<Log> page = logService.getLogByPage(Page.of(current, size));
+    public R page(@RequestBody LogReq req) {
+        Page<Log> page = logService.getLogByPage(Page.of(req.getCurrent(), req.getSize()));
         Page<LogRes> resPage = logConvert.entity2ResPage(page);
         return R.success().put(new PageUtils(resPage));
     }

@@ -32,9 +32,9 @@ public class DictDataController {
 
     @Operation(summary = "查询分页数据")
     @PostMapping("/page")
-    public R page(Long current, Long size, @RequestBody DictDataReq req) {
+    public R page(@RequestBody DictDataReq req) {
         DictData entity = dictDataConvert.req2Entity(req);
-        Page<DictData> page = dictDataService.getDictDataByPage(Page.of(current, size), entity);
+        Page<DictData> page = dictDataService.getDictDataByPage(Page.of(req.getCurrent(), req.getSize()), entity);
         Page<DictDataRe> resPage = dictDataConvert.entity2ResPage(page);
         return R.success().put(new PageUtils(resPage));
     }

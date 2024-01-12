@@ -49,9 +49,9 @@ public class RoleController {
 
     @Operation(summary = "查询分页数据")
     @PostMapping("/page")
-    public R list(Long current, Long size, @RequestBody RoleReq roleReq) {
+    public R list(@RequestBody RoleReq roleReq) {
         Role role = convert.req2Entity(roleReq);
-        Page<Role> list = roleService.getRoleByPage(Page.of(current, size), role);
+        Page<Role> list = roleService.getRoleByPage(Page.of(roleReq.getCurrent(), roleReq.getSize()), role);
         Page<RoleRes> roleResPage = convert.entity2ResPage(list);
         return R.success().put(new PageUtils(roleResPage));
     }

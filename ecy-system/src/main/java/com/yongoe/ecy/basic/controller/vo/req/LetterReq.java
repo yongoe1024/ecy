@@ -1,5 +1,6 @@
 package com.yongoe.ecy.basic.controller.vo.req;
 
+import com.yongoe.ecy.utils.BaseEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,7 +18,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(name = "信件管理Req")
-public class LetterReq {
+public class LetterReq extends BaseEntity {
 
     private Long id;
     /**

@@ -1,5 +1,6 @@
 package com.yongoe.ecy.system.controller.vo.req;
 
+import com.yongoe.ecy.utils.BaseEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(name = "角色Req")
-public class RoleReq {
+public class RoleReq extends BaseEntity {
 
     private Long id;
     /**

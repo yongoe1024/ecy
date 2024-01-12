@@ -86,7 +86,7 @@
                    style="display:flex;justify-content:center;"
                    @size-change="handleSizeChange"
                    @current-change="handleCurrentChange"
-                   :page-size="size"
+                   :page-size="queryParam.size"
                    layout="total, sizes, prev, pager, next, jumper"
                    :total="total"></el-pagination>
 
@@ -132,8 +132,7 @@ export default {
       // 多选框数据
       multipleSelection: [],
       total: 0,
-      current: 1,
-      size: 10,
+
       dialogVisible: false,
       dialogTitle: '',
 
@@ -143,6 +142,8 @@ export default {
         enabled: true,
       },
       queryParam: {
+        current: 1,
+        size: 10,
         name: null,
         enabled: null,
       },
@@ -168,12 +169,12 @@ export default {
     },
     // 改变页码
     handleSizeChange (val) {
-      this.size = val
+      this.queryParam.size = val
       this.getList()
     },
     // 点击页数
     handleCurrentChange (val) {
-      this.current = val
+      this.queryParam.current = val
       this.getList()
     },
     handleShowAddEdit () {
@@ -214,7 +215,7 @@ export default {
     },
     // 初始化数据
     getList () {
-      this.axios.post(`/basic/position/page?current=${this.current}&size=${this.size}`, this.queryParam).then(data => {
+      this.axios.post(`/basic/position/page`, this.queryParam).then(data => {
         this.dataList = data.list
         this.total = data.total - 0
       }).catch(e => { })

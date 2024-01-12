@@ -35,9 +35,9 @@ public class ConfigController {
 
     @Operation(summary = "查询分页数据")
     @PostMapping("/page")
-    public R page(Long current, Long size, @RequestBody ConfigReq req) {
+    public R page(@RequestBody ConfigReq req) {
         Config entity = convert.req2Entity(req);
-        Page<Config> page = configService.getConfigByPage(Page.of(current, size), entity);
+        Page<Config> page = configService.getConfigByPage(Page.of(req.getCurrent(), req.getSize()), entity);
         Page<ConfigRes> resPage = convert.entity2ResPage(page);
         return R.success().put(new PageUtils(resPage));
     }

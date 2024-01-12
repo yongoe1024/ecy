@@ -36,9 +36,9 @@ public class ${table.controllerName} {
 
     @Operation(summary = "查询分页数据")
     @PostMapping("/page")
-    public R page(Long current, Long size, @RequestBody ${entity}Req req) {
+    public R page(@RequestBody ${entity}Req req) {
         ${entity} entity = ${entity?uncap_first}Convert.req2Entity(req);
-        Page<${entity}> page = ${table.serviceName?uncap_first}.get${entity}ByPage(Page.of(current, size), entity);
+        Page<${entity}> page = ${table.serviceName?uncap_first}.get${entity}ByPage(Page.of(req.getCurrent(), req.getSize()), entity);
         Page<${entity}Res> resPage = ${entity?uncap_first}Convert.entity2ResPage(page);
         return R.success().put(new PageUtils(resPage));
     }

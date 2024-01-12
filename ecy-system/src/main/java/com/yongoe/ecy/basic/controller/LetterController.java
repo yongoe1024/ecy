@@ -86,22 +86,22 @@ public class LetterController {
 
     @Operation(summary = "查询分页数据-收件箱")
     @PostMapping("/recv")
-    public R revc(Long current, Long size, @RequestBody LetterReq req) {
+    public R revc(@RequestBody LetterReq req) {
         Letter entity = letterConvert.req2Entity(req);
         Long userId = UserUtils.getUserId();
         entity.setAddresseeId(userId);
-        Page<Letter> page = letterService.getLetterByPage(Page.of(current, size), entity);
+        Page<Letter> page = letterService.getLetterByPage(Page.of(req.getCurrent(), req.getSize()), entity);
         Page<LetterRes> resPage = letterConvert.entity2ResPage(page);
         return R.success().put(new PageUtils(resPage));
     }
 
     @Operation(summary = "查询分页数据-发件箱")
     @PostMapping("/send")
-    public R send(Long current, Long size, @RequestBody LetterReq req) {
+    public R send(@RequestBody LetterReq req) {
         Letter entity = letterConvert.req2Entity(req);
         Long userId = UserUtils.getUserId();
         entity.setAddresserId(userId);
-        Page<Letter> page = letterService.getLetterByPage(Page.of(current, size), entity);
+        Page<Letter> page = letterService.getLetterByPage(Page.of(req.getCurrent(), req.getSize()), entity);
         Page<LetterRes> resPage = letterConvert.entity2ResPage(page);
         return R.success().put(new PageUtils(resPage));
     }
