@@ -35,7 +35,7 @@ public class MyWebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         String[] p = new String[]{
-                "/login", "/logout", "/oauth/**", "/captcha/**",
+                "/login", "/oauth/**", "/captcha/**",
                 "/forget", "/register",
                 "/file/**",
                 "/webjars/**", "/v3/**", "/doc.html",

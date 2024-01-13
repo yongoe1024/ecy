@@ -74,12 +74,6 @@
             <artifactId>hutool-all</artifactId>
             <version>5.8.16</version>
         </dependency>
-        <dependency>
-            <groupId>jakarta.servlet</groupId>
-            <artifactId>jakarta.servlet-api</artifactId>
-            <version>6.0.0</version>
-            <scope>provided</scope>
-        </dependency>
 
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
@@ -107,6 +101,12 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.0.0</version>
+            <scope>provided</scope>
+        </dependency>
         <!--jdk9之后就剥离出来了，需要手动引入-->
         <dependency>
             <groupId>javax.xml.bind</groupId>

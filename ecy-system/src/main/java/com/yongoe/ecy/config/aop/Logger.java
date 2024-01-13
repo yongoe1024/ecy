@@ -4,6 +4,7 @@ import com.yongoe.ecy.system.service.LogService;
 import jakarta.annotation.Resource;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -16,6 +17,7 @@ import java.util.Arrays;
  */
 @Component
 @Aspect
+@Order(0)
 public class Logger {
     @Resource
     private LogService logService;

@@ -15,6 +15,8 @@ import java.util.Objects;
 public class UserUtils {
 
     public static User getUser() {
+        User user = UserThreadLocal.get();
+        Objects.requireNonNull(user, "用户未登录");
         return UserThreadLocal.get();
     }
 
