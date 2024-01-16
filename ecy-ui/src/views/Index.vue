@@ -11,33 +11,16 @@
                  class="el-menu-vertical"
                  background-color="#3e506b"
                  text-color="#FFFFFF"
-                 :default-active="path"
+                 :default-active="$router.currentRoute.path"
                  unique-opened>
           <el-menu-item index="/home">
             <i class="fa fa-home"
                style="margin-left:3px;color:#FFFFFF;font-size:23px"></i>
             <span style="margin-left:20px;font-size:15px">首页</span>
           </el-menu-item>
-          <el-submenu v-for="(item, index) in routes"
-                      :index="index+''"
-                      :key="index"
-                      v-show="item.isShow">
-            <template slot="title">
-              <i :class="item.icon"
-                 style="color:#FFFFFF;font-size:18px"></i>
-              <span style="margin-left:5px;font-size:15px">{{ item.name }}</span>
-            </template>
-            <!-- 子选项 -->
-            <el-menu-item style="width:180px"
-                          :index="children.path"
-                          v-for="(children, indexj) in item.children"
-                          :key="indexj"
-                          v-show="children.isShow">
-              <i :class="children.icon"
-                 style="color:#FFFFFF;font-size:15px"></i>
-              <span style="font-size:15px">{{ children.name }}</span>
-            </el-menu-item>
-          </el-submenu>
+          <e-menu-item v-for="(item, index) in routes"
+                       :key="index"
+                       :item="item"></e-menu-item>
         </el-menu>
       </el-aside>
 
@@ -47,21 +30,25 @@
                    height="50px">
           <div>
             <i class="el-icon-s-fold"
-               style="font-size:25px;cursor:pointer;"
+               style="font-size:25px;cursor:pointer;style:margin-right:10px;"
                @click="isCollapse=!isCollapse"></i>
             <!-- 面包屑 -->
             <el-breadcrumb>
-              <el-breadcrumb-item>首页</el-breadcrumb-item>
-              <el-breadcrumb-item v-if="$router.currentRoute.path != '/index'">{{$router.currentRoute.name }}</el-breadcrumb-item>
+              <el-breadcrumb-item v-for="(item,index) in pathList"
+                                  :key="index">{{item.name }}</el-breadcrumb-item>
             </el-breadcrumb>
           </div>
 
           <div>
             <letter-icon></letter-icon>
             <el-dropdown @command="handleCommand">
-              <img :src="user.avatar"
-                   class="userimg"
-                   @error="setDefaultImage" />
+              <div>
+                <img :src="user.avatar"
+                     class="userimg"
+                     @error="setDefaultImage" />
+                <i class="el-icon-caret-bottom"
+                   style="margin-top:30px;"></i>
+              </div>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item command="userinfo">个人中心</el-dropdown-item>
                 <el-dropdown-item command="logout">退出登录</el-dropdown-item>
@@ -94,12 +81,19 @@ export default {
     routes () {
       return this.$store.state.menus.routes
     },
-    path () {
-      return this.$router.currentRoute.path
+  },
+  watch: {
+    $route: {
+      immediate: true,
+      handler (to, from) {
+        console.log(to)
+        this.pathList = to.matched
+      }
     }
   },
   data () {
     return {
+      pathList: [],
       imgUrl: require('../assets/no-img.jpg'),
       isCollapse: false,
       asideWidth: '200px',
@@ -150,12 +144,9 @@ export default {
 .userimg {
   width: 42px;
   height: 42px;
-  border-radius: 45%;
+  border-radius: 20%;
   border: 1px solid #c0bbbb;
   cursor: pointer;
-}
-.el-menu-vertical:not(.el-menu--collapse) {
-  width: 200px;
 }
 .el-aside {
   transition: width 0.3s;
@@ -164,30 +155,6 @@ export default {
   -webkit-transition: width 0.3s;
   -o-transition: width 0.3s;
   color: #76bdda;
+  overflow: hidden;
 }
-.el-menu {
-  border-right-width: 0 !important;
-}
-/* 
-.el-submenu__title {
-  display: flex;
-  align-items: center;
-}
-.el-submenu__title span {
-  white-space: normal;
-  line-height: 20px;
-  padding-right: 20px;
-}
-.el-menu-item {
-  display: flex;
-  align-items: center;
-  padding-right: 20px !important;
-}
-.el-menu-item span {
-  white-space: normal;
-  line-height: 20px;
-}
-.el-menu {
-  border-right-width: 0 !important;
-} */
 </style>

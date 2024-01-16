@@ -1,13 +1,21 @@
 <template>
   <div>
+
     <el-popover placement="bottom"
                 v-model="popover"
                 width="400"
                 trigger="click">
-      <el-tree :data="data"
-               :default-expand-all="open_all"
-               :props="tree_props"
-               @node-click="handleNodeClick"></el-tree>
+      <div>
+        <el-button slot="reference"
+                   size="mini"
+                   type="text"
+                   style="margin-left:20px"
+                   @click="handleRoot">选择根节点</el-button>
+        <el-tree :data="data"
+                 :default-expand-all="open_all"
+                 :props="tree_props"
+                 @node-click="handleNodeClick"></el-tree>
+      </div>
       <el-input v-model="label"
                 readonly
                 :size="size"
@@ -72,6 +80,11 @@ export default {
 
   },
   methods: {
+    handleRoot () {
+      this.popover = false
+      this.label = "根节点"
+      this.$emit('input', '0')
+    },
     handleNodeClick (data) {
       this.popover = false
       this.label = data[this.tree_props.label]

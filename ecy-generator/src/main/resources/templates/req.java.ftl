@@ -1,5 +1,6 @@
 package ${package.Controller}.vo.req;
 
+import com.yongoe.ecy.utils.BaseEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,7 +21,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(name = "${moduleName}Req")
-public class ${entity}Req {
+public class ${entity}Req  extends BaseEntity {
 
 <#-- ----------  BEGIN 字段循环遍历  ---------->
 <#list table.fields as field>

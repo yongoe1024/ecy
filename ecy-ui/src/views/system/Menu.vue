@@ -28,7 +28,7 @@
                        align="center">
         <template slot-scope="scope">
           <span v-if="scope.row.type===1">目录</span>
-          <span v-else-if="scope.row.type===2">菜单</span>
+          <span v-else-if="scope.row.type===2">页面</span>
           <span v-else-if="scope.row.type===3">按钮</span>
         </template>
       </el-table-column>
@@ -121,6 +121,22 @@
                label-width="auto"
                style="margin:20px"
                :rules="rules">
+        <el-form-item label="类型"
+                      prop="type">
+
+          <el-radio v-for="(item,index) in [{name:'目录',type:1},{name:'页面',type:2},{name:'按钮',type:3}]"
+                    :key="index"
+                    v-model="form.type"
+                    :label="item.type">{{item.name}}</el-radio>
+          <el-tooltip placement="top">
+            <div slot="content">
+              <p>目录：用于组织页面，可放根节点和目录下</p>
+              <p>页面：用于页面显示，放在目录下</p>
+              <p>按钮：用于页面按钮，可指定接口url精确权限，放在页面下</p>
+            </div>
+            <i class="el-icon-question" />
+          </el-tooltip>
+        </el-form-item>
         <el-form-item label="上级菜单"
                       prop="parentId">
           <e-input-tree :data="dataList"
@@ -133,17 +149,6 @@
           <el-input v-model="form.name"
                     placeholder="请输入菜单名" />
         </el-form-item>
-        <el-form-item label="类型"
-                      prop="type">
-          <el-select v-model="form.type"
-                     placeholder="请选择类型">
-            <el-option v-for="item in [{name:'目录',type:1},{name:'菜单',type:2},{name:'按钮',type:3}]"
-                       :key="item.type"
-                       :label="item.name"
-                       :value="item.type">
-            </el-option>
-          </el-select>
-        </el-form-item>
         <el-form-item label="组件位置"
                       prop="component">
           <el-input v-model="form.component"
@@ -153,6 +158,7 @@
         <el-form-item label="接口url"
                       prop="url">
           <el-input v-model="form.url"
+                    :disabled="urlDisabled"
                     placeholder="请输入接口路径" />
         </el-form-item>
         <el-form-item label="图标"
@@ -167,6 +173,7 @@
         <el-form-item label="是否缓存"
                       prop="keepAlive">
           <el-switch v-model="form.keepAlive"
+                     :disabled="componentDisabled"
                      active-text="是"
                      inactive-text="否"
                      active-color="#13ce66"
@@ -211,17 +218,25 @@ export default {
     type (n) {
       if (n == 1) {
         this.componentDisabled = true
-        this.form.parentId = '0'
+        this.urlDisabled = true
+        // this.form.parentId = '0'
+        this.form.url = ''
+        this.form.component = ''
+      } else if (n == 3) {
+        this.componentDisabled = true
+        this.urlDisabled = false
         this.form.url = ''
         this.form.component = ''
       } else {
         this.componentDisabled = false
+        this.urlDisabled = false
       }
     }
   },
   data () {
     return {
       componentDisabled: true,
+      urlDisabled: true,
 
       dialogVisible: false,
       dialogTitle: '',

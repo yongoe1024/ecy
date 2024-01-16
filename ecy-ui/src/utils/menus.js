@@ -9,7 +9,12 @@ export default (router, store) => {
       axios.post('/user/menu').then(data => {
         //格式化
         let fmtRoutes = formatRoutes(data)
-        fmtRoutes.forEach(x => router.addRoute(x))
+        router.addRoute({
+          name: '',
+          path: '',
+          component: () => import('/src/views/Index'),
+          children: fmtRoutes
+        })
         //存入vuex
         store.commit('initRoutes', fmtRoutes)
         flag = true
@@ -35,7 +40,6 @@ function formatRoutes (routes) {
     if (children && children instanceof Array) {
       children = formatRoutes(children)			// 递归
     }
-
     let fmRouter = {
       type: type,
       name: name,
@@ -44,22 +48,23 @@ function formatRoutes (routes) {
       isShow: isShow,
       meta: {
         auth: [],
-        keepAlive: false
+        keepAlive: keepAlive
       }
     }
-    children.forEach(v => {
-      //按钮权限
-      if (v.type === 3)
-        fmRouter.meta.auth.push(v.name)
-    })
-    if (fmRouter.type === 1 || type === 3) {
-      fmRouter.component = () => import('/src/views/Index')
-      fmRouter.path = '//'    // 此处不这么做 会导致路由混乱 ，meta传不进去值，顺序错误
-    }
-    else {
+    // 存在组件就是页面
+    if (component) {
       fmRouter.path = component
       fmRouter.component = () => import('/src/views' + component)
-      fmRouter.meta.keepAlive = keepAlive
+      children.forEach(v => {
+        //按钮权限
+        if (v.type === 3)
+          fmRouter.meta.auth.push(v.name)
+      })
+      children = []
+    } else {
+      // 不存在就是目录和按钮
+      fmRouter.path = ''
+      fmRouter.component = { render: (e) => e("router-view") }
     }
     fmtRoutes.push(fmRouter)
   })

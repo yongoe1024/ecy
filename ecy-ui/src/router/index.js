@@ -28,8 +28,8 @@ const routes = [
     component: () => import('@/views/oauth/QQ'),
   },
   {
-    path: '/index',
-    name: '页面框架',
+    path: '',
+    name: '',
     component: () => import('@/views/Index'),
     children: [
       {
