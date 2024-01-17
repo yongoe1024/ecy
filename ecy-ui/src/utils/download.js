@@ -81,7 +81,11 @@ function download (url, params) {
   var a = document.createElement("a")
   var str = ''
   if (params) {
-    str = Object.keys(params).map(key => key + '=' + params[key]).join('&')
+    str = Object.keys(params).map(key => {
+      if (typeof (params[key]) !== "undefined" && params[key] !== null) {
+        return `${key}=${params[key]}`
+      }
+    }).join('&')
   }
   a.href = `${Vue.prototype.$BASE_URL}${url}?Authorization=${window.localStorage.getItem('token')}&${str}`
   a.style.display = "none"
