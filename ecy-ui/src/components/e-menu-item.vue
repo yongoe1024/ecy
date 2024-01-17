@@ -4,23 +4,22 @@
                 v-if="item.type==1"
                 v-show="item.isShow">
       <template slot="title">
-        <i :class="item.icon"
-           style="color:#FFFFFF;font-size:18px"></i>
-        <span style="margin-left:5px;font-size:15px">{{ item.name }}</span>
+        <i :class="item.icon"></i>
+        <span>{{ item.name }}</span>
       </template>
-
-      <div v-for="(x, indexj) in item.children"
+      <div v-for="(x,indexj) in item.children"
            :key="indexj">
         <e-menu-item :item="x"> </e-menu-item>
       </div>
     </el-submenu>
+
     <el-menu-item v-if="item.type==2"
                   style="width:180px"
                   :index="item.path"
                   v-show="item.isShow">
-      <i :class="item.icon"
-         style="color:#FFFFFF;font-size:15px"></i>
-      <span style="font-size:15px">{{ item.name }}</span>
+      <i style="margin-right:5px"
+         :class="item.icon"></i>
+      <span>{{ item.name }}</span>
     </el-menu-item>
   </div>
 </template>
@@ -43,5 +42,15 @@ export default {
 /*隐藏 > */
 .el-menu--collapse .el-submenu__title .el-submenu__icon-arrow {
   display: none;
+}
+.el-menu--collapse .el-menu-item span {
+  display: none;
+}
+span {
+  font-size: 15px;
+}
+i {
+  font-size: 18px;
+  color: #ffffff;
 }
 </style>

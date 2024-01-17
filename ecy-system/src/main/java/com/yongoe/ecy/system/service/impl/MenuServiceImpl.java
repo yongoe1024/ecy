@@ -3,8 +3,6 @@ package com.yongoe.ecy.system.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yongoe.ecy.system.entity.Menu;
-import com.yongoe.ecy.system.entity.Role;
-import com.yongoe.ecy.system.entity.User;
 import com.yongoe.ecy.system.mapper.MenuMapper;
 import com.yongoe.ecy.system.service.MenuService;
 import com.yongoe.ecy.utils.UserUtils;
@@ -39,20 +37,17 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
 
     @Override
     public List<Menu> getMenuByUser() {
-        User user = UserUtils.getUser();
-        List<Menu> menuByUser = getMenuByUserCache(user.getId());
+        List<Menu> menuByUser = getMenuByUser(UserUtils.getUserId());
         return tree(0L, menuByUser);
     }
 
-    public List<Menu> getMenuByUserCache(Long id) {
-        User user = UserUtils.getUser();
+    private List<Menu> getMenuByUser(Long id) {
+        Boolean admin = UserUtils.isRole("admin");
         // 超级管理员
-        for (Role role : user.getRoleList()) {
-            if (role.getId() == 1) {
-                return baseMapper.selectList(new LambdaQueryWrapper<Menu>()
-                        .eq(Menu::getEnabled, true)
-                        .orderByDesc(Menu::getSort));
-            }
+        if (admin) {
+            return baseMapper.selectList(new LambdaQueryWrapper<Menu>()
+                    .eq(Menu::getEnabled, true)
+                    .orderByDesc(Menu::getSort));
         }
         return baseMapper.getMenuByUser(id);
     }

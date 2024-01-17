@@ -15,9 +15,13 @@ import java.util.Objects;
 public class UserUtils {
 
     public static User getUser() {
-        User user = UserThreadLocal.get();
-        Objects.requireNonNull(user, "用户未登录");
         return UserThreadLocal.get();
+    }
+
+    public static Long getUserId() {
+        User user = getUser();
+        Objects.requireNonNull(user, "用户未登录");
+        return getUser().getId();
     }
 
     public static String getName() {
@@ -37,18 +41,13 @@ public class UserUtils {
         Objects.requireNonNull(user, "用户未登录");
         List<Role> roles = getUser().getRoleList();
         for (Role role : roles) {
-            if ("code".equals(role.getCode())) {
+            if (code.equals(role.getCode())) {
                 return true;
             }
         }
         return false;
     }
 
-    public static Long getUserId() {
-        User user = getUser();
-        Objects.requireNonNull(user, "用户未登录");
-        return getUser().getId();
-    }
 
     public static void logout() {
         UserThreadLocal.remove();

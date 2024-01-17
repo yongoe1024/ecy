@@ -55,12 +55,12 @@ function formatRoutes (routes) {
     if (component) {
       fmRouter.path = component
       fmRouter.component = () => import('/src/views' + component)
-      children.forEach(v => {
+      fmRouter.children.forEach(v => {
         //按钮权限
         if (v.type === 3)
           fmRouter.meta.auth.push(v.name)
       })
-      children = []
+      fmRouter.children = []
     } else {
       // 不存在就是目录和按钮
       fmRouter.path = ''

@@ -34,7 +34,8 @@ public class LogController {
     @Operation(summary = "查询分页数据")
     @PostMapping("/page")
     public R page(@RequestBody LogReq req) {
-        Page<Log> page = logService.getLogByPage(Page.of(req.getCurrent(), req.getSize()));
+        Log log = logConvert.req2Entity(req);
+        Page<Log> page = logService.getLogByPage(Page.of(req.getCurrent(), req.getSize()), log);
         Page<LogRes> resPage = logConvert.entity2ResPage(page);
         return R.success().put(new PageUtils(resPage));
     }

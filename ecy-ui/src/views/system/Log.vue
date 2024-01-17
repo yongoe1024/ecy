@@ -10,7 +10,9 @@
                  size="mini"
                  icon="el-icon-refresh"
                  @click="clear">清空日志</el-button>
-
+      <el-button type="text"
+                 size="mini"
+                 @click="getType">{{queryParam.name=='系统'?'全部日志':'系统日志'}}</el-button>
     </div>
 
     <!-- 表格 -->
@@ -31,7 +33,18 @@
       <el-table-column prop="type"
                        label="类型"
                        width="100"
-                       align="center"></el-table-column>
+                       align="center">
+        <template slot-scope="scope">
+          <el-tag v-if="scope.row.type=='操作'"
+                  effect="dark"
+                  type="info">{{scope.row.type}}
+          </el-tag>
+          <el-tag v-else
+                  effect="dark"
+                  type="danger">{{scope.row.type}}
+          </el-tag>
+        </template>
+      </el-table-column>
       <el-table-column prop="title"
                        label="标题"></el-table-column>
       <el-table-column label="操作"
@@ -99,6 +112,10 @@ export default {
       queryParam: {
         current: 1,
         size: 10,
+        name: null,
+        type: null,
+        title: null,
+        details: null,
       },
       form: {
         name: null,
@@ -112,6 +129,10 @@ export default {
     this.getList()
   },
   methods: {
+    getType () {
+      this.queryParam.name == '系统' ? this.queryParam.name = '' : this.queryParam.name = '系统'
+      this.getList()
+    },
     // 改变页码
     handleSizeChange (val) {
       this.queryParam.size = val

@@ -18,8 +18,8 @@ import org.springframework.stereotype.Service;
 public class LogServiceImpl extends ServiceImpl<LogMapper, Log> implements LogService {
 
     @Override
-    public Page<Log> getLogByPage(Page<Log> page) {
-        return baseMapper.getLogByPage(page);
+    public Page<Log> getLogByPage(Page<Log> page, Log log) {
+        return baseMapper.getLogByPage(page, log);
     }
 
     @Override
@@ -35,8 +35,11 @@ public class LogServiceImpl extends ServiceImpl<LogMapper, Log> implements LogSe
             else
                 log.setDetails(details);
             try {
-                String name = UserUtils.getName();
-                log.setName(name);
+                if (UserUtils.getUser() != null)
+                    log.setName(UserUtils.getName());
+                else {
+                    log.setName("系统");
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

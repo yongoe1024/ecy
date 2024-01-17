@@ -47,8 +47,7 @@ public class UserInfoController {
     @Operation(summary = "查询个人信息")
     @PostMapping("/user/info")
     public R getUserInfo(HttpServletRequest request) {
-        User user = UserUtils.getUser();
-        user = userService.getUserById(user.getId());
+        User user = userService.getUserById(UserUtils.getUserId());
         // 顺便修改登录时间
         user.setLastTime(LocalDateTime.now());
         user.setLastIp(IpUtils.getIp(request));
@@ -80,10 +79,9 @@ public class UserInfoController {
     @Operation(summary = "修改头像")
     @PostMapping("/user/avatar")
     public R uploadFile(MultipartFile file) {
-        User user = UserUtils.getUser();
         String url = FileUtils.saveFile(file);
         userService.update(new LambdaUpdateWrapper<User>()
-                .eq(User::getId, user.getId())
+                .eq(User::getId, UserUtils.getUserId())
                 .set(User::getAvatar, url));
         return R.success("修改成功");
     }
@@ -91,10 +89,9 @@ public class UserInfoController {
     @Operation(summary = "修改密码")
     @PostMapping("/user/password")
     public R password(@RequestBody UserReq req) {
-        User user = UserUtils.getUser();
         String password = req.getPassword();
         userService.update(new LambdaUpdateWrapper<User>()
-                .eq(User::getId, user.getId())
+                .eq(User::getId, UserUtils.getUserId())
                 .set(User::getPassword, password));
         return R.success("修改成功");
 
