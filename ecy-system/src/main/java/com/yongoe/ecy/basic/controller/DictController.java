@@ -43,7 +43,7 @@ public class DictController {
 
     @Operation(summary = "查询字典,没权限")
     @PostMapping("/dict")
-    public R getDict(String name,Object[] value) {
+    public R getDict(String name,String[] value) {
         Dict dict = dictService.getOne(new LambdaQueryWrapper<Dict>().eq(Dict::getName, name));
         List<DictData> dictData = dictDataService.list(new LambdaQueryWrapper<DictData>()
                 .eq(DictData::getDictId, dict.getId())
