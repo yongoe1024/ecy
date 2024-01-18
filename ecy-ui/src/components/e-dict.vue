@@ -11,6 +11,12 @@
                  :value="item.dictValue">
       </el-option>
     </el-select>
+    <el-checkbox-group v-model="myValue2"
+                       v-else-if="type==='checkbox'">
+      <el-checkbox v-for="item in dataList"
+                   :key="item.id"
+                   label="item.dictValue">{{item.dictKey}}</el-checkbox>
+    </el-checkbox-group>
     <el-radio v-else-if="type==='radio'"
               v-for="item in dataList"
               :key="item.id"
@@ -24,16 +30,20 @@
               :style="{'background-color': item.color,'border-color': item.color}"
               v-if="myValue == item.dictValue">{{item.dictKey}}</el-tag>
     </span>
+    <span v-else-if="type==='checkboxtag'"
+          v-for="item in dataList"
+          :key="item.id">
+      <el-tag :size="size"
+              effect="dark"
+              style="margin-right: 5px;"
+              :style="{'background-color': item.color,'border-color': item.color}">{{item.dictKey}}</el-tag>
+    </span>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    tag: {
-      type: Boolean,
-      default: () => false
-    },
     value: {
       default: () => null
     },
@@ -86,6 +96,13 @@ export default {
   },
   methods: {
     getData () {
+      if (this.type == 'checkboxtag') {
+        this.axios.get(`/dict?name=${this.name}&value=${this.value.split(',')}`).then(data => {
+          this.dataList = data
+          window.sessionStorage.setItem('dict_' + this.name, JSON.stringify(data))
+        }).catch(e => { })
+        return
+      }
       this.axios.post('/dict?name=' + this.name).then(data => {
         this.dataList = data
         window.sessionStorage.setItem('dict_' + this.name, JSON.stringify(data))

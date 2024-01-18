@@ -120,8 +120,7 @@
 
       </el-form>
       <span slot="footer">
-        <el-button size="mini"
-                   type="primary"
+        <el-button type="primary"
                    @click="handlMenuUpdate()">确认修改</el-button>
         <el-button @click="dialogVisibleMenu = false">关闭</el-button>
       </span>
@@ -176,6 +175,7 @@ export default {
       let menuIds = selectedKeys.map(item => item.id)
       let url = `/system/role/menu/update?roleId=${this.form.id}&menuIds=${menuIds}`
       this.axios.post(url).then(() => {
+        this.dialogVisibleMenu = false
         this.getList()
       }).catch(e => { })
     },

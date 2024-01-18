@@ -13,8 +13,11 @@
             :value="true"></e-dict>
     <e-dict name="启用"
             v-model="a"></e-dict> -->
-    <e-chunk-upload></e-chunk-upload>
-    <e-download-file file-path="/1/2dd29b76af857983a2dc84ba33327330.mp4"> 下载</e-download-file>
+    <!-- <e-chunk-upload></e-chunk-upload>
+    <e-download-file file-path="/1/2dd29b76af857983a2dc84ba33327330.mp4"> 下载</e-download-file> -->
+    <e-dict name="启用"
+            type="checkboxtag"
+            :value="v"></e-dict>
   </div>
 </template>
 
@@ -26,7 +29,7 @@ export default {
   watch: {},
   data () {
     return {
-      v: '',
+      v: '1,2',
       p: '',
       a: true
     }

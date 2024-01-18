@@ -74,13 +74,13 @@ docker-compose方法: 需结合/ecy/中的docker-compose.yml，无法单独启�
 | name        |字典名
 | placeholder |提示文字
 | icon        |输入框图标
-| type        |select , radio , tag
+| type        |select , radio , tag , checkbox , checkboxtag
 | size：       |【medium , small , mini】
 
 ```
 <e-dict name="性别" v-model="xxx" size="mini" ></e-dict>
 <e-dict name="启用"
-        :tag="true"
+        type="tag"
         :value="true"></e-dict>
 ```
 
