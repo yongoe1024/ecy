@@ -1,0 +1,136 @@
+{
+  "activeRecord": true,
+  "author": "Mr.Wang",
+  "baseColumnList": false,
+  "baseResultMap": true,
+  "config": {
+    "globalConfig": {
+      "activeRecord": true,
+      "author": "Mr.Wang",
+      "baseColumnList": false,
+      "baseResultMap": true,
+      "controllerName": "%sController",
+      "dateType": "TIME_PACK",
+      "enableCache": false,
+      "fileOverride": false,
+      "kotlin": false,
+      "mapperName": "%sMapper",
+      "open": false,
+      "outputDir": "C:/Users/Administrator/IdeaProjects/nan-ning/src/main/java",
+      "serviceImplName": "%sServiceImpl",
+      "serviceName": "%sService",
+      "swagger2": false,
+      "xmlName": "%sMapper"
+    },
+    "packageInfo": {
+      "Controller": "com.enso.controller",
+      "Entity": "com.enso.entity",
+      "Mapper": "com.enso.mapper",
+      "Service": "com.enso.service",
+      "ServiceImpl": "com.enso.service.impl",
+      "Xml": "com.enso.mapper"
+    },
+    "pathInfo": {
+      "controller_path": "C:/Users/Administrator/IdeaProjects/nan-ning/src/main/java/com/enso/controller",
+      "entity_path": "C:/Users/Administrator/IdeaProjects/nan-ning/src/main/java/com/enso/entity",
+      "mapper_path": "C:/Users/Administrator/IdeaProjects/nan-ning/src/main/java/com/enso/mapper",
+      "service_impl_path": "C:/Users/Administrator/IdeaProjects/nan-ning/src/main/java/com/enso/service/impl",
+      "service_path": "C:/Users/Administrator/IdeaProjects/nan-ning/src/main/java/com/enso/service",
+      "xml_path": "C:/Users/Administrator/IdeaProjects/nan-ning/src/main/java/com/enso/mapper"
+    },
+    "strategyConfig": {
+      "capitalMode": false,
+      "columnNaming": "underline_to_camel",
+      "controllerMappingHyphenStyle": false,
+      "entityBooleanColumnRemoveIsPrefix": false,
+      "entityBuilderModel": true,
+      "entityColumnConstant": false,
+      "entityLombokModel": false,
+      "entityTableFieldAnnotationEnable": false,
+      "include": [
+        "air_stat_live_data"
+      ],
+      "naming": "underline_to_camel",
+      "restControllerStyle": false,
+      "skipView": false,
+      "superMapperClass": "com.baomidou.mybatisplus.core.mapper.BaseMapper",
+      "superServiceClass": "com.baomidou.mybatisplus.extension.service.IService",
+      "superServiceImplClass": "com.baomidou.mybatisplus.extension.service.impl.ServiceImpl"
+    },
+    "superMapperClass": "com.baomidou.mybatisplus.core.mapper.BaseMapper",
+    "superServiceClass": "com.baomidou.mybatisplus.extension.service.IService",
+    "superServiceImplClass": "com.baomidou.mybatisplus.extension.service.impl.ServiceImpl",
+    "template": {
+      "controller": "/templates/controller.java",
+      "mapper": "/templates/mapper.java",
+      "service": "/templates/service.java",
+      "serviceImpl": "/templates/serviceImpl.java",
+      "xml": "/templates/mapper.xml"
+    }
+  },
+  "date": "2018-10-30",
+  "enableCache": false,
+  "entity": "AirStatLiveData",
+  "entityBooleanColumnRemoveIsPrefix": false,
+  "entityBuilderModel": true,
+  "entityColumnConstant": false,
+  "entityLombokModel": false,
+  "kotlin": false,
+  "package": {
+    "$ref": "$.config.packageInfo"
+  },
+  "restControllerStyle": false,
+  "superMapperClass": "BaseMapper",
+  "superMapperClassPackage": "com.baomidou.mybatisplus.core.mapper.BaseMapper",
+  "superServiceClass": "IService",
+  "superServiceClassPackage": "com.baomidou.mybatisplus.extension.service.IService",
+  "superServiceImplClass": "ServiceImpl",
+  "superServiceImplClassPackage": "com.baomidou.mybatisplus.extension.service.impl.ServiceImpl",
+  "swagger2": false,
+  "table": {
+    "comment": "查询指定城市所有测点的空气质量实况每小时更新",
+    "commonFields": [],
+    "controllerName": "AirStatLiveDataController",
+    "convert": false,
+    "entityName": "AirStatLiveData",
+    "entityPath": "airStatLiveData",
+    "fieldNames": "table_id, citycode, cityname, createtime, time, info, devid, stationname, aqi, pm25, pm10, co, so2, no2, o3, prkey",
+    "fields": [
+      {
+        "capitalName": "TableId",
+        "columnType": "LONG",
+        "comment": "表单id",
+        "convert": false,
+        "keyFlag": true,
+        "keyIdentityFlag": true,
+        "name": "table_id",
+        "propertyName": "tableId",
+        "propertyType": "Long",
+        "type": "bigint(20)"
+      },
+      {
+        "capitalName": "Citycode",
+        "columnType": "STRING",
+        "comment": "城市编码",
+        "convert": false,
+        "keyFlag": false,
+        "keyIdentityFlag": false,
+        "name": "citycode",
+        "propertyName": "citycode",
+        "propertyType": "String",
+        "type": "varchar(50)"
+      }
+    ],
+    "importPackages": [
+      "com.baomidou.mybatisplus.annotation.IdType",
+      "com.baomidou.mybatisplus.extension.activerecord.Model",
+      "com.baomidou.mybatisplus.annotation.TableId",
+      "java.io.Serializable"
+    ],
+    "mapperName": "AirStatLiveDataMapper",
+    "name": "air_stat_live_data",
+    "serviceImplName": "AirStatLiveDataServiceImpl",
+    "serviceName": "AirStatLiveDataService",
+    "xmlName": "AirStatLiveDataMapper"
+  }
+}

@@ -1,29 +1,17 @@
 <template>
   <div>
-    <!-- <e-dict name="性别"
-            v-model="v"></e-dict>
-  
-    <e-editor v-model="v"></e-editor>  
-     <el-button @click="pay">支付</el-button>
-    <el-button @click="dd">aa{{p}}</el-button>
-      <e-upload>收拾 </e-upload>
-  
-    <e-dict name="启用"
-            :tag="true"
-            :value="true"></e-dict>
-    <e-dict name="启用"
-            v-model="a"></e-dict> -->
-    <!-- <e-chunk-upload></e-chunk-upload>
-    <e-download-file file-path="/1/2dd29b76af857983a2dc84ba33327330.mp4"> 下载</e-download-file> -->
     <e-dict name="启用"
             type="checkboxtag"
             :value="v"></e-dict>
+    <e-chunk-upload></e-chunk-upload>
   </div>
 </template>
 
 
 <script>
+import eChunkUpload from '@/components/chunk-upload/e-chunk-upload.vue'
 export default {
+  components: { eChunkUpload },
   props: {},
   computed: {},
   watch: {},

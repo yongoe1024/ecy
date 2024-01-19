@@ -2,11 +2,12 @@ package com.yongoe.ecy.config.redis;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PrefixRedisSerializer extends StringRedisSerializer {
     @Value("${server.servlet.context-path}")
     private String pathPrefix;
-    public String PREFIX_KEY = pathPrefix + ":";
 
     /**
      * 序列化
@@ -20,7 +21,7 @@ public class PrefixRedisSerializer extends StringRedisSerializer {
         if (s == null) {
             return new byte[0];
         }
-        String realKey = PREFIX_KEY + s;
+        String realKey = pathPrefix + ":" + s;
         return super.serialize(realKey);
     }
 
@@ -33,9 +34,9 @@ public class PrefixRedisSerializer extends StringRedisSerializer {
     @Override
     public String deserialize(byte[] bytes) {
         String cacheKey = new String(bytes);
-        int indexOf = cacheKey.indexOf(PREFIX_KEY);
+        int indexOf = cacheKey.indexOf(pathPrefix + ":");
         if (indexOf == -1) {
-            cacheKey = PREFIX_KEY + cacheKey;
+            cacheKey = pathPrefix + ":" + cacheKey;
         }
         return cacheKey;
     }

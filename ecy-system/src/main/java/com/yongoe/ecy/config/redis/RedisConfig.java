@@ -1,5 +1,6 @@
 package com.yongoe.ecy.config.redis;
 
+import jakarta.annotation.Resource;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,9 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @Configuration
 @EnableCaching
 public class RedisConfig {
+    @Resource
+    private PrefixRedisSerializer prefixRedisSerializer;
+
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
@@ -30,8 +34,7 @@ public class RedisConfig {
         redisTemplate.setHashValueSerializer(new GenericJackson2JsonRedisSerializer());
         redisTemplate.setConnectionFactory(connectionFactory);
         //统一前缀
-        PrefixRedisSerializer redisKeySerializer = new PrefixRedisSerializer();
-        redisTemplate.setKeySerializer(redisKeySerializer);
+        redisTemplate.setKeySerializer(prefixRedisSerializer);
         return redisTemplate;
     }
 
