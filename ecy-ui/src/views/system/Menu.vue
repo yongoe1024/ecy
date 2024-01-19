@@ -113,6 +113,7 @@
 
     <el-dialog :visible.sync="dialogVisible"
                :title="dialogTitle"
+               :destroy-on-close="true"
                @close="reset"
                :close-on-click-modal="false"
                width="600px">

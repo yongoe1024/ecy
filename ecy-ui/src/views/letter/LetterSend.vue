@@ -86,6 +86,7 @@
 
     <el-dialog :visible.sync="dialogVisible"
                :title="dialogTitle"
+               :destroy-on-close="true"
                @close="reset"
                :fullscreen="true"
                :close-on-click-modal="false"

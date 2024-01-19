@@ -1,7 +1,6 @@
 package com.yongoe.ecy.system.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,7 +17,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName("sys_role_menu")
-@Schema(name = "角色-菜单")
 public class RoleMenu {
 
     @TableId(value = "id", type = IdType.AUTO)

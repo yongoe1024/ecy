@@ -1,6 +1,7 @@
 package com.yongoe.ecy.system.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.yongoe.ecy.config.aop.WebLog;
 import com.yongoe.ecy.system.controller.vo.req.ConfigReq;
 import com.yongoe.ecy.system.controller.vo.res.ConfigRes;
 import com.yongoe.ecy.system.convert.ConfigConvert;
@@ -33,6 +34,7 @@ public class ConfigController {
     @Resource
     private ConfigConvert convert;
 
+    //@WebLog
     @Operation(summary = "查询分页数据")
     @PostMapping("/page")
     public R page(@RequestBody ConfigReq req) {
@@ -42,6 +44,7 @@ public class ConfigController {
         return R.success().put(new PageUtils(resPage));
     }
 
+    @WebLog
     @Operation(summary = "添加数据")
     @PostMapping("/add")
     public R add(@RequestBody ConfigReq req) {
@@ -51,6 +54,7 @@ public class ConfigController {
         return R.success("添加成功");
     }
 
+    @WebLog
     @Operation(summary = "修改数据")
     @PostMapping("/update")
     public R update(@RequestBody ConfigReq req) {
@@ -60,6 +64,7 @@ public class ConfigController {
         return R.success("修改成功");
     }
 
+    @WebLog
     @Operation(summary = "删除数据")
     @PostMapping("/delete/{ids}")
     public R delete(@PathVariable List<Long> ids) {

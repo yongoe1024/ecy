@@ -1,7 +1,6 @@
 package com.yongoe.ecy.system.controller.vo.res;
 
 import com.yongoe.ecy.system.entity.Role;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +16,6 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "用户信息")
 public class UserInfoRes {
 
     private Long id;

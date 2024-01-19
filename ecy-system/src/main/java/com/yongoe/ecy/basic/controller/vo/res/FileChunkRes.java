@@ -1,7 +1,6 @@
 package com.yongoe.ecy.basic.controller.vo.res;
 
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,7 +14,6 @@ import java.util.Set;
  */
 @Data
 @NoArgsConstructor
-@Schema(name = "断点续传Req")
 public class FileChunkRes {
     /**
      * 是否跳过上传

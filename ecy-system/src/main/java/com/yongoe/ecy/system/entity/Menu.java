@@ -1,7 +1,6 @@
 package com.yongoe.ecy.system.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +18,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName("sys_menu")
-@Schema(name = "菜单")
 public class Menu {
 
     @TableId(value = "id", type = IdType.AUTO)

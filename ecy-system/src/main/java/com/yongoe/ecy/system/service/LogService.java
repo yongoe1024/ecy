@@ -14,6 +14,4 @@ public interface LogService extends IService<Log> {
 
     Page<Log> getLogByPage(Page<Log> page, Log log);
 
-    void saveLog(String type, String title, String details);
-
 }

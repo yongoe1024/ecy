@@ -71,18 +71,19 @@
 
     <el-dialog :visible.sync="dialogVisible"
                :title="dialogTitle"
+               :destroy-on-close="true"
                @close="reset"
                :close-on-click-modal="false"
                width="600px">
       <el-form ref="form"
                :model="form"
-               label-width="auto"
                style="margin:20px"
+               label-width="auto"
                :rules="rules">
         <el-form-item label="角色代码"
                       prop="code">
           <el-input v-model="form.code"
-                    :disabled="form.id"
+                    :disabled="form.id!=null"
                     placeholder="请输入角色代码" />
         </el-form-item>
         <el-form-item label="中文名"
@@ -99,14 +100,14 @@
     </el-dialog>
 
     <!-- 编辑菜单权限 -->
-    <el-dialog v-if="dialogVisibleMenu"
-               :visible.sync="dialogVisibleMenu"
+    <el-dialog :visible.sync="dialogVisibleMenu"
                title="菜单权限"
+               :destroy-on-close="true"
                :close-on-click-modal="false"
-               width="60%">
+               width="600px">
       <el-form label-width="auto"
                style="margin:20px">
-        <el-form-item label="菜单">
+        <el-form-item>
           <!-- 树 -->
           <el-tree ref="tree"
                    :check-strictly="treeCheckStrictly"

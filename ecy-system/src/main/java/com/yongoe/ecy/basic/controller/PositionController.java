@@ -7,6 +7,7 @@ import com.yongoe.ecy.basic.controller.vo.res.PositionRes;
 import com.yongoe.ecy.basic.convert.PositionConvert;
 import com.yongoe.ecy.basic.entity.Position;
 import com.yongoe.ecy.basic.service.PositionService;
+import com.yongoe.ecy.config.aop.WebLog;
 import com.yongoe.ecy.system.entity.User;
 import com.yongoe.ecy.system.service.UserService;
 import com.yongoe.ecy.utils.PageUtils;
@@ -36,6 +37,7 @@ public class PositionController {
     @Resource
     private PositionConvert positionConvert;
 
+    //@WebLog
     @Operation(summary = "查询分页数据")
     @PostMapping("/page")
     public R page(@RequestBody PositionReq req) {
@@ -45,15 +47,7 @@ public class PositionController {
         return R.success().put(new PageUtils(resPage));
     }
 
-    @Operation(summary = "查询list")
-    @PostMapping("/list")
-    public R list() {
-        List<Position> list = positionService.list(new LambdaQueryWrapper<Position>()
-                .eq(Position::getEnabled, true));
-        List<PositionRes> resList = positionConvert.entity2ResList(list);
-        return R.success().put(resList);
-    }
-
+    @WebLog
     @Operation(summary = "添加数据")
     @PostMapping("/add")
     public R add(@RequestBody PositionReq req) {
@@ -62,6 +56,7 @@ public class PositionController {
         return R.success("添加成功");
     }
 
+    @WebLog
     @Operation(summary = "修改数据")
     @PostMapping("/update")
     public R update(@RequestBody PositionReq req) {
@@ -70,6 +65,7 @@ public class PositionController {
         return R.success("修改成功");
     }
 
+    @WebLog
     @Operation(summary = "删除数据")
     @PostMapping("/delete/{ids}")
     public R delete(@PathVariable List<Long> ids) {

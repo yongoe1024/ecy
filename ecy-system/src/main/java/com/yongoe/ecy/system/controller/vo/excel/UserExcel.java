@@ -1,7 +1,6 @@
 package com.yongoe.ecy.system.controller.vo.excel;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +14,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "系统配置Req")
 public class UserExcel {
 
     @Excel(name = "部门", width = 20)

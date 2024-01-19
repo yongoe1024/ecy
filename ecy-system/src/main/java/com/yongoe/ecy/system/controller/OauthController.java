@@ -1,9 +1,11 @@
 package com.yongoe.ecy.system.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.yongoe.ecy.config.aop.WebLog;
 import com.yongoe.ecy.system.service.OauthService;
 import com.yongoe.ecy.utils.R;
 import com.yongoe.ecy.utils.WXH5SignatureUtil;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletResponse;
@@ -34,6 +36,7 @@ public class OauthController {
     @Resource
     private WXH5SignatureUtil wxh5SignatureUtil;
 
+    @Operation(summary = "获取QQ登录地址")
     @GetMapping("/oauth/qq/redirect")
     public void redirectQQ(HttpServletResponse response) throws IOException {
         AuthRequest qqAuthRequest = oauthService.getQQAuthRequest();
@@ -45,11 +48,13 @@ public class OauthController {
         }
     }
 
+    @Operation(summary = "获取微信登录地址")
     @GetMapping("/oauth/wxh5/redirect")
     public void redirectWXH5(HttpServletResponse response) throws IOException {
         response.sendRedirect(oauthService.getWXH5Redirect());
     }
 
+    @Operation(summary = "获取微信H5配置")
     @PostMapping("/oauth/wxh5/config")
     public R config(String url) throws UnsupportedEncodingException {
         try {
@@ -62,11 +67,15 @@ public class OauthController {
         }
     }
 
+    @WebLog
+    @Operation(summary = "微信登录-回调")
     @GetMapping("/oauth/wxh5/callback")
     public R callbackWXH5(String code) throws JsonProcessingException {
         return oauthService.callbackWXH5(code);
     }
 
+    @WebLog
+    @Operation(summary = "QQ登录-回调")
     @GetMapping("/oauth/qq/callback")
     public R callbackQQ(AuthCallback callback) throws JsonProcessingException {
         return oauthService.callbackQQ(callback);

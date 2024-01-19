@@ -1,6 +1,5 @@
 package com.yongoe.ecy.basic.controller.vo.res;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,8 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "数据字典-数据Res")
-public class DictDataRe {
+public class DictDataRes {
 
     private Long id;
     /**

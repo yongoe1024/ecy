@@ -1,7 +1,6 @@
 package com.yongoe.ecy.system.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,7 +20,6 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @TableName("sys_user")
-@Schema(name = "用户")
 public class User {
 
     @TableId(value = "id", type = IdType.AUTO)

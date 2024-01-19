@@ -97,13 +97,13 @@ export default {
   methods: {
     getData () {
       if (this.type == 'checkboxtag') {
-        this.axios.post(`/dict?name=${this.name}&value=${this.value.split(',')}`).then(data => {
+        this.axios.post(`/getDict?name=${this.name}&value=${this.value.split(',')}`).then(data => {
           this.dataList = data
           window.sessionStorage.setItem('dict_' + this.name, JSON.stringify(data))
         }).catch(e => { })
         return
       }
-      this.axios.post('/dict?name=' + this.name).then(data => {
+      this.axios.post('/getDict?name=' + this.name).then(data => {
         this.dataList = data
         window.sessionStorage.setItem('dict_' + this.name, JSON.stringify(data))
       }).catch(e => { })

@@ -362,10 +362,10 @@ DROP TABLE IF EXISTS `sys_log`;
 CREATE TABLE `sys_log`
 (
     `id`          bigint unsigned                        NOT NULL AUTO_INCREMENT,
-    `name`        varchar(50) COLLATE utf8mb4_unicode_ci                         DEFAULT NULL COMMENT '用户',
-    `type`        varchar(50) COLLATE utf8mb4_unicode_ci                         DEFAULT NULL COMMENT '类型',
-    `title`       varchar(100) COLLATE utf8mb4_unicode_ci                        DEFAULT NULL COMMENT '标题',
-    `details`     varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '详情',
+    `name`        varchar(50) COLLATE utf8mb4_unicode_ci  DEFAULT NULL COMMENT '用户',
+    `type`        varchar(50) COLLATE utf8mb4_unicode_ci  DEFAULT NULL COMMENT '类型',
+    `title`       varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '标题',
+    `details`     text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT '详情',
     `create_time` datetime                               NOT NULL COMMENT '创建时间',
     `update_time` datetime                               NOT NULL COMMENT '修改时间',
     `create_by`   varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '创建人',

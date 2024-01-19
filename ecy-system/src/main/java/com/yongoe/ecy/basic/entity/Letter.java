@@ -1,7 +1,6 @@
 package com.yongoe.ecy.basic.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,7 +17,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName("basic_letter")
-@Schema(name = "信件管理")
 public class Letter {
 
     @TableId(value = "id", type = IdType.AUTO)

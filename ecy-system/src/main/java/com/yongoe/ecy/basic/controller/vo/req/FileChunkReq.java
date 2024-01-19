@@ -1,6 +1,5 @@
 package com.yongoe.ecy.basic.controller.vo.req;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "断点续传Req")
 public class FileChunkReq {
     /**
      * 文件 md5

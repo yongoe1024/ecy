@@ -1,7 +1,6 @@
 package com.yongoe.ecy.system.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,7 +19,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 @TableName("sys_user_auths")
-@Schema(name = "用户授权")
 public class UserAuths {
 
     @TableId(value = "id", type = IdType.AUTO)

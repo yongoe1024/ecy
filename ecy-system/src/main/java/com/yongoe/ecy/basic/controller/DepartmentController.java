@@ -6,6 +6,7 @@ import com.yongoe.ecy.basic.controller.vo.res.DepartmentRes;
 import com.yongoe.ecy.basic.convert.DepartmentConvert;
 import com.yongoe.ecy.basic.entity.Department;
 import com.yongoe.ecy.basic.service.DepartmentService;
+import com.yongoe.ecy.config.aop.WebLog;
 import com.yongoe.ecy.system.entity.User;
 import com.yongoe.ecy.system.service.UserService;
 import com.yongoe.ecy.utils.R;
@@ -34,6 +35,7 @@ public class DepartmentController {
     @Resource
     private DepartmentConvert departmentConvert;
 
+    //@WebLog
     @Operation(summary = "查询数据")
     @PostMapping("/tree")
     public R tree() {
@@ -42,15 +44,7 @@ public class DepartmentController {
         return R.success().put(resList);
     }
 
-    @Operation(summary = "查询list")
-    @PostMapping("/list")
-    public R list() {
-        List<Department> list = departmentService.getMenuByTree(new LambdaQueryWrapper<Department>()
-                .eq(Department::getEnabled, true));
-        List<DepartmentRes> resList = departmentConvert.entity2ResList(list);
-        return R.success().put(resList);
-    }
-
+    @WebLog
     @Operation(summary = "添加数据")
     @PostMapping("/add")
     public R add(@RequestBody DepartmentReq req) {
@@ -59,6 +53,7 @@ public class DepartmentController {
         return R.success("添加成功");
     }
 
+    @WebLog
     @Operation(summary = "修改数据")
     @PostMapping("/update")
     public R update(@RequestBody DepartmentReq req) {
@@ -67,6 +62,7 @@ public class DepartmentController {
         return R.success("修改成功");
     }
 
+    @WebLog
     @Operation(summary = "删除数据")
     @PostMapping("/delete/{id}")
     public R delete(@PathVariable Long id) {

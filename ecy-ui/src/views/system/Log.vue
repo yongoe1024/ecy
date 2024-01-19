@@ -10,8 +10,7 @@
                  size="mini"
                  icon="el-icon-refresh"
                  @click="clear">清空日志</el-button>
-      <el-button type="text"
-                 size="mini"
+      <el-button size="mini"
                  @click="getType">{{queryParam.name=='系统'?'全部日志':'系统日志'}}</el-button>
     </div>
 
@@ -36,7 +35,6 @@
                        align="center">
         <template slot-scope="scope">
           <el-tag v-if="scope.row.type=='操作'"
-                  effect="dark"
                   type="info">{{scope.row.type}}
           </el-tag>
           <el-tag v-else
@@ -53,7 +51,7 @@
                        fixed="right">
         <template slot-scope="scope">
           <el-button style="padding: 3px"
-                     type="primary"
+                     type="text"
                      @click="handleShowUpdateEdit(scope.row)">详情</el-button>
         </template>
       </el-table-column>
@@ -69,6 +67,7 @@
 
     <el-dialog :visible.sync="dialogVisible"
                :title="dialogTitle"
+               :destroy-on-close="true"
                :close-on-click-modal="false"
                width="70%">
       <el-form ref="form"

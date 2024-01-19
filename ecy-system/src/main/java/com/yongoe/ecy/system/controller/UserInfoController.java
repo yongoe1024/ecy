@@ -1,6 +1,7 @@
 package com.yongoe.ecy.system.controller;
 
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.yongoe.ecy.config.aop.WebLog;
 import com.yongoe.ecy.system.controller.vo.req.UserReq;
 import com.yongoe.ecy.system.controller.vo.res.MenuRes;
 import com.yongoe.ecy.system.controller.vo.res.UserInfoRes;
@@ -11,7 +12,7 @@ import com.yongoe.ecy.system.entity.User;
 import com.yongoe.ecy.system.service.MenuService;
 import com.yongoe.ecy.system.service.UserService;
 import com.yongoe.ecy.utils.FileUtils;
-import com.yongoe.ecy.utils.IpUtils;
+import com.yongoe.ecy.utils.IPUtils;
 import com.yongoe.ecy.utils.R;
 import com.yongoe.ecy.utils.UserUtils;
 import io.swagger.v3.oas.annotations.Operation;
@@ -44,18 +45,20 @@ public class UserInfoController {
     @Resource
     private MenuConvert menuConvert;
 
+    //@WebLog
     @Operation(summary = "查询个人信息")
     @PostMapping("/user/info")
     public R getUserInfo(HttpServletRequest request) {
         User user = userService.getUserById(UserUtils.getUserId());
         // 顺便修改登录时间
         user.setLastTime(LocalDateTime.now());
-        user.setLastIp(IpUtils.getIp(request));
+        user.setLastIp(IPUtils.getIp(request));
         userService.updateById(user);
         UserInfoRes userInfo = userConvert.entity2UserInfo(user);
         return R.success().put(userInfo);
     }
 
+    //@WebLog
     @Operation(summary = "查询个人菜单")
     @PostMapping("/user/menu")
     public R getMenuById() {
@@ -64,6 +67,7 @@ public class UserInfoController {
         return R.success().put(resList);
     }
 
+    @WebLog
     @Operation(summary = "修改个人信息")
     @PostMapping("/user/update")
     public R updateUserinfo(@RequestBody UserReq req) {
@@ -76,6 +80,7 @@ public class UserInfoController {
         return R.success("修改成功");
     }
 
+    @WebLog
     @Operation(summary = "修改头像")
     @PostMapping("/user/avatar")
     public R uploadFile(MultipartFile file) {
@@ -86,6 +91,7 @@ public class UserInfoController {
         return R.success("修改成功");
     }
 
+    @WebLog
     @Operation(summary = "修改密码")
     @PostMapping("/user/password")
     public R password(@RequestBody UserReq req) {

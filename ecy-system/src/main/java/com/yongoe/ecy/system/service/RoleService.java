@@ -21,4 +21,6 @@ public interface RoleService extends IService<Role> {
      * 更新用户-角色
      */
     void updateMenuRole(Long roleId, Long[] menuIds);
+
+    void deleteRole(Long id);
 }

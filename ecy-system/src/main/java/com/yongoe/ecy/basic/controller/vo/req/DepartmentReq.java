@@ -1,6 +1,5 @@
 package com.yongoe.ecy.basic.controller.vo.req;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +13,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "部门Req")
 public class DepartmentReq {
 
     private Long id;

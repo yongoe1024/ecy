@@ -117,11 +117,17 @@ export default {
     },
     logout () {
       this.$confirm('此操作将退出登录, 是否继续?', '提示', { type: 'warning' }).then(() => {
-        this.axios.post('/logout').catch(e => { })
-        window.localStorage.clear()
-        window.sessionStorage.clear()
-        this.$router.replace('/login')
-        location.reload()
+        this.axios.post('/logout').then(() => {
+          window.localStorage.clear()
+          window.sessionStorage.clear()
+          this.$router.replace('/login')
+          location.reload()
+        }).catch(e => {
+          window.localStorage.clear()
+          window.sessionStorage.clear()
+          this.$router.replace('/login')
+          location.reload()
+        })
       }).catch(e => { })
     },
   },

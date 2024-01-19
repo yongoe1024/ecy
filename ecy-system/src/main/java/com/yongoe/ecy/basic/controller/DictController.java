@@ -3,14 +3,13 @@ package com.yongoe.ecy.basic.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yongoe.ecy.basic.controller.vo.req.DictReq;
-import com.yongoe.ecy.basic.controller.vo.res.DictDataRe;
 import com.yongoe.ecy.basic.controller.vo.res.DictRes;
 import com.yongoe.ecy.basic.convert.DictConvert;
-import com.yongoe.ecy.basic.convert.DictDataConvert;
 import com.yongoe.ecy.basic.entity.Dict;
 import com.yongoe.ecy.basic.entity.DictData;
 import com.yongoe.ecy.basic.service.DictDataService;
 import com.yongoe.ecy.basic.service.DictService;
+import com.yongoe.ecy.config.aop.WebLog;
 import com.yongoe.ecy.utils.PageUtils;
 import com.yongoe.ecy.utils.R;
 import io.swagger.v3.oas.annotations.Operation;
@@ -38,21 +37,8 @@ public class DictController {
     private DictDataService dictDataService;
     @Resource
     private DictConvert dictConvert;
-    @Resource
-    private DictDataConvert dictDataConvert;
 
-    @Operation(summary = "查询字典,没权限")
-    @PostMapping("/dict")
-    public R getDict(String name,String[] value) {
-        Dict dict = dictService.getOne(new LambdaQueryWrapper<Dict>().eq(Dict::getName, name));
-        List<DictData> dictData = dictDataService.list(new LambdaQueryWrapper<DictData>()
-                .eq(DictData::getDictId, dict.getId())
-                .in(value!=null,DictData::getDictValue, value)
-                .orderByDesc(DictData::getSort));
-        List<DictDataRe> resList = dictDataConvert.entity2ResList(dictData);
-        return R.success().put(resList);
-    }
-
+    //@WebLog
     @Operation(summary = "查询分页数据")
     @PostMapping("/basic/dict/page")
     public R page(@RequestBody DictReq req) {
@@ -62,6 +48,7 @@ public class DictController {
         return R.success().put(new PageUtils(resPage));
     }
 
+    @WebLog
     @Operation(summary = "添加数据")
     @PostMapping("/basic/dict/add")
     public R add(@RequestBody DictReq req) {
@@ -70,6 +57,7 @@ public class DictController {
         return R.success("添加成功");
     }
 
+    @WebLog
     @Operation(summary = "修改数据")
     @PostMapping("/basic/dict/update")
     public R update(@RequestBody DictReq req) {
@@ -78,6 +66,7 @@ public class DictController {
         return R.success("修改成功");
     }
 
+    @WebLog
     @Operation(summary = "删除数据")
     @PostMapping("/basic/dict/delete/{ids}")
     public R delete(@PathVariable List<Long> ids) {

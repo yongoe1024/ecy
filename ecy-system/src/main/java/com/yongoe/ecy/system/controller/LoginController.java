@@ -1,6 +1,6 @@
 package com.yongoe.ecy.system.controller;
 
-import com.github.xiaoymin.knife4j.annotations.ApiSupport;
+import com.yongoe.ecy.config.aop.WebLog;
 import com.yongoe.ecy.system.controller.vo.req.ForgetReq;
 import com.yongoe.ecy.system.controller.vo.req.LoginReq;
 import com.yongoe.ecy.system.controller.vo.req.RegisterReq;
@@ -21,19 +21,20 @@ import org.springframework.web.bind.annotation.RestController;
  * @author yongoe
  * @since 2023/1/1
  */
-@Tag(name = "登录", description = "登录")
-@ApiSupport(order = 1)
+@Tag(name = "系统登录")
 @RestController
 public class LoginController {
     @Resource
     private LoginService loginService;
 
+    @WebLog
     @Operation(summary = "登录")
     @PostMapping("/login")
     public R login(@RequestBody LoginReq loginReq, HttpServletRequest request) {
         return loginService.login(loginReq, request);
     }
 
+    @WebLog
     @Operation(summary = "退出登录")
     @PostMapping("/logout")
     public R logout() {
@@ -41,12 +42,14 @@ public class LoginController {
         return R.success("退出登录");
     }
 
+    @WebLog
     @Operation(summary = "注册")
     @PostMapping("/register")
     public R register(@RequestBody RegisterReq register) {
         return loginService.register(register);
     }
 
+    @WebLog
     @Operation(summary = "找回密码")
     @PostMapping("/forget")
     public R forget(@RequestBody ForgetReq forget) {

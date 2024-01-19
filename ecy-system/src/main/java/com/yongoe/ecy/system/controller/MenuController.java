@@ -1,6 +1,7 @@
 package com.yongoe.ecy.system.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.yongoe.ecy.config.aop.WebLog;
 import com.yongoe.ecy.system.controller.vo.req.MenuReq;
 import com.yongoe.ecy.system.controller.vo.res.MenuRes;
 import com.yongoe.ecy.system.convert.MenuConvert;
@@ -34,6 +35,7 @@ public class MenuController {
     @Resource
     private MenuConvert convert;
 
+    //@WebLog
     @Operation(summary = "查询数据")
     @PostMapping("/tree")
     public R tree() {
@@ -42,6 +44,7 @@ public class MenuController {
         return R.success().put(resList);
     }
 
+    @WebLog
     @Operation(summary = "添加数据")
     @PostMapping("/add")
     public R add(@RequestBody MenuReq req) {
@@ -50,6 +53,7 @@ public class MenuController {
         return R.success("添加成功");
     }
 
+    @WebLog
     @Operation(summary = "修改数据")
     @PostMapping("/update")
     public R update(@RequestBody MenuReq req) {
@@ -58,6 +62,7 @@ public class MenuController {
         return R.success("修改成功");
     }
 
+    @WebLog
     @Operation(summary = "删除数据")
     @PostMapping("/delete/{id}")
     public R delete(@PathVariable Long id) {

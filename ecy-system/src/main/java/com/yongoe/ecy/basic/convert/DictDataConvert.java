@@ -2,7 +2,7 @@ package com.yongoe.ecy.basic.convert;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yongoe.ecy.basic.controller.vo.req.DictDataReq;
-import com.yongoe.ecy.basic.controller.vo.res.DictDataRe;
+import com.yongoe.ecy.basic.controller.vo.res.DictDataRes;
 import com.yongoe.ecy.basic.entity.DictData;
 import org.mapstruct.Mapper;
 
@@ -21,7 +21,7 @@ public interface DictDataConvert {
      */
     DictDataReq entity2Req(DictData entity);
 
-    DictDataRe entity2Res(DictData entity);
+    DictDataRes entity2Res(DictData entity);
 
 
     /**
@@ -29,13 +29,13 @@ public interface DictDataConvert {
      */
     List<DictDataReq> entity2ReqList(List<DictData> list);
 
-    List<DictDataRe> entity2ResList(List<DictData> list);
+    List<DictDataRes> entity2ResList(List<DictData> list);
 
 
     /**
      * entity to vo Page
      */
-    Page<DictDataRe> entity2ResPage(Page<DictData> page);
+    Page<DictDataRes> entity2ResPage(Page<DictData> page);
 
 
     /**

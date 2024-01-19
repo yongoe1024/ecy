@@ -9,7 +9,7 @@ import org.apache.commons.lang3.StringUtils;
  * @author yongoe
  * @since 2023/1/1
  */
-public class IpUtils {
+public class IPUtils {
 
     /**
      * 获取请求人的ip

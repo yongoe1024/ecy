@@ -1,7 +1,6 @@
 package com.yongoe.ecy.basic.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +18,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName("basic_department")
-@Schema(name = "部门")
 public class Department {
 
     @TableId(value = "id", type = IdType.AUTO)

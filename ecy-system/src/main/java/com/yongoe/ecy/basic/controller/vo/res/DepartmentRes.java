@@ -1,7 +1,6 @@
 package com.yongoe.ecy.basic.controller.vo.res;
 
 import com.yongoe.ecy.basic.entity.Department;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +16,6 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "部门Res")
 public class DepartmentRes {
 
     private Long id;

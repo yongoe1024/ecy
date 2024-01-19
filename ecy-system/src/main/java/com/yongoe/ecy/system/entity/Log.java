@@ -1,7 +1,6 @@
 package com.yongoe.ecy.system.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,7 +17,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName("sys_log")
-@Schema(name = "系统日志")
 public class Log {
 
     @TableId(value = "id", type = IdType.AUTO)

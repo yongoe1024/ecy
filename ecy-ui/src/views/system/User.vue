@@ -163,6 +163,7 @@
 
     <el-dialog :visible.sync="dialogVisible"
                :title="dialogTitle"
+               :destroy-on-close="true"
                @close="reset"
                :close-on-click-modal="false"
                width="600px">
@@ -294,13 +295,13 @@ export default {
     }
   },
   mounted () {
-    this.axios.post('/basic/department/list').then(data => {
+    this.axios.post('/getDept').then(data => {
       this.departmentList = data
     }).catch(e => { })
-    this.axios.post('/basic/position/list').then(data => {
+    this.axios.post('/getPosition').then(data => {
       this.positionList = data
     }).catch(e => { })
-    this.axios.post('/system/role/list').then(data => {
+    this.axios.post('/getRole').then(data => {
       this.roleList = data
     }).catch(e => { })
     this.getList()

@@ -1,6 +1,7 @@
 package ${package.Controller};
 
 import ${package.Service}.${table.serviceName};
+import com.yongoe.ecy.config.aop.WebLog;
 import com.yongoe.ecy.${packageName}.controller.vo.excel.${entity}Excel;
 import com.yongoe.ecy.${packageName}.controller.vo.req.${entity}Req;
 import com.yongoe.ecy.${packageName}.controller.vo.res.${entity}Res;
@@ -34,6 +35,7 @@ public class ${table.controllerName} {
     @Resource
     private ${entity}Convert ${entity?uncap_first}Convert;
 
+    //@WebLog
     @Operation(summary = "查询分页数据")
     @PostMapping("/page")
     public R page(@RequestBody ${entity}Req req) {
@@ -43,6 +45,7 @@ public class ${table.controllerName} {
         return R.success().put(new PageUtils(resPage));
     }
 
+    @WebLog
     @Operation(summary = "添加数据")
     @PostMapping("/add")
     public R add(@RequestBody ${entity}Req req) {
@@ -51,6 +54,7 @@ public class ${table.controllerName} {
         return R.success("添加成功");
     }
 
+    @WebLog
     @Operation(summary = "修改数据")
     @PostMapping("/update")
     public R update(@RequestBody ${entity}Req req) {
@@ -59,6 +63,7 @@ public class ${table.controllerName} {
         return R.success("修改成功");
     }
 
+    @WebLog
     @Operation(summary = "删除数据")
     @PostMapping("/delete/{ids}")
     public R delete(@PathVariable List<Long> ids) {
@@ -66,6 +71,7 @@ public class ${table.controllerName} {
         return R.success("删除成功");
     }
 
+    @WebLog
     @Operation(summary = "导入数据")
     @PostMapping("/upload")
     public R upload(MultipartFile file) {
@@ -75,6 +81,7 @@ public class ${table.controllerName} {
         return R.success("导入成功");
     }
 
+    @WebLog
     @Operation(summary = "导出数据")
     @GetMapping("/export")
     public void export(${entity}Req req, HttpServletResponse response) {
