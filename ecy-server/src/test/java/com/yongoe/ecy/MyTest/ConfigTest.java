@@ -7,11 +7,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 public class ConfigTest {
-    @Resource
-    private RedisUtils redisUtils;
-
-    @Test
-    public void test() throws Exception {
-    }
 
 }

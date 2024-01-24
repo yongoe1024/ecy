@@ -11,5 +11,5 @@ target
 ecy-file
 *.iml
 pom.xml.versionsBackup
-
+static/
 
