@@ -70,12 +70,12 @@ export default {
         password: null,
       },
       rules: {
-        name: [{ required: true, trigger: 'change' }],
-        phone: [{ required: true, trigger: 'change' }],
+        name: [{ required: true, message: '请输入姓名', trigger: 'change' }],
+        phone: [{ required: true, message: '请输入手机', trigger: 'change' }],
         email: [{ type: 'email', required: true, message: '请输入邮箱', trigger: 'change' }],
-        username: [{ required: true, trigger: 'change' }],
+        username: [{ required: true, message: '请输入用户名', trigger: 'change' }],
         password: [
-          { required: true, message: "用户密码不能为空", trigger: "change" },
+          { required: true, message: "请输入密码", trigger: "change" },
           { min: 6, message: '密码长度必须大于6', trigger: 'change' }
         ],
       },
