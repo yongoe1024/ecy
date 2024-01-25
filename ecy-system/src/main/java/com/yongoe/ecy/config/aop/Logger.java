@@ -110,7 +110,7 @@ public class Logger {
         Operation operation = methodSignature.getMethod().getAnnotation(Operation.class);
         String summary = operation.summary();
         WebLog annotation = methodSignature.getMethod().getAnnotation(WebLog.class);
-        boolean details = annotation.details();
+        boolean ignore = annotation.ignore();
         String description = annotation.description();
 
         Log entity = new Log();
@@ -129,7 +129,7 @@ public class Logger {
         jsonObject.put("IP", IPUtils.getIp(request));
         jsonObject.put("类名", classname);
         jsonObject.put("方法名", method);
-        if (details) {
+        if (!ignore) {
             jsonObject.put("入参", Arrays.toString(point.getArgs()));
             jsonObject.put("出参", result);
         }

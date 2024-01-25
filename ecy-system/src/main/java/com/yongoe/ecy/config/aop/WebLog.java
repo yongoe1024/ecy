@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface WebLog {
 
-    boolean details() default false;
+    boolean ignore() default true;
 
     String description() default "";
 

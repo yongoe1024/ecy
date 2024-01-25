@@ -37,7 +37,7 @@
                      @click="submitForm">确认</el-button>
         </el-form-item>
 
-        <el-link href="/login"
+        <el-link @click="$router.push('/login')"
                  type="primary">返回</el-link>
       </el-form>
     </el-card>
@@ -82,7 +82,7 @@ export default {
 .box {
   height: 100%;
   width: 100%;
-  position: absolute;
+  position: fixed !important;
   background-image: url("../../assets/back.jpg");
   background-size: 100% 100%;
   display: flex;

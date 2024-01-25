@@ -1,4 +1,4 @@
-import {Loading} from 'element-ui'
+import { Loading } from 'element-ui'
 
 let loading
 export function startLoading () {

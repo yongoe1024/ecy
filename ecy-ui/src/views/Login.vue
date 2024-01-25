@@ -1,13 +1,11 @@
 <template>
   <div class="root">
-
     <div class="right-box">
       <el-form :rules="rules"
                ref="form"
                :model="form"
                style="width: 320px;">
         <h1 class="titleText">{{$TITLE}}</h1>
-
         <el-form-item prop="username">
           <el-input v-model="form.username"
                     placeholder="请输入用户名或邮箱"></el-input>
@@ -19,22 +17,15 @@
                     @keyup.enter.native="submitForm"
                     placeholder="请输入密码"></el-input>
         </el-form-item>
-        <!-- <el-row>
-          <el-col :span="14">
-            <el-form-item prop="code">
-              <el-input type="text"
-                        @keydown.enter.native="submitForm"
-                        v-model="form.code"
-                        placeholder="点击图片更换验证码"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="9"
-                  :offset="1">
-            <img @click="updateCaptcha"
-                 :src="captchaUrl" />
-          </el-col>
-        </el-row> -->
-
+        <!-- <el-form-item prop="code">
+          <el-input type="text"
+                    @keydown.enter.native="submitForm"
+                    v-model="form.code"
+                    placeholder="点击图片更换验证码"></el-input>
+          <img @click="updateCaptcha"
+               class="captcha"
+               :src="captchaUrl" />
+        </el-form-item> -->
         <el-form-item>
           <el-button style="width: 100%"
                      type="primary"
@@ -44,7 +35,6 @@
           <router-link :to="{path: 'register'}">注册账号</router-link>
           <router-link :to="{path: 'forget'}">忘记密码？</router-link>
         </div>
-
         <!-- <div class="qq">
           社交账号登录<br>
           <a :href="$BASE_URL+'/oauth/qq/redirect'">
@@ -83,9 +73,9 @@ export default {
       this.$refs.form.validate((valid) => {
         if (valid) {
           this.axios.post('/login', this.form).then((token) => {
-            // 存入 session
+            window.localStorage.clear()
+            window.sessionStorage.clear()
             window.localStorage.setItem('token', token)
-            // 取出重定向的网页
             let path = this.$route.query.redirect
             this.$router.replace(
               path == '/login' || path == undefined ? '/home' : path
@@ -105,13 +95,12 @@ export default {
 .root {
   height: 100%;
   width: 100%;
-  position: absolute;
+  position: fixed !important;
   background-image: url("../assets/back.jpg");
   background-size: 100% 100%;
 }
 .titleText {
-  font-size: 20px;
-  font-family: 楷体;
+  font-size: 25px;
 }
 .right-box {
   float: right;
@@ -121,6 +110,12 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.captcha {
+  position: absolute;
+  height: 40px;
+  width: 110px;
+  margin-left: -110px;
 }
 .end {
   display: flex;

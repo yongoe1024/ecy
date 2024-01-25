@@ -10,7 +10,7 @@ const routes = [
   {
     path: '/login',
     name: '登录',
-    component: () => import('@/views/Login2')
+    component: () => import('@/views/Login')
   },
   {
     path: '/register',

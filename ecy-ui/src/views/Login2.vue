@@ -1,35 +1,44 @@
 <template>
   <div class="root">
-
-    <div class="box">
-      <el-form :rules="rules"
-               ref="form"
-               :model="form">
-        <h1 class="titleText">{{$TITLE}}</h1>
-
-        <el-form-item prop="username">
-          <input v-model="form.username"
-                 placeholder="请输入用户名或邮箱" />
-        </el-form-item>
-
-        <el-form-item prop="password">
-          <input type="password"
-                 v-model="form.password"
-                 @keyup.enter="submitForm"
-                 placeholder="请输入密码" />
-        </el-form-item>
-        <el-form-item>
-          <el-button style="width: 100%; border-radius: 50px;"
-                     type="primary"
-                     @click="submitForm">登录</el-button>
-        </el-form-item>
-        <div class="end">
-          <router-link :to="{path: 'register'}">注册账号</router-link>
-          <router-link :to="{path: 'forget'}">忘记密码？</router-link>
-        </div>
-      </el-form>
-    </div>
-
+    <el-form :rules="rules"
+             ref="form"
+             :model="form">
+      <h1 class="titleText">{{$TITLE}}</h1>
+      <el-form-item prop="username">
+        <input v-model="form.username"
+               placeholder="请输入用户名或邮箱" />
+      </el-form-item>
+      <el-form-item prop="password">
+        <input type="password"
+               v-model="form.password"
+               @keyup.enter="submitForm"
+               placeholder="请输入密码" />
+      </el-form-item>
+      <!-- <el-form-item prop="code">
+        <input @keydown.enter="submitForm"
+               v-model="form.code"
+               placeholder="点击图片更换验证码" />
+        <img @click="updateCaptcha"
+             class="captcha"
+             :src="captchaUrl" />
+      </el-form-item> -->
+      <el-form-item>
+        <el-button style="width:100%;border-radius:50px;"
+                   type="primary"
+                   @click="submitForm">登录</el-button>
+      </el-form-item>
+      <div class="end">
+        <router-link :to="{path: 'register'}">注册账号</router-link>
+        <router-link :to="{path: 'forget'}">忘记密码？</router-link>
+      </div>
+      <!-- <div class="qq">
+        社交账号登录<br>
+        <a :href="$BASE_URL+'/oauth/qq/redirect'">
+          <img style="width:30px;margin:10px"
+               src="../assets/icon_QQ.png">
+        </a>
+      </div> -->
+    </el-form>
   </div>
 </template>
 
@@ -58,9 +67,9 @@ export default {
       this.$refs.form.validate((valid) => {
         if (valid) {
           this.axios.post('/login', this.form).then((token) => {
-            // 存入 session
+            window.localStorage.clear()
+            window.sessionStorage.clear()
             window.localStorage.setItem('token', token)
-            // 取出重定向的网页
             let path = this.$route.query.redirect
             this.$router.replace(
               path == '/login' || path == undefined ? '/home' : path
@@ -80,7 +89,7 @@ export default {
 .root {
   height: 100%;
   width: 100%;
-  position: absolute;
+  position: fixed !important;
   background-image: url("../assets/back2.jpg");
   background-size: 100% 100%;
   display: flex;
@@ -88,13 +97,9 @@ export default {
   align-items: center;
 }
 .titleText {
-  font: 39px "Times New Roman", Times, serif;
+  font-size: 39px;
   text-align: center;
   color: #ffffff;
-}
-.box {
-  width: 330px;
-  margin: 0 auto;
 }
 .end {
   display: flex;
@@ -117,11 +122,19 @@ export default {
 input {
   width: 300px;
   height: 46px;
-  border: rgba(255, 255, 255, 0.2) 2px solid !important;
+  border: rgba(255, 255, 255, 0.2) 2px solid;
   border-radius: 50px;
-  font: 15px "microsoft yahei", Helvetica, Tahoma, Arial, "Microsoft jhengHei";
+  font-size: 15px;
   background-color: transparent;
-  color: #ffffff !important;
+  color: #ffffff;
   padding-left: 20px;
+  padding-right: 20px;
+}
+.captcha {
+  position: absolute;
+  border-radius: 50px;
+  height: 52px;
+  width: 134px;
+  margin-left: -134px;
 }
 </style>
