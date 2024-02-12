@@ -124,7 +124,6 @@
                :rules="rules">
         <el-form-item label="类型"
                       prop="type">
-
           <el-radio v-for="(item,index) in [{name:'目录',type:1},{name:'页面',type:2},{name:'按钮',type:3}]"
                     :key="index"
                     v-model="form.type"
@@ -198,9 +197,11 @@
         </el-form-item>
       </el-form>
       <span slot="footer">
-        <el-button type="primary"
+        <el-button size="medium"
+                   @click="dialogVisible = false">取 消</el-button>
+        <el-button size="medium"
+                   type="primary"
                    @click="handleAddOrUpdate">确 定</el-button>
-        <el-button @click="dialogVisible = false">取 消</el-button>
       </span>
     </el-dialog>
   </div>
@@ -208,8 +209,6 @@
 
 <script>
 export default {
-  components: {},
-  props: {},
   computed: {
     type () {
       return this.form.type
@@ -220,7 +219,6 @@ export default {
       if (n == 1) {
         this.componentDisabled = true
         this.urlDisabled = true
-        // this.form.parentId = '0'
         this.form.url = ''
         this.form.component = ''
       } else if (n == 3) {
@@ -256,7 +254,7 @@ export default {
         enabled: true,
       },
       rules: {
-        parentId: [{ required: true, message: '请选择父菜单', trigger: 'change' }],
+        parentId: [{ required: true, message: '请选择上级菜单', trigger: 'change' }],
         name: [{ required: true, message: '请输入菜单名', trigger: 'change' }],
         type: [{ required: true, message: '请输入类型', trigger: 'change' }],
         sort: [{ required: true, message: '请输入顺序', trigger: 'change' }],
@@ -278,12 +276,13 @@ export default {
     handleShowRowAddEdit (row) {
       this.dialogTitle = '添加'
       this.form.parentId = row.id
+      if (row.type == 2)
+        this.form.type = 3
       this.dialogVisible = true
     },
     handleShowUpdateEdit (row) {
       this.dialogTitle = '修改'
       Object.assign(this.form, row)
-      this.form.parentId = this.form.parentId + ''
       this.dialogVisible = true
     },
     handleAddOrUpdate () {
@@ -293,26 +292,26 @@ export default {
             this.axios.post('/system/menu/update', this.form).then(() => {
               this.getList()
               this.dialogVisible = false
-            }).catch(e => { })
+            })
           } else {
             this.axios.post('/system/menu/add', this.form).then(() => {
               this.getList()
               this.dialogVisible = false
-            }).catch(e => { })
+            })
           }
         }
       })
     },
     handleDelete (row) {
       this.$confirm('此操作将永久删除这条数据, 是否继续?', '提示', { type: 'warning' }).then(() => {
-        this.axios.post('/system/menu/delete/' + row.id).then(() => this.getList()).catch(e => { })
+        this.axios.post('/system/menu/delete/' + row.id).then(() => this.getList())
       }).catch(e => { })
     },
     // 初始化数据
     getList () {
       this.axios.post('/system/menu/tree').then(data => {
         this.dataList = data
-      }).catch(e => { })
+      })
     },
   },
 }

@@ -26,7 +26,6 @@
       <el-button icon="el-icon-refresh"
                  size="mini"
                  plain
-                 type="info"
                  @click="resetQuery">重置</el-button>
     </div>
 
@@ -79,18 +78,15 @@
                    :page-size="queryParam.size"
                    layout="total, sizes, prev, pager, next, jumper"
                    :total="total"></el-pagination>
-
   </div>
 </template>
 
 <script>
+import page from '@/mixin/page.js'
 export default {
-  components: {},
-  props: {},
+  mixins: [page],
   data () {
     return {
-      total: 0,
-
       dataList: [],
       queryParam: {
         current: 1,
@@ -113,22 +109,12 @@ export default {
     resetQuery () {
       this.queryParam = this.$options.data().queryParam
     },
-    // 改变页码
-    handleSizeChange (val) {
-      this.queryParam.size = val
-      this.getList()
-    },
-    // 点击页数
-    handleCurrentChange (val) {
-      this.queryParam.current = val
-      this.getList()
-    },
     // 初始化数据
     getList () {
       this.axios.post(`/basic/letter/recv`, this.queryParam).then(data => {
         this.dataList = data.list
         this.total = data.total - 0
-      }).catch(e => { })
+      })
     },
   },
 }

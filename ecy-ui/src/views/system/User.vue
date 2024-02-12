@@ -81,14 +81,23 @@
       <el-table-column prop="positionName"
                        label="职位"
                        align="center"></el-table-column>
-      <el-table-column prop="avatar"
+      <!-- <el-table-column prop="avatar"
                        label="头像"
                        align="center">
         <template slot-scope="scope">
           <img :src="scope.row.avatar"
                style="width:40px">
         </template>
-      </el-table-column>
+      </el-table-column> -->
+      <el-table-column prop="email"
+                       label="邮箱"
+                       align="center"></el-table-column>
+      <el-table-column prop="phone"
+                       label="联系电话"
+                       align="center"></el-table-column>
+      <el-table-column prop="remark"
+                       label="备注"
+                       align="center"></el-table-column>
       <el-table-column prop="enabled"
                        label="是否启用"
                        align="center">
@@ -104,6 +113,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="roleList"
+                       width="110"
                        label="角色"
                        align="center">
         <template slot-scope="scope">
@@ -113,27 +123,16 @@
                   :key="item.id">{{item.name}}</el-tag>
         </template>
       </el-table-column>
-      <!--  <el-table-column prop="email"
-                       label="邮箱"
-                       width="200"
-                       align="center"></el-table-column>
-                       <el-table-column prop="lastIp"
+      <el-table-column prop="lastIp"
                        label="上次登录ip"
-                       width="100"
                        align="center"></el-table-column>
       <el-table-column prop="lastTime"
+                       width="110"
                        label="上次登录时间"
-                       width="120"
                        align="center"></el-table-column>
-      <el-table-column prop="phone"
-                       label="联系电话"
-                       align="center"></el-table-column>
-      <el-table-column prop="remark"
-                       label="备注"
-                       align="center"></el-table-column> -->
       <el-table-column label="操作"
                        align="center"
-                       width="140"
+                       width="180"
                        fixed="right">
         <template slot-scope="scope">
           <el-button type="text"
@@ -240,20 +239,22 @@
         </el-form-item>
       </el-form>
       <span slot="footer">
-        <el-button type="primary"
+        <el-button size="medium"
+                   @click="dialogVisible = false">取 消</el-button>
+        <el-button size="medium"
+                   type="primary"
                    @click="handleAddOrUpdate">确 定</el-button>
-        <el-button @click="dialogVisible = false">取 消</el-button>
       </span>
     </el-dialog>
   </div>
 </template>
 
 <script>
+import page from '@/mixin/page.js'
 export default {
+  mixins: [page],
   data () {
     return {
-      total: 0,
-
       dialogVisible: false,
       dialogTitle: '',
 
@@ -275,8 +276,6 @@ export default {
         roleIds: [],
       },
       queryParam: {
-        current: 1,
-        size: 10,
         departmentId: null,
         positionId: null,
         name: null,
@@ -297,18 +296,18 @@ export default {
   mounted () {
     this.axios.post('/getDept').then(data => {
       this.departmentList = data
-    }).catch(e => { })
+    })
     this.axios.post('/getPosition').then(data => {
       this.positionList = data
-    }).catch(e => { })
+    })
     this.axios.post('/getRole').then(data => {
       this.roleList = data
-    }).catch(e => { })
+    })
     this.getList()
   },
   methods: {
     handleExport () {
-      this.$confirm('部门存在子部门，若子部门同名，则无法区分，建议所有子部门区分名称, 是否继续?', '提示', { type: 'warning' }).then(() => {
+      this.$confirm('若部门同名，则无法正确区分， 是否继续?', '提示', { type: 'warning' }).then(() => {
         this.download('/system/user/export')
       }).catch(e => { })
     },
@@ -317,16 +316,6 @@ export default {
     },
     resetQuery () {
       this.queryParam = this.$options.data().queryParam
-    },
-    // 改变页码
-    handleSizeChange (val) {
-      this.queryParam.size = val
-      this.getList()
-    },
-    // 点击页数
-    handleCurrentChange (val) {
-      this.queryParam.current = val
-      this.getList()
     },
     handleShowAddEdit () {
       this.dialogTitle = '添加'
@@ -359,19 +348,19 @@ export default {
             this.axios.post('/system/user/update', this.form).then(() => {
               this.getList()
               this.dialogVisible = false
-            }).catch(e => { })
+            })
           } else {
             this.axios.post('/system/user/add', this.form).then(() => {
               this.getList()
               this.dialogVisible = false
-            }).catch(e => { })
+            })
           }
         }
       })
     },
     handleDelete (row) {
       this.$confirm('此操作将永久删除这条数据, 是否继续?', '提示', { type: 'warning' }).then(() => {
-        this.axios.post('/system/user/delete/' + row.id).then(() => this.getList()).catch(e => { })
+        this.axios.post('/system/user/delete/' + row.id).then(() => this.getList())
       }).catch(e => { })
     },
 
@@ -380,7 +369,7 @@ export default {
       this.axios.post(`/system/user/page`, this.queryParam).then(data => {
         this.dataList = data.list
         this.total = data.total - 0
-      }).catch(e => { })
+      })
     },
   },
 }

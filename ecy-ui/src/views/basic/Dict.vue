@@ -101,24 +101,24 @@
         </el-form-item>
       </el-form>
       <span slot="footer">
-        <el-button type="primary"
+        <el-button size="medium"
+                   @click="dialogVisible = false">取 消</el-button>
+        <el-button size="medium"
+                   type="primary"
                    @click="handleAddOrUpdate">确 定</el-button>
-        <el-button @click="dialogVisible = false">取 消</el-button>
       </span>
     </el-dialog>
   </div>
 </template>
 
 <script>
+import page from '@/mixin/page.js'
 export default {
-  components: {},
-  props: {},
+  mixins: [page],
   data () {
     return {
       // 多选框数据
       multipleSelection: [],
-      total: 0,
-
       dialogVisible: false,
       dialogTitle: '',
 
@@ -128,8 +128,6 @@ export default {
         remark: null,
       },
       queryParam: {
-        current: 1,
-        size: 10,
         name: null,
       },
       rules: {
@@ -151,16 +149,6 @@ export default {
     handleSelectionChange (val) {
       this.multipleSelection = val.map(item => item.id)
     },
-    // 改变页码
-    handleSizeChange (val) {
-      this.queryParam.size = val
-      this.getList()
-    },
-    // 点击页数
-    handleCurrentChange (val) {
-      this.queryParam.current = val
-      this.getList()
-    },
     handleShowAddEdit () {
       this.dialogTitle = '添加'
       this.dialogVisible = true
@@ -177,24 +165,24 @@ export default {
             this.axios.post('/basic/dict/update', this.form).then(() => {
               this.getList()
               this.dialogVisible = false
-            }).catch(e => { })
+            })
           } else {
             this.axios.post('/basic/dict/add', this.form).then(() => {
               this.getList()
               this.dialogVisible = false
-            }).catch(e => { })
+            })
           }
         }
       })
     },
     handleDelete (row) {
       this.$confirm('此操作将永久删除这条数据, 是否继续?', '提示', { type: 'warning' }).then(() => {
-        this.axios.post('/basic/dict/delete/' + row.id).then(() => this.getList()).catch(e => { })
+        this.axios.post('/basic/dict/delete/' + row.id).then(() => this.getList())
       }).catch(e => { })
     },
     handleDeleteMany () {
       this.$confirm('此操作将永久删除 [' + this.multipleSelection.length + '] 条数据, 是否继续?', '提示', { type: 'warning' }).then(() => {
-        this.axios.post('/basic/dict/delete/' + this.multipleSelection).then(() => this.getList()).catch(e => { })
+        this.axios.post('/basic/dict/delete/' + this.multipleSelection).then(() => this.getList())
       }).catch(e => { })
     },
     // 初始化数据
@@ -202,7 +190,7 @@ export default {
       this.axios.post(`/basic/dict/page`, this.queryParam).then(data => {
         this.dataList = data.list
         this.total = data.total - 0
-      }).catch(e => { })
+      })
     },
   },
 }

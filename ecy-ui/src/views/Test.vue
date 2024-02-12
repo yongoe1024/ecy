@@ -1,25 +1,12 @@
 <template>
   <div>
-    <e-dict name="启用"
-            type="checkboxtag"
-            :value="v"></e-dict>
-    <e-chunk-upload></e-chunk-upload>
   </div>
 </template>
 
-
 <script>
-import eChunkUpload from '@/components/chunk-upload/e-chunk-upload.vue'
 export default {
-  components: { eChunkUpload },
-  props: {},
-  computed: {},
-  watch: {},
   data () {
     return {
-      v: '1,2',
-      p: '',
-      a: true
     }
   },
   mounted () {

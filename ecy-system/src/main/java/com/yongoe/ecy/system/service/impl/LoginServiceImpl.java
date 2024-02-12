@@ -33,7 +33,7 @@ public class LoginServiceImpl implements LoginService {
 //        String captcha = (String) session.getAttribute("captcha");
 //        request.getSession().removeAttribute("captcha");
 //        if (StringUtils.isEmpty(captcha) || !captcha.equalsIgnoreCase(code)) {
-//            return R.error(402, "验证码错误");
+//            return R.error("验证码错误");
 //        }
         User user = userService.getOne(new LambdaQueryWrapper<User>().eq(User::getUsername, loginReq.getUsername()));
         if (user == null)

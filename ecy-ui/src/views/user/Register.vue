@@ -88,7 +88,7 @@ export default {
           this.axios.post('/register', this.form).then((token) => {
             window.localStorage.setItem('token', token)
             setTimeout(() => { this.$router.replace('/index') }, 1000)
-          }).catch(e => { })
+          })
         }
       })
     },

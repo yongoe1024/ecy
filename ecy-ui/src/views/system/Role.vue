@@ -93,9 +93,11 @@
         </el-form-item>
       </el-form>
       <span slot="footer">
-        <el-button type="primary"
+        <el-button size="medium"
+                   @click="dialogVisible = false">取 消</el-button>
+        <el-button size="medium"
+                   type="primary"
                    @click="handleAddOrUpdate">确 定</el-button>
-        <el-button @click="dialogVisible = false">取 消</el-button>
       </span>
     </el-dialog>
 
@@ -121,22 +123,22 @@
 
       </el-form>
       <span slot="footer">
-        <el-button type="primary"
+        <el-button size="medium"
+                   @click="dialogVisibleMenu = false">关闭</el-button>
+        <el-button size="medium"
+                   type="primary"
                    @click="handlMenuUpdate()">确认修改</el-button>
-        <el-button @click="dialogVisibleMenu = false">关闭</el-button>
       </span>
     </el-dialog>
   </div>
 </template>
 
 <script>
+import page from '@/mixin/page.js'
 export default {
-  components: {},
-  props: {},
+  mixins: [page],
   data () {
     return {
-      total: 0,
-
       dialogVisible: false,
       dialogVisibleMenu: false,
       dialogTitle: '',
@@ -152,8 +154,6 @@ export default {
         menuIds: [],
       },
       queryParam: {
-        current: 1,
-        size: 10,
         id: null,
         code: null,
         name: null,
@@ -178,7 +178,7 @@ export default {
       this.axios.post(url).then(() => {
         this.dialogVisibleMenu = false
         this.getList()
-      }).catch(e => { })
+      })
     },
     handleRoleMenuEdit (row) {
       this.dialogVisibleMenu = true
@@ -189,16 +189,6 @@ export default {
     },
     resetQuery () {
       this.queryParam = this.$options.data().queryParam
-    },
-    // 改变页码
-    handleSizeChange (val) {
-      this.queryParam.size = val
-      this.getList()
-    },
-    // 点击页数
-    handleCurrentChange (val) {
-      this.queryParam.current = val
-      this.getList()
     },
     handleShowAddEdit () {
       this.dialogTitle = '添加'
@@ -216,36 +206,37 @@ export default {
             this.axios.post('/system/role/update', this.form).then(() => {
               this.getList()
               this.dialogVisible = false
-            }).catch(e => { })
+            })
           } else {
             this.axios.post('/system/role/add', this.form).then(() => {
               this.getList()
               this.dialogVisible = false
-            }).catch(e => { })
+            })
           }
         }
       })
     },
     handleDelete (row) {
       this.$confirm('此操作将永久删除[' + row.name + ']角色, 是否继续?', '提示', { type: 'warning' }).then(() => {
-        this.axios.post('/system/role/delete/' + row.id).then(() => this.getList()).catch(e => { })
+        this.axios.post('/system/role/delete/' + row.id).then(() => this.getList())
       }).catch(e => { })
     },
     // 初始化菜单数据
     getMenus () {
-      this.axios.post('/system/menu/tree').then(data => this.menuList = data).catch(e => { })
+      this.axios.post('/system/menu/tree').then(data => this.menuList = data)
     },
     // 初始化数据
     getList () {
       this.axios.post(`/system/role/page`, this.queryParam).then(data => {
         this.roleList = data.list
         this.total = data.total - 0
-      }).catch(e => { })
+      })
     },
   },
 }
 </script>
 <style scoped>
+/* 全局修改el-table 表头和内容颜色 header color content color */
 .head {
   display: flex;
   flex-wrap: wrap;

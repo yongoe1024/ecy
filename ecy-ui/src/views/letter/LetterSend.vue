@@ -20,12 +20,11 @@
       </el-select>
       <el-button icon="el-icon-search"
                  size="mini"
-                 type="primary"
                  plain
+                 type="primary"
                  @click="getList">搜索</el-button>
       <el-button icon="el-icon-refresh"
                  size="mini"
-                 type="info"
                  plain
                  @click="resetQuery">重置</el-button>
       <el-button type="text"
@@ -125,23 +124,22 @@
         </el-form-item>
       </el-form>
       <span slot="footer">
-        <el-button type="primary"
+        <el-button size="medium"
+                   @click="dialogVisible = false">取 消</el-button>
+        <el-button size="medium"
+                   type="primary"
                    @click="handleAddOrUpdate">确 定</el-button>
-        <el-button @click="dialogVisible = false">取 消</el-button>
       </span>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import EEditor from '@/components/e-editor.vue'
+import page from '@/mixin/page.js'
 export default {
-  components: { EEditor },
-  props: {},
+  mixins: [page],
   data () {
     return {
-      total: 0,
-
       dialogVisible: false,
       dialogTitle: '',
       userList: [],
@@ -153,8 +151,6 @@ export default {
         content: null,
       },
       queryParam: {
-        current: 1,
-        size: 10,
         addresserId: null,
         addressee: null,
         title: null,
@@ -188,7 +184,7 @@ export default {
     this.getList()
     this.axios.post('/basic/letter/user').then(data => {
       this.userList = data
-    }).catch(e => { })
+    })
   },
   methods: {
     getInfo (row) {
@@ -200,16 +196,6 @@ export default {
     resetQuery () {
       this.queryParam = this.$options.data().queryParam
     },
-    // 改变页码
-    handleSizeChange (val) {
-      this.queryParam.size = val
-      this.getList()
-    },
-    // 点击页数
-    handleCurrentChange (val) {
-      this.queryParam.current = val
-      this.getList()
-    },
     handleShowAddEdit () {
       this.dialogTitle = '写信'
       this.dialogVisible = true
@@ -220,7 +206,7 @@ export default {
           this.axios.post('/basic/letter/add', this.form).then(() => {
             this.getList()
             this.dialogVisible = false
-          }).catch(e => { })
+          })
         }
       })
     },
@@ -229,7 +215,7 @@ export default {
       this.axios.post(`/basic/letter/send`, this.queryParam).then(data => {
         this.dataList = data.list
         this.total = data.total - 0
-      }).catch(e => { })
+      })
     },
   },
 }

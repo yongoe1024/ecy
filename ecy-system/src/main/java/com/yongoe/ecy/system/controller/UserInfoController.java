@@ -71,11 +71,7 @@ public class UserInfoController {
     @Operation(summary = "修改个人信息")
     @PostMapping("/user/update")
     public R updateUserinfo(@RequestBody UserReq req) {
-        Long userId = UserUtils.getUserId();
-        User user = userService.getUserById(userId);
-        user.setPhone(req.getPhone());
-        user.setEmail(req.getEmail());
-        user.setRemark(req.getRemark());
+        User user = userConvert.req2Entity(req);
         userService.updateById(user);
         return R.success("修改成功");
     }

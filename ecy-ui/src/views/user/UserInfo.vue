@@ -6,13 +6,13 @@
     <el-row :gutter="20">
       <el-col :offset="1"
               :span="6">
-        <el-upload :action="uploadURL"
+        <el-upload :action="$BASE_URL+'/user/avatar'"
                    :headers="headers"
                    :show-file-list="false"
                    :on-success="onSuccess">
           <div class="user-info-img">
             <img style="width:100px;height:100px;"
-                 @error="setDefaultImage"
+                 @error="handleImageError"
                  :src="form.avatar" />
           </div>
         </el-upload>
@@ -92,16 +92,13 @@
   </div>
 </template>
 
-
 <script>
 export default {
   data () {
     return {
-      uploadURL: this.$BASE_URL + '/user/avatar',
       headers: {
         Authorization: window.localStorage.getItem('token')
       },
-      imgUrl: require('../../assets/no-img.jpg'),
       form: {
         name: null,
         email: null,
@@ -121,28 +118,24 @@ export default {
     this.initUser()
   },
   methods: {
-    setDefaultImage (e) {
-      e.target.src = this.imgUrl
-      e.target.onerror = null
-    },
     onSuccess () {
       this.initUser()
     },
     handleUpdate () {
       this.axios.post('/user/update', this.form).then((data) => {
         setTimeout(() => { this.initUser() }, 1000)
-      }).catch(e => { })
+      })
     },
     initUser () {
       this.axios.post('/user/info').then(data => {
         this.$store.commit('initUser', data)
         this.form = data
-      }).catch(e => { })
+      })
     }
   },
 }
-
 </script>
+
 <style scoped>
 .box {
   margin: 0 auto;

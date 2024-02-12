@@ -23,11 +23,10 @@
                  icon="el-icon-refresh"
                  @click="resetQuery">重置</el-button>
       <el-button type="success"
-                 plain
                  size="mini"
+                 plain
                  @click="handleShowAddEdit"
                  icon="el-icon-plus">添加</el-button>
-
     </div>
 
     <!-- 表格 -->
@@ -40,7 +39,7 @@
       <el-table-column align="center"
                        type="index"></el-table-column>
       <el-table-column prop="configKey"
-                       label="键"
+                       label="名称"
                        align="center"></el-table-column>
       <el-table-column prop="configValue"
                        :show-overflow-tooltip="true"
@@ -92,10 +91,10 @@
                label-width="auto"
                style="margin:20px"
                :rules="rules">
-        <el-form-item label="键"
+        <el-form-item label="名称"
                       prop="configKey">
           <el-input v-model="form.configKey"
-                    placeholder="请输入键" />
+                    placeholder="请输入名称" />
         </el-form-item>
         <el-form-item label="值"
                       prop="configValue">
@@ -109,27 +108,26 @@
         </el-form-item>
       </el-form>
       <span slot="footer">
-        <el-button type="primary"
+        <el-button size="medium"
+                   @click="dialogVisible = false">取 消</el-button>
+        <el-button size="medium"
+                   type="primary"
                    @click="handleAddOrUpdate">确 定</el-button>
-        <el-button @click="dialogVisible = false">取 消</el-button>
       </span>
     </el-dialog>
   </div>
 </template>
 
 <script>
+import page from '@/mixin/page.js'
 export default {
-  components: {},
-  props: {},
+  mixins: [page],
   data () {
     return {
       // 多选框数据
       multipleSelection: [],
-      total: 0,
-
       dialogVisible: false,
       dialogTitle: '',
-
       dataList: [],
       form: {
         configKey: null,
@@ -137,8 +135,6 @@ export default {
         remark: null
       },
       queryParam: {
-        current: 1,
-        size: 10,
         configKey: null,
         configValue: null,
       },
@@ -162,16 +158,6 @@ export default {
     handleSelectionChange (val) {
       this.multipleSelection = val.map(item => item.id)
     },
-    // 改变页码
-    handleSizeChange (val) {
-      this.queryParam.size = val
-      this.getList()
-    },
-    // 点击页数
-    handleCurrentChange (val) {
-      this.queryParam.current = val
-      this.getList()
-    },
     handleShowAddEdit () {
       this.dialogTitle = '添加'
       this.dialogVisible = true
@@ -188,24 +174,24 @@ export default {
             this.axios.post('/system/config/update', this.form).then(() => {
               this.getList()
               this.dialogVisible = false
-            }).catch(e => { })
+            })
           } else {
             this.axios.post('/system/config/add', this.form).then(() => {
               this.getList()
               this.dialogVisible = false
-            }).catch(e => { })
+            })
           }
         }
       })
     },
     handleDelete (row) {
       this.$confirm('此操作将永久删除这条数据, 是否继续?', '提示', { type: 'warning' }).then(() => {
-        this.axios.post('/system/config/delete/' + row.id).then(() => this.getList()).catch(e => { })
-      }).catch(e => { })
+        this.axios.post('/system/config/delete/' + row.id).then(() => this.getList())
+      })
     },
     handleDeleteMany () {
       this.$confirm('此操作将永久删除 [' + this.multipleSelection.length + '] 条数据, 是否继续?', '提示', { type: 'warning' }).then(() => {
-        this.axios.post('/system/config/delete/' + this.multipleSelection).then(() => this.getList()).catch(e => { })
+        this.axios.post('/system/config/delete/' + this.multipleSelection).then(() => this.getList())
       }).catch(e => { })
     },
     // 初始化数据
@@ -213,7 +199,7 @@ export default {
       this.axios.post(`/system/config/page`, this.queryParam).then(data => {
         this.dataList = data.list
         this.total = data.total - 0
-      }).catch(e => { })
+      })
     },
   },
 }

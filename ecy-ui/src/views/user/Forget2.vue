@@ -44,7 +44,7 @@ export default {
         password: null,
       },
       rules: {
-        email: [{ type: "email", message: "请输入正确邮箱", required: true, trigger: 'change' }],
+        email: [{ type: "email", message: "请输入邮箱", required: true, trigger: 'change' }],
         username: [{ required: true, message: "请输入用户名", trigger: 'change' }],
         password: [{ required: true, message: "请输入密码", trigger: "change" },
         { min: 6, message: '密码长度必须大于6', trigger: 'change' }],
@@ -55,9 +55,9 @@ export default {
     submitForm () {
       this.$refs.form.validate((valid) => {
         if (valid) {
-          this.axios.post('/forget', this.form).then((result) => {
+          this.axios.post('/forget', this.form).then(() => {
             this.$router.replace('/login')
-          }).catch(e => { })
+          })
         }
       })
     },

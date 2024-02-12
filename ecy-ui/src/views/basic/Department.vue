@@ -105,9 +105,11 @@
         </el-form-item>
       </el-form>
       <span slot="footer">
-        <el-button type="primary"
+        <el-button size="medium"
+                   @click="dialogVisible = false">取 消</el-button>
+        <el-button size="medium"
+                   type="primary"
                    @click="handleAddOrUpdate">确 定</el-button>
-        <el-button @click="dialogVisible = false">取 消</el-button>
       </span>
     </el-dialog>
   </div>
@@ -129,7 +131,7 @@ export default {
         enabled: true,
       },
       rules: {
-        parentId: [{ required: true, message: '请输入父id', trigger: 'change' }],
+        parentId: [{ required: true, message: '请输入上级部门', trigger: 'change' }],
         name: [{ required: true, message: '请输入部门名称', trigger: 'change' }],
         leader: [{ required: true, message: '请输入负责人', trigger: 'change' }],
         phone: [{ required: true, message: '请输入联系电话', trigger: 'change' }],
@@ -169,26 +171,26 @@ export default {
             this.axios.post('/basic/department/update', this.form).then(() => {
               this.getList()
               this.dialogVisible = false
-            }).catch(e => { })
+            })
           } else {
             this.axios.post('/basic/department/add', this.form).then(() => {
               this.getList()
               this.dialogVisible = false
-            }).catch(e => { })
+            })
           }
         }
       })
     },
     handleDelete (row) {
       this.$confirm('此操作将永久删除这条数据, 是否继续?', '提示', { type: 'warning' }).then(() => {
-        this.axios.post('/basic/department/delete/' + row.id).then(() => this.getList()).catch(e => { })
+        this.axios.post('/basic/department/delete/' + row.id).then(() => this.getList())
       }).catch(e => { })
     },
     // 初始化数据
     getList () {
       this.axios.post('/basic/department/tree').then(data => {
         this.dataList = data
-      }).catch(e => { })
+      })
     },
   },
 }

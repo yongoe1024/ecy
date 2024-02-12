@@ -6,23 +6,17 @@
   </div>
 </template>
 
-
 <script>
 export default {
-  components: {},
-  props: {},
-  computed: {},
-  watch: {},
   data () {
     return {
     }
   },
-
   mounted () { },
   methods: {},
 }
-
 </script>
+
 <style scoped>
 .welcomeFont {
   margin: 12% auto;

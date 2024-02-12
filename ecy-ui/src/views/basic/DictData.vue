@@ -134,29 +134,26 @@
 </template>
 
 <script>
+import page from '@/mixin/page.js'
 export default {
-  components: {},
-  props: {},
+  mixins: [page],
   data () {
     return {
       // 多选框数据
       multipleSelection: [],
-      total: 0,
-
       dialogVisible: false,
       dialogTitle: '',
 
       dataList: [],
       form: {
-        dictId: null,
+        dictId: this.$route.query.dictId,
         dictKey: null,
         dictValue: null,
         color: null,
         sort: null,
       },
       queryParam: {
-        current: 1,
-        size: 10,
+        dictId: this.$route.query.dictId,
         dictKey: null,
         dictValue: null,
       },
@@ -184,32 +181,18 @@ export default {
     }
   },
   mounted () {
-    this.queryParam.dictId = this.$route.query.dictId
-    this.form.dictId = this.$route.query.dictId
     this.getList()
   },
   methods: {
     reset () {
       this.form = this.$options.data().form
-      this.form.dictId = this.$route.query.dictId
     },
     resetQuery () {
       this.queryParam = this.$options.data().queryParam
-      this.queryParam.dictId = this.$route.query.dictId
     },
     // 多选框回调
     handleSelectionChange (val) {
       this.multipleSelection = val.map(item => item.id)
-    },
-    // 改变页码
-    handleSizeChange (val) {
-      this.queryParam.size = val
-      this.getList()
-    },
-    // 点击页数
-    handleCurrentChange (val) {
-      this.queryParam.current = val
-      this.getList()
     },
     handleShowAddEdit () {
       this.dialogTitle = '添加'
@@ -227,24 +210,24 @@ export default {
             this.axios.post('/basic/dict/data/update', this.form).then(() => {
               this.getList()
               this.dialogVisible = false
-            }).catch(e => { })
+            })
           } else {
             this.axios.post('/basic/dict/data/add', this.form).then(() => {
               this.getList()
               this.dialogVisible = false
-            }).catch(e => { })
+            })
           }
         }
       })
     },
     handleDelete (row) {
       this.$confirm('此操作将永久删除这条数据, 是否继续?', '提示', { type: 'warning' }).then(() => {
-        this.axios.post('/basic/dict/data/delete/' + row.id).then(() => this.getList()).catch(e => { })
+        this.axios.post('/basic/dict/data/delete/' + row.id).then(() => this.getList())
       }).catch(e => { })
     },
     handleDeleteMany () {
       this.$confirm('此操作将永久删除 [' + this.multipleSelection.length + '] 条数据, 是否继续?', '提示', { type: 'warning' }).then(() => {
-        this.axios.post('/basic/dict/data/delete/' + this.multipleSelection).then(() => this.getList()).catch(e => { })
+        this.axios.post('/basic/dict/data/delete/' + this.multipleSelection).then(() => this.getList())
       }).catch(e => { })
     },
     // 初始化数据
@@ -252,7 +235,7 @@ export default {
       this.axios.post(`/basic/dict/data/page`, this.queryParam).then(data => {
         this.dataList = data.list
         this.total = data.total - 0
-      }).catch(e => { })
+      })
     },
   },
 }

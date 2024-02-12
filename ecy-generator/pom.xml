@@ -13,6 +13,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
             <groupId>com.yongoe</groupId>
             <artifactId>ecy-common</artifactId>
             <version>${revision}</version>

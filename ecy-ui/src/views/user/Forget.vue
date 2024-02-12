@@ -68,9 +68,9 @@ export default {
     submitForm () {
       this.$refs.form.validate((valid) => {
         if (valid) {
-          this.axios.post('/forget', this.form).then((result) => {
+          this.axios.post('/forget', this.form).then(() => {
             this.$router.replace('/login')
-          }).catch(e => { })
+          })
         }
       })
     },

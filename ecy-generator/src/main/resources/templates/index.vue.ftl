@@ -167,23 +167,26 @@
                 </#list>
             </el-form>
             <span slot="footer">
-                <el-button type="primary" @click="handleAddOrUpdate">确 定</el-button>
-                <el-button @click="dialogVisible = false">取 消</el-button>
+                <el-button size="medium"
+                           @click="dialogVisible = false">取 消</el-button>
+                <el-button size="medium"
+                           type="primary"
+                           @click="handleAddOrUpdate">确 定</el-button>
             </span>
         </el-dialog>
     </div>
 </template>
 
 <script>
+import page from '@/mixin/page.js'
 export default {
+    mixins: [page],
     components: {},
     props: {},
     data() {
         return {
             // 多选框数据
             multipleSelection: [],
-            total: 0,
-
             dialogVisible: false,
             dialogTitle: '',
 
@@ -199,8 +202,6 @@ export default {
                 </#list >
             },
             queryParam: {
-                current: 1,
-                size: 10,
                 <#list table.fields as field >
                 <#if myParam?seq_contains(field.name)>
                 <#else >
@@ -238,16 +239,6 @@ export default {
             </#if>
             </#list >
         },
-        // 改变页码
-        handleSizeChange(val) {
-            this.queryParam.size = val
-            this.getList()
-        },
-        // 点击页数
-        handleCurrentChange(val) {
-            this.queryParam.current = val
-            this.getList()
-        },
         handleShowAddEdit() {
             this.dialogTitle = '添加'
             this.dialogVisible = true
@@ -266,12 +257,12 @@ export default {
                         this.axios.post('/${packageName}/${entity?lower_case}/update', this.form).then(() => {
                             this.getList()
                             this.dialogVisible = false
-                        }).catch(e => { })
+                        })
                     } else {
                         this.axios.post('/${packageName}/${entity?lower_case}/add', this.form).then(() => {
                             this.getList()
                             this.dialogVisible = false
-                        }).catch(e => { })
+                        })
                     }
                     </#if>
                     </#list >
@@ -282,14 +273,14 @@ export default {
             this.$confirm('此操作将永久删除这条数据, 是否继续?', '提示', {type: 'warning'}).then(() => {
                 <#list table.fields as field >
                 <#if field.keyFlag>
-                this.axios.post('/${packageName}/${entity?lower_case}/delete/' + row.${field.propertyName}).then(() => this.getList()).catch(e => {})
+                this.axios.post('/${packageName}/${entity?lower_case}/delete/' + row.${field.propertyName}).then(() => this.getList())
                 </#if>
                 </#list >
             }).catch(e => { })
         },
         handleDeleteMany() {
             this.$confirm('此操作将永久删除 [' + this.multipleSelection.length + '] 条数据, 是否继续?', '提示', {type: 'warning'}).then(() => {
-                this.axios.post('/${packageName}/${entity?lower_case}/delete/' + this.multipleSelection).then(() => this.getList()).catch(e => {})
+                this.axios.post('/${packageName}/${entity?lower_case}/delete/' + this.multipleSelection).then(() => this.getList())
             }).catch(e => { })
         },
         // 初始化数据
@@ -297,7 +288,7 @@ export default {
             this.axios.post(`/${packageName}/${entity?lower_case}/page`, this.queryParam).then(data => {
                 this.dataList = data.list
                 this.total = data.total - 0
-            }).catch(e => { })
+            })
         },
     },
 }

@@ -9,6 +9,9 @@ module.exports = defineConfig({
   lintOnSave: false,
   publicPath: '/',   //如果放到jar中,需要修改为/ecy
   devServer: {
+    client: {
+      overlay: false,
+    },
     port: 8080,
     allowedHosts: [
       'all', // 允许访问的域名地址

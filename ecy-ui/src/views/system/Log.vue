@@ -4,14 +4,17 @@
     <div class="button">
       <el-button type="primary"
                  size="mini"
+                 plain
                  icon="el-icon-search"
                  @click="getList">刷新</el-button>
+      <el-button size="mini"
+                 plain
+                 @click="getType">{{queryParam.name=='系统'?'全部日志':'系统日志'}}</el-button>
       <el-button type="danger"
                  size="mini"
+                 plain
                  icon="el-icon-refresh"
                  @click="clear">清空日志</el-button>
-      <el-button size="mini"
-                 @click="getType">{{queryParam.name=='系统'?'全部日志':'系统日志'}}</el-button>
     </div>
 
     <!-- 表格 -->
@@ -97,20 +100,16 @@
 </template>
 
 <script>
+import page from '@/mixin/page.js'
 export default {
-  components: {},
-  props: {},
+  mixins: [page],
   data () {
     return {
-      total: 0,
-
       dialogVisible: false,
       dialogTitle: '',
 
       dataList: [],
       queryParam: {
-        current: 1,
-        size: 10,
         name: null,
         type: null,
         title: null,
@@ -132,16 +131,6 @@ export default {
       this.queryParam.name == '系统' ? this.queryParam.name = '' : this.queryParam.name = '系统'
       this.getList()
     },
-    // 改变页码
-    handleSizeChange (val) {
-      this.queryParam.size = val
-      this.getList()
-    },
-    // 点击页数
-    handleCurrentChange (val) {
-      this.queryParam.current = val
-      this.getList()
-    },
     handleShowUpdateEdit (row) {
       this.dialogTitle = '详情'
       Object.assign(this.form, row)
@@ -149,7 +138,7 @@ export default {
     },
     clear () {
       this.$confirm('此操作将永久删除数据, 是否继续?', '提示', { type: 'warning' }).then(() => {
-        this.axios.post('/system/log/delete').then(() => this.getList()).catch(e => { })
+        this.axios.post('/system/log/delete').then(() => this.getList())
       }).catch(e => { })
     },
     // 初始化数据
@@ -157,7 +146,7 @@ export default {
       this.axios.post(`/system/log/page`, this.queryParam).then(data => {
         this.dataList = data.list
         this.total = data.total - 0
-      }).catch(e => { })
+      })
     },
   },
 }

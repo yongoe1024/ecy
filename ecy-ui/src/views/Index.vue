@@ -45,7 +45,7 @@
               <div>
                 <img :src="user.avatar"
                      class="userimg"
-                     @error="setDefaultImage" />
+                     @error="handleImageError" />
                 <i class="el-icon-caret-bottom"
                    style="margin-top:30px;"></i>
               </div>
@@ -93,20 +93,15 @@ export default {
   data () {
     return {
       pathList: [],
-      imgUrl: require('../assets/no-img.jpg'),
       isCollapse: false,
       asideWidth: '200px',
     }
   },
   mounted () {
     //获取用户信息
-    this.axios.post('/user/info').then(data => this.$store.commit('initUser', data)).catch(e => { })
+    this.axios.post('/user/info').then(data => this.$store.commit('initUser', data))
   },
   methods: {
-    setDefaultImage (e) {
-      e.target.src = this.imgUrl
-      e.target.onerror = null
-    },
     // 头像个人信息
     handleCommand (command) {
       if (command == 'userinfo') {

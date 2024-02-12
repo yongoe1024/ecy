@@ -79,12 +79,7 @@ export default {
     let id = this.$route.query.id
     this.axios.post('/basic/letter/info?id=' + id).then(data => {
       this.letter = data
-    }).catch(e => { })
-  },
-  methods: {
-
-  },
+    })
+  }
 }
 </script> 
-<style scoped>
-</style>

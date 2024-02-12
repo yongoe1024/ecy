@@ -56,7 +56,7 @@ export default {
       rules: {
         name: [{ required: true, message: '请输入姓名', trigger: 'change' }],
         phone: [{ required: true, message: '请输入手机', trigger: 'change' }],
-        email: [{ type: 'email', required: true, message: '请输入正确邮箱', trigger: 'change' }],
+        email: [{ type: 'email', required: true, message: '请输入邮箱', trigger: 'change' }],
         username: [{ required: true, message: '请输入用户名', trigger: 'change' }],
         password: [
           { required: true, message: "请输入密码", trigger: "change" },
@@ -72,7 +72,7 @@ export default {
           this.axios.post('/register', this.form).then((token) => {
             window.localStorage.setItem('token', token)
             setTimeout(() => { this.$router.replace('/index') }, 1000)
-          }).catch(e => { })
+          })
         }
       })
     },

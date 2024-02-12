@@ -36,11 +36,6 @@ ax.interceptors.response.use(
         router.replace('/login')
         location.reload()
       }
-      else if (response.data.code == 402) {
-        //验证码错误
-        Message.error({ message: response.data.message })
-        return Promise.reject(response)
-      }
       else if (response.data.code != 200) {
         Message.error({ message: response.data.message })
         return Promise.reject(response)

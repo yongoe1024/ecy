@@ -4,9 +4,6 @@
   </div>
 </template>
 
-<script>
-</script>
-
 <style>
 .ql-editor img {
   max-width: 90%;

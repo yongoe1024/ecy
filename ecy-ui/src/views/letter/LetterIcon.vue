@@ -1,6 +1,7 @@
 <template>
   <div style="display:inline;">
     <el-popover placement="bottom"
+                v-model="visible"
                 width="300"
                 trigger="click">
       <div style="height:310px">
@@ -39,13 +40,13 @@
   </div>
 </template>
 
-
 <script>
 export default {
   data () {
     return {
       num: '',
       letterList: [],
+      visible: false
     }
   },
   mounted () {
@@ -56,12 +57,13 @@ export default {
       this.axios.post('/basic/letter/list').then(data => {
         this.letterList = data.list
         this.num = data.num == 0 ? '' : data.num
-      }).catch(e => { })
+      })
     },
     getletterById (id) {
       this.$router.push('/letter-info?id=' + id)
     },
     getAll () {
+      this.visible = false
       this.$router.push('/letter')
     }
   },

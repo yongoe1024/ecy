@@ -42,7 +42,7 @@ export default {
     update () {
       this.$refs.form.validate((valid) => {
         if (valid) {
-          this.axios.post('/user/password', this.form).catch(e => { })
+          this.axios.post('/user/password', this.form)
         }
       })
     }
