@@ -185,10 +185,20 @@ export default {
   },
   methods: {
     reset () {
-      this.form = this.$options.data().form
+      this.form = {
+        dictId: this.$route.query.dictId,
+        dictKey: null,
+        dictValue: null,
+        color: null,
+        sort: null,
+      }
     },
     resetQuery () {
-      this.queryParam = this.$options.data().queryParam
+      this.queryParam = {
+        dictId: this.$route.query.dictId,
+        dictKey: null,
+        dictValue: null,
+      }
     },
     // 多选框回调
     handleSelectionChange (val) {
