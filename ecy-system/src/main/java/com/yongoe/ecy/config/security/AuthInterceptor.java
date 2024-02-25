@@ -18,6 +18,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Path;
 import java.util.List;
 
 /**
@@ -44,7 +45,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         String requestURI = request.getRequestURI();
         for (Menu menu : menuService.list()) {
             // 查找 与请求路径匹配的菜单数据
-            if (!StringUtils.isEmpty(menu.getUrl()) && antPathMatcher.match(contextPath + menu.getUrl(), requestURI)) {
+            if (!StringUtils.isEmpty(menu.getUrl()) && antPathMatcher.match(Path.of(contextPath, menu.getUrl()).toString(), requestURI)) {
                 // 返回 该菜单的 所需的权限
                 List<Long> roleIds = menuService.getRoleIdsByMenuId(menu.getId());
                 for (Long id : roleIds) {
