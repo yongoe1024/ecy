@@ -121,7 +121,7 @@
                        @current-change="handleCurrentChange"
                        :page-size="queryParam.size"
                        layout="total, sizes, prev, pager, next, jumper"
-                       :total="queryParam.total"></el-pagination>
+                       :total="total"></el-pagination>
 
         <el-dialog :visible.sync="dialogVisible"
                    :title="dialogTitle"
