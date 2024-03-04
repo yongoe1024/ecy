@@ -7,8 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -52,7 +51,8 @@ public class FileUtils {
             // 创建这个新文件
             File newFile = new File(Path.of(getFullFilePath(), fileName).toString());
             file.transferTo(newFile);
-            return Path.of(contextPath, "/file/", getRelativeFilePath(), fileName).toString();
+            LocalDate date = LocalDate.now();
+            return Path.of(contextPath, "file", date.getYear() + "", date.getMonthValue() + "", date.getDayOfMonth() + "", fileName).toString();
         } catch (IOException e) {
             throw new RuntimeException("无法创建文件");
         }
@@ -77,20 +77,12 @@ public class FileUtils {
 
 
     /**
-     * 得到当前文件保存全路径
+     * 得到当前文件保存-全路径
      */
     public static String getFullFilePath() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("/yyyy/MM/dd/");
-        String directory = simpleDateFormat.format(new Date());
-        return Path.of(fileSavePath, directory).toString();
+        LocalDate date = LocalDate.now();
+        return Path.of(fileSavePath, date.getYear() + "", date.getMonthValue() + "", date.getDayOfMonth() + "").toString();
 
     }
 
-    /**
-     * 得到当前文件保存相对路径
-     */
-    public static String getRelativeFilePath() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("/yyyy/MM/dd/");
-        return simpleDateFormat.format(new Date());
-    }
 }

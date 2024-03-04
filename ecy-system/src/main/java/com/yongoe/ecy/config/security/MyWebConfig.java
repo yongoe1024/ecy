@@ -76,10 +76,9 @@ public class MyWebConfig implements WebMvcConfigurer {
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        String path = Path.of("file://", fileSavePath).toString();
+        String path = "file://"+fileSavePath;
         registry.addResourceHandler("/file/**")
                 .addResourceLocations(path + "/");
     }
-
 
 }
