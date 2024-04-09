@@ -82,7 +82,6 @@ public class FileUtils {
     public static String getFullFilePath() {
         LocalDate date = LocalDate.now();
         return Path.of(fileSavePath, date.getYear() + "", date.getMonthValue() + "", date.getDayOfMonth() + "").toString();
-
     }
 
 }

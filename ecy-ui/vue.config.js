@@ -1,5 +1,4 @@
 const { defineConfig } = require('@vue/cli-service')
-const Timestamp = new Date().getTime()
 module.exports = defineConfig({
   // chainWebpack: config => {
   //   config.output.filename(`js/[name].${Timestamp}.js`)
@@ -14,14 +13,14 @@ module.exports = defineConfig({
     client: {
       overlay: false, // 关闭错误提示
     },
-    port: 8080,
+    port: 80,
     open: true, //配置自动启动浏览器
     allowedHosts: ['all'],  // 允许访问的域名地址  
     disableHostCheck: true,  // 解决内网穿透报错
     // 打包后就用nginx转发啦
     proxy: {
       '/ecy': {
-        target: 'http://localhost:8081',
+        target: 'http://localhost:8080',
         ws: true,
         changeOrigin: true,
         // pathRewrite: { '^/ecy': 'ecy' }
