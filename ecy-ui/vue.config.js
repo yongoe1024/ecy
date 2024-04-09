@@ -16,7 +16,6 @@ module.exports = defineConfig({
     port: 80,
     open: true, //配置自动启动浏览器
     allowedHosts: ['all'],  // 允许访问的域名地址  
-    disableHostCheck: true,  // 解决内网穿透报错
     // 打包后就用nginx转发啦
     proxy: {
       '/ecy': {
