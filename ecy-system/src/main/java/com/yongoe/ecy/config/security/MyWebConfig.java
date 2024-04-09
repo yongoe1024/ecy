@@ -46,7 +46,7 @@ public class MyWebConfig implements WebMvcConfigurer {
                 "/forget", "/register",
                 "/file/**",
                 "/webjars/**", "/v3/**", "/doc.html",
-                "/index.html**", "/js/**", "/fonts/**", "/img/**", "/favicon.ico"
+                "/index.html**", "/static/**", "/favicon.ico"
         };
         registry.addInterceptor(loginInterceptor).addPathPatterns("/**").excludePathPatterns(p);
         registry.addInterceptor(authInterceptor).addPathPatterns("/**").excludePathPatterns(p);
@@ -76,7 +76,7 @@ public class MyWebConfig implements WebMvcConfigurer {
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        String path = "file://"+fileSavePath;
+        String path = "file:"+fileSavePath;
         registry.addResourceHandler("/file/**")
                 .addResourceLocations(path + "/");
     }

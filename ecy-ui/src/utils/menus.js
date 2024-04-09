@@ -5,7 +5,6 @@ export default (router, store) => {
   if (flag) {
     flag = false
     if (store.getters.getRoutes.length == 0) {
-      //防止无限请求，一秒一次
       axios.post('/user/menu').then(data => {
         //格式化
         let fmtRoutes = formatRoutes(data)
@@ -17,10 +16,10 @@ export default (router, store) => {
         })
         //存入vuex
         store.commit('initRoutes', fmtRoutes)
+      }).finally(() => {
         flag = true
-      }).catch(() => {
-        flag = true
-      })
+      }
+      )
     }
   }
 }

@@ -7,7 +7,7 @@ mybatis-plus:
 
 spring:
   profiles:
-    active: ${SPRING_ACTIVE_PROFILE:dev}
+    active: dev
   banner:
     location: /banner.txt
 

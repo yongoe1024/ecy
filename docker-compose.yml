@@ -12,14 +12,13 @@ services:
     volumes:
       - ./ecy-file:/ecy/ecy-file
     environment:
-      - SPRING_ACTIVE_PROFILE=docker
-      - DATABASE_URL=jdbc:mysql://host.docker.internal:3306/ecy?characterEncoding=utf8&useUnicode=true&serverTimezone=GMT%2B8&useSSL=false&allowPublicKeyRetrieval=true
-      - DATABASE_USERNAME=root
-      - DATABASE_PASSWORD=123456
-      - REDIS_PORT=6379
-      - REDIS_HOSTS=host.docker.internal
-      - REDIS_PASSWORD=123456
-      - ECY_FILE=/ecy/ecy-file
+      - SPRING_DATASOURE_URL=jdbc:mysql://host.docker.internal:3306/ecy?characterEncoding=utf8&useUnicode=true&serverTimezone=GMT%2B8&useSSL=false&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURE_USERNAME=root
+      - SPRING_DATASOURE_PASSWORD=123456
+      - SPRING_DATA_REDIS_PORT=6379
+      - SPRING_DATA_REDIS_HOST=host.docker.internal
+      - SPRING_DATA_REDIS_PASSWORD=123456
+      - ECY_FILE_SAVE_PATH=/ecy/ecy-file
     extra_hosts:
       - host.docker.internal:host-gateway
     networks:
@@ -41,6 +40,6 @@ services:
 networks:
   ecy-network:
 
-# 主机需要jdk，maven环境，编译vue是在容器内，不需要任何环境
+# 执行docker-compose.yml, JAVA需要jar，vue是在容器内编译，不需要任何环境
 # nginx容器对外暴露80，443端口，设置nginx转发/ecy 到 后端容器的8081端口，转发为容器内网络，防止暴露后端的端口
-# host.docker.internal 为主机ip ，mysql，redis等我是放到主机，并非容器，如果用docker就改成容器ip
+# host.docker.internal 为主机ip ，mysql，redis，部署到主机了

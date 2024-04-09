@@ -52,7 +52,7 @@ public class FileUtils {
             File newFile = new File(Path.of(getFullFilePath(), fileName).toString());
             file.transferTo(newFile);
             LocalDate date = LocalDate.now();
-            return Path.of(contextPath, "file", date.getYear() + "", date.getMonthValue() + "", date.getDayOfMonth() + "", fileName).toString();
+            return contextPath + "/file/" + date.getYear() + "/" + date.getMonthValue() + "/" + date.getDayOfMonth() + "/" + fileName;
         } catch (IOException e) {
             throw new RuntimeException("无法创建文件");
         }
@@ -63,7 +63,7 @@ public class FileUtils {
      */
     public static String getFileName(MultipartFile file) {
         Objects.requireNonNull(file.getOriginalFilename());
-        String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+        String suffix = getFileSuffix(file);
         return UUID.randomUUID().toString().replaceAll("-", "") + suffix;
     }
 
@@ -77,7 +77,7 @@ public class FileUtils {
 
 
     /**
-     * 得到当前文件保存-全路径
+     * 保存文件的全路径
      */
     public static String getFullFilePath() {
         LocalDate date = LocalDate.now();

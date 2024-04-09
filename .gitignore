@@ -13,3 +13,4 @@ ecy-file
 pom.xml.versionsBackup
 static/
 
+pnpm-lock.yaml

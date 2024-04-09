@@ -292,7 +292,7 @@ insert into `sys_user`(`id`, `department_id`, `position_id`, `username`, `passwo
                        `remark`, `last_ip`,
                        `last_time`, `enabled`, `create_time`, `update_time`, `create_by`, `update_by`)
 values (1, 1, 1, 'admin', '111111', 'yongoe',
-        'https://img.xjh.me/random_img.php', '121887765@qq.com', '10086',
+        '/', '121887765@qq.com', '10086',
         '无', '127.0.0.1', '2023-01-01 00:00:00', 1,
         '2023-01-01 00:00:00', '2023-01-01 00:00:00', 'yongoe', 'yongoe');
 
