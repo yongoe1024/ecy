@@ -29,7 +29,7 @@ const mergeChunksUrl = baseURL + '/upload/merge' // 合并分片
 
 /**
  * 分片上传功能
- * @param {*Element的fileObject对象} fileObject 
+ * @param fileObject Element的fileObject对象
  * @returns 
  */
 export async function uploadChunk (fileObject) {
@@ -97,10 +97,14 @@ export async function uploadChunk (fileObject) {
   //所有分块上传成功
   if (result.every(item => item.data.code == 200)) {
     //合并分块
-    let re = await mergeChunks(new FileRequest(file, md5, totalChunks, null))
-    return Promise.resolve("合并成功")
+    try {
+      await mergeChunks(new FileRequest(file, md5, totalChunks, null))
+      return Promise.resolve("合并成功")
+    } catch (error) {
+      return Promise.reject("合并失败")
+    }
   } else {
-    return Promise.reject("合并失败")
+    return Promise.reject("分块未全部上传成功")
   }
 }
 
@@ -114,7 +118,7 @@ export function stop () {
 
 /**
  * 获取第一个块的md5
- * @param {*原生File} file 
+ * @param file 原生File对象
  * @returns 异步Promise
  */
 function firstChunkMd5 (file) {
@@ -135,7 +139,7 @@ function firstChunkMd5 (file) {
 }
 /**
  * 检测文件是否存在
- * @param {*FileRequest} fileRequest 
+ * @param fileRequest FileRequest对象
  * @returns 请求结果
  */
 function checkChunkExist (fileRequest) {
@@ -144,7 +148,7 @@ function checkChunkExist (fileRequest) {
 }
 /**
  * 合并文件
- * @param {*FileRequest} fileRequest 
+ * @param fileRequest FileRequest对象
  * @returns 请求结果
  */
 function mergeChunks (fileRequest) {
@@ -153,10 +157,10 @@ function mergeChunks (fileRequest) {
 }
 /**
  * 文件请求对象构造函数
- * @param {*原生File} file 
- * @param {*文件md5} md5 
- * @param {*分块总数} totalChunks 
- * @param {*当前分块序号,从0开始} chunkNumber 
+ * @param file 原生File
+ * @param md5 文件md5
+ * @param totalChunks 分块总数
+ * @param chunkNumber 当前分块序号,从0开始
  */
 function FileRequest (file, md5, totalChunks, chunkNumber) {
   let chunkFile = file.slice(0 + chunkNumber * chunkSize, 0 + (chunkNumber + 1) * chunkSize)

@@ -2,8 +2,8 @@ import Vue from 'vue'
 
 /**
  * a标签下载
- * @param {*路径} url 
- * @param {*参数} params 
+ * @param  url 路径
+ * @param  params 参数
  */
 function download (url, params) {
   var a = document.createElement("a")

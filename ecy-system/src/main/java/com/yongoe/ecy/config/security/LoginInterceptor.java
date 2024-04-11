@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import java.io.IOException;
@@ -55,10 +56,10 @@ public class LoginInterceptor implements HandlerInterceptor {
                 }
             }
         }
-        IgnoreLogin annotation;
-        if (handler instanceof HandlerInterceptor) {
-            annotation = ((HandlerInterceptor) handler).getClass().getAnnotation(IgnoreLogin.class);
-            if (annotation != null) {
+        IgnoreLogin ignoreLogin;
+        if (handler instanceof HandlerMethod) {
+            ignoreLogin = ((HandlerMethod) handler).getMethodAnnotation(IgnoreLogin.class);
+            if (ignoreLogin != null) {
                 return true;
             }
         } else {

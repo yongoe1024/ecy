@@ -16,6 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import java.io.IOException;
@@ -38,9 +39,9 @@ public class AuthInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
         IgnoreLogin ignoreLogin;
         IgnoreAuth ignoreAuth;
-        if (handler instanceof HandlerInterceptor) {
-            ignoreLogin = ((HandlerInterceptor) handler).getClass().getAnnotation(IgnoreLogin.class);
-            ignoreAuth = ((HandlerInterceptor) handler).getClass().getAnnotation(IgnoreAuth.class);
+        if (handler instanceof HandlerMethod) {
+            ignoreLogin = ((HandlerMethod) handler).getMethodAnnotation(IgnoreLogin.class);
+            ignoreAuth = ((HandlerMethod) handler).getMethodAnnotation(IgnoreAuth.class);
             if (ignoreLogin != null || ignoreAuth != null) {
                 return true;
             }
