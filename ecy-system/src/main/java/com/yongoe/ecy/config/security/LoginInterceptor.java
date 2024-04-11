@@ -1,6 +1,7 @@
 package com.yongoe.ecy.config.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.yongoe.ecy.config.aop.IgnoreLogin;
 import com.yongoe.ecy.system.entity.User;
 import com.yongoe.ecy.system.service.UserService;
 import com.yongoe.ecy.utils.JwtUtils;
@@ -53,6 +54,15 @@ public class LoginInterceptor implements HandlerInterceptor {
                     return true;
                 }
             }
+        }
+        IgnoreLogin annotation;
+        if (handler instanceof HandlerInterceptor) {
+            annotation = ((HandlerInterceptor) handler).getClass().getAnnotation(IgnoreLogin.class);
+            if (annotation != null) {
+                return true;
+            }
+        } else {
+            return true;
         }
         R bean = R.error(401, "尚未登录，请登录！");
         PrintWriter writer = response.getWriter();

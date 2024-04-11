@@ -12,7 +12,6 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import java.nio.file.Path;
 import java.util.Collections;
 
 /**
@@ -76,7 +75,7 @@ public class MyWebConfig implements WebMvcConfigurer {
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        String path = "file:"+fileSavePath;
+        String path = "file:" + fileSavePath;
         registry.addResourceHandler("/file/**")
                 .addResourceLocations(path + "/");
     }
