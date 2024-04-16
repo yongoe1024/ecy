@@ -17,5 +17,5 @@ public interface DictService extends IService<Dict> {
 
     Page<Dict> getDictByPage(Page<Dict> page, Dict dict);
 
-    List<DictData> getDict(String name, String[] value);
+    List<DictData> getDict(String name);
 }

@@ -30,11 +30,10 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
     }
 
     @Override
-    public List<DictData> getDict(String name, String[] value) {
+    public List<DictData> getDict(String name) {
         Dict dict = this.getOne(new LambdaQueryWrapper<Dict>().eq(Dict::getName, name));
         List<DictData> dictData = dictDataService.list(new LambdaQueryWrapper<DictData>()
                 .eq(DictData::getDictId, dict.getId())
-                .in(value != null, DictData::getDictValue, value)
                 .orderByDesc(DictData::getSort));
         return dictData;
     }

@@ -11,11 +11,11 @@
                  :value="item.dictValue">
       </el-option>
     </el-select>
-    <el-checkbox-group v-model="myValue2"
-                       v-else-if="type==='checkbox'">
+    <el-checkbox-group v-else-if="type==='checkbox'"
+                       v-model="myCheckbox">
       <el-checkbox v-for="item in dataList"
                    :key="item.id"
-                   label="item.dictValue">{{item.dictKey}}</el-checkbox>
+                   :label="item.dictValue">{{item.dictKey}}</el-checkbox>
     </el-checkbox-group>
     <el-radio v-else-if="type==='radio'"
               v-for="item in dataList"
@@ -31,11 +31,11 @@
               v-if="myValue == item.dictValue">{{item.dictKey}}</el-tag>
     </span>
     <span v-else-if="type==='checkboxtag'"
-          v-for="item in dataList"
+          v-for="item in myCheckboxList"
           :key="item.id">
       <el-tag :size="size"
               effect="dark"
-              style="margin-right: 5px;"
+              style="margin: 2px;"
               :style="{'background-color': item.color,'border-color': item.color}">{{item.dictKey}}</el-tag>
     </span>
   </div>
@@ -65,15 +65,17 @@ export default {
     },
     type: {
       type: String,
-      default: () => 'select' // select , radio , tag
+      default: () => 'select' // select , radio , tag , checkbox , checkboxtag
     }
   },
   watch: {
     value: {
       immediate: true,
       handler (nv) {
-        if (nv != null)
-          this.myValue = nv + ''
+        if (nv != null) {
+          this.myValue = nv
+          this.myCheckbox = !!nv ? nv.split(',') : []
+        }
         else
           this.myValue = nv
       },
@@ -84,29 +86,41 @@ export default {
         this.$emit("input", nv)
       }
     },
+    myCheckbox: {
+      immediate: true,
+      handler (nv) {
+        this.getCheckboxList()
+        this.$emit("input", nv + '')
+      }
+    },
   },
   data () {
     return {
       dataList: [],
-      myValue: null
+      myValue: null,
+      myCheckbox: [],
+      myCheckboxList: []
     }
   },
   mounted () {
     window.sessionStorage.getItem('dict_' + this.name) ? this.dataList = JSON.parse(window.sessionStorage.getItem('dict_' + this.name)) : this.getData()
+    this.getCheckboxList()
   },
   methods: {
     getData () {
-      if (this.type == 'checkboxtag') {
-        this.axios.post(`/getDict?name=${this.name}&value=${this.value.split(',')}`).then(data => {
-          this.dataList = data
-          window.sessionStorage.setItem('dict_' + this.name, JSON.stringify(data))
-        }).catch(e => { })
-        return
-      }
       this.axios.post('/getDict?name=' + this.name).then(data => {
         this.dataList = data
         window.sessionStorage.setItem('dict_' + this.name, JSON.stringify(data))
-      }).catch(e => { })
+        this.getCheckboxList()
+      })
+    },
+    getCheckboxList () {
+      if (this.type == 'checkboxtag') {
+        //从dataList中找出myCheckboxList
+        this.myCheckboxList = this.dataList.filter(item => {
+          return this.myCheckbox.includes(item.dictValue)
+        })
+      }
     }
   }
 }

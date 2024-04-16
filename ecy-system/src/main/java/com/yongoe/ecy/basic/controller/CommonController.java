@@ -94,8 +94,8 @@ public class CommonController {
      * 查询可用字典
      */
     @PostMapping("/getDict")
-    public R getDict(String name, String[] value) {
-        List<DictData> dictData = dictService.getDict(name, value);
+    public R getDict(String name) {
+        List<DictData> dictData = dictService.getDict(name);
         List<DictDataRes> resList = dictDataConvert.entity2ResList(dictData);
         return R.success().put(resList);
     }
