@@ -77,9 +77,7 @@ export default {
             window.sessionStorage.clear()
             window.localStorage.setItem('token', token)
             let path = this.$route.query.redirect
-            this.$router.replace(
-              path == '/login' || path == undefined ? '/home' : path
-            )
+            this.$router.replace(path == '/login' || path == undefined ? '/home' : path)
           }).catch(() => {
             this.updateCaptcha()
             this.form.code = ''

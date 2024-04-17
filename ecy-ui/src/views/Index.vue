@@ -70,6 +70,7 @@
 </template>
 
 <script>
+import initMenu from '@/utils/menus'
 export default {
   components: {
     letterIcon: () => import('./letter/LetterIcon.vue')
@@ -100,6 +101,7 @@ export default {
   mounted () {
     //获取用户信息
     this.axios.post('/user/info').then(data => this.$store.commit('initUser', data))
+    initMenu(this.$router, this.$store)
   },
   methods: {
     // 头像个人信息

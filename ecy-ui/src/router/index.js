@@ -1,10 +1,10 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Router from 'vue-router'
 import store from '@/store'
 
 import initMenu from '@/utils/menus'
 
-Vue.use(VueRouter)
+Vue.use(Router)
 
 const routes = [
   {
@@ -66,10 +66,11 @@ const routes = [
   },
 ]
 
-const router = new VueRouter({
+const router = new Router({
   // mode: 'history',
   mode: 'hash',
-  routes
+  scrollBehavior: () => ({ y: 0 }),
+  routes: routes
 })
 // 路由前置守卫
 router.beforeEach((to, from, next) => {
@@ -78,43 +79,47 @@ router.beforeEach((to, from, next) => {
     if (to.path == '/login' || to.path == '/') {
       next('/home')
     } else {
-      initMenu(router, store)
       next()
     }
   }
   else {
-    let arr = ['/login', '/forget', '/register', '/oauth/qq']
-    if (arr.indexOf(to.path) > -1) {
-      next()
+    let arr = ['/login*', '/forget', '/register', '/oauth/*']
+    for (let i = 0; i < arr.length; i++) {
+      if (matchAntPath(arr[i], to.path)) {
+        next()
+        return
+      }
     }
-    else {
-      //加入参数来重定向
-      if (to.path == '/')
-        next('/login')
-      else
-        next('/login?redirect=' + to.path)
-    }
+    if (to.path == '/login')
+      next('/login')
+    else
+      next('/login?redirect=' + to.path)
   }
 })
 router.afterEach((to, from) => {
   // endLoading()
 })
 
-// 防止跳转当前路径报错
-let originPush = VueRouter.prototype.push  //备份原push方法
-VueRouter.prototype.push = function (location, resolve, reject) {
-  if (resolve && reject) {    //如果传了回调函数，直接使用
-    originPush.call(this, location, resolve, reject)
-  } else {                     //如果没有传回调函数，手动添加
-    originPush.call(this, location, () => { }, () => { })
-  }
+function matchAntPath (pattern, path) {
+  // 将通配符转换为正则表达式
+  const regexPattern = pattern
+    .replace(/\*/g, '[^/]*') // 将单个星号转换为匹配任何非斜杠字符的序列
+    .replace(/\*\*/g, '.*')  // 将双星号转换为匹配任何字符的序列
+
+  const regex = new RegExp(`^${regexPattern}$`)
+  return regex.test(path)
 }
-VueRouter.prototype.push = function (location, resolve, reject) {
-  if (resolve && reject) {    //如果传了回调函数，直接使用
-    originPush.call(this, location, resolve, reject)
-  } else {                     //如果没有传回调函数，手动添加
-    originPush.call(this, location, () => { }, () => { })
-  }
+
+// 防止连续点击多次路由报错
+let routerPush = Router.prototype.push
+let routerReplace = Router.prototype.replace
+// push
+Router.prototype.push = function push (location) {
+  return routerPush.call(this, location).catch(err => err)
+}
+// replace
+Router.prototype.replace = function push (location) {
+  return routerReplace.call(this, location).catch(err => err)
 }
 
 export default router
