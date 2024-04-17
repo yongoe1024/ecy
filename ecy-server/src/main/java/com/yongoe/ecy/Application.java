@@ -7,10 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Application {
 
     public static void main(String[] args) {
-
         SpringApplication.run(Application.class, args);
-        System.out.println(("================================================启动完毕================================================"));
-        System.out.println(("===============================  接口文档: http://localhost:8080/ecy/doc.html  ============================="));
+        System.out.println("(♥◠‿◠)ﾉﾞ  ecy 启动成功  牛皮！（压声）   \n");
     }
 
 }
