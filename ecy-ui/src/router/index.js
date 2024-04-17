@@ -69,31 +69,48 @@ const routes = [
 const router = new Router({
   // mode: 'history',
   mode: 'hash',
-  scrollBehavior: () => ({ y: 0 }),
   routes: routes
 })
 // 路由前置守卫
+// 路由前置守卫
+var flag = true
 router.beforeEach((to, from, next) => {
   // startLoading()
   if (window.localStorage.getItem('token')) {
-    if (to.path == '/login' || to.path == '/') {
-      next('/home')
+    if (flag) {
+      flag = false
+      initMenu().then((fmtRoutes) => {
+        router.addRoute({
+          name: '',
+          path: '',
+          component: () => import('/src/views/Index'),
+          children: fmtRoutes
+        })
+        store.commit('initRoutes', fmtRoutes)
+        if (to.path == '/login' || to.path == '/') {
+          next('/home')
+        } else {
+          next({ ...to })
+        }
+      })
     } else {
-      next()
+      if (to.path == '/login' || to.path == '/') {
+        next('/home')
+      } else {
+        next()
+      }
     }
   }
   else {
-    let arr = ['/login*', '/forget', '/register', '/oauth/*']
+    if (to.path != '/login')
+      next('/login?redirect=' + to.path)
+    let arr = ['/', '/login*', '/forget', '/register', '/oauth/*']
     for (let i = 0; i < arr.length; i++) {
       if (matchAntPath(arr[i], to.path)) {
         next()
         return
       }
     }
-    if (to.path == '/login')
-      next('/login')
-    else
-      next('/login?redirect=' + to.path)
   }
 })
 router.afterEach((to, from) => {

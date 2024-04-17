@@ -19,7 +19,7 @@ public class JwtUtils {
     public static final String tokenHead = "Bearer";           // JWT 负载中拿到开头
 
     private static final String secret = "ecy-secret";          // JWT 加解密使用的密钥;
-    private static final Long expiration = 604800L;             //  JWT的超期限时间（60*60*24）1Day
+    private static final Long expiration = 86400L;             //   JWT的超期限时间秒
 
     private static final String CLAIM_KEY_USERNAME = "sub";
     private static final String CLAIM_KEY_CREATED = "created";

@@ -1,19 +1,15 @@
 import axios from '@/utils/request'
 
-export default (router, store) => {
-  axios.post('/user/menu').then(data => {
-    //格式化
-    let fmtRoutes = formatRoutes(data)
-    router.addRoute({
-      name: '',
-      path: '',
-      component: () => import('/src/views/Index'),
-      children: fmtRoutes
+export default () =>
+  new Promise((resolve, reject) => {
+    axios.post('/user/menu').then(data => {
+      //格式化
+      let fmtRoutes = formatRoutes(data)
+      resolve(fmtRoutes)
+    }).catch(() => {
+      reject()
     })
-    //存入vuex
-    store.commit('initRoutes', fmtRoutes)
   })
-}
 
 function formatRoutes (routes) {
   let fmtRoutes = []
