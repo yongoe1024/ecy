@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from '@/store'
+import NProgress from "nprogress"
+import 'nprogress/nprogress.css' //这个样式必须引入
 
 import initMenu from '@/utils/menus'
 
@@ -75,6 +77,7 @@ const router = new Router({
 // 路由前置守卫
 var flag = true
 router.beforeEach((to, from, next) => {
+  NProgress.start()
   // startLoading()
   if (window.localStorage.getItem('token')) {
     if (flag) {
@@ -114,7 +117,8 @@ router.beforeEach((to, from, next) => {
   }
 })
 router.afterEach((to, from) => {
-  // endLoading()
+  console.log('log')
+  NProgress.done()
 })
 
 function matchAntPath (pattern, path) {
