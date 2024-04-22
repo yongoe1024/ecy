@@ -36,7 +36,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -118,12 +117,11 @@ public class CommonController {
      */
     @GetMapping("/download")
     public ResponseEntity<InputStreamResource> downloadFile(String filePath) throws IOException {
-        String prefix = Path.of(pathPrefix, "file").toString();
+        String prefix = pathPrefix + "/" + "file";
         if (filePath.startsWith(prefix))
             filePath = filePath.substring(prefix.length());
-        Path path = Path.of(fileSavePath, filePath);
         // 从文件系统中获取文件输入流
-        File file = new File(path.toString());
+        File file = new File(fileSavePath + filePath);
         InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
         // 设置响应头
         HttpHeaders headers = new HttpHeaders();

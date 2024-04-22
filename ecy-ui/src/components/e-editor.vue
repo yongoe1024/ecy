@@ -51,16 +51,14 @@ export default {
         method: "POST",
         data: formData,
         headers: { "Content-Type": "multipart/form-data", Authorization: window.localStorage.getItem("token") }
+      }).then(result => {
+        let url = result.data.data
+        Editor.insertEmbed(cursorLocation, "image", url)
+        resetUploader()
+      }).catch(err => {
+        this.$message({ message: '图片上传失败', type: 'error' })
+        console.log(err)
       })
-        .then(result => {
-          let url = result.data.data // Get url from response
-          Editor.insertEmbed(cursorLocation, "image", url)
-          resetUploader()
-        })
-        .catch(err => {
-          this.$message({ message: '图片上传失败', type: 'error' })
-          console.log(err)
-        })
     }
   }
 }
