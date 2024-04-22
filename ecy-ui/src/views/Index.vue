@@ -40,7 +40,6 @@
           </div>
 
           <div>
-            <letter-icon></letter-icon>
             <el-dropdown @command="handleCommand">
               <div>
                 <img :src="user.avatar"
@@ -70,10 +69,8 @@
 </template>
 
 <script>
-import initMenu from '@/utils/menus'
 export default {
   components: {
-    letterIcon: () => import('./letter/LetterIcon.vue')
   },
   computed: {
     user () {

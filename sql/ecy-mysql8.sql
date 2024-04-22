@@ -335,27 +335,6 @@ CREATE TABLE `sys_user_role`
 insert into `sys_user_role`(`id`, `user_id`, `role_id`, `create_time`, `update_time`, `create_by`, `update_by`)
 values (1, 1, 1, '2023-01-01 00:00:00', '2023-01-01 00:00:00', 'yongoe', 'yongoe');
 
-DROP TABLE IF EXISTS `basic_letter`;
-
-CREATE TABLE `basic_letter`
-(
-    `id`           bigint unsigned NOT NULL AUTO_INCREMENT,
-    `addresser_id` bigint                                                       NOT NULL COMMENT '发件人id',
-    `addresser`    varchar(50) COLLATE utf8mb4_unicode_ci                       NOT NULL COMMENT '发件人',
-    `addressee_id` bigint                                                       NOT NULL COMMENT '收件人id',
-    `addressee`    varchar(50) COLLATE utf8mb4_unicode_ci                       NOT NULL COMMENT '收件人',
-    `title`        varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '标题',
-    `content`      longtext COLLATE utf8mb4_unicode_ci                          NOT NULL COMMENT '内容',
-    `state`        tinyint(1) NOT NULL COMMENT '状态',
-    `create_time`  datetime                                                     NOT NULL COMMENT '创建时间',
-    `update_time`  datetime                                                     NOT NULL COMMENT '修改时间',
-    `create_by`    varchar(50) COLLATE utf8mb4_unicode_ci                       NOT NULL COMMENT '创建人',
-    `update_by`    varchar(50) COLLATE utf8mb4_unicode_ci                       NOT NULL COMMENT '修改人',
-    PRIMARY KEY (`id`)
-) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8mb4
-  COLLATE = utf8mb4_unicode_ci;
-
 DROP TABLE IF EXISTS `sys_log`;
 
 CREATE TABLE `sys_log`
