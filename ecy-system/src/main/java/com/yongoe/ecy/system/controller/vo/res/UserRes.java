@@ -61,14 +61,6 @@ public class UserRes {
      */
     private String remark;
     /**
-     * 上次登录ip
-     */
-    private String lastIp;
-    /**
-     * 上次登录时间
-     */
-    private LocalDateTime lastTime;
-    /**
      * 是否启用
      */
     private Boolean enabled;

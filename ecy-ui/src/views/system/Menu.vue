@@ -128,14 +128,6 @@
                     :key="index"
                     v-model="form.type"
                     :label="item.type">{{item.name}}</el-radio>
-          <el-tooltip placement="top">
-            <div slot="content">
-              <p>目录：用于组织页面，可放根节点和目录下</p>
-              <p>页面：用于页面显示，放在目录下</p>
-              <p>按钮：用于页面按钮，可指定接口url精确权限，放在页面下</p>
-            </div>
-            <i class="el-icon-question" />
-          </el-tooltip>
         </el-form-item>
         <el-form-item label="上级菜单"
                       prop="parentId">

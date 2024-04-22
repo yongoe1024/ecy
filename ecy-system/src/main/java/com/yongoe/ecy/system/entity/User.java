@@ -49,10 +49,6 @@ public class User {
 
     private String remark;
 
-    private String lastIp;
-
-    private LocalDateTime lastTime;
-
     private Boolean enabled;
 
     @TableField(fill = FieldFill.INSERT)

@@ -27,14 +27,12 @@ public class LoginController {
     @Resource
     private LoginService loginService;
 
-    @WebLog(ignore = false)
     @Operation(summary = "登录")
     @PostMapping("/login")
     public R login(@RequestBody LoginReq loginReq, HttpServletRequest request) {
         return loginService.login(loginReq, request);
     }
 
-    @WebLog(ignore = false)
     @Operation(summary = "退出登录")
     @PostMapping("/logout")
     public R logout() {
@@ -42,14 +40,12 @@ public class LoginController {
         return R.success("退出登录");
     }
 
-    @WebLog(ignore = false)
     @Operation(summary = "注册")
     @PostMapping("/register")
     public R register(@RequestBody RegisterReq register) {
         return loginService.register(register);
     }
 
-    @WebLog(ignore = false)
     @Operation(summary = "找回密码")
     @PostMapping("/forget")
     public R forget(@RequestBody ForgetReq forget) {

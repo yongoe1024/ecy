@@ -17,8 +17,6 @@
         <result column="email" property="email"/>
         <result column="phone" property="phone"/>
         <result column="remark" property="remark"/>
-        <result column="last_ip" property="lastIp"/>
-        <result column="last_time" property="lastTime"/>
         <result column="enabled" property="enabled"/>
         <collection property="roleList"
                     select="selectRoleByUserId"

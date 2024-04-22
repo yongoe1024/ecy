@@ -1,18 +1,20 @@
-CREATE DATABASE IF NOT EXISTS `ecy` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE
+DATABASE IF NOT EXISTS `ecy` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-USE `ecy`;
+USE
+`ecy`;
 
 
 DROP TABLE IF EXISTS `basic_department`;
 
 CREATE TABLE `basic_department`
 (
-    `id`          bigint unsigned                                              NOT NULL AUTO_INCREMENT,
+    `id`          bigint unsigned NOT NULL AUTO_INCREMENT,
     `parent_id`   bigint                                                       NOT NULL COMMENT '父id',
     `name`        varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '部门名称',
     `leader`      varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '负责人',
     `phone`       varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '联系电话',
-    `enabled`     tinyint(1)                                                   NOT NULL COMMENT '是否启用',
+    `enabled`     tinyint(1) NOT NULL COMMENT '是否启用',
     `create_time` datetime                                                     NOT NULL COMMENT '创建时间',
     `update_time` datetime                                                     NOT NULL COMMENT '修改时间',
     `create_by`   varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '创建人',
@@ -34,9 +36,9 @@ DROP TABLE IF EXISTS `basic_dict`;
 
 CREATE TABLE `basic_dict`
 (
-    `id`          bigint unsigned                                              NOT NULL AUTO_INCREMENT,
+    `id`          bigint unsigned NOT NULL AUTO_INCREMENT,
     `name`        varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '字典名称',
-    `type`        varchar(50) COLLATE utf8mb4_unicode_ci                       NULL COMMENT '字典类型',
+    `type`        varchar(50) COLLATE utf8mb4_unicode_ci NULL COMMENT '字典类型',
     `remark`      varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '备注',
     `create_time` datetime                                                     NOT NULL COMMENT '创建时间',
     `update_time` datetime                                                     NOT NULL COMMENT '修改时间',
@@ -53,7 +55,7 @@ DROP TABLE IF EXISTS `basic_dict_data`;
 
 CREATE TABLE `basic_dict_data`
 (
-    `id`          bigint unsigned                                              NOT NULL AUTO_INCREMENT,
+    `id`          bigint unsigned NOT NULL AUTO_INCREMENT,
     `dict_id`     bigint                                                       NOT NULL COMMENT '字典id',
     `dict_key`    varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '字典键',
     `dict_value`  varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '字典值',
@@ -72,9 +74,9 @@ DROP TABLE IF EXISTS `basic_position`;
 
 CREATE TABLE `basic_position`
 (
-    `id`          bigint unsigned                                              NOT NULL AUTO_INCREMENT,
+    `id`          bigint unsigned NOT NULL AUTO_INCREMENT,
     `name`        varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '职位',
-    `enabled`     tinyint(1)                                                   NOT NULL COMMENT '是否启用',
+    `enabled`     tinyint(1) NOT NULL COMMENT '是否启用',
     `create_time` datetime                                                     NOT NULL COMMENT '创建时间',
     `update_time` datetime                                                     NOT NULL COMMENT '修改时间',
     `create_by`   varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '创建人',
@@ -96,9 +98,9 @@ DROP TABLE IF EXISTS `sys_config`;
 
 CREATE TABLE `sys_config`
 (
-    `id`           bigint unsigned                                              NOT NULL AUTO_INCREMENT,
+    `id`           bigint unsigned NOT NULL AUTO_INCREMENT,
     `config_key`   varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '键',
-    `config_value` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci    NOT NULL COMMENT '值',
+    `config_value` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '值',
     `remark`       varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '备注',
     `create_time`  datetime                                                     NOT NULL COMMENT '创建时间',
     `update_time`  datetime                                                     NOT NULL COMMENT '修改时间',
@@ -168,7 +170,7 @@ DROP TABLE IF EXISTS `sys_menu`;
 
 CREATE TABLE `sys_menu`
 (
-    `id`          bigint unsigned                                              NOT NULL AUTO_INCREMENT,
+    `id`          bigint unsigned NOT NULL AUTO_INCREMENT,
     `parent_id`   bigint                                                       NOT NULL COMMENT '父id',
     `name`        varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '菜单名',
     `type`        int                                                          NOT NULL COMMENT '类型',
@@ -176,9 +178,9 @@ CREATE TABLE `sys_menu`
     `component`   varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '组件位置',
     `icon`        varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '图标',
     `sort`        int                                                          NOT NULL COMMENT '顺序',
-    `keep_alive`  tinyint(1)                                                   NOT NULL COMMENT '是否缓存',
-    `is_show`     tinyint(1)                                                   NOT NULL COMMENT '是否显示',
-    `enabled`     tinyint(1)                                                   NOT NULL COMMENT '是否启用',
+    `keep_alive`  tinyint(1) NOT NULL COMMENT '是否缓存',
+    `is_show`     tinyint(1) NOT NULL COMMENT '是否显示',
+    `enabled`     tinyint(1) NOT NULL COMMENT '是否启用',
     `create_time` datetime                                                     NOT NULL COMMENT '创建时间',
     `update_time` datetime                                                     NOT NULL COMMENT '修改时间',
     `create_by`   varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '创建人',
@@ -224,7 +226,7 @@ DROP TABLE IF EXISTS `sys_role`;
 
 CREATE TABLE `sys_role`
 (
-    `id`          bigint unsigned                                              NOT NULL AUTO_INCREMENT,
+    `id`          bigint unsigned NOT NULL AUTO_INCREMENT,
     `code`        varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '角色代码',
     `name`        varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '中文名',
     `create_time` datetime                                                     NOT NULL COMMENT '创建时间',
@@ -248,7 +250,7 @@ DROP TABLE IF EXISTS `sys_role_menu`;
 
 CREATE TABLE `sys_role_menu`
 (
-    `id`          bigint unsigned                                              NOT NULL AUTO_INCREMENT,
+    `id`          bigint unsigned NOT NULL AUTO_INCREMENT,
     `role_id`     bigint                                                       NOT NULL COMMENT '角色id',
     `menu_id`     bigint                                                       NOT NULL COMMENT '菜单id',
     `create_time` datetime                                                     NOT NULL COMMENT '创建时间',
@@ -264,7 +266,7 @@ DROP TABLE IF EXISTS `sys_user`;
 
 CREATE TABLE `sys_user`
 (
-    `id`            bigint unsigned                                               NOT NULL AUTO_INCREMENT,
+    `id`            bigint unsigned NOT NULL AUTO_INCREMENT,
     `department_id` bigint                                                       DEFAULT NULL COMMENT '部门id',
     `position_id`   bigint                                                       DEFAULT NULL COMMENT '职位id',
     `username`      varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci  NOT NULL COMMENT '账号',
@@ -274,9 +276,7 @@ CREATE TABLE `sys_user`
     `email`         varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci  NOT NULL COMMENT '邮箱',
     `phone`         varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci  NOT NULL COMMENT '联系电话',
     `remark`        varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '备注',
-    `last_ip`       varchar(50) COLLATE utf8mb4_unicode_ci                       DEFAULT NULL COMMENT '上次登录ip',
-    `last_time`     datetime                                                     DEFAULT NULL COMMENT '上次登录时间',
-    `enabled`       tinyint(1)                                                    NOT NULL COMMENT '是否启用',
+    `enabled`       tinyint(1) NOT NULL COMMENT '是否启用',
     `create_time`   datetime                                                      NOT NULL COMMENT '创建时间',
     `update_time`   datetime                                                      NOT NULL COMMENT '修改时间',
     `create_by`     varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci  NOT NULL COMMENT '创建人',
@@ -289,11 +289,10 @@ CREATE TABLE `sys_user`
 
 
 insert into `sys_user`(`id`, `department_id`, `position_id`, `username`, `password`, `name`, `avatar`, `email`, `phone`,
-                       `remark`, `last_ip`,
-                       `last_time`, `enabled`, `create_time`, `update_time`, `create_by`, `update_by`)
+                       `remark`, `enabled`, `create_time`, `update_time`, `create_by`, `update_by`)
 values (1, 1, 1, 'admin', '111111', 'yongoe',
         '/', '121887765@qq.com', '10086',
-        '无', '127.0.0.1', '2023-01-01 00:00:00', 1,
+        '无', 1,
         '2023-01-01 00:00:00', '2023-01-01 00:00:00', 'yongoe', 'yongoe');
 
 
@@ -340,14 +339,14 @@ DROP TABLE IF EXISTS `basic_letter`;
 
 CREATE TABLE `basic_letter`
 (
-    `id`           bigint unsigned                                              NOT NULL AUTO_INCREMENT,
+    `id`           bigint unsigned NOT NULL AUTO_INCREMENT,
     `addresser_id` bigint                                                       NOT NULL COMMENT '发件人id',
     `addresser`    varchar(50) COLLATE utf8mb4_unicode_ci                       NOT NULL COMMENT '发件人',
     `addressee_id` bigint                                                       NOT NULL COMMENT '收件人id',
     `addressee`    varchar(50) COLLATE utf8mb4_unicode_ci                       NOT NULL COMMENT '收件人',
     `title`        varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '标题',
     `content`      longtext COLLATE utf8mb4_unicode_ci                          NOT NULL COMMENT '内容',
-    `state`        tinyint(1)                                                   NOT NULL COMMENT '状态',
+    `state`        tinyint(1) NOT NULL COMMENT '状态',
     `create_time`  datetime                                                     NOT NULL COMMENT '创建时间',
     `update_time`  datetime                                                     NOT NULL COMMENT '修改时间',
     `create_by`    varchar(50) COLLATE utf8mb4_unicode_ci                       NOT NULL COMMENT '创建人',
@@ -361,7 +360,7 @@ DROP TABLE IF EXISTS `sys_log`;
 
 CREATE TABLE `sys_log`
 (
-    `id`          bigint unsigned                        NOT NULL AUTO_INCREMENT,
+    `id`          bigint unsigned NOT NULL AUTO_INCREMENT,
     `name`        varchar(50) COLLATE utf8mb4_unicode_ci  DEFAULT NULL COMMENT '用户',
     `type`        varchar(50) COLLATE utf8mb4_unicode_ci  DEFAULT NULL COMMENT '类型',
     `title`       varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '标题',

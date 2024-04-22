@@ -48,11 +48,8 @@ public class UserInfoController {
     //@WebLog
     @Operation(summary = "查询个人信息")
     @PostMapping("/user/info")
-    public R getUserInfo(HttpServletRequest request) {
+    public R getUserInfo() {
         User user = userService.getUserById(UserUtils.getUserId());
-        // 顺便修改登录时间
-        user.setLastTime(LocalDateTime.now());
-        user.setLastIp(IPUtils.getIp(request));
         userService.updateById(user);
         UserInfoRes userInfo = userConvert.entity2UserInfo(user);
         return R.success().put(userInfo);

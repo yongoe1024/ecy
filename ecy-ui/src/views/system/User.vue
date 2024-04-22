@@ -123,13 +123,6 @@
                   :key="item.id">{{item.name}}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="lastIp"
-                       label="上次登录ip"
-                       align="center"></el-table-column>
-      <el-table-column prop="lastTime"
-                       width="110"
-                       label="上次登录时间"
-                       align="center"></el-table-column>
       <el-table-column label="操作"
                        align="center"
                        width="180"

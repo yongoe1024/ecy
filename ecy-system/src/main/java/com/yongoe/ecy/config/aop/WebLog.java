@@ -9,8 +9,15 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface WebLog {
 
+    /**
+     * 忽略出入参数
+     */
     boolean ignore() default true;
 
+    /**
+     * 描述，默认用 （系统日志-删除数据）
+     * " @Tag(name = "系统日志") @Operation(summary = "删除数据") "
+     */
     String description() default "";
 
 }
