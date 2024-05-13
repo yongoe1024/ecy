@@ -90,15 +90,14 @@ router.beforeEach((to, from, next) => {
     }
   }
   else {
-    let arr = ['/', '/login*', '/forget', '/register', '/oauth/*']
+    let arr = ['/login', '/forget', '/register', '/oauth/*']
     for (let i = 0; i < arr.length; i++) {
       if (matchAntPath(arr[i], to.path)) {
         next()
         return
       }
     }
-    if (to.path != '/login')
-      next('/login?redirect=' + to.path)
+    next('/login?redirect=' + to.path)
   }
 })
 router.afterEach((to, from) => {
