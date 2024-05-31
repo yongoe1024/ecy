@@ -1,13 +1,10 @@
 
         insert  into `sys_menu`(`id`,`parent_id`,`type`,`url`,`component`,`name`,`icon`,`sort`,`keep_alive`,`is_show`,`enabled`,
         `create_time`,`update_time`,`create_by`,`update_by`) values
-    (null,${parentId},2,'','/${packageName}/${entity}','${moduleName}','',0,0,1,1,NOW(),NOW(),'${author}','${author}');
+    (null,${parentId},2,'/${packageName}/${entity?lower_case}/page*','/${packageName}/${entity}','${moduleName}','',0,0,1,1,NOW(),NOW(),'${author}','${author}');
     -- 按钮父菜单ID
     set @parentId = @@identity;
 
-    <#if get> insert  into `sys_menu`(`parent_id`,`type`,`url`,`component`,`name`,`icon`,`sort`,`keep_alive`,`is_show`,`enabled`,`create_time`,`update_time`,`create_by`,`update_by`) values
-        (@parentId,3,'/${packageName}/${entity?lower_case}/page*','','查','',0,0,1,1,NOW(),NOW(),'${author}','${author}');
-    </#if>
     <#if add>   insert  into `sys_menu`(`parent_id`,`type`,`url`,`component`,`name`,`icon`,`sort`,`keep_alive`,`is_show`,`enabled`,`create_time`,`update_time`,`create_by`,`update_by`) values
         (@parentId,3,'/${packageName}/${entity?lower_case}/add','','增','',0,0,1,1,NOW(),NOW(),'${author}','${author}');
     </#if>
