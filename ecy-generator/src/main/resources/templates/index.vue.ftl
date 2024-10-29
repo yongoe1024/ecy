@@ -3,7 +3,7 @@
     <div>
         <!-- 搜索 -->
         <#if get>
-        <div v-auth="'查'" class="head">
+        <div  class="head">
             <#list table.fields as field>
             <#if field.keyFlag || myParam?seq_contains(field.name)>
             <#elseif  field.propertyType == "Boolean">
@@ -34,11 +34,11 @@
         </#if>
         <!-- 按钮 -->
         <div class="button">
-            <#if get><el-button type="primary" v-auth="'查'"
+            <#if get><el-button type="primary" 
                        size="mini" plain
                        icon="el-icon-search"
                        @click="getList">搜索</el-button></#if>
-            <#if get><el-button v-auth="'查'"
+            <#if get><el-button 
                        size="mini" plain
                        icon="el-icon-refresh"
                        @click="resetQuery">重置</el-button></#if>
